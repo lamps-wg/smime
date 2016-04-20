@@ -1,7 +1,31 @@
 <?xml version = '1.0' encoding='US-ASCII'?>
 <!DOCTYPE rfc SYSTEM "../xml2rfc-1.36/rfc2629.dtd" [
   <!ENTITY rfc2119     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+  <!ENTITY rfc2311     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2311.xml">
+  <!ENTITY rfc2312     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2312.xml">
+  <!ENTITY rfc2313     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2313.xml">
+  <!ENTITY rfc2314     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2314.xml">
+  <!ENTITY rfc2315     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2315.xml">
+  <!ENTITY rfc2630     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2630.xml">
+  <!ENTITY rfc2631     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2631.xml">
+  <!ENTITY rfc2632     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2632.xml">
+  <!ENTITY rfc2633     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2633.xml">
+  <!ENTITY rfc2634     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2634.xml">
+  <!ENTITY rfc2985     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2985.xml">
+  <!ENTITY rfc3114     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3114.xml">
+  <!ENTITY rfc3279     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3279.xml">
+  <!ENTITY rfc3447     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3447.xml">
+  <!ENTITY rfc3850     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3850.xml">
+  <!ENTITY rfc3851     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3851.xml">
   <!ENTITY rfc3852     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3852.xml">
+  <!ENTITY rfc4055     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4055.xml">
+  <!ENTITY rfc4056     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4056.xml">
+  <!ENTITY rfc5035     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5035.xml">
+  <!ENTITY rfc5280     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
+  <!ENTITY rfc5652     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5652.xml">
+  <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
+  <!ENTITY rfc5755     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5755.xml">
+  <!ENTITY rfc5758     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5758.xml">
 ]>
 
 <?rfc toc='yes'?>
@@ -62,14 +86,14 @@
 <section title="Introduction">
   <t>
    S/MIME (Secure/Multipurpose Internet Mail Extensions) v3.2, described
-   in [SMIME-MSG], provides a method to send and receive secure MIME
+   in <xref target="RFC5751"/>, provides a method to send and receive secure MIME
    messages.  Before using a public key to provide security services,
    the S/MIME agent MUST verify that the public key is valid.  S/MIME
    agents MUST use PKIX certificates to validate public keys as
    described in the Internet X.509 Public Key Infrastructure (PKIX)
-   Certificate and CRL Profile [KEYM].  S/MIME agents MUST meet the
+   Certificate and CRL Profile <xref target="RFC5280"/>.  S/MIME agents MUST meet the
    certificate processing requirements documented in this document in
-   addition to those stated in [KEYM].
+   addition to those stated in <xref target="RFC5280"/>.
   </t>
   <t>
    This specification is compatible with the Cryptographic Message
@@ -83,7 +107,7 @@
   </t>
   <t>
    ASN.1: Abstract Syntax Notation One, as defined in ITU-T X.680
-   [X.680].
+   <xref target="X.680"/>.
   </t>
   <t>
    Attribute certificate (AC): An X.509 AC is a separate structure from
@@ -91,12 +115,12 @@
    multiple X.509 ACs associated with each of its public key X.509
    certificates.  Each X.509 AC binds one or more attributes with one of
    the subject's public key X.509 certificates.  The X.509 AC syntax is
-   defined in [ACAUTH].
+   defined in <xref target="RFC5755"/>.
   </t>
   <t>
    Certificate: A type that binds an entity's name to a public key with
    a digital signature.  This type is defined in the Internet X.509
-   Public Key Infrastructure (PKIX) Certificate and CRL Profile [KEYM].
+   Public Key Infrastructure (PKIX) Certificate and CRL Profile <xref target="RFC5280"/>.
    This type also contains the distinguished name of the certificate
    issuer (the signer), an issuer-specific serial number, the issuer's
    signature algorithm identifier, a validity period, and extensions
@@ -108,8 +132,8 @@
    The information consists of an issuer name, the time of issue, the
    next scheduled time of issue, a list of certificate serial numbers
    and their associated revocation times, and extensions as defined in
-   [KEYM].  The CRL is signed by the issuer.  The type intended by this
-   specification is the one defined in [KEYM].
+   <xref target="RFC5280"/>.  The CRL is signed by the issuer.  The type intended by this
+   specification is the one defined in <xref target="RFC5280"/>.
   </t>
   <t>
    Receiving agent: Software that interprets and processes S/MIME CMS
@@ -128,7 +152,7 @@
   <t>
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [MUSTSHOULD].
+   document are to be interpreted as described in <xref target="RFC2119"/>.
   </t>
   <t>
    We define some additional terms here:
@@ -252,19 +276,19 @@
    content and algorithm support.  This section puts forth a number of
    support requirements and recommendations in order to achieve a base
    level of interoperability among all S/MIME implementations.  Most of
-   the CMS format for S/MIME messages is defined in [SMIME-MSG].
+   the CMS format for S/MIME messages is defined in <xref target="RFC5751"/>.
 </t>
 <section title="Certificate Revocation Lists">
 <t>
    Receiving agents MUST support the Certificate Revocation List (CRL)
-   format defined in [KEYM].  If sending agents include CRLs in outgoing
-   messages, the CRL format defined in [KEYM] MUST be used.  In all
+   format defined in <xref target="RFC5280"/>.  If sending agents include CRLs in outgoing
+   messages, the CRL format defined in <xref target="RFC5280"/> MUST be used.  In all
    cases, both v1 and v2 CRLs MUST be supported.
   </t>
   <t>
    All agents MUST be capable of performing revocation checks using CRLs
-   as specified in [KEYM].  All agents MUST perform revocation status
-   checking in accordance with [KEYM].  Receiving agents MUST recognize
+   as specified in <xref target="RFC5280"/>.  All agents MUST perform revocation status
+   checking in accordance with <xref target="RFC5280"/>.  Receiving agents MUST recognize
    CRLs in received S/MIME messages.
   </t>
   <t>
@@ -275,19 +299,19 @@
 <section title="Certificate Choices">
 <t>
    Receiving agents MUST support v1 X.509 and v3 X.509 certificates as
-   profiled in [KEYM].  End-entity certificates MAY include an Internet
+   profiled in <xref target="RFC5280"/>.  End-entity certificates MAY include an Internet
    mail address, as described in Section 3.
   </t>
   <t>
    Receiving agents SHOULD support X.509 version 2 attribute
-   certificates.  See [ACAUTH] for details about the profile for
+   certificates.  See <xref target="RFC5755"/> for details about the profile for
    attribute certificates.
   </t>
 <section title="Historical Note about CMS Certificates">
 <t>
    The CMS message format supports a choice of certificate formats for
    public key content types: PKIX, PKCS #6 extended certificates
-   [PKCS6], and PKIX attribute certificates.
+   <xref target="PKCS6"/>, and PKIX attribute certificates.
   </t>
   <t>
    The PKCS #6 format is not in widespread use.  In addition, PKIX
@@ -359,14 +383,14 @@
    certificates included in CMS objects.  All other issues regarding the
    generation and use of X.509 attribute certificates are outside of the
    scope of this specification.  One specification that addresses
-   attribute certificate use is defined in [SECLABEL].
+   attribute certificate use is defined in <xref target="RFC3114"/>.
   </t>
 </section>
  </section>
  <section title="Using Distinguished Names for Internet Mail">
    <t>
    End-entity certificates MAY contain an Internet mail address as
-   described in [KEYM], Section 4.2.1.6.  The email address SHOULD be in
+   described in <xref target="RFC5280"/>, Section 4.2.1.6.  The email address SHOULD be in
    the subjectAltName extension, and SHOULD NOT be in the subject
    distinguished name.
   </t>
@@ -378,7 +402,7 @@
    agent's address book, if available.  Receiving agents MUST recognize
    email addresses in the subjectAltName field.  Receiving agents MUST
    recognize email addresses in the Distinguished Name field in the PKCS
-   #9 [PKCS9] emailAddress attribute:
+   #9 <xref target="RFC2985"/> emailAddress attribute:
   </t>
     <figure>
       <artwork>
@@ -422,7 +446,7 @@
    S/MIME agents need to provide some certificate retrieval mechanism in
    order to gain access to certificates for recipients of digital
    envelopes.  There are many ways to implement certificate retrieval
-   mechanisms.  [X.500] directory service is an excellent example of a
+   mechanisms.  <xref target="X.500"/> directory service is an excellent example of a
    certificate retrieval-only mechanism that is compatible with classic
    X.500 Distinguished Names.  Another method under consideration by the
    IETF is to provide certificate retrieval services as part of the
@@ -456,7 +480,7 @@
    import and export of certificates, using a CMS certs-only message.
    This allows for import and export of full certificate chains as
    opposed to just a single certificate.  This is described in
-   [SMIME-MSG].
+   <xref target="RFC5751"/>.
   </t>
   <t>
    Agents MUST handle multiple valid certification authority (CA)
@@ -488,8 +512,8 @@
   </t>
   <t>
    All agents MUST be capable of performing revocation checks using CRLs
-   as specified in [KEYM].  All agents MUST perform revocation status
-   checking in accordance with [KEYM].  Receiving agents MUST recognize
+   as specified in <xref target="RFC5280"/>.  All agents MUST perform revocation status
+   checking in accordance with <xref target="RFC5280"/>.  Receiving agents MUST recognize
    CRLs in received S/MIME messages.
   </t>
 
@@ -500,7 +524,7 @@
    In creating a user agent for secure messaging, certificate, CRL, and
    certification path validation SHOULD be highly automated while still
    acting in the best interests of the user.  Certificate, CRL, and path
-   validation MUST be performed as per [KEYM] when validating a
+   validation MUST be performed as per <xref target="RFC5280"/> when validating a
    correspondent's public key.  This is necessary before using a public
    key to provide security services such as verifying a signature,
    encrypting a content-encryption key (e.g., RSA), or forming a
@@ -581,27 +605,27 @@
     </artwork>
   </figure>
   <t>
-   For 512-bit RSA with SHA-1 see [KEYMALG] and [FIPS186-2] without
-   Change Notice 1, for 512-bit RSA with SHA-256 see [RSAOAEP] and
-   [FIPS186-2] without Change Notice 1, for 1024-bit through 3072-bit
-   RSA with SHA-256 see [RSAOAEP] and [FIPS186-2] with Change Notice 1,
-   and for 4096-bit RSA with SHA-256 see [RSAOAEP] and [PKCS1].  In
+   For 512-bit RSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
+   Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC4055"/> and
+   <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit through 3072-bit
+   RSA with SHA-256 see <xref target="RFC4055"/> and <xref target="FIPS186-2"/> with Change Notice 1,
+   and for 4096-bit RSA with SHA-256 see <xref target="RFC4055"/> and <xref target="RFC3447"/>.  In
    either case, the first reference provides the signature algorithm's
    object identifier and the second provides the signature algorithm's
    definition.
   </t>
   <t>
-   For 512-bit DSA with SHA-1 see [KEYMALG] and [FIPS186-2] without
-   Change Notice 1, for 512-bit DSA with SHA-256 see [KEYMALG2] and
-   [FIPS186-2] without Change Notice 1, for 1024-bit DSA with SHA-1 see
-   [KEYMALG] and [FIPS186-2] with Change Notice 1, for 1024-bit through
-   3072 DSA with SHA-256 see [KEYMALG2] and [FIPS186-3].  In either
+   For 512-bit DSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
+   Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5758"/> and
+   <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA-1 see
+   <xref target="RFC3279"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit through
+   3072 DSA with SHA-256 see <xref target="RFC5758"/> and <xref target="FIPS186-3"/>.  In either
    case, the first reference provides the signature algorithm's object
    identifier and the second provides the signature algorithm's
    definition.
   </t>
   <t>
-    For RSASSA-PSS with SHA-256 see [RSAPSS].
+    For RSASSA-PSS with SHA-256 see <xref target="RFC4056"/>.
   </t>
 </section>
 <section title="PKIX Certificate Extensions">
@@ -615,7 +639,7 @@
    for business purposes.  This document identifies the minimum required
    set of certificate extensions that have the greatest value in the
    S/MIME environment.  The syntax and semantics of all the identified
-   extensions are defined in [KEYM].
+   extensions are defined in <xref target="RFC5280"/>.
   </t>
   <t>
    Sending and receiving agents MUST correctly handle the basic
@@ -635,7 +659,7 @@
    SHOULD NOT be marked as critical.
   </t>
   <t>
-   Interpretation and syntax for all extensions MUST follow [KEYM],
+   Interpretation and syntax for all extensions MUST follow <xref target="RFC5280"/>,
    unless otherwise specified here.
   </t>
 <section title="Basic Constraints">
@@ -652,7 +676,7 @@
    performing issuing authority operations (see Section 4.4.2).
   </t>
   <t>
-   As per [KEYM], certificates MUST contain a basicConstraints extension
+   As per <xref target="RFC5280"/>, certificates MUST contain a basicConstraints extension
    in CA certificates, and SHOULD NOT contain that extension in end-
    entity certificates.
   </t>
@@ -696,7 +720,7 @@
    preferred means to convey the email address(es) that correspond(s) to
    the entity for this certificate.  Any email addresses present MUST be
    encoded using the rfc822Name CHOICE of the GeneralName type as
-   described in [KEYM], Section 4.2.1.6.  Since the SubjectAltName type
+   described in <xref target="RFC5280"/>, Section 4.2.1.6.  Since the SubjectAltName type
    is a SEQUENCE OF GeneralName, multiple email addresses MAY be
    present.
   </t>
@@ -727,7 +751,7 @@
    If the extended key usage extension is present in the certificate,
    then interpersonal message S/MIME receiving agents MUST check that it
    contains either the emailProtection or the anyExtendedKeyUsage OID as
-   defined in [KEYM].  S/MIME uses other than interpersonal messaging
+   defined in <xref target="RFC5280"/>.  S/MIME uses other than interpersonal messaging
    MAY require the explicit presence of the extended key usage extension
    or other OIDs to be present in the extension or both.
   </t>
@@ -804,7 +828,7 @@
    field of a certificate.
   </t>
   <t>
-   In addition to the Security Considerations identified in [KEYM],
+   In addition to the Security Considerations identified in <xref target="RFC5280"/>,
    caution should be taken when processing certificates that have not
    first been validated to a trust anchor.  Certificates could be
    manufactured by untrusted sources for the purpose of mounting denial
@@ -821,12 +845,12 @@
    The 4096-bit RSA key size requirement for certificate and CRL
    verification is larger than the 2048-bit RSA key sizes for message
    signature generation/verification or message encryption/decryption in
-   [SMIME-MSG] because many root CAs included in certificate stores have
+   <xref target="RFC5751"/> because many root CAs included in certificate stores have
    already issued root certificates with the 4096-bit key.  The standard
    that defines comparable key sizes for DSA is not yet available.  In
-   particular, [FIPS186-2] without Change Notice 1 allowed DSA key sizes
-   between 512 and 1024 bits, [FIPS186-2] with Change Notice 1 only
-   allowed DSA key sizes of 1024 bits, and [FIPS186-3] allowed DSA key
+   particular, <xref target="FIPS186-2"/> without Change Notice 1 allowed DSA key sizes
+   between 512 and 1024 bits, <xref target="FIPS186-2"/> with Change Notice 1 only
+   allowed DSA key sizes of 1024 bits, and <xref target="FIPS186-3"/> allowed DSA key
    sizes from 1024 to 3072 bits.  Further, 4096-bit keys are normally
    only used by Root certificates and not by subordinate CA
    certificates, thereby lengthening the root CA certificate's validity
@@ -855,198 +879,160 @@
   <t>
    If an implementation is concerned about compliance with National
    Institute of Standards and Technology (NIST) key size
-   recommendations, then see [SP800-57].
+   recommendations, then see <xref target="SP800-57"/>.
   </t>
  </section>
  </middle>
  <back>
-   <references title="Normative References">
-     &rfc2119;
-   </references>
-   <references title="Informational References">
-     &rfc3852;
-   </references>
    <!--
 6.  References
 
 6.1.  Reference Conventions
 
-   [CMS] refers to [RFC5652].
+        <referencegroup target="ESS">
+          &rfc2634;
+          &rfc5035;
+        </referencegroup>
 
-   [ESS] refers to [RFC2634] and [RFC5035].
+        <referencegroup target="MIME-SPEC">
+          &rfc2045;
+          &rfc2046;
+          &rfc2047;
+          &rfc2049;
+          &rfc4288;
+          &rfc4289;
+        </referencegroup>
 
-   [SMIMEv2] refers to [RFC2311], [RFC2312], [RFC2313], [RFC2314], and
-   [RFC2315].
+        <referencegroup target="SMIMEv2">
+          &rfc2311;
+          &rfc2312;
+          &rfc2313;
+          &rfc2314;
+          &rfc2315;
+        </referencegroup>
 
-   [SMIMEv3] refers to [RFC2630], [RFC2631], [RFC2632], [RFC2633],
-   [RFC2634], and [RFC5035].
+        <referencegroup target="SMIMEv3">
+          &rfc2630;
+          &rfc2631;
+          &rfc2632;
+          &rfc2633;
+          &rfc2634;
+          &rfc5035;
+        </referencegroup>
 
-   [SMIMv3.1] refers to [RFC2634], [RFC3850], [RFC3851], [RFC3852], and
-   [RFC5035].
+        <referencegroup target="SMIMEv3.1">
+          &rfc2634;
+          &rfc3850;
+          &rfc3851;
+          &rfc3852;
+          &rfc5035;
+        </referencegroup>
 
-6.2.  Normative References
+<referenceXXX target="RFC5652" use="CMS"/>
+-->
+        
+   <references title="Normative References">
+     &rfc2119;
+     &rfc2634;
+     &rfc2985;
+     &rfc3447;
+     &rfc4056;
+     &rfc4055;
+     &rfc5035;
+     &rfc5280;
+     &rfc5751;
+     &rfc5755;
+     &rfc5758;
+     &rfc3279;
+        <reference anchor="FIPS186-2">
+          <front>
+            <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="January" year="2000"/>
+          </front>
+          <seriesInfo name="Federal Information Processing Standards Publication"
+                      value="186-2"/>
+        </reference>
 
-   [ACAUTH]     Farrell, S., Housley, R., and S. Turner, "An Internet
-                Attribute Certificate Profile for Authorization", RFC
-                5755, January 2010.
+        <reference anchor="FIPS186-3">
+          <front>
+            <title>Digital Signature Standard (DSS)</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="June" year="2009"/>
+          </front>
+          <seriesInfo name="Federal Information Processing Standards Publication"
+                      value="186-3"/>
+        </reference>
+     
+   <!--
+       <referenceXXX target="RFC5280" use="KEYM"/>
+       <referenceXXX target="RFC3279" use="KEYMALG"/>
+       <referenceXXX target="RFC5758" use="KEYMALG2"/>
+       <referenceXXX target="RFC2119" use="MUSTSHOULD"/>
+       <referenceXXX target="RFC3447" use="PKCS1"/>
+       <referenceXXX target="RFC2985" use="PKCS9"/>
+       <referenceXXX target="RFC4056" use="RSAPSS"/>
+       <referenceXXX target="RFC4055" use="RSAOAEP"/>
+       <referenceXXX target="RFC5751" use="SMIME-MSG"/>
 
-   [RFC2634]    Hoffman, P., Ed., "Enhanced Security Services for
-                S/MIME", RFC 2634, June 1999.
+   -->
 
+        <reference anchor="X.680">
+          <front>
+            <title>Information Technology - Abstract Syntax
+            Notation One (ASN.1):  Specification of basic notation.
+            ITU-T Recommendation X.680 (2002) | ISO/IEC 8824-1:2002. 
+            </title>
+            <author/>
+            <date/>
+          </front>
+        </reference>
+   
+   </references>
 
+   <references title="Informational References">
+     &rfc2311;  &rfc2312; &rfc2313; &rfc2314; &rfc2315;
+     &rfc2630;  &rfc2631; &rfc2632; &rfc2633;
+     &rfc3850;  &rfc3851; &rfc3852;
+     &rfc3114;
 
-
-   [RFC5035]    Schaad, J., "Enhanced Security Services (ESS) Update:
-                Adding CertID Algorithm Agility", RFC 5035, August 2007.
-
-   [RFC5652]    Housley, R., "Cryptographic Message Syntax (CMS)", RFC
-                5652, September 2009.
-
-   [FIPS186-2]  National Institute of Standards and Technology (NIST),
-                "Digital Signature Standard (DSS)", FIPS Publication
-                186-3, January 2000. [With Change Notice 1]
-
-   [FIPS186-3]  National Institute of Standards and Technology (NIST),
-                FIPS Publication 186-3: Digital Signature Standard, June
-                2009.
-
-   [KEYM]       Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
-                Housley, R., and W. Polk, "Internet X.509 Public Key
-                Infrastructure Certificate and Certificate Revocation
-                List (CRL) Profile", RFC 5280, May 2008.
-
-   [KEYMALG]    Bassham, L., Polk, W., and R. Housley, "Algorithms and
-                Identifiers for the Internet X.509 Public Key
-                Infrastructure Certificate and Certificate Revocation
-                List (CRL) Profile", RFC 3279, April 2002.
-
-   [KEYMALG2]   Dang, Q., Santesson, S., Moriarty, K., Brown, D., and T.
-                Polk, "Internet X.509 Public Key Infrastructure:
-                Additional Algorithms and Identifiers for DSA and
-                ECDSA", RFC 5758, January 2010.
-
-   [MUSTSHOULD] Bradner, S., "Key words for use in RFCs to Indicate
-                Requirement Levels", BCP 14, RFC 2119, March 1997.
-
-   [PKCS1]      Jonsson, J. and B. Kaliski, "Public-Key Cryptography
-                Standards (PKCS) #1: RSA Cryptography Specifications
-                Version 2.1", RFC 3447, February 2003.
-
-   [PKCS9]      Nystrom, M. and B. Kaliski, "PKCS #9: Selected Object
-                Classes and Attribute Types Version 2.0", RFC 2985,
-                November 2000.
-
-   [RSAPSS]     Schaad, J., "Use of the RSASSA-PSS Signature Algorithm
-                in Cryptographic Message Syntax (CMS)", RFC 4056, June
-                2005.
-
-
-
-
-
-
-
-   [RSAOAEP]    Schaad, J., Kaliski, B., and R. Housley, "Additional
-                Algorithms and Identifiers for RSA Cryptography for use
-                in the Internet X.509 Public Key Infrastructure
-                Certificate and Certificate Revocation List (CRL)
-                Profile", RFC 4055, June 2005.
-
-   [SMIME-MSG]  Ramsdell, B. and S. Turner, "Secure/Multipurpose
-                Internet Mail Extensions (S/MIME) Version 3.2 Message
-                Specification", RFC 5751, January 2010.
-
-   [X.680]      ITU-T Recommendation X.680 (2002) | ISO/IEC 8824-1:2002.
-                Information Technology - Abstract Syntax Notation One
-                (ASN.1):  Specification of basic notation.
-
-6.3.  Informative References
-
-   [PKCS6]      RSA Laboratories, "PKCS #6: Extended-Certificate Syntax
-                Standard", November 1993.
-
-   [SECLABEL]   Nicolls, W., "Implementing Company Classification Policy
-                with the S/MIME Security Label", RFC 3114, May 2002.
-
-   [RFC2311]    Dusse, S., Hoffman, P., Ramsdell, B., Lundblade, L., and
-                L. Repka, "S/MIME Version 2 Message Specification", RFC
-                2311, March 1998.
-
-   [RFC2312]    Dusse, S., Hoffman, P., Ramsdell, B., and J. Weinstein,
-                "S/MIME Version 2 Certificate Handling", RFC 2312, March
-                1998.
-
-   [RFC2313]    Kaliski, B., "PKCS #1: RSA Encryption Version 1.5", RFC
-                2313, March 1998.
-
-   [RFC2314]    Kaliski, B., "PKCS #10: Certification Request Syntax
-                Version 1.5", RFC 2314, March 1998.
-
-   [RFC2315]    Kaliski, B., "PKCS #7: Cryptographic Message Syntax
-                Version 1.5", RFC 2315, March 1998.
-
-   [RFC2630]    Housley, R., "Cryptographic Message Syntax", RFC 2630,
-                June 1999.
-
-   [RFC2631]    Rescorla, E., "Diffie-Hellman Key Agreement Method", RFC
-                2631, June 1999.
-
-   [RFC2632]    Ramsdell, B., Ed., "S/MIME Version 3 Certificate
-                Handling", RFC 2632, June 1999.
-
-
-
-
-   [RFC2633]    Ramsdell, B., Ed., "S/MIME Version 3 Message
-                Specification", RFC 2633, June 1999.
-
-   [RFC3850]    Ramsdell, B., Ed., "Secure/Multipurpose Internet Mail
-                Extensions (S/MIME) Version 3.1 Certificate Handling",
-                RFC 3850, July 2004.
-
-   [RFC3851]    Ramsdell, B., Ed., "Secure/Multipurpose Internet Mail
-                Extensions (S/MIME) Version 3.1 Message Specification",
-                RFC 3851, July 2004.
-
-   [RFC3852]    Housley, R., "Cryptographic Message Syntax (CMS)", RFC
-                3852, July 2004.
-
-   [SP800-57]   National Institute of Standards and Technology (NIST),
-                Special Publication 800-57: Recommendation for Key
-                Management, August 2005.
-
-   [X.500]      ITU-T Recommendation X.500 (1997) | ISO/IEC 9594-
+     <reference anchor="PKCS6">
+       <front>
+         <title>PKCS #6: Extended-Certificate Syntax Standard</title>
+         <author><organization>RSA Laboratories</organization></author>
+         <date month="November" year="1993"/>
+       </front>
+     </reference>
+         
+        <reference anchor="SP800-57">
+          <front>
+            <title>
+              Special Publication 800-57: Recommendation for Key
+              Management
+            </title>
+            <author><organization>
+              National Institute of Standards and Technology (NIST)
+            </organization>
+            </author>
+            <date               month="August" year="2005"/>
+          </front>
+        </reference>
+        
+        <reference anchor="X.500">
+          <front>
+            <title>ITU-T Recommendation X.500 (1997) | ISO/IEC 9594-
                 1:1997, Information technology - Open Systems
                 Interconnection - The Directory:  Overview of concepts,
-                models and services.
+            models and services.</title>
+            <author/>
+            <date/>
+          </front>
+        </reference>
+   <!--
+        <referenceXXX target="RFC3114" use="SECLABEL"/>
 
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   -->
+   </references>
 
 <section title="Moving S/MIME v2 Certificate Handling to Historic Status">
   <t>
