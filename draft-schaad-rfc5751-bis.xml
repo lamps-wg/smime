@@ -1,8 +1,44 @@
 <?xml version = '1.0' encoding='US-ASCII'?>
 <!DOCTYPE rfc SYSTEM "../xml2rfc-1.36/rfc2629.dtd" [
+  <!ENTITY rfc1847     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1847.xml">
+  <!ENTITY rfc2045     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2045.xml">
+  <!ENTITY rfc2046     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2046.xml">
+  <!ENTITY rfc2047     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2047.xml">
+  <!ENTITY rfc2049     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2049.xml">
   <!ENTITY rfc2119     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+  <!ENTITY rfc2138     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2138.xml">
+  <!ENTITY rfc2311     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2311.xml">
+  <!ENTITY rfc2312     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2312.xml">
+  <!ENTITY rfc2313     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2313.xml">
+  <!ENTITY rfc2314     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2314.xml">
+  <!ENTITY rfc2315     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2315.xml">
+  <!ENTITY rfc2317     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2317.xml">
+  <!ENTITY rfc2630     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2630.xml">
+  <!ENTITY rfc2631     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2631.xml">
+  <!ENTITY rfc2632     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2632.xml">
+  <!ENTITY rfc2633     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2633.xml">
+  <!ENTITY rfc2634     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2634.xml">
+  <!ENTITY rfc2785     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2785.xml">
+  <!ENTITY rfc3218     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3218.xml">
+  <!ENTITY rfc3274     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3274.xml">
+  <!ENTITY rfc3370     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3370.xml">
+  <!ENTITY rfc3560     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3560.xml">
+  <!ENTITY rfc3565     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3565.xml">
+  <!ENTITY rfc3766     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3766.xml">
+  <!ENTITY rfc3850     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3850.xml">
+  <!ENTITY rfc3851     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3851.xml">
   <!ENTITY rfc3852     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3852.xml">
+  <!ENTITY rfc4056     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4056.xml">
+  <!ENTITY rfc4086     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4086.xml">
+  <!ENTITY rfc4270     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4270.xml">
+  <!ENTITY rfc4288     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4288.xml">
+  <!ENTITY rfc4289     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4289.xml">
+  <!ENTITY rfc5035     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5035.xml">
+  <!ENTITY rfc5652     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5652.xml">
+  <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
+  <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
 ]>
+
 
 <?rfc toc='yes'?>
 <?rfc symrefs='yes'?>
@@ -95,12 +131,12 @@
           This specification defines how to create a MIME body part that has
           been cryptographically enhanced according to the Cryptographic
           Message Syntax (CMS) RFC 5652 [CMS], which is derived from PKCS #7
-          [PKCS-7].  This specification also defines the application/pkcs7-mime
+          <xref target="RFC2315"/>.  This specification also defines the application/pkcs7-mime
           media type that can be used to transport those body parts.
         </t>
         <t>
           This document also discusses how to use the multipart/signed media
-          type defined in [MIME-SECURE] to transport S/MIME signed messages.
+          type defined in <xref target="RFC1847"/> to transport S/MIME signed messages.
           multipart/signed is used in conjunction with the application/pkcs7-
           signature media type, which is used to transport a detached S/MIME
           signature.
@@ -108,8 +144,8 @@
         <t>
           In order to create S/MIME messages, an S/MIME agent MUST follow the
           specifications in this document, as well as the specifications listed
-          in the Cryptographic Message Syntax document [CMS], [CMSALG],
-          [RSAPSS], [RSAOAEP], and [CMS-SHA2].
+          in the Cryptographic Message Syntax document [CMS], <xref target="RFC3370"/>,
+          <xref target="RFC4056"/>, <xref target="RFC3560"/>, and <xref target="RFC5754"/>.
         </t>
         <t>
           Throughout this specification, there are requirements and
@@ -142,10 +178,10 @@
         <t>
           <list style="hanging" hangIndent="19">
             <t hangText="ASN.1:">
-              Abstract Syntax Notation One, as defined in ITU-T Recommendation X.680 [X.680].
+              Abstract Syntax Notation One, as defined in ITU-T Recommendation X.680 <xref target="X.680"/>.
             </t>
           <t hangText="BER:">               Basic Encoding Rules for ASN.1, as defined in ITU-
-          T Recommendation X.690 [X.690].
+          T Recommendation X.690 <xref target="X.690"/>.
             </t>
 
           <t hangText="Certificate:">       A type that binds an entity's name to a public key
@@ -153,7 +189,7 @@
             </t>
 
           <t hangText="DER:">               Distinguished Encoding Rules for ASN.1, as defined
-          in ITU-T Recommendation X.690 [X.690].
+          in ITU-T Recommendation X.690 <xref target="X.690"/>.
             </t>
 
           <t hangText="7-bit data:">        Text data with lines less than 998 characters
@@ -376,16 +412,16 @@
         CMS allows for a wide variety of options in content, attributes, and
         algorithm support.  This section puts forth a number of support
         requirements and recommendations in order to achieve a base level of
-        interoperability among all S/MIME implementations.  [CMSALG] and
-        [CMS-SHA2] provides additional details regarding the use of the
+        interoperability among all S/MIME implementations.  <xref target="RFC3370"/> and
+        <xref target="RFC5754"/> provides additional details regarding the use of the
         cryptographic algorithms.  [ESS] provides additional details
         regarding the use of additional attributes.
       </t>
       <section title="DigestAlgorithmIdentifier">
         <t>
-          Sending and receiving agents MUST support SHA-256 [CMS-SHA2] and
-          SHOULD- support SHA-1 [CMSALG].  Receiving agents SHOULD- support MD5
-          [CMSALG] for the purpose of providing backward compatibility with
+          Sending and receiving agents MUST support SHA-256 <xref target="RFC5754"/> and
+          SHOULD- support SHA-1 <xref target="RFC3370"/>.  Receiving agents SHOULD- support MD5
+          <xref target="RFC3370"/> for the purpose of providing backward compatibility with
           MD5-digested S/MIME v2 SignedData objects.
         </t>
       </section>
@@ -455,14 +491,14 @@
           Receiving and sending agents:
           <list style="symbols">
             <t>
-              MUST support RSA Encryption, as specified in [CMSALG].
+              MUST support RSA Encryption, as specified in <xref target="RFC3370"/>.
             </t>
             <t>
-              SHOULD+ support RSAES-OAEP, as specified in [RSAOAEP].
+              SHOULD+ support RSAES-OAEP, as specified in <xref target="RFC3560"/>.
             </t>
             <t>
               SHOULD- support DH ephemeral-static mode, as specified in
-              [CMSALG] and [SP800-57].
+              <xref target="RFC3370"/> and <xref target="SP800-57"/>.
             </t>
           </list>
         </t>
@@ -470,7 +506,7 @@
           When DH ephemeral-static is used, a key wrap algorithm is also
           specified in the KeyEncryptionAlgorithmIdentifier [CMS].  The
           underlying encryption functions for the key wrap and content
-          encryption algorithm ([CMSALG] and [CMSAES]) and the key sizes for
+          encryption algorithm (<xref target="RFC3370"/> and <xref target="RFC3565"/>) and the key sizes for
           the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm
           with AES-128 content encryption algorithm).  As AES-128 CBC is the
           mandatory-to-implement content encryption algorithm, the AES-128 key
@@ -787,15 +823,15 @@
             <list style="symbols">
               <t>
                 MUST support encryption and decryption with AES-128 CBC
-                [CMSAES].
+                <xref target="RFC3565"/>.
               </t>
               <t>
                 SHOULD+ support encryption and decryption with AES-192 CBC and
-                AES-256 CBC [CMSAES].
+                AES-256 CBC <xref target="RFC3565"/>.
               </t>
               <t>
                 SHOULD- support encryption and decryption with DES EDE3 CBC,
-                hereinafter called "tripleDES" [CMSALG].
+                hereinafter called "tripleDES" <xref target="RFC3370"/>.
               </t>
             </list>
           </t>
@@ -940,7 +976,7 @@
           <t>
 
             The reader of this section is expected to understand MIME as
-            described in [MIME-SPEC] and [MIME-SECURE].
+            described in [MIME-SPEC] and <xref target="RFC1847"/>.
           </t>
 
           <section title="Preparing the MIME Entity for Signing, Enveloping, or Compressing">
@@ -1043,7 +1079,7 @@
                 entities of major type "text" MUST have both their line endings and
                 character set canonicalized.  The line ending MUST be the pair of
                 characters &lt;CR&gt;&lt;LF&gt;, and the charset SHOULD be a registered charset
-                [CHARSETS].  The details of the canonicalization are specified in
+                <xref target="CHARSETS"/>.  The details of the canonicalization are specified in
                 [MIME-SPEC].
               </t>
               <t>
@@ -1129,7 +1165,7 @@
               </t>
               <t>
 
-                [MIME-SECURE] prohibits an agent from changing the transfer encoding
+                <xref target="RFC1847"/> prohibits an agent from changing the transfer encoding
                 of the first part of a multipart/signed message.  If a compliant
                 agent that cannot transmit 8-bit or binary data encounters a
                 multipart/signed message with 8-bit or binary data in the first part,
@@ -1232,7 +1268,7 @@
                   For the application/pkcs7-mime, sending agents SHOULD emit the
                   optional "name" parameter to the Content-Type field for compatibility
                   with older systems.  Sending agents SHOULD also emit the optional
-                  Content-Disposition field [CONTDISP] with the "filename" parameter.
+                  Content-Disposition field <xref target="RFC2138"/> with the "filename" parameter.
                   If a sending agent emits the above parameters, the value of the
                   parameters SHOULD be a file name with the appropriate extension:
                 </t>
@@ -1459,7 +1495,7 @@ Media Type                                            File Extension
                 <t>
                   This format is a clear-signing format.  Recipients without any S/MIME
                   or CMS processing facilities are able to view the message.  It makes
-                  use of the multipart/signed media type described in [MIME-SECURE].
+                  use of the multipart/signed media type described in <xref target="RFC1847"/>.
                   The multipart/signed media type has two parts.  The first part
                   contains the MIME entity that is signed; the second part contains the
                   "detached signature" CMS SignedData object in which the
@@ -1597,7 +1633,7 @@ n8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 Please note that versions of S/MIME prior to version 3.1 did not
                 specify any use of CompressedData, and will not recognize it.  The
                 use of a capability to indicate the ability to receive CompressedData
-                is described in [CMSCOMPR] and is the preferred method for
+                is described in <xref target="RFC3274"/> and is the preferred method for
                 compatibility.
               </t>
               <t>
@@ -1766,7 +1802,7 @@ file suffix: p7m, p7s, p7c, p7z
               envelopes.  This specification does not cover how S/MIME agents
               handle certificates, only what they do after a certificate has been
               validated or rejected.  S/MIME certificate issues are covered in
-              [CERT32].
+              <xref target="RFC5750"/>.
             </t>
             <t>
               At a minimum, for initial S/MIME deployment, a user agent could
@@ -1780,7 +1816,7 @@ file suffix: p7m, p7s, p7c, p7z
             <section title="Key Pair Generation">
               <t>
                 All generated key pairs MUST be generated from a good source of non-
-                deterministic random input [RANDOM] and the private key MUST be
+                deterministic random input <xref target="RFC4086"/> and the private key MUST be
                 protected in a secure fashion.
               </t>
               <t>
@@ -1788,28 +1824,28 @@ file suffix: p7m, p7s, p7c, p7z
                 bits for use with the RSA or DSA signature algorithms.
               </t>
               <t>
-                For 512-bit RSA with SHA-1 see [CMSALG] and [FIPS186-2] without
-                Change Notice 1, for 512-bit RSA with SHA-256 see [CMS-SHA2] and
-                [FIPS186-2] without Change Notice 1, and for 1024-bit through
-                2048-bit RSA with SHA-256 see [CMS-SHA2] and [FIPS186-2] with Change
+                For 512-bit RSA with SHA-1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without
+                Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC5754"/> and
+                <xref target="FIPS186-2"/> without Change Notice 1, and for 1024-bit through
+                2048-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> with Change
                 Notice 1.  The first reference provides the signature algorithm's
                 object identifier, and the second provides the signature algorithm's
                 definition.
               </t>
               <t>
-                For 512-bit DSA with SHA-1 see [CMSALG] and [FIPS186-2] without
-                Change Notice 1, for 512-bit DSA with SHA-256 see [CMS-SHA2] and
-                [FIPS186-2] without Change Notice 1, for 1024-bit DSA with SHA-1 see
-                [CMSALG] and [FIPS186-2] with Change Notice 1, for 1024-bit and above
-                DSA with SHA-256 see [CMS-SHA2] and [FIPS186-3].  The first reference
+                For 512-bit DSA with SHA-1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without
+                Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5754"/> and
+                <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA-1 see
+                <xref target="RFC3370"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit and above
+                DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-3"/>.  The first reference
                 provides the signature algorithm's object identifier and the second
                 provides the signature algorithm's definition.
               </t>
               <t>
-                For RSASSA-PSS with SHA-256, see [RSAPSS].  For 1024-bit DH, see
-                [CMSALG].  For 1024-bit and larger DH, see [SP800-56A]; regardless,
-                use the KDF, which is from X9.42, specified in [CMSALG].  For RSAES-
-                OAEP, see [RSAOAEP].
+                For RSASSA-PSS with SHA-256, see <xref target="RFC4056"/>.  For 1024-bit DH, see
+                <xref target="RFC3370"/>.  For 1024-bit and larger DH, see <xref target="SP800-56A"/>; regardless,
+                use the KDF, which is from X9.42, specified in <xref target="RFC3370"/>.  For RSAES-
+                OAEP, see <xref target="RFC3560"/>.
               </t>
             </section>
             <section title="Signature Generation">
@@ -1967,15 +2003,14 @@ Change Controller: S/ MIME working group delegated from the IESG
               dealing with the current state of the art.  For example:
               <list style="symbols">
                 <t>
-                  The Million Message Attack described in RFC 3218 [MMA].
+                  The Million Message Attack described in RFC 3218 <xref target="RFC3218"/>.
                 </t>
                 <t>
                   The Diffie-Hellman "small-subgroup" attacks described in RFC
-                  2785 [DHSUB].
+                  2785 <xref target="RFC2785"/>.
                 </t>
                 <t>
-                  The attacks against hash algorithms described in RFC 4270 [HASH-
-                  ATTACK].
+                  The attacks against hash algorithms described in RFC 4270 <xref target="RFC4270"/>.
                 </t>
               </list>
             </t>
@@ -2006,7 +2041,7 @@ Change Controller: S/ MIME working group delegated from the IESG
 
 
 
-              specification seem appropriate for the Internet based on [STRENGTH].
+              specification seem appropriate for the Internet based on <xref target="RFC3766"/>.
               Of course, there are environments, such as financial and medical
               systems, that may select different key sizes.  For this reason, an
               implementation MAY support key sizes beyond those recommended in this
@@ -2073,7 +2108,7 @@ Change Controller: S/ MIME working group delegated from the IESG
             <t>
               If an implementation is concerned about compliance with National
               Institute of Standards and Technology (NIST) key size
-              recommendations, then see [SP800-57].
+              recommendations, then see <xref target="SP800-57"/>.
             </t>
             <t>
               If messaging environments make use of the fact that a message is
@@ -2088,213 +2123,179 @@ Change Controller: S/ MIME working group delegated from the IESG
           </section>
   </middle>
   <back>
-
       <!--
-      <section title="7.1.  Reference Conventions">
+    <section title="7.1.  Reference Conventions">
 
-        [CMS] refers to [RFC5652].
+        <referencegroup target="ESS">
+          &rfc2634;
+          &rfc5035;
+        </referencegroup>
 
-        [ESS] refers to [RFC2634] and [RFC5035].
+        <referencegroup target="MIME-SPEC">
+          &rfc2045;
+          &rfc2046;
+          &rfc2047;
+          &rfc2049;
+          &rfc4288;
+          &rfc4289;
+        </referencegroup>
 
-        [MIME] refers to [RFC2045], [RFC2046],  [RFC2047], [RFC2049],
-        [RFC4288], and [RFC4289].
+        <referencegroup target="SMIMEv2">
+          &rfc2311;
+          &rfc2312;
+          &rfc2313;
+          &rfc2314;
+          &rfc2315;
+        </referencegroup>
 
-        [SMIMEv2] refers to [RFC2311], [RFC2312], [RFC2313], [RFC2314], and
-        [RFC2315].
+        <referencegroup target="SMIMEv3">
+          &rfc2630;
+          &rfc2631;
+          &rfc2632;
+          &rfc2633;
+          &rfc2634;
+          &rfc5035;
+        </referencegroup>
 
-        [SMIMEv3] refers to [RFC2630], [RFC2631], [RFC2632], [RFC2633],
-        [RFC2634], and [RFC5035].
+        <referencegroup target="SMIMEv3.1">
+          &rfc2634;
+          &rfc3850;
+          &rfc3851;
+          &rfc3852;
+          &rfc5035;
+        </referencegroup>
 
-        [SMIMv3.1] refers to [RFC2634], [RFC3850], [RFC3851], <xref target="RFC3852"/>, and
-        [RFC5035].
-
+        <referenceXXX target="RFC5652" use="CMS"/>
+        
 
       </section>
       -->
       <references title="Normative References">
-<!--
-        [CERT32]      Ramsdell, B. and S. Turner, "Secure/Multipurpose
-        Internet Mail Extensions (S/ MIME) Version 3.2
-        Certificate Handling", RFC 5750, January 2010.
-
-        [CHARSETS]    Character sets assigned by IANA.  See
-        http://www.iana.org/assignments/character-sets.
-
-        [CMSAES]      Schaad, J., "Use of the Advanced Encryption Standard
-        (AES) Encryption Algorithm in Cryptographic Message
-        Syntax (CMS)", RFC 3565, July 2003.
-
-        [CMSALG]      Housley, R., "Cryptographic Message Syntax (CMS)
-        Algorithms", RFC 3370, August 2002.
-
-        [CMSCOMPR]    Gutmann, P., "Compressed Data Content Type for
-        Cryptographic Message Syntax (CMS)", RFC 3274, June
-        2002.
-
-        [CMS-SHA2]    Turner, S., "Using SHA2 Algorithms with Cryptographic
-        Message Syntax", RFC 5754, January 2010.
-
-        [CONTDISP]    Troost, R., Dorner, S., and K. Moore, Ed.,
-        "Communicating Presentation Information in Internet
-        Messages: The Content-Disposition Header Field", RFC
-        2183, August 1997.
-
-        [FIPS186-2]   National Institute of Standards and Technology (NIST),
-        "Digital Signature Standard (DSS)", FIPS Publication
-        186-2, January 2000. [With Change Notice 1].
-
-        [FIPS186-3]   National Institute of Standards and Technology (NIST),
-        FIPS Publication 186-3: Digital Signature Standard,
-        June 2009.
-
-        [MIME-SECURE] Galvin, J., Murphy, S., Crocker, S., and N. Freed,
-        "Security Multiparts for MIME: Multipart/Signed and
-        Multipart/Encrypted", RFC 1847, October 1995.
--->
-&rfc2119;
-<!--
-        [RANDOM]      Eastlake, D., 3rd, Schiller, J., and S. Crocker,
-        "Randomness Requirements for Security", BCP 106, RFC
-        4086, June 2005.
-
-
-
-
-
-
-        [RFC2045]     Freed, N. and N. Borenstein, "Multipurpose Internet
-        Mail Extensions (MIME) Part One: Format of Internet
-        Message Bodies", RFC 2045, November 1996.
-
-        [RFC2046]     Freed, N. and N. Borenstein, "Multipurpose Internet
-        Mail Extensions (MIME) Part Two: Media Types", RFC
-        2046, November 1996.
-
-        [RFC2047]     Moore, K., "MIME (Multipurpose Internet Mail
-        Extensions) Part Three: Message Header Extensions for
-        Non-ASCII Text", RFC 2047, November 1996.
-
-        [RFC2049]     Freed, N. and N. Borenstein, "Multipurpose Internet
-        Mail Extensions (MIME) Part Five: Conformance Criteria
-        and Examples", RFC 2049, November 1996.
-
-        [RFC2634]     Hoffman, P. Ed., "Enhanced Security Services for
-        S/ MIME", RFC 2634, June 1999.
-
-        [RFC4288]     Freed, N. and J. Klensin, "Media Type Specifications
-        and Registration Procedures", BCP 13, RFC 4288,
-        December 2005.
-
-        [RFC4289]     Freed, N. and J. Klensin, "Multipurpose Internet Mail
-        Extensions (MIME) Part Four: Registration Procedures",
-        BCP 13, RFC 4289, December 2005.
-
-        [RFC5035]     Schaad, J., "Enhanced Security Services (ESS) Update:
-        Adding CertID Algorithm Agility", RFC 5035, August
-        2007.
-
-        [RFC5652]     Housley, R., "Cryptographic Message Syntax (CMS)", RFC
-        5652, September 2009.
-
-        [RSAOAEP]     Housley, R. "Use of the RSAES-OAEP Key Transport
-        Algorithm in the Cryptographic Message Syntax (CMS)",
-        RFC 3560, July 2003.
-
-        [RSAPSS]      Schaad, J., "Use of the RSASSA-PSS Signature Algorithm
-        in Cryptographic Message Syntax (CMS)", RFC 4056, June
-        2005.
-
-        [SP800-56A]   National Institute of Standards and Technology (NIST),
-        Special Publication 800-56A: Recommendation Pair-Wise
-        Key Establishment Schemes Using Discrete Logarithm
-        Cryptography (Revised), March 2007.
-
-
-
-
-
-
-
-        [X.680]       ITU-T Recommendation X.680 (2002) | ISO/IEC
-        8824-1:2002. Information Technology - Abstract Syntax
-        Notation One (ASN.1):  Specification of basic notation.
-
-        [X.690]       ITU-T Recommendation X.690 (2002) | ISO/IEC
-        8825-1:2002.  Information Technology - ASN.1 encoding
-        rules: Specification of Basic Encoding Rules (BER),
-        Canonical Encoding Rules (CER) and Distinguished
-        Encoding Rules (DER).
+        &rfc1847;
+        &rfc2045; &rfc2046; &rfc2047; &rfc2049;
+        &rfc2119;
+        &rfc2138;
+        &rfc2634;
+        &rfc3274;
+        &rfc3370;
+        &rfc3560;
+        &rfc3565;
+        &rfc4056;
+        &rfc4288;  &rfc4289;
+        &rfc5035;
+        &rfc5652;
+        &rfc5750;
+        &rfc5754;
+        &rfc4086;
+        
+        <!--
+            <referenceXXX target="RFC5750" use="CERT32"/>
+            <referenceXXX target="RFC3565" use="CMSAES"/>
+            <referenceXXX target="RFC3370" use="CMSALG"/>
+            <referenceXXX target="RFC3274" use="CMSCOMPR"/>
+            <referenceXXX target="RFC5754" use="CMS-SHA2"/>
+            <referenceXXX target="RFC2138" use="CONTDISP"/>
+            <referenceXXX target="RFC1847" use="MIME-SECURE"/>
+            <referenceXXX target="RFC4086" use="RANDOM"/>
+            <referenceXXX target="RFC3560" use="RSAOAEP"/>
+            <referenceXXX target="RFC4056" use="RSAPSS"/>
         -->
+           
+        <reference anchor="CHARSETS" target="http://www.iana.org/assignments/character-sets.">
+          <front>
+            <title>Character sets assigned by IANA.</title>
+            <author/>
+            <date/>
+          </front>
+          
+        </reference>
+
+        <reference anchor="FIPS186-2">
+          <front>
+            <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="January" year="2000"/>
+          </front>
+          <seriesInfo name="Federal Information Processing Standards Publication"
+                      value="186-2"/>
+        </reference>
+
+        <reference anchor="FIPS186-3">
+          <front>
+            <title>Digital Signature Standard (DSS)</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="June" year="2009"/>
+          </front>
+          <seriesInfo name="Federal Information Processing Standards Publication"
+                      value="186-3"/>
+        </reference>
+
+        <reference anchor="SP800-56A">
+          <front>
+            <title>Special Publication 800-56A: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography (Revised)</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="March" year="2007"/>
+          </front>
+        </reference>
+
+        <reference anchor="X.680">
+          <front>
+            <title>Information Technology - Abstract Syntax
+            Notation One (ASN.1):  Specification of basic notation.
+            ITU-T Recommendation X.680 (2002) | ISO/IEC 8824-1:2002. 
+            </title>
+            <author/>
+            <date/>
+          </front>
+        </reference>
+
+        <reference anchor="X.690">
+          <front>
+            <title>
+              ITU-T Recommendation X.690 (2002) | ISO/IEC
+              8825-1:2002.  Information Technology - ASN.1 encoding
+              rules: Specification of Basic Encoding Rules (BER),
+              Canonical Encoding Rules (CER) and Distinguished
+              Encoding Rules (DER).
+            </title>
+            <author/>
+            <date/>
+          </front>
+        </reference>
+
       </references>
       
       <references title="Informative References">
-<!--
-        [DHSUB]       Zuccherato, R., "Methods for Avoiding the "Small-
-        Subgroup" Attacks on the Diffie-Hellman Key Agreement
-        Method for S/ MIME", RFC 2785, March 2000.
+        &rfc2311; &rfc2312; &rfc2313; &rfc2314; &rfc2315;
+        &rfc2630; &rfc2631; &rfc2632; &rfc2633;
+        &rfc2785;
+        &rfc3218;
+        &rfc3850; &rfc3851; &rfc3852;
+        &rfc4270;
+        &rfc3766;
 
-        [HASH-ATTACK] Hoffman, P. and B. Schneier, "Attacks on Cryptographic
-        Hashes in Internet Protocols", RFC 4270, November 2005.
-
-        [MMA]         Rescorla, E., "Preventing the Million Message Attack on
-        Cryptographic Message Syntax", RFC 3218, January 2002.
-
-        [PKCS-7]      Kaliski, B., "PKCS #7: Cryptographic Message Syntax
-        Version 1.5", RFC 2315, March 1998.
-
-        [RFC2311]     Dusse, S., Hoffman, P., Ramsdell, B., Lundblade, L.,
-        and L. Repka, "S/ MIME Version 2 Message Specification",
-        RFC 2311, March 1998.
-
-        [RFC2312]     Dusse, S., Hoffman, P., Ramsdell, B., and J.
-        Weinstein, "S/ MIME Version 2 Certificate Handling", RFC
-        2312, March 1998.
-
-        [RFC2313]     Kaliski, B., "PKCS #1: RSA Encryption Version 1.5", RFC
-        2313, March 1998.
-
-        [RFC2314]     Kaliski, B., "PKCS #10: Certification Request Syntax
-        Version 1.5", RFC 2314, March 1998.
-
-        [RFC2315]     Kaliski, B., "PKCS #7: Certification Message Syntax
-        Version 1.5", RFC 2315, March 1998.
-
-        [RFC2630]     Housley, R., "Cryptographic Message Syntax", RFC 2630,
-        June 1999.
-
-        [RFC2631]     Rescorla, E., "Diffie-Hellman Key Agreement Method",
-        RFC 2631, June 1999.
-
-
-
-
-
-
-        [RFC2632]     Ramsdell, B., Ed., "S/ MIME Version 3 Certificate
-        Handling", RFC 2632, June 1999.
-
-        [RFC2633]     Ramsdell, B., Ed., "S/ MIME Version 3 Message
-        Specification", RFC 2633, June 1999.
-
-        [RFC3850]     Ramsdell, B., Ed., "Secure/Multipurpose Internet Mail
-        Extensions (S/ MIME) Version 3.1 Certificate Handling",
-        RFC 3850, July 2004.
-
-        [RFC3851]     Ramsdell, B., Ed., "Secure/Multipurpose Internet Mail
-        Extensions (S/ MIME) Version 3.1 Message Specification",
-        RFC 3851, July 2004.
+        <!--
+            <referenceXXX target="RFC2785" use="DHSUB"/>
+            <referenceXXX target="RFC4270" use="HASH-ATTACK"/>
+            <referenceXXX target="RFC3218" use="MMA"/>
+            <referenceXXX target="RFC2315" use="PKCS-7"/>
+            <referenceXXX target="RFC3766" use="STRENGTH"/>
+            
 -->
-&rfc3852;
 
-<!--
-        [SP800-57]    National Institute of Standards and Technology (NIST),
-        Special Publication 800-57: Recommendation for Key
-        Management, August 2005.
-
-        [STRENGTH]    Orman, H., and P. Hoffman, "Determining Strengths For
-        Public Keys Used For Exchanging Symmetric Keys", BCP
-        86, RFC 3766, April 2004.
--->
+        <reference anchor="SP800-57">
+          <front>
+            <title>
+              Special Publication 800-57: Recommendation for Key
+              Management
+            </title>
+            <author><organization>
+              National Institute of Standards and Technology (NIST)
+            </organization>
+            </author>
+            <date               month="August" year="2005"/>
+          </front>
+        </reference>
       </references>
 
 

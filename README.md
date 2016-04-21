@@ -1,9 +1,22 @@
-# Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.2 Certificate Handling
+# S/MIME documents for version 3.5
 
-This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.2 Certificate Handling".
+##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling
+This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling".
 
 * [Editor's copy](https://spasm-wg.github.io/smime/)
 * [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5650-bis)
+* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5650-bis&url2=https://spasm-wgsacmwg.github.io/smime/draft-schaad-rfc5650.txt)
+* [Compare Editor's and RFC5650] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5650&url2=https://spasm-wgsacmwg.github.io/smime/draft-schaad-rfc5650.txt)
+
+
+##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message
+
+This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message".
+
+* [Editor's copy](https://spasm-wg.github.io/smime/)
+* [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5651-bis)
+* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5651-bis&url2=https://spasm-wgsacmwg.github.io/smime/draft-schaad-rfc5651.txt)
+* [Compare Editor's and RFC5651] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5651&url2=https://spasm-wgsacmwg.github.io/smime/draft-schaad-rfc5651.txt)
 
 
 ## Building the Draft
