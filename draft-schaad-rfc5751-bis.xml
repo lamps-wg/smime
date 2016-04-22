@@ -47,7 +47,7 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='trust200902' docName="draft-schaad-rfc5751-bis-latest" category='std'>
+<rfc ipr='pre5378Trust200902' docName="draft-schaad-rfc5751-bis-latest" category='std' obsoletes="RFC5751">
   <front>
     <title abbrev="S/MIME 3.2 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification </title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
@@ -77,12 +77,12 @@
     </author>
     <date/>
     <area>Security Area</area>
-    <workgroup>S/ MIME</workgroup>
-    <keyword>S/ MIME</keyword>
+    <workgroup>SPASM</workgroup>
+    <keyword>S/MIME</keyword>
     <abstract>
       <t>
         This document defines Secure/Multipurpose Internet Mail Extensions
-        (S/MIME) version 3.2.  S/MIME provides a consistent way to send and
+        (S/&wj;MIME) version 3.2.  S/&wj;MIME provides a consistent way to send and
         receive secure MIME data.  Digital signatures provide authentication,
         message integrity, and non-repudiation with proof of origin.
         Encryption provides data confidentiality.  Compression can be used to
@@ -93,28 +93,28 @@
   <middle>
     <section title="Introduction">
       <t>
-        S/MIME (Secure/Multipurpose Internet Mail Extensions) provides a
+        S/&wj;MIME (Secure/Multipurpose Internet Mail Extensions) provides a
         consistent way to send and receive secure MIME data.  Based on the
-        popular Internet MIME standard, S/MIME provides the following
+        popular Internet MIME standard, S/&wj;MIME provides the following
         cryptographic security services for electronic messaging
         applications:  authentication, message integrity and non-repudiation
         of origin (using digital signatures), and data confidentiality (using
-        encryption).  As a supplementary service, S/MIME provides for message
+        encryption).  As a supplementary service, S/&wj;MIME provides for message
         compression.
       </t>
 
       <t>
-        S/MIME can be used by traditional mail user agents (MUAs) to add
+        S/&wj;MIME can be used by traditional mail user agents (MUAs) to add
         cryptographic security services to mail that is sent, and to
         interpret cryptographic security services in mail that is received.
-        However, S/MIME is not restricted to mail; it can be used with any
+        However, S/&wj;MIME is not restricted to mail; it can be used with any
         transport mechanism that transports MIME data, such as HTTP or SIP.
-        As such, S/MIME takes advantage of the object-based features of MIME
+        As such, S/&wj;MIME takes advantage of the object-based features of MIME
         and allows secure messages to be exchanged in mixed-transport
         systems.
       </t>
       <t>
-        Further, S/MIME can be used in automated message transfer agents that
+        Further, S/&wj;MIME can be used in automated message transfer agents that
         use cryptographic security services that do not require any human
         intervention, such as the signing of software-generated documents and
         the encryption of FAX messages sent over the Internet.
@@ -123,28 +123,28 @@
 
         <t>
           This document describes a protocol for adding cryptographic signature
-          and encryption services to MIME data.  The MIME standard [MIME-SPEC]
+          and encryption services to MIME data.  The MIME standard <xref target="MIME-SPEC"/>
           provides a general structure for the content of Internet messages and
           allows extensions for new content-type-based applications.
         </t>
         <t>
           This specification defines how to create a MIME body part that has
           been cryptographically enhanced according to the Cryptographic
-          Message Syntax (CMS) RFC 5652 [CMS], which is derived from PKCS #7
+          Message Syntax (CMS) RFC 5652 <xref target="RFC5652"/>, which is derived from PKCS #7
           <xref target="RFC2315"/>.  This specification also defines the application/pkcs7-mime
           media type that can be used to transport those body parts.
         </t>
         <t>
           This document also discusses how to use the multipart/signed media
-          type defined in <xref target="RFC1847"/> to transport S/MIME signed messages.
+          type defined in <xref target="RFC1847"/> to transport S/&wj;MIME signed messages.
           multipart/signed is used in conjunction with the application/pkcs7-
-          signature media type, which is used to transport a detached S/MIME
+          signature media type, which is used to transport a detached S/&wj;MIME
           signature.
         </t>
         <t>
-          In order to create S/MIME messages, an S/MIME agent MUST follow the
+          In order to create S/&wj;MIME messages, an S/&wj;MIME agent MUST follow the
           specifications in this document, as well as the specifications listed
-          in the Cryptographic Message Syntax document [CMS], <xref target="RFC3370"/>,
+          in the Cryptographic Message Syntax document <xref target="RFC5652"/>, <xref target="RFC3370"/>,
           <xref target="RFC4056"/>, <xref target="RFC3560"/>, and <xref target="RFC5754"/>.
         </t>
         <t>
@@ -159,9 +159,9 @@
         </t>
         <t>
           The separation for requirements on receiving agents and sending
-          agents also derives from the likelihood that there will be S/MIME
+          agents also derives from the likelihood that there will be S/&wj;MIME
           systems that involve software other than traditional Internet mail
-          clients.  S/MIME can be used with any system that transports MIME
+          clients.  S/&wj;MIME can be used with any system that transports MIME
           data.  An automated process that sends an encrypted message might not
           be able to receive an encrypted message at all, for example.  Thus,
           the requirements and recommendations for the two types of agents are
@@ -214,12 +214,12 @@
           transmits 7-bit data.
             </t>
 
-          <t hangText="Receiving agent:">   Software that interprets and processes S/MIME CMS
+          <t hangText="Receiving agent:">   Software that interprets and processes S/&wj;MIME CMS
           objects, MIME body parts that contain CMS content
           types, or both.
             </t>
 
-          <t hangText="Sending agent:">     Software that creates S/MIME CMS content types,
+          <t hangText="Sending agent:">     Software that creates S/&wj;MIME CMS content types,
           MIME body parts that contain CMS content types, or
           both.
             </t>
@@ -265,14 +265,14 @@
       <section title="Compatibility with Prior Practice of S/MIME">
 
         <t>
-          S/MIME version 3.2 agents ought to attempt to have the greatest
-          interoperability possible with agents for prior versions of S/MIME.
-          S/MIME version 2 is described in RFC 2311 through RFC 2315 inclusive
-          [SMIMEv2], S/MIME version 3 is described in RFC 2630 through RFC 2634
-          inclusive and RFC 5035 [SMIMEv3], and S/MIME version 3.1 is described
-          in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 [SMIMEv3.1].
+          S/&wj;MIME version 3.2 agents ought to attempt to have the greatest
+          interoperability possible with agents for prior versions of S/&wj;MIME.
+          S/&wj;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive
+          <xref target="SMIMEv2"/>, S/&wj;MIME version 3 is described in RFC 2630 through RFC 2634
+          inclusive and RFC 5035 <xref target="SMIMEv3"/>, and S/&wj;MIME version 3.1 is described
+          in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <xref target="SMIMEv3.1"/>.
           RFC 2311 also has historical information about the development of
-          S/MIME.
+          S/&wj;MIME.
         </t>
       </section>
       
@@ -329,7 +329,7 @@
           X.690.
         </t>
         <t>
-          Section 1.4: Added references to S/MIME MSG 3.1 RFCs.
+          Section 1.4: Added references to S/&wj;MIME MSG 3.1 RFCs.
         </t>
         <t>
           Section 2.1 (digest algorithm): SHA-256 added as MUST, SHA-1 and MD5
@@ -339,7 +339,7 @@
           Section 2.2 (signature algorithms): RSA with SHA-256 added as MUST,
           and DSA with SHA-256 added as SHOULD+, RSA with SHA-1, DSA with
           SHA-1, and RSA with MD5 changed to SHOULD-, and RSASSA-PSS with
-          SHA-256 added as SHOULD+.  Also added note about what S/MIME v3.1
+          SHA-256 added as SHOULD+.  Also added note about what S/&wj;MIME v3.1
           clients support.
         </t>
         <t>
@@ -400,7 +400,7 @@
           SMIMEv3.1.
         </t>
         <t>
-          Appendix B: Added Appendix B to move S/MIME v2 to Historic status.
+          Appendix B: Added Appendix B to move S/&wj;MIME v2 to Historic status.
         </t>
       </section>
       
@@ -412,9 +412,9 @@
         CMS allows for a wide variety of options in content, attributes, and
         algorithm support.  This section puts forth a number of support
         requirements and recommendations in order to achieve a base level of
-        interoperability among all S/MIME implementations.  <xref target="RFC3370"/> and
+        interoperability among all S/&wj;MIME implementations.  <xref target="RFC3370"/> and
         <xref target="RFC5754"/> provides additional details regarding the use of the
-        cryptographic algorithms.  [ESS] provides additional details
+        cryptographic algorithms.  <xref target="ESS"/> provides additional details
         regarding the use of additional attributes.
       </t>
       <section title="DigestAlgorithmIdentifier">
@@ -422,7 +422,7 @@
           Sending and receiving agents MUST support SHA-256 <xref target="RFC5754"/> and
           SHOULD- support SHA-1 <xref target="RFC3370"/>.  Receiving agents SHOULD- support MD5
           <xref target="RFC3370"/> for the purpose of providing backward compatibility with
-          MD5-digested S/MIME v2 SignedData objects.
+          MD5-digested S/&wj;MIME v2 SignedData objects.
         </t>
       </section>
       <section title="SignatureAlgorithmIdentifier">
@@ -474,14 +474,14 @@
           See Section 4.1 for information on key size and algorithm references.
         </t>
         <t>
-          Note that S/MIME v3.1 clients support verifying id-dsa-with-sha1 and
+          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
           rsaEncryption and might not implement sha256withRSAEncryption.  Note
-          that S/MIME v3 clients might only implement signing or signature
+          that S/&wj;MIME v3 clients might only implement signing or signature
           verification using id-dsa-with-sha1, and might also use id-dsa as an
           AlgorithmIdentifier in this field.  Receiving clients SHOULD
           recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
           clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
-          that S/MIME v2 clients are only required to verify digital signatures
+          that S/&wj;MIME v2 clients are only required to verify digital signatures
           using the rsaEncryption algorithm with SHA-1 or MD5, and might not
           implement id-dsa-with-sha1 or id-dsa at all.
         </t>
@@ -504,7 +504,7 @@
         </t>
         <t>
           When DH ephemeral-static is used, a key wrap algorithm is also
-          specified in the KeyEncryptionAlgorithmIdentifier [CMS].  The
+          specified in the KeyEncryptionAlgorithmIdentifier <xref target="RFC5652"/>.  The
           underlying encryption functions for the key wrap and content
           encryption algorithm (<xref target="RFC3370"/> and <xref target="RFC3565"/>) and the key sizes for
           the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm
@@ -514,10 +514,10 @@
           used.
         </t>
         <t>
-          Note that S/MIME v3.1 clients might only implement key encryption and
-          decryption using the rsaEncryption algorithm.  Note that S/MIME v3
+          Note that S/&wj;MIME v3.1 clients might only implement key encryption and
+          decryption using the rsaEncryption algorithm.  Note that S/&wj;MIME v3
           clients might only implement key encryption and decryption using the
-          Diffie-Hellman algorithm.  Also note that S/MIME v2 clients are only
+          Diffie-Hellman algorithm.  Also note that S/&wj;MIME v2 clients are only
           capable of decrypting content-encryption keys using the rsaEncryption
           algorithm.
         </t>
@@ -526,7 +526,7 @@
         <t>
           There are several CMS content types.  Of these, only the Data,
           SignedData, EnvelopedData, and CompressedData content types are
-          currently used for S/MIME.
+          currently used for S/&wj;MIME.
         </t>
         <section title="Data Content Type">
           <t>
@@ -585,7 +585,7 @@
           Receiving agents MUST be able to handle zero or one instance of each
           of the signed attributes listed here.  Sending agents SHOULD generate
           one instance of each of the following signed attributes in each
-          S/MIME message:
+          S/&wj;MIME message:
           <list style="symbols">
             <t>
               Signing Time (section (Section 2.5.1 in this document)
@@ -598,18 +598,18 @@
               document)
             </t>
             <t>
-              Message Digest (section (Section 11.2 in [CMS])
+              Message Digest (section (Section 11.2 in <xref target="RFC5652"/>)
             </t>
             <t>
-              Content Type (section (Section 11.1 in [CMS])
+              Content Type (section (Section 11.1 in <xref target="RFC5652"/>)
             </t>
           </list>
         </t>
         <t>
           Further, receiving agents SHOULD be able to handle zero or one
           instance of the signingCertificate and signingCertificatev2 signed
-          attributes, as defined in Section 5 of RFC 2634 [ESS] and Section 3
-          of RFC 5035 [ESS].
+          attributes, as defined in Section 5 of RFC 2634 <xref target="ESS"/> and Section 3
+          of RFC 5035 <xref target="ESS"/>.
         </t>
         <t>
           Sending agents SHOULD generate one instance of the signingCertificate
@@ -637,7 +637,7 @@
           <t>
             Sending agents MUST encode signing time through the year 2049 as
             UTCTime; signing times in 2050 or later MUST be encoded as
-            GeneralizedTime.  When the UTCTime CHOICE is used, S/MIME agents MUST
+            GeneralizedTime.  When the UTCTime CHOICE is used, S/&wj;MIME agents MUST
             interpret the year field (YY) as follows:
           </t>
           <t>
@@ -792,7 +792,7 @@
                   Or use some other method of determining the user's key management
                   key.  If a X.509 key management certificate is not found, then
                   encryption cannot be done with the signer of the message.  If
-                  multiple X.509 key management certificates are found, the S/MIME
+                  multiple X.509 key management certificates are found, the S/&wj;MIME
                   agent can make an arbitrary choice between them.
                 </t>
               </list>
@@ -802,9 +802,9 @@
       </section>
         <section title="SignerIdentifier SignerInfo Type">
           <t>
-            S/MIME v3.2 implementations MUST support both issuerAndSerialNumber
+            S/&wj;MIME v3.2 implementations MUST support both issuerAndSerialNumber
             and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier
-            choice cannot be read by S/MIME v2 clients.
+            choice cannot be read by S/&wj;MIME v2 clients.
           </t>
           <t>
             It is important to understand that some certificates use a value for
@@ -916,12 +916,12 @@
                   </t>
                   <t>
 
-                    the sending agent has no knowledge of the version of S/MIME of
+                    the sending agent has no knowledge of the version of S/&wj;MIME of
                     the recipient,
                   </t>
                 </list>
                 then the sending agent SHOULD use AES-128 because it is a stronger
-                algorithm and is required by S/MIME v3.2.  If the sending agent
+                algorithm and is required by S/&wj;MIME v3.2.  If the sending agent
                 chooses not to use AES-128 in this step, it SHOULD use tripleDES.
               </t>
             </section>
@@ -953,21 +953,21 @@
     </section>
         <section title="Creating S/MIME Messages">
           <t>
-            This section describes the S/MIME message formats and how they are
-            created.  S/MIME messages are a combination of MIME bodies and CMS
+            This section describes the S/&wj;MIME message formats and how they are
+            created.  S/&wj;MIME messages are a combination of MIME bodies and CMS
             content types.  Several media types as well as several CMS content
             types are used.  The data to be secured is always a canonical MIME
             entity.  The MIME entity and other data, such as certificates and
             algorithm identifiers, are given to CMS processing facilities that
             produce a CMS object.  Finally, the CMS object is wrapped in MIME.
-            The Enhanced Security Services for S/MIME [ESS] document provides
-            descriptions of how nested, secured S/MIME messages are formatted.
-            ESS provides a description of how a triple-wrapped S/MIME message is
+            The Enhanced Security Services for S/&wj;MIME <xref target="ESS"/> document provides
+            descriptions of how nested, secured S/&wj;MIME messages are formatted.
+            ESS provides a description of how a triple-wrapped S/&wj;MIME message is
             formatted using multipart/signed and application/pkcs7-mime for the
             signatures.
           </t>
           <t>
-            S/MIME provides one format for enveloped-only data, several formats
+            S/&wj;MIME provides one format for enveloped-only data, several formats
             for signed-only data, and several formats for signed and enveloped
             data.  Several formats are required to accommodate several
             environments, in particular for signed messages.  The criteria for
@@ -976,16 +976,16 @@
           <t>
 
             The reader of this section is expected to understand MIME as
-            described in [MIME-SPEC] and <xref target="RFC1847"/>.
+            described in <xref target="MIME-SPEC"/> and <xref target="RFC1847"/>.
           </t>
 
           <section title="Preparing the MIME Entity for Signing, Enveloping, or Compressing">
             <t>
-              S/MIME is used to secure MIME entities.  A MIME entity can be a sub-
+              S/&wj;MIME is used to secure MIME entities.  A MIME entity can be a sub-
               part, sub-parts of a message, or the whole message with all its sub-
               parts.  A MIME entity that is the whole message includes only the
               MIME message headers and MIME body, and does not include the RFC-822
-              header.  Note that S/MIME can also be used to secure MIME entities
+              header.  Note that S/&wj;MIME can also be used to secure MIME entities
               used in applications other than Internet mail.  If protection of the
               RFC-822 header is required, the use of the message/rfc822 media type
               is explained later in this section.
@@ -998,9 +998,9 @@
               described in Sections 3.2, 3.4, and elsewhere.
             </t>
             <t>
-              The procedure for preparing a MIME entity is given in [MIME-SPEC].
+              The procedure for preparing a MIME entity is given in <xref target="MIME-SPEC"/>.
               The same procedure is used here with some additional restrictions
-              when signing.  The description of the procedures from [MIME-SPEC] is
+              when signing.  The description of the procedures from <xref target="MIME-SPEC"/> is
               repeated here, but it is suggested that the reader refer to that
               document for the exact procedure.  This section also describes
               additional requirements.
@@ -1033,7 +1033,7 @@
               </list>
             </t>
             <t>
-              When an S/MIME message is received, the security services on the
+              When an S/&wj;MIME message is received, the security services on the
               message are processed, and the result is the MIME entity.  That MIME
               entity is typically passed to a MIME-capable user agent where it is
               further decoded and presented to the user or receiving application.
@@ -1042,12 +1042,12 @@
               In order to protect outer, non-content-related message header fields
               (for instance, the "Subject", "To", "From", and "Cc" fields), the
               sending client MAY wrap a full MIME message in a message/rfc822
-              wrapper in order to apply S/MIME security services to these header
+              wrapper in order to apply S/&wj;MIME security services to these header
               fields.  It is up to the receiving client to decide how to present
               this "inner" header along with the unprotected "outer" header.
             </t>
             <t>
-              When an S/MIME message is received, if the top-level protected MIME
+              When an S/&wj;MIME message is received, if the top-level protected MIME
               entity has a Content-Type of message/rfc822, it can be assumed that
               the intent was to provide header protection.  This entity SHOULD be
               presented as the top-level message, taking into account header
@@ -1071,7 +1071,7 @@
                 have only one representation regardless of computing platform or
                 environment that can be considered their canonical representation.
                 In general, canonicalization will be performed by the non-security
-                part of the sending agent rather than the S/MIME implementation.
+                part of the sending agent rather than the S/&wj;MIME implementation.
               </t>
               <t>
                 The most common and important canonicalization is for text, which is
@@ -1080,7 +1080,7 @@
                 character set canonicalized.  The line ending MUST be the pair of
                 characters &lt;CR&gt;&lt;LF&gt;, and the charset SHOULD be a registered charset
                 <xref target="CHARSETS"/>.  The details of the canonicalization are specified in
-                [MIME-SPEC].
+                <xref target="MIME-SPEC"/>.
               </t>
               <t>
                 Note that some charsets such as ISO-2022 have multiple
@@ -1093,12 +1093,12 @@
               <t>
                 When generating any of the secured MIME entities below, except the
                 signing using the multipart/signed format, no transfer encoding is
-                required at all.  S/MIME implementations MUST be able to deal with
+                required at all.  S/&wj;MIME implementations MUST be able to deal with
                 binary MIME objects.  If no Content-Transfer-Encoding header field is
                 present, the transfer encoding is presumed to be 7BIT.
               </t>
               <t>
-                S/MIME implementations SHOULD however use transfer encoding described
+                S/&wj;MIME implementations SHOULD however use transfer encoding described
                 in Section 3.1.3 for all MIME entities they secure.  The reason for
                 securing only 7-bit MIME entities, even for enveloped data that are
                 not exposed to the transport, is that it allows the MIME entity to be
@@ -1111,7 +1111,7 @@
                 not be possible unless the original MIME entity was only 7-bit data.
               </t>
               <t>
-                S/MIME implementations that "know" that all intended recipients are
+                S/&wj;MIME implementations that "know" that all intended recipients are
                 capable of handling inner (all but the outermost) binary MIME objects
                 SHOULD use binary encoding as opposed to a 7-bit-safe transfer
                 encoding for the inner entities.  The use of a 7-bit-safe encoding
@@ -1124,7 +1124,7 @@
               <t>
                 If one or more intended recipients are unable to handle inner binary
                 MIME objects, or if this capability is unknown for any of the
-                intended recipients, S/MIME implementations SHOULD use transfer
+                intended recipients, S/&wj;MIME implementations SHOULD use transfer
                 encoding described in Section 3.1.3 for all MIME entities they
                 secure.
               </t>
@@ -1182,7 +1182,7 @@
                 text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.
               </t>
               <t>
-                Note that this example is not of an S/MIME message.
+                Note that this example is not of an S/&wj;MIME message.
               </t>
               <figure>
               <artwork>
@@ -1235,7 +1235,7 @@
                 The carried CMS object always contains a MIME entity that is prepared
                 as described in Section 3.1 if the eContentType is id-data.  Other
                 contents MAY be carried when the eContentType contains different
-                values.  See [ESS] for an example of this with signed receipts.
+                values.  See <xref target="ESS"/> for an example of this with signed receipts.
               </t>
               <t>
                 Since CMS content types are binary data, in most cases base-64
@@ -1288,23 +1288,23 @@ Media Type                                            File Extension
                   followed by a three-letter extension.  The eight-character filename
                   base can be any distinct name; the use of the filename base "smime"
                   SHOULD be used to indicate that the MIME entity is associated with
-                  S/MIME.
+                  S/&wj;MIME.
                 </t>
                 <t>
 
                   Including a file name serves two purposes.  It facilitates easier use
-                  of S/MIME objects as files on disk.  It also can convey type
+                  of S/&wj;MIME objects as files on disk.  It also can convey type
                   information across gateways.  When a MIME entity of type
                   application/pkcs7-mime (for example) arrives at a gateway that has no
-                  special knowledge of S/MIME, it will default the entity's media type
+                  special knowledge of S/&wj;MIME, it will default the entity's media type
                   to application/octet-stream and treat it as a generic attachment,
                   thus losing the type information.  However, the suggested filename
                   for an attachment is often carried across a gateway.  This often
                   allows the receiving systems to determine the appropriate application
-                  to hand the attachment off to, in this case, a stand-alone S/MIME
+                  to hand the attachment off to, in this case, a stand-alone S/&wj;MIME
                   processing application.  Note that this mechanism is provided as a
                   convenience for implementations in certain environments.  A proper
-                  S/MIME implementation MUST use the media types and MUST NOT rely on
+                  S/&wj;MIME implementation MUST use the media types and MUST NOT rely on
                   the file extensions.
                 </t>
               </section>
@@ -1373,7 +1373,7 @@ Media Type                                            File Extension
                 CMS object of type EnvelopedData.  In addition to encrypting
                 a copy of the content-encryption key for each recipient, a
                 copy of the content-encryption key SHOULD be encrypted for
-                the originator and included in the EnvelopedData (see [CMS],
+                the originator and included in the EnvelopedData (see <xref target="RFC5652"/>,
                 Section 6).
 </t>
                 <t hangText="Step 3.">  The EnvelopedData object is wrapped in a CMS ContentInfo
@@ -1408,7 +1408,7 @@ Media Type                                            File Extension
             </section>
             <section title="Creating a Signed-Only Message">
               <t>
-                There are two formats for signed messages defined for S/MIME:
+                There are two formats for signed messages defined for S/&wj;MIME:
                 <list style="symbols">
                   <t>
                     application/pkcs7-mime with SignedData.
@@ -1427,13 +1427,13 @@ Media Type                                            File Extension
                 <t>
                   There are no hard-and-fast rules as to when a particular signed-only
                   format is chosen.  It depends on the capabilities of all the
-                  receivers and the relative importance of receivers with S/MIME
+                  receivers and the relative importance of receivers with S/&wj;MIME
                   facilities being able to verify the signature versus the importance
-                  of receivers without S/MIME software being able to view the message.
+                  of receivers without S/&wj;MIME software being able to view the message.
                 </t>
                 <t>
                   Messages signed using the multipart/signed format can always be
-                  viewed by the receiver whether or not they have S/MIME software.
+                  viewed by the receiver whether or not they have S/&wj;MIME software.
                   They can also be viewed whether they are using a MIME-native user
                   agent or they have messages translated by a gateway.  In this
                   context, "be viewed" means the ability to process the message
@@ -1443,7 +1443,7 @@ Media Type                                            File Extension
                 <t>
 
                   Messages signed using the SignedData format cannot be viewed by a
-                  recipient unless they have S/MIME facilities.  However, the
+                  recipient unless they have S/&wj;MIME facilities.  However, the
                   SignedData format protects the message content from being changed by
                   benign intermediate agents.  Such agents might do line wrapping or
                   content-transfer encoding changes that would break the signature.
@@ -1493,7 +1493,7 @@ Media Type                                            File Extension
               
               <section title="Signing Using the multipart/signed Format">
                 <t>
-                  This format is a clear-signing format.  Recipients without any S/MIME
+                  This format is a clear-signing format.  Recipients without any S/&wj;MIME
                   or CMS processing facilities are able to view the message.  It makes
                   use of the multipart/signed media type described in <xref target="RFC1847"/>.
                   The multipart/signed media type has two parts.  The first part
@@ -1579,7 +1579,7 @@ Any other   (defined separately in algorithm profile or "unknown"
                 </artwork>
                 </figure>
                 <t>
-                  (Historical note: some early implementations of S/ MIME emitted and
+                  (Historical note: some early implementations of S/MIME emitted and
                   expected "rsa-md5", "rsa-sha1", and "sha1" for the micalg parameter.)
                   Receiving agents SHOULD be able to recover gracefully from a micalg
                   parameter value that they do not recognize.  Future names for this
@@ -1630,7 +1630,7 @@ n8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
             <section title="Creating a Compressed-Only Message">
               <t>
                 This section describes the format for compressing a MIME entity.
-                Please note that versions of S/MIME prior to version 3.1 did not
+                Please note that versions of S/&wj;MIME prior to version 3.1 did not
                 specify any use of CompressedData, and will not recognize it.  The
                 use of a capability to indicate the ability to receive CompressedData
                 is described in <xref target="RFC3274"/> and is the preferred method for
@@ -1681,8 +1681,8 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 that encapsulate other MIME entities.
               </t>
               <t>
-                An S/MIME implementation MUST be able to receive and process
-                arbitrarily nested S/MIME within reasonable resource limits of the
+                An S/&wj;MIME implementation MUST be able to receive and process
+                arbitrarily nested S/&wj;MIME within reasonable resource limits of the
                 recipient computer.
               </t>
               <t>
@@ -1756,21 +1756,21 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 and so on.
               </t>
               <t>
-                S/MIME v2 [SMIMEv2] specified a method for "registering" public keys
+                S/&wj;MIME v2 <xref target="SMIMEv2"/> specified a method for "registering" public keys
                 with certificate authorities using an application/pkcs10 body part.
                 Since that time, the IETF PKIX Working Group has developed other
-                methods for requesting certificates.  However, S/MIME v3.2 does not
+                methods for requesting certificates.  However, S/&wj;MIME v3.2 does not
                 require a particular certificate request mechanism.
               </t>
             </section>
             <section title="Identifying an S/MIME Message">
               <t>
-                Because S/MIME takes into account interoperation in non-MIME
+                Because S/&wj;MIME takes into account interoperation in non-MIME
                 environments, several different mechanisms are employed to carry the
-                type information, and it becomes a bit difficult to identify S/MIME
+                type information, and it becomes a bit difficult to identify S/&wj;MIME
                 messages.  The following table lists criteria for determining whether
-                or not a message is an S/MIME message.  A message is considered an
-                S/MIME message if it matches any of the criteria listed below.
+                or not a message is an S/&wj;MIME message.  A message is considered an
+                S/&wj;MIME message if it matches any of the criteria listed below.
               </t>
               <t>
                 The file suffix in the table below comes from the "name" parameter in
@@ -1799,13 +1799,13 @@ file suffix: p7m, p7s, p7c, p7z
             <t>
               A receiving agent MUST provide some certificate retrieval mechanism
               in order to gain access to certificates for recipients of digital
-              envelopes.  This specification does not cover how S/MIME agents
+              envelopes.  This specification does not cover how S/&wj;MIME agents
               handle certificates, only what they do after a certificate has been
-              validated or rejected.  S/MIME certificate issues are covered in
+              validated or rejected.  S/&wj;MIME certificate issues are covered in
               <xref target="RFC5750"/>.
             </t>
             <t>
-              At a minimum, for initial S/MIME deployment, a user agent could
+              At a minimum, for initial S/&wj;MIME deployment, a user agent could
               automatically generate a message to an intended recipient requesting
               that recipient's certificate in a signed return message.  Receiving
               and sending agents SHOULD also provide a mechanism to allow a user to
@@ -1820,7 +1820,7 @@ file suffix: p7m, p7s, p7c, p7z
                 protected in a secure fashion.
               </t>
               <t>
-                An S/MIME user agent MUST NOT generate asymmetric keys less than 512
+                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 512
                 bits for use with the RSA or DSA signature algorithms.
               </t>
               <t>
@@ -1850,7 +1850,7 @@ file suffix: p7m, p7s, p7c, p7z
             </section>
             <section title="Signature Generation">
               <t>
-                The following are the requirements for an S/MIME agent generated RSA,
+                The following are the requirements for an S/&wj;MIME agent generated RSA,
                 RSASSA-PSS, and DSA signatures:
               </t>
               <figure>
@@ -1863,7 +1863,7 @@ file suffix: p7m, p7s, p7c, p7z
             </section>
             <section title="Signature Verification">
               <t>
-                The following are the requirements for S/MIME receiving agents during
+                The following are the requirements for S/&wj;MIME receiving agents during
                 signature verification of RSA, RSASSA-PSS, and DSA signatures:
               </t>
               <figure>
@@ -1876,7 +1876,7 @@ file suffix: p7m, p7s, p7c, p7z
             </section>
             <section title="Encryption">
               <t>
-                The following are the requirements for an S/MIME agent when
+                The following are the requirements for an S/&wj;MIME agent when
                 establishing keys for content encryption using the RSA, RSA-OAEP, and
                 DH algorithms:
               </t>
@@ -1890,7 +1890,7 @@ file suffix: p7m, p7s, p7c, p7z
             </section>
             <section title="Decryption">
               <t>
-                The following are the requirements for an S/MIME agent when
+                The following are the requirements for an S/&wj;MIME agent when
                 establishing keys for content decryption using the RSA, RSAES-OAEP,
                 and DH algorithms:
               </t>
@@ -1912,7 +1912,7 @@ file suffix: p7m, p7s, p7c, p7z
             </t>
             <t>
               Note that other documents can define additional MIME media types for
-              S/MIME.
+              S/&wj;MIME.
             </t>
 
             <section title="Media Type for application/pkcs7-mime">
@@ -2060,8 +2060,8 @@ Change Controller: S/ MIME working group delegated from the IESG
               cryptographic resource management system to prevent such attacks.
             </t>
             <t>
-              Using weak cryptography in S/MIME offers little actual security over
-              sending plaintext.  However, other features of S/MIME, such as the
+              Using weak cryptography in S/&wj;MIME offers little actual security over
+              sending plaintext.  However, other features of S/&wj;MIME, such as the
               specification of AES and the ability to announce stronger
               cryptographic capabilities to parties with whom you communicate,
               allow senders to create messages that use strong encryption.  Using
@@ -2075,7 +2075,7 @@ Change Controller: S/ MIME working group delegated from the IESG
               Such keys were previously considered secure, so processing previously
               received signed and encrypted mail will often result in the use of
               weak keys.  Implementations that wish to support previous versions of
-              S/MIME or process old messages need to consider the security risks
+              S/&wj;MIME or process old messages need to consider the security risks
               that result from smaller key sizes (e.g., spoofed messages) versus
               the costs of denial of service.  If an implementation supports
               verification of digital signatures generated with RSA and DSA keys of
@@ -2123,49 +2123,29 @@ Change Controller: S/ MIME working group delegated from the IESG
           </section>
   </middle>
   <back>
-      <!--
+        <!--
+            <displayreference target="RFC2785" to="DHSUB"/>
+            <displayreference target="RFC4270" to="HASH-ATTACK"/>
+            <displayreference target="RFC3218" to="MMA"/>
+            <displayreference target="RFC2315" to="PKCS-7"/>
+            <displayreference target="RFC3766" to="STRENGTH"/>
+            <displayreference target="RFC5750" to="CERT32"/>
+            <displayreference target="RFC3565" to="CMSAES"/>
+            <displayreference target="RFC3370" to="CMSALG"/>
+            <displayreference target="RFC3274" to="CMSCOMPR"/>
+            <displayreference target="RFC5754" to="CMS-SHA2"/>
+            <displayreference target="RFC2138" to="CONTDISP"/>
+            <displayreference target="RFC1847" to="MIME-SECURE"/>
+            <displayreference target="RFC4086" to="RANDOM"/>
+            <displayreference target="RFC3560" to="RSAOAEP"/>
+            <displayreference target="RFC4056" to="RSAPSS"/>
+            <displayreference target="RFC5652" use="CMS"/>
+        -->
+
+        <!--
     <section title="7.1.  Reference Conventions">
 
-        <referencegroup target="ESS">
-          &rfc2634;
-          &rfc5035;
-        </referencegroup>
 
-        <referencegroup target="MIME-SPEC">
-          &rfc2045;
-          &rfc2046;
-          &rfc2047;
-          &rfc2049;
-          &rfc4288;
-          &rfc4289;
-        </referencegroup>
-
-        <referencegroup target="SMIMEv2">
-          &rfc2311;
-          &rfc2312;
-          &rfc2313;
-          &rfc2314;
-          &rfc2315;
-        </referencegroup>
-
-        <referencegroup target="SMIMEv3">
-          &rfc2630;
-          &rfc2631;
-          &rfc2632;
-          &rfc2633;
-          &rfc2634;
-          &rfc5035;
-        </referencegroup>
-
-        <referencegroup target="SMIMEv3.1">
-          &rfc2634;
-          &rfc3850;
-          &rfc3851;
-          &rfc3852;
-          &rfc5035;
-        </referencegroup>
-
-        <referenceXXX target="RFC5652" use="CMS"/>
         
 
       </section>
@@ -2189,18 +2169,48 @@ Change Controller: S/ MIME working group delegated from the IESG
         &rfc4086;
         
         <!--
-            <referenceXXX target="RFC5750" use="CERT32"/>
-            <referenceXXX target="RFC3565" use="CMSAES"/>
-            <referenceXXX target="RFC3370" use="CMSALG"/>
-            <referenceXXX target="RFC3274" use="CMSCOMPR"/>
-            <referenceXXX target="RFC5754" use="CMS-SHA2"/>
-            <referenceXXX target="RFC2138" use="CONTDISP"/>
-            <referenceXXX target="RFC1847" use="MIME-SECURE"/>
-            <referenceXXX target="RFC4086" use="RANDOM"/>
-            <referenceXXX target="RFC3560" use="RSAOAEP"/>
-            <referenceXXX target="RFC4056" use="RSAPSS"/>
         -->
-           
+
+        <!--
+        <referencegroup target="ESS">
+          &rfc2634;
+          &rfc5035;
+          </referencegroup>
+          -->
+
+        <reference anchor="ESS">
+          <front>
+            <title>Enhanced Security Services for S/ MIME</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This is the set of documents dealing with enhanged security services and refers to <xref target="RFC2634"/> and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+
+        <!--
+            <referencegroup target="MIME-SPEC">
+            &rfc2045;
+            &rfc2046;
+            &rfc2047;
+            &rfc2049;
+            &rfc4288;
+            &rfc4289;
+            </referencegroup>
+        -->
+        <reference anchor="MIME-SPEC">
+          <front>
+            <title>MIME Message Specifications</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This is the set of documents that define how to use MIME.
+            This set of documents is <xref target="RFC2045"/>, <xref target="RFC2046"/>, <xref target="RFC2047"/>, <xref target="RFC2049"/>, <xref target="RFC4288"/>, and <xref target="RFC4289"/>.
+          </annotation>
+        </reference>
+
         <reference anchor="CHARSETS" target="http://www.iana.org/assignments/character-sets.">
           <front>
             <title>Character sets assigned by IANA.</title>
@@ -2275,13 +2285,70 @@ Change Controller: S/ MIME working group delegated from the IESG
         &rfc3766;
 
         <!--
-            <referenceXXX target="RFC2785" use="DHSUB"/>
-            <referenceXXX target="RFC4270" use="HASH-ATTACK"/>
-            <referenceXXX target="RFC3218" use="MMA"/>
-            <referenceXXX target="RFC2315" use="PKCS-7"/>
-            <referenceXXX target="RFC3766" use="STRENGTH"/>
-            
--->
+        <referencegroup target="SMIMEv2">
+          &rfc2311;
+          &rfc2312;
+          &rfc2313;
+          &rfc2314;
+          &rfc2315;
+        </referencegroup>
+        -->
+        <reference anchor="SMIMEv2">
+          <front>
+            <title>S/MIME version v2</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 2.
+            This set of documents are <xref target="RFC2311"/>, <xref target="RFC2312"/>, <xref target="RFC2313"/>, <xref target="RFC2314"/>, and <xref target="RFC2315"/>.
+          </annotation>
+        </reference>
+
+      <!--
+        <referencegroup target="SMIMEv3">
+          &rfc2630;
+          &rfc2631;
+          &rfc2632;
+          &rfc2633;
+          &rfc2634;
+          &rfc5035;
+          </referencegroup>
+          -->
+
+        <reference anchor="SMIMEv3">
+          <front>
+            <title>S/MIME version 3</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 3.
+            This set of documents are <xref target="RFC2630"/>, <xref target="RFC2631"/>, <xref target="RFC2632"/>, <xref target="RFC2633"/>, <xref target="RFC2634"/>, and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+
+        <!--
+        <referencegroup target="SMIMEv3.1">
+          &rfc2634;
+          &rfc3850;
+          &rfc3851;
+          &rfc3852;
+          &rfc5035;
+          </referencegroup>
+          -->
+
+        <reference anchor="SMIMEv3.1">
+          <front>
+            <title>S/MIME version 3.1</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 3.1.
+            This set of documents are <xref target="RFC2634"/>, <xref target="RFC3850"/>, <xref target="RFC3851"/>, <xref target="RFC3852"/>,  and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
 
         <reference anchor="SP800-57">
           <front>
@@ -2400,23 +2467,23 @@ END
 
     <section title="Moving S/MIME v2 Message Specification to Historic Status">
       <t>
-        The S/MIME v3 [SMIMEv3], v3.1 [SMIMEv3.1], and v3.2 (this document)
-        are backwards compatible with the S/MIME v2 Message Specification
-        [SMIMEv2], with the exception of the algorithms (dropped RC2/40
+        The S/&wj;MIME v3 <xref target="SMIMEv3"/>, v3.1 <xref target="SMIMEv3.1"/>, and v3.2 (this document)
+        are backwards compatible with the S/&wj;MIME v2 Message Specification
+        <xref target="SMIMEv2"/>, with the exception of the algorithms (dropped RC2/40
         requirement and added DSA and RSASSA-PSS requirements).  Therefore,
-        it is recommended that RFC 2311 [SMIMEv2] be moved to Historic
+        it is recommended that RFC 2311 <xref target="SMIMEv2"/> be moved to Historic
         status.
       </t>
     </section>
     <section title="Acknowledgments">
       <t>
-        Many thanks go out to the other authors of the S/MIME version 2
+        Many thanks go out to the other authors of the S/&wj;MIME version 2
         Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence
         Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1,
         or v3.2.
       </t>
       <t>
-        A number of the members of the S/MIME Working Group have also worked
+        A number of the members of the S/&wj;MIME Working Group have also worked
         very hard and contributed to this document.  Any list of people is
         doomed to omission, and for that I apologize.  In alphabetical order,
         the following people stand out in my mind because they made direct
