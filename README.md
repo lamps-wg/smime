@@ -4,7 +4,7 @@
 This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling".
 
 * [Editor's copy](https://spasm-wg.github.io/smime/draft-schaad-rfc5750-bis.html)
-* [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5650-bis)
+* [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5750-bis)
 * [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5750-bis&url2=https://spasm-wgsacmwg.github.io/smime/draft-schaad-rfc5750.txt)
 * [Compare Editor's and RFC5750] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750&url2=https://spasm-wgsacmwg.github.io/smime/draft-schaad-rfc5750.txt)
 
@@ -35,8 +35,8 @@ instructions](https://github.com/martinthomson/i-d-template/blob/master/doc/SETU
 
 Before submitting feedback, please familiarize yourself with our current issues
 list and review the [working group
-documents](https://datatracker.ietf.org/wg/rfc5650/documents/) and [mailing
-list discussion](https://mailarchive.ietf.org/arch/browse/rfc5650/). If you're
+documents](https://datatracker.ietf.org/wg/rfc5750/documents/) and [mailing
+list discussion](https://mailarchive.ietf.org/arch/browse/rfc5750/). If you're
 new to this, you may also want to read the [Tao of the
 IETF](https://www.ietf.org/tao.html).
 
@@ -45,7 +45,7 @@ terms outlined below.
 
 1. The best way to provide feedback (editorial or design) and ask questions is
 sending an e-mail to our mailing list
-([info](https://www.ietf.org/mailman/listinfo/rfc5650)). This will ensure that
+([info](https://www.ietf.org/mailman/listinfo/rfc5750)). This will ensure that
 the entire Working Group sees your input in a timely fashion.
 
 2. If you have **editorial** suggestions (i.e., those that do not change the
