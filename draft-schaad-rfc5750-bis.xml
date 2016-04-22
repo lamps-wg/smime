@@ -65,17 +65,17 @@
     </author>
     <date/>
     <area>Security Area</area>
-    <workgroup>S/ MIME</workgroup>
-    <keyword>S/ MIME</keyword>
+    <workgroup>SPASM</workgroup>
+    <keyword>S/MIME</keyword>
     <abstract>
       <t>
    This document specifies conventions for X.509 certificate usage by
-   Secure/Multipurpose Internet Mail Extensions (S/MIME) v3.2 agents.
-   S/MIME provides a method to send and receive secure MIME messages,
-   and certificates are an integral part of S/MIME agent processing.
-   S/MIME agents validate certificates as described in RFC 5280, the
+   Secure/Multipurpose Internet Mail Extensions (S/&wj;MIME) v3.2 agents.
+   S/&wj;MIME provides a method to send and receive secure MIME messages,
+   and certificates are an integral part of S/&wj;MIME agent processing.
+   S/&wj;MIME agents validate certificates as described in RFC 5280, the
    Internet X.509 Public Key Infrastructure Certificate and CRL Profile.
-   S/MIME agents must meet the certificate processing requirements in
+   S/&wj;MIME agents must meet the certificate processing requirements in
    this document as well as those in RFC 5280.  This document obsoletes
    RFC 3850.
       </t>
@@ -85,19 +85,19 @@
 
 <section title="Introduction">
   <t>
-   S/MIME (Secure/Multipurpose Internet Mail Extensions) v3.2, described
+   S/&wj;MIME (Secure/Multipurpose Internet Mail Extensions) v3.2, described
    in <xref target="RFC5751"/>, provides a method to send and receive secure MIME
    messages.  Before using a public key to provide security services,
-   the S/MIME agent MUST verify that the public key is valid.  S/MIME
+   the S/&wj;MIME agent MUST verify that the public key is valid.  S/&wj;MIME
    agents MUST use PKIX certificates to validate public keys as
    described in the Internet X.509 Public Key Infrastructure (PKIX)
-   Certificate and CRL Profile <xref target="RFC5280"/>.  S/MIME agents MUST meet the
+   Certificate and CRL Profile <xref target="RFC5280"/>.  S/&wj;MIME agents MUST meet the
    certificate processing requirements documented in this document in
    addition to those stated in <xref target="RFC5280"/>.
   </t>
   <t>
    This specification is compatible with the Cryptographic Message
-   Syntax (CMS) RFC 5652 [CMS] in that it uses the data types defined by
+   Syntax (CMS) RFC 5652 <xref target="RFC5652"/> in that it uses the data types defined by
    CMS.  It also inherits all the varieties of architectures for
    certificate-based key management supported by CMS.
   </t>
@@ -136,15 +136,15 @@
    specification is the one defined in <xref target="RFC5280"/>.
   </t>
   <t>
-   Receiving agent: Software that interprets and processes S/MIME CMS
+   Receiving agent: Software that interprets and processes S/&wj;MIME CMS
    objects, MIME body parts that contain CMS objects, or both.
   </t>
   <t>
-   Sending agent: Software that creates S/MIME CMS objects, MIME body
+   Sending agent: Software that creates S/&wj;MIME CMS objects, MIME body
    parts that contain CMS objects, or both.
   </t>
   <t>
-   S/MIME agent: User software that is a receiving agent, a sending
+   S/&wj;MIME agent: User software that is a receiving agent, a sending
    agent, or both.
   </t>
 </section>
@@ -178,16 +178,16 @@
 </section>
 <section title="Compatibility with Prior Practice S/MIME">
   <t>
-   S/MIME version 3.2 agents ought to attempt to have the greatest
-   interoperability possible with agents for prior versions of S/MIME.
+   S/&wj;MIME version 3.2 agents ought to attempt to have the greatest
+   interoperability possible with agents for prior versions of S/&wj;MIME.
   </t>
   <t>
-   S/MIME version 2 is described in RFC 2311 through RFC 2315 inclusive
-   [SMIMEv2], S/MIME version 3 is described in RFC 2630 through RFC 2634
-   inclusive and RFC 5035 [SMIMEv3], and S/MIME version 3.1 is described
-   in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 [SMIMEv3.1].
+   S/&wj;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive
+   <xref target="SMIMEv2"/>, S/&wj;MIME version 3 is described in RFC 2630 through RFC 2634
+   inclusive and RFC 5035 <xref target="SMIMEv3"/>, and S/&wj;MIME version 3.1 is described
+   in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <xref target="SMIMEv3.1"/>.
    RFC 2311 also has historical information about the development of
-   S/MIME.
+   S/&wj;MIME.
   </t>
 </section>
 <section title="Changes from S/MIME v3 to S/MIME v3.1">
@@ -240,7 +240,7 @@
                   255 characters.  Added text about matching email
                   addresses.
 </t>
-   <t hangText="Section 4.2:">   Added text to indicate how S/MIME agents locate the
+   <t hangText="Section 4.2:">   Added text to indicate how S/&wj;MIME agents locate the
                   correct user certificate.
 </t>
 
@@ -263,7 +263,7 @@
                   Updated the references.
 </t>
    <t hangText="Appendix A:">    Moved Appendix A to Appendix B.  Added Appendix A to
-                  move S/MIME v2 Certificate Handling to Historic
+                  move S/&wj;MIME v2 Certificate Handling to Historic
                   Status.
    </t>
    </list>
@@ -275,8 +275,8 @@
    The CMS message format allows for a wide variety of options in
    content and algorithm support.  This section puts forth a number of
    support requirements and recommendations in order to achieve a base
-   level of interoperability among all S/MIME implementations.  Most of
-   the CMS format for S/MIME messages is defined in <xref target="RFC5751"/>.
+   level of interoperability among all S/&wj;MIME implementations.  Most of
+   the CMS format for S/&wj;MIME messages is defined in <xref target="RFC5751"/>.
 </t>
 <section title="Certificate Revocation Lists">
 <t>
@@ -289,7 +289,7 @@
    All agents MUST be capable of performing revocation checks using CRLs
    as specified in <xref target="RFC5280"/>.  All agents MUST perform revocation status
    checking in accordance with <xref target="RFC5280"/>.  Receiving agents MUST recognize
-   CRLs in received S/MIME messages.
+   CRLs in received S/&wj;MIME messages.
   </t>
   <t>
    Agents SHOULD store CRLs received in messages for use in processing
@@ -345,10 +345,10 @@
    sending a message to recipients that may not have access to the
    sender's public key through any other means or when sending a signed
    message to a new recipient.  The inclusion of certificates in
-   outgoing messages can be omitted if S/MIME objects are sent within a
+   outgoing messages can be omitted if S/&wj;MIME objects are sent within a
    group of correspondents that has established access to each other's
    certificates by some other means such as a shared directory or manual
-   certificate distribution.  Receiving S/MIME agents SHOULD be able to
+   certificate distribution.  Receiving S/&wj;MIME agents SHOULD be able to
    handle messages without certificates using a database or directory
    lookup scheme.
   </t>
@@ -406,8 +406,8 @@
   </t>
     <figure>
       <artwork>
-   pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
-    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 1 }
+pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
+ { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 1 }
       </artwork>
     </figure>
 
@@ -434,7 +434,7 @@
   </t>
   <t>
    All subject and issuer names MUST be populated (i.e., not an empty
-   SEQUENCE) in S/MIME-compliant X.509 certificates, except that the
+   SEQUENCE) in S/&wj;MIME-compliant X.509 certificates, except that the
    subject distinguished name (DN) in a user's (i.e., end-entity)
    certificate MAY be an empty SEQUENCE in which case the subjectAltName
    extension will include the subject's identifier and MUST be marked as
@@ -443,7 +443,7 @@
  </section>
 <section title="Certificate Processing">
   <t>
-   S/MIME agents need to provide some certificate retrieval mechanism in
+   S/&wj;MIME agents need to provide some certificate retrieval mechanism in
    order to gain access to certificates for recipients of digital
    envelopes.  There are many ways to implement certificate retrieval
    mechanisms.  <xref target="X.500"/> directory service is an excellent example of a
@@ -453,7 +453,7 @@
    existing Domain Name System (DNS).  Until such mechanisms are widely
    used, their utility may be limited by the small number of the
    correspondent's certificates that can be retrieved.  At a minimum,
-   for initial S/MIME deployment, a user agent could automatically
+   for initial S/&wj;MIME deployment, a user agent could automatically
    generate a message to an intended recipient requesting the
    recipient's certificate in a signed return message.
   </t>
@@ -514,7 +514,7 @@
    All agents MUST be capable of performing revocation checks using CRLs
    as specified in <xref target="RFC5280"/>.  All agents MUST perform revocation status
    checking in accordance with <xref target="RFC5280"/>.  Receiving agents MUST recognize
-   CRLs in received S/MIME messages.
+   CRLs in received S/&wj;MIME messages.
   </t>
 
 </section>
@@ -546,10 +546,10 @@
   </t>
   <t>
    When verifying a signature and the certificates that are included in
-   the message, if a signingCertificate attribute from RFC 2634 [ESS] or
-   a signingCertificateV2 attribute from RFC 5035 [ESS] is found in an
-   S/MIME message, it SHALL be used to identify the signer's
-   certificate.  Otherwise, the certificate is identified in an S/MIME
+   the message, if a signingCertificate attribute from RFC 2634 <xref target="ESS"/> or
+   a signingCertificateV2 attribute from RFC 5035 <xref target="ESS"/> is found in an
+   S/&wj;MIME message, it SHALL be used to identify the signer's
+   certificate.  Otherwise, the certificate is identified in an S/&wj;MIME
    message, either using the issuerAndSerialNumber, which identifies the
    signer's certificate by the issuer's distinguished name and the
    certificate serial number, or the subjectKeyIdentifier, which
@@ -559,7 +559,7 @@
    When decrypting an encrypted message, if a
    SMIMEEncryptionKeyPreference attribute is found in an encapsulating
    SignedData, it SHALL be used to identify the originator's certificate
-   found in OriginatorInfo.  See [CMS] for the CMS fields that reference
+   found in OriginatorInfo.  See <xref target="RFC5652"/> for the CMS fields that reference
    the originator's and recipient's certificates.
   </t>
 </section>
@@ -584,7 +584,7 @@
   </t>
   <t>
    The following are the RSA and RSASSA-PSS key size requirements for
-   S/MIME receiving agents during certificate and CRL signature
+   S/&wj;MIME receiving agents during certificate and CRL signature
    verification:
   </t>
   <figure>
@@ -595,7 +595,7 @@
     </artwork>
   </figure>
   <t>
-   The following are the DSA key size requirements for S/MIME receiving
+   The following are the DSA key size requirements for S/&wj;MIME receiving
    agents during certificate and CRL signature verification:
   </t>
   <figure>
@@ -638,7 +638,7 @@
    Further, there are active efforts underway to issue PKIX certificates
    for business purposes.  This document identifies the minimum required
    set of certificate extensions that have the greatest value in the
-   S/MIME environment.  The syntax and semantics of all the identified
+   S/&wj;MIME environment.  The syntax and semantics of all the identified
    extensions are defined in <xref target="RFC5280"/>.
   </t>
   <t>
@@ -650,7 +650,7 @@
    appear in end-entity or CA certificates.
   </t>
   <t>
-   Certificates issued for the S/MIME environment SHOULD NOT contain any
+   Certificates issued for the S/&wj;MIME environment SHOULD NOT contain any
    critical extensions (extensions that have the critical field set to
    TRUE) other than those listed here.  These extensions SHOULD be
    marked as non-critical unless the proper handling of the extension is
@@ -700,12 +700,12 @@
    MUST be marked as critical.
   </t>
   <t>
-   S/MIME receiving agents MUST NOT accept the signature of a message if
+   S/&wj;MIME receiving agents MUST NOT accept the signature of a message if
    it was verified using a certificate that contains the key usage
    extension without either the digitalSignature or nonRepudiation bit
-   set.  Sometimes S/MIME is used as a secure message transport for
+   set.  Sometimes S/&wj;MIME is used as a secure message transport for
    applications beyond interpersonal messaging.  In such cases, the
-   S/MIME-enabled application can specify additional requirements
+   S/&wj;MIME-enabled application can specify additional requirements
    concerning the digitalSignature or nonRepudiation bits within this
    extension.
   </t>
@@ -716,7 +716,7 @@
 </section>
 <section title="Subject Alternative Name">
   <t>
-   The subject alternative name extension is used in S/MIME as the
+   The subject alternative name extension is used in S/&wj;MIME as the
    preferred means to convey the email address(es) that correspond(s) to
    the entity for this certificate.  Any email addresses present MUST be
    encoded using the rfc822Name CHOICE of the GeneralName type as
@@ -737,10 +737,10 @@
    For example, if the certificate contains a key usage extension
    indicating digital signature and an extended key usage extension that
    includes the email protection OID, then the certificate may be used
-   for signing but not encrypting S/MIME messages.  If the certificate
+   for signing but not encrypting S/&wj;MIME messages.  If the certificate
    contains a key usage extension indicating digital signature but no
    extended key usage extension, then the certificate may also be used
-   to sign but not encrypt S/MIME messages.
+   to sign but not encrypt S/&wj;MIME messages.
   </t>
   <t>
 
@@ -749,9 +749,9 @@
 
 
    If the extended key usage extension is present in the certificate,
-   then interpersonal message S/MIME receiving agents MUST check that it
+   then interpersonal message S/&wj;MIME receiving agents MUST check that it
    contains either the emailProtection or the anyExtendedKeyUsage OID as
-   defined in <xref target="RFC5280"/>.  S/MIME uses other than interpersonal messaging
+   defined in <xref target="RFC5280"/>.  S/&wj;MIME uses other than interpersonal messaging
    MAY require the explicit presence of the extended key usage extension
    or other OIDs to be present in the extension or both.
   </t>
@@ -761,7 +761,7 @@
  <section title="Security Considerations">
    <t>
    All of the security issues faced by any cryptographic application
-   must be faced by a S/MIME agent.  Among these issues are protecting
+   must be faced by a S/&wj;MIME agent.  Among these issues are protecting
    the user's private key, preventing various attacks, and helping the
    user avoid mistakes such as inadvertently encrypting a message for
    the wrong recipient.  The entire list of security considerations is
@@ -812,8 +812,8 @@
    It is possible for there to be multiple unexpired CRLs for a CA.  If
    an agent is consulting CRLs for certificate validation, it SHOULD
    make sure that the most recently issued CRL for that CA is consulted,
-   since an S/MIME message sender could deliberately include an older
-   unexpired CRL in an S/MIME message.  This older CRL might not include
+   since an S/&wj;MIME message sender could deliberately include an older
+   unexpired CRL in an S/&wj;MIME message.  This older CRL might not include
    recently revoked certificates, which might lead an agent to accept a
    certificate that has been revoked in a subsequent CRL.
   </t>
@@ -821,7 +821,7 @@
    When determining the time for a certificate validity check, agents
    have to be careful to use a reliable time.  Unless it is from a
    trusted agent, this time MUST NOT be the SigningTime attribute found
-   in an S/MIME message.  For most sending agents, the SigningTime
+   in an S/&wj;MIME message.  For most sending agents, the SigningTime
    attribute could be deliberately set to direct the receiving agent to
    check a CRL that could have out-of-date revocation status for a
    certificate, or cause an improper result when checking the Validity
@@ -863,7 +863,7 @@
    or CRLs.  Such keys were previously considered secure, so processing
    previously received signed and encrypted mail may require processing
    certificates or CRLs signed with weak keys.  Implementations that
-   wish to support previous versions of S/MIME or process old messages
+   wish to support previous versions of S/&wj;MIME or process old messages
    need to consider the security risks that result from accepting
    certificates and CRLs with smaller key sizes (e.g., spoofed
    certificates) versus the costs of denial of service.  If an
@@ -885,51 +885,19 @@
  </middle>
  <back>
    <!--
-6.  References
 
-6.1.  Reference Conventions
-
-        <referencegroup target="ESS">
-          &rfc2634;
-          &rfc5035;
-        </referencegroup>
-
-        <referencegroup target="MIME-SPEC">
-          &rfc2045;
-          &rfc2046;
-          &rfc2047;
-          &rfc2049;
-          &rfc4288;
-          &rfc4289;
-        </referencegroup>
-
-        <referencegroup target="SMIMEv2">
-          &rfc2311;
-          &rfc2312;
-          &rfc2313;
-          &rfc2314;
-          &rfc2315;
-        </referencegroup>
-
-        <referencegroup target="SMIMEv3">
-          &rfc2630;
-          &rfc2631;
-          &rfc2632;
-          &rfc2633;
-          &rfc2634;
-          &rfc5035;
-        </referencegroup>
-
-        <referencegroup target="SMIMEv3.1">
-          &rfc2634;
-          &rfc3850;
-          &rfc3851;
-          &rfc3852;
-          &rfc5035;
-        </referencegroup>
-
-<referenceXXX target="RFC5652" use="CMS"/>
--->
+        <displayreference target="RFC3114" use="SECLABEL"/>
+        <displayreference target="RFC5652" use="CMS"/>
+       <displayreference target="RFC5280" use="KEYM"/>
+       <displayreference target="RFC3279" use="KEYMALG"/>
+       <displayreference target="RFC5758" use="KEYMALG2"/>
+       <displayreference target="RFC2119" use="MUSTSHOULD"/>
+       <displayreference target="RFC3447" use="PKCS1"/>
+       <displayreference target="RFC2985" use="PKCS9"/>
+       <displayreference target="RFC4056" use="RSAPSS"/>
+       <displayreference target="RFC4055" use="RSAOAEP"/>
+       <displayreference target="RFC5751" use="SMIME-MSG"/>
+   -->
         
    <references title="Normative References">
      &rfc2119;
@@ -944,6 +912,8 @@
      &rfc5755;
      &rfc5758;
      &rfc3279;
+     &rfc5652;
+     
         <reference anchor="FIPS186-2">
           <front>
             <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
@@ -964,19 +934,6 @@
                       value="186-3"/>
         </reference>
      
-   <!--
-       <referenceXXX target="RFC5280" use="KEYM"/>
-       <referenceXXX target="RFC3279" use="KEYMALG"/>
-       <referenceXXX target="RFC5758" use="KEYMALG2"/>
-       <referenceXXX target="RFC2119" use="MUSTSHOULD"/>
-       <referenceXXX target="RFC3447" use="PKCS1"/>
-       <referenceXXX target="RFC2985" use="PKCS9"/>
-       <referenceXXX target="RFC4056" use="RSAPSS"/>
-       <referenceXXX target="RFC4055" use="RSAOAEP"/>
-       <referenceXXX target="RFC5751" use="SMIME-MSG"/>
-
-   -->
-
         <reference anchor="X.680">
           <front>
             <title>Information Technology - Abstract Syntax
@@ -996,7 +953,46 @@
      &rfc3850;  &rfc3851; &rfc3852;
      &rfc3114;
 
-     <reference anchor="PKCS6">
+        <!--
+            <referencegroup target="MIME-SPEC">
+            &rfc2045;
+            &rfc2046;
+            &rfc2047;
+            &rfc2049;
+            &rfc4288;
+            &rfc4289;
+            </referencegroup>
+        <reference anchor="MIME-SPEC">
+          <front>
+            <title>MIME Message Specifications</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This is the set of documents that define how to use MIME.
+            This set of documents is <xref target="RFC2045"/>, <xref target="RFC2046"/>, <xref target="RFC2047"/>, <xref target="RFC2049"/>, <xref target="RFC4288"/>, and <xref target="RFC4289"/>.
+          </annotation>
+        </reference>
+        -->
+
+        <!--
+        <referencegroup target="ESS">
+          &rfc2634;
+          &rfc5035;
+          </referencegroup>
+          -->
+        <reference anchor="ESS">
+          <front>
+            <title>Enhanced Security Services for S/ MIME</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This is the set of documents dealing with enhanged security services and refers to <xref target="RFC2634"/> and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+
+        <reference anchor="PKCS6">
        <front>
          <title>PKCS #6: Extended-Certificate Syntax Standard</title>
          <author><organization>RSA Laboratories</organization></author>
@@ -1028,30 +1024,93 @@
             <date/>
           </front>
         </reference>
-   <!--
-        <referenceXXX target="RFC3114" use="SECLABEL"/>
 
-   -->
+        <!--
+        <referencegroup target="SMIMEv2">
+          &rfc2311;
+          &rfc2312;
+          &rfc2313;
+          &rfc2314;
+          &rfc2315;
+        </referencegroup>
+        -->
+        <reference anchor="SMIMEv2">
+          <front>
+            <title>S/MIME version v2</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 2.
+            This set of documents are <xref target="RFC2311"/>, <xref target="RFC2312"/>, <xref target="RFC2313"/>, <xref target="RFC2314"/>, and <xref target="RFC2315"/>.
+          </annotation>
+        </reference>
+
+      <!--
+        <referencegroup target="SMIMEv3">
+          &rfc2630;
+          &rfc2631;
+          &rfc2632;
+          &rfc2633;
+          &rfc2634;
+          &rfc5035;
+          </referencegroup>
+          -->
+
+        <reference anchor="SMIMEv3">
+          <front>
+            <title>S/MIME version 3</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 3.
+            This set of documents are <xref target="RFC2630"/>, <xref target="RFC2631"/>, <xref target="RFC2632"/>, <xref target="RFC2633"/>, <xref target="RFC2634"/>, and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+
+        <!--
+        <referencegroup target="SMIMEv3.1">
+          &rfc2634;
+          &rfc3850;
+          &rfc3851;
+          &rfc3852;
+          &rfc5035;
+          </referencegroup>
+          -->
+
+        <reference anchor="SMIMEv3.1">
+          <front>
+            <title>S/MIME version 3.1</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 3.1.
+            This set of documents are <xref target="RFC2634"/>, <xref target="RFC3850"/>, <xref target="RFC3851"/>, <xref target="RFC3852"/>,  and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+        
    </references>
 
 <section title="Moving S/MIME v2 Certificate Handling to Historic Status">
   <t>
-   The S/MIME v3 [SMIMEv3], v3.1 [SMIMEv3.1], and v3.2 (this document)
-   are backwards compatible with the S/MIME v2 Certificate Handling
-   Specification [SMIMEv2], with the exception of the algorithms
+   The S/&wj;MIME v3 <xref target="SMIMEv3"/>, v3.1 <xref target="SMIMEv3.1"/>, and v3.2 (this document)
+   are backwards compatible with the S/&wj;MIME v2 Certificate Handling
+   Specification <xref target="SMIMEv2"/>, with the exception of the algorithms
    (dropped RC2/40 requirement and added DSA and RSASSA-PSS
-   requirements).  Therefore, it is recommended that RFC 2312 [SMIMEv2]
+   requirements).  Therefore, it is recommended that RFC 2312 <xref target="SMIMEv2"/>
    be moved to Historic status.
   </t>
 </section>
 <section title="Acknowledgments">
   <t>
-   Many thanks go out to the other authors of the S/MIME v2 RFC: Steve
+   Many thanks go out to the other authors of the S/&wj;MIME v2 RFC: Steve
    Dusse, Paul Hoffman, and Jeff Weinstein.  Without v2, there wouldn't
    be a v3, v3.1, or v3.2.
   </t>
   <t>
-   A number of the members of the S/MIME Working Group have also worked
+   A number of the members of the S/&wj;MIME Working Group have also worked
    very hard and contributed to this document.  Any list of people is
    doomed to omission, and for that I apologize.  In alphabetical order,
    the following people stand out in my mind because they made direct
