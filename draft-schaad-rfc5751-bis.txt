@@ -1322,7 +1322,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
       Name                   CMS Type                Inner Content
       enveloped-data         EnvelopedData           id-data
       signed-data            SignedData              id-data
-      certs-only             SignedData              none
+      certs-only             SignedData              id-data
       compressed-data        CompressedData          id-data
 
    In order for consistency to be obtained with future specifications,
@@ -1383,15 +1383,15 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    A sample message would be:
 
-      Content-Type: application/pkcs7-mime; smime-type=enveloped-data;
-           name=smime.p7m
-      Content-Transfer-Encoding: base64
-      Content-Disposition: attachment; filename=smime.p7m
+   Content-Type: application/pkcs7-mime; smime-type=enveloped-data;
+        name=smime.p7m
+   Content-Transfer-Encoding: base64
+   Content-Disposition: attachment; filename=smime.p7m
 
-      rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
-      7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
-      f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
-      0GhIGfHfQbnj756YT64V
+   rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+   7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+   f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+   0GhIGfHfQbnj756YT64V
 
 
 
@@ -1572,7 +1572,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Content-Type: multipart/signed;
         protocol="application/pkcs7-signature";
-        micalg=sha1; boundary=boundary42
+        micalg=sha-1; boundary=boundary42
 
    --boundary42
    Content-Type: text/plain
