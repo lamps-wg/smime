@@ -11,7 +11,6 @@ checkout:
 dependencies:
   pre:
     - pip install xml2rfc
-    - gem install kramdown-rfc2629
 
 test:
   override:
