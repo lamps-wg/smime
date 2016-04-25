@@ -6,23 +6,23 @@ SPASM                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Obsoletes: RFC5751 (if approved)                             B. Ramsdell
 Intended status: Standards Track                  Brute Squad Labs, Inc.
-Expires: October 24, 2016                                      S. Turner
+Expires: October 27, 2016                                      S. Turner
                                                               IECA, Inc.
-                                                          April 22, 2016
+                                                          April 25, 2016
 
 
-   Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2
+   Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5
                          Message Specification
                     draft-schaad-rfc5751-bis-latest
 
 Abstract
 
    This document defines Secure/Multipurpose Internet Mail Extensions
-   (S/MIME) version 3.2.  S/MIME provides a consistent way to send and
+   (S/MIME) version 3.5.  S/MIME provides a consistent way to send and
    receive secure MIME data.  Digital signatures provide authentication,
    message integrity, and non-repudiation with proof of origin.
    Encryption provides data confidentiality.  Compression can be used to
-   reduce data size.  This document obsoletes RFC 3851.
+   reduce data size.  This document obsoletes RFC 5751.
 
 Status of This Memo
 
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 24, 2016.
+   This Internet-Draft will expire on October 27, 2016.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Schaad, et al.          Expires October 24, 2016                [Page 1]
+Schaad, et al.          Expires October 27, 2016                [Page 1]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    carefully, as they describe your rights and restrictions with respect
@@ -83,72 +83,76 @@ Table of Contents
      1.2.  Definitions . . . . . . . . . . . . . . . . . . . . . . .   5
      1.3.  Conventions Used in This Document . . . . . . . . . . . .   6
      1.4.  Compatibility with Prior Practice of S/MIME . . . . . . .   6
-     1.5.  Changes from S/MIME v3 to S/MIME v3.1 . . . . . . . . . .   6
-     1.6.  Changes since S/MIME v3.1 . . . . . . . . . . . . . . . .   7
-   2.  CMS Options . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     1.5.  Changes from S/MIME v3 to S/MIME v3.1 . . . . . . . . . .   7
+     1.6.  Changes from S/MIME v3.1 to S/MIME v3.2 . . . . . . . . .   7
+     1.7.  Changes since S/MIME v3.2 . . . . . . . . . . . . . . . .   9
+   2.  CMS Options . . . . . . . . . . . . . . . . . . . . . . . . .   9
      2.1.  DigestAlgorithmIdentifier . . . . . . . . . . . . . . . .   9
      2.2.  SignatureAlgorithmIdentifier  . . . . . . . . . . . . . .   9
      2.3.  KeyEncryptionAlgorithmIdentifier  . . . . . . . . . . . .  10
-     2.4.  General Syntax  . . . . . . . . . . . . . . . . . . . . .  10
-       2.4.1.  Data Content Type . . . . . . . . . . . . . . . . . .  10
+     2.4.  General Syntax  . . . . . . . . . . . . . . . . . . . . .  11
+       2.4.1.  Data Content Type . . . . . . . . . . . . . . . . . .  11
        2.4.2.  SignedData Content Type . . . . . . . . . . . . . . .  11
        2.4.3.  EnvelopedData Content Type  . . . . . . . . . . . . .  11
-       2.4.4.  CompressedData Content Type . . . . . . . . . . . . .  11
-     2.5.  Attributes and the SignerInfo Type  . . . . . . . . . . .  11
+       2.4.4.  AuthEnvelopedData Content Type  . . . . . . . . . . .  11
+       2.4.5.  CompressedData Content Type . . . . . . . . . . . . .  11
+     2.5.  Attributes and the SignerInfo Type  . . . . . . . . . . .  12
        2.5.1.  Signing Time Attribute  . . . . . . . . . . . . . . .  12
-       2.5.2.  SMIME Capabilities Attribute  . . . . . . . . . . . .  12
+       2.5.2.  SMIME Capabilities Attribute  . . . . . . . . . . . .  13
        2.5.3.  Encryption Key Preference Attribute . . . . . . . . .  14
-     2.6.  SignerIdentifier SignerInfo Type  . . . . . . . . . . . .  15
-     2.7.  ContentEncryptionAlgorithmIdentifier  . . . . . . . . . .  15
+     2.6.  SignerIdentifier SignerInfo Type  . . . . . . . . . . . .  16
+     2.7.  ContentEncryptionAlgorithmIdentifier  . . . . . . . . . .  16
        2.7.1.  Deciding Which Encryption Method to Use . . . . . . .  16
-       2.7.2.  Choosing Weak Encryption  . . . . . . . . . . . . . .  17
-       2.7.3.  Multiple Recipients . . . . . . . . . . . . . . . . .  17
+       2.7.2.  Choosing Weak Encryption  . . . . . . . . . . . . . .  18
+       2.7.3.  Multiple Recipients . . . . . . . . . . . . . . . . .  18
    3.  Creating S/MIME Messages  . . . . . . . . . . . . . . . . . .  18
-     3.1.  Preparing the MIME Entity for Signing, Enveloping, or
-           Compressing . . . . . . . . . . . . . . . . . . . . . . .  18
 
 
 
-Schaad, et al.          Expires October 24, 2016                [Page 2]
+Schaad, et al.          Expires October 27, 2016                [Page 2]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
-       3.1.1.  Canonicalization  . . . . . . . . . . . . . . . . . .  19
-       3.1.2.  Transfer Encoding . . . . . . . . . . . . . . . . . .  20
+     3.1.  Preparing the MIME Entity for Signing, Enveloping, or
+           Compressing . . . . . . . . . . . . . . . . . . . . . . .  19
+       3.1.1.  Canonicalization  . . . . . . . . . . . . . . . . . .  20
+       3.1.2.  Transfer Encoding . . . . . . . . . . . . . . . . . .  21
        3.1.3.  Transfer Encoding for Signing Using multipart/signed   21
        3.1.4.  Sample Canonical MIME Entity  . . . . . . . . . . . .  22
      3.2.  The application/pkcs7-mime Media Type . . . . . . . . . .  23
-       3.2.1.  The name and filename Parameters  . . . . . . . . . .  23
-       3.2.2.  The smime-type Parameter  . . . . . . . . . . . . . .  24
-     3.3.  Creating an Enveloped-Only Message  . . . . . . . . . . .  25
-     3.4.  Creating a Signed-Only Message  . . . . . . . . . . . . .  26
-       3.4.1.  Choosing a Format for Signed-Only Messages  . . . . .  26
-       3.4.2.  Signing Using application/pkcs7-mime with SignedData   26
-       3.4.3.  Signing Using the multipart/signed Format . . . . . .  27
-     3.5.  Creating a Compressed-Only Message  . . . . . . . . . . .  29
-     3.6.  Multiple Operations . . . . . . . . . . . . . . . . . . .  30
-     3.7.  Creating a Certificate Management Message . . . . . . . .  31
-     3.8.  Registration Requests . . . . . . . . . . . . . . . . . .  31
-     3.9.  Identifying an S/MIME Message . . . . . . . . . . . . . .  31
-   4.  Certificate Processing  . . . . . . . . . . . . . . . . . . .  32
-     4.1.  Key Pair Generation . . . . . . . . . . . . . . . . . . .  32
-     4.2.  Signature Generation  . . . . . . . . . . . . . . . . . .  33
-     4.3.  Signature Verification  . . . . . . . . . . . . . . . . .  33
-     4.4.  Encryption  . . . . . . . . . . . . . . . . . . . . . . .  33
-     4.5.  Decryption  . . . . . . . . . . . . . . . . . . . . . . .  34
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  34
-     5.1.  Media Type for application/pkcs7-mime . . . . . . . . . .  34
-     5.2.  Media Type for application/pkcs7-signature  . . . . . . .  35
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  36
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  38
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  39
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  41
-   Appendix A.  ASN.1 Module . . . . . . . . . . . . . . . . . . . .  44
+       3.2.1.  The name and filename Parameters  . . . . . . . . . .  24
+       3.2.2.  The smime-type Parameter  . . . . . . . . . . . . . .  25
+     3.3.  Creating an Enveloped-Only Message  . . . . . . . . . . .  26
+     3.4.  Creating an Authenticated Enveloped-Only Message  . . . .  26
+     3.5.  Creating a Signed-Only Message  . . . . . . . . . . . . .  27
+       3.5.1.  Choosing a Format for Signed-Only Messages  . . . . .  27
+       3.5.2.  Signing Using application/pkcs7-mime with SignedData   28
+       3.5.3.  Signing Using the multipart/signed Format . . . . . .  29
+     3.6.  Creating a Compressed-Only Message  . . . . . . . . . . .  31
+     3.7.  Multiple Operations . . . . . . . . . . . . . . . . . . .  32
+     3.8.  Creating a Certificate Management Message . . . . . . . .  33
+     3.9.  Registration Requests . . . . . . . . . . . . . . . . . .  33
+     3.10. Identifying an S/MIME Message . . . . . . . . . . . . . .  33
+   4.  Certificate Processing  . . . . . . . . . . . . . . . . . . .  34
+     4.1.  Key Pair Generation . . . . . . . . . . . . . . . . . . .  34
+     4.2.  Signature Generation  . . . . . . . . . . . . . . . . . .  35
+     4.3.  Signature Verification  . . . . . . . . . . . . . . . . .  35
+     4.4.  Encryption  . . . . . . . . . . . . . . . . . . . . . . .  35
+     4.5.  Decryption  . . . . . . . . . . . . . . . . . . . . . . .  36
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  36
+     5.1.  Media Type for application/pkcs7-mime . . . . . . . . . .  36
+     5.2.  Media Type for application/pkcs7-signature  . . . . . . .  37
+     5.3.  Register authEnvelopedData smime-type . . . . . . . . . .  38
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  38
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  41
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  41
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  44
+   Appendix A.  ASN.1 Module . . . . . . . . . . . . . . . . . . . .  46
    Appendix B.  Moving S/MIME v2 Message Specification to Historic
-                Status . . . . . . . . . . . . . . . . . . . . . . .  46
-   Appendix C.  Acknowledgments  . . . . . . . . . . . . . . . . . .  46
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  46
+                Status . . . . . . . . . . . . . . . . . . . . . . .  48
+   Appendix C.  Acknowledgments  . . . . . . . . . . . . . . . . . .  48
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  49
 
 1.  Introduction
 
@@ -158,17 +162,16 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    cryptographic security services for electronic messaging
    applications: authentication, message integrity and non-repudiation
    of origin (using digital signatures), and data confidentiality (using
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 3]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    encryption).  As a supplementary service, S/MIME provides for message
    compression.
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 3]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    S/MIME can be used by traditional mail user agents (MUAs) to add
    cryptographic security services to mail that is sent, and to
@@ -193,19 +196,19 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    This specification defines how to create a MIME body part that has
    been cryptographically enhanced according to the Cryptographic
-   Message Syntax (CMS) RFC 5652 [RFC5652], which is derived from PKCS
-   #7 [RFC2315].  This specification also defines the application/
-   pkcs7-mime media type that can be used to transport those body parts.
+   Message Syntax (CMS) [CMS], which is derived from PKCS #7 [RFC2315].
+   This specification also defines the application/pkcs7-mime media type
+   that can be used to transport those body parts.
 
    This document also discusses how to use the multipart/signed media
    type defined in [RFC1847] to transport S/MIME signed messages.
-   multipart/signed is used in conjunction with the application/pkcs7-
-   signature media type, which is used to transport a detached S/MIME
-   signature.
+   multipart/signed is used in conjunction with the
+   application/pkcs7-signature media type, which is used to transport a
+   detached S/MIME signature.
 
    In order to create S/MIME messages, an S/MIME agent MUST follow the
    specifications in this document, as well as the specifications listed
-   in the Cryptographic Message Syntax document [RFC5652], [RFC3370],
+   in the Cryptographic Message Syntax document [CMS], [RFC3370],
    [RFC4056], [RFC3560], and [RFC5754].
 
    Throughout this specification, there are requirements and
@@ -214,17 +217,17 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    how sending agents create outgoing messages.  In general, the best
    strategy is to "be liberal in what you receive and conservative in
    what you send".  Most of the requirements are placed on the handling
+
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 4]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    of incoming messages, while the recommendations are mostly on the
    creation of outgoing messages.
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 4]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    The separation for requirements on receiving agents and sending
    agents also derives from the likelihood that there will be S/MIME
@@ -269,18 +272,19 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
                       or binary data can be sent via a channel that only
                       transmits 7-bit data.
 
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 5]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    Receiving agent:   Software that interprets and processes S/MIME CMS
                       objects, MIME body parts that contain CMS content
                       types, or both.
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 5]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    Sending agent:     Software that creates S/MIME CMS content types,
                       MIME body parts that contain CMS content types, or
@@ -314,29 +318,31 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 1.4.  Compatibility with Prior Practice of S/MIME
 
-   S/MIME version 3.2 agents ought to attempt to have the greatest
+   S/MIME version 3.5 agents ought to attempt to have the greatest
    interoperability possible with agents for prior versions of S/MIME.
    S/MIME version 2 is described in RFC 2311 through RFC 2315 inclusive
    [SMIMEv2], S/MIME version 3 is described in RFC 2630 through RFC 2634
-   inclusive and RFC 5035 [SMIMEv3], and S/MIME version 3.1 is described
-   in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 [SMIMEv3.1].
-   RFC 2311 also has historical information about the development of
-   S/MIME.
+   inclusive and RFC 5035 [SMIMEv3], S/MIME version 3.1 is described in
+   RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 [SMIMEv3.1], and
+   S/MIME version 3.2 is described in [SMIMEv3.2].  RFC 2311 also has
+   historical information about the development of S/MIME.
+
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 6]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
 1.5.  Changes from S/MIME v3 to S/MIME v3.1
 
    The RSA public key algorithm was changed to a MUST implement key
    wrapping algorithm, and the Diffie-Hellman (DH) algorithm changed to
    a SHOULD implement.
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 6]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    The AES symmetric encryption algorithm has been included as a SHOULD
    implement.
@@ -357,7 +363,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Use of the CompressedData CMS type is allowed, along with required
    media type and file extension additions.
 
-1.6.  Changes since S/MIME v3.1
+1.6.  Changes from S/MIME v3.1 to S/MIME v3.2
 
    Editorial changes, e.g., replaced "MIME type" with "media type",
    content-type with Content-Type.
@@ -378,21 +384,21 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    made SHOULD-.
 
    Section 2.2 (signature algorithms): RSA with SHA-256 added as MUST,
-   and DSA with SHA-256 added as SHOULD+, RSA with SHA-1, DSA with SHA-
-   1, and RSA with MD5 changed to SHOULD-, and RSASSA-PSS with SHA-256
-   added as SHOULD+.  Also added note about what S/MIME v3.1 clients
-   support.
+   and DSA with SHA-256 added as SHOULD+, RSA with SHA-1, DSA with
+   SHA-1, and RSA with MD5 changed to SHOULD-, and RSASSA-PSS with
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 7]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
+   SHA-256 added as SHOULD+.  Also added note about what S/MIME v3.1
+   clients support.
 
    Section 2.3 (key encryption): DH changed to SHOULD-, and RSAES-OAEP
    added as SHOULD+.  Elaborated requirements for key wrap algorithm.
-
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 7]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    Section 2.5.1: Added requirement that receiving agents MUST support
    both GeneralizedTime and UTCTime.
@@ -435,6 +441,22 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Appendix B: Added Appendix B to move S/MIME v2 to Historic status.
 
+
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 8]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
+1.7.  Changes since S/MIME v3.2
+
+   -  Add the use of AuthEnvelopedData, including defining and
+      registering an smime-type value.
+
+   -  Add the use of AES-GCM.
+
 2.  CMS Options
 
    CMS allows for a wide variety of options in content, attributes, and
@@ -442,14 +464,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    requirements and recommendations in order to achieve a base level of
    interoperability among all S/MIME implementations.  [RFC3370] and
    [RFC5754] provides additional details regarding the use of the
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 8]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    cryptographic algorithms.  [ESS] provides additional details
    regarding the use of additional attributes.
 
@@ -484,6 +498,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    -  SHOULD+ support RSASSA-PSS with SHA-256.
 
+
+
+
+Schaad, et al.          Expires October 27, 2016                [Page 9]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    -  SHOULD- support RSA with SHA-1 or DSA with SHA-1.
 
    -  SHOULD- support RSA with MD5.
@@ -498,14 +520,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
    clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
    that S/MIME v2 clients are only required to verify digital signatures
-
-
-
-Schaad, et al.          Expires October 24, 2016                [Page 9]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    using the rsaEncryption algorithm with SHA-1 or MD5, and might not
    implement id-dsa-with-sha1 or id-dsa at all.
 
@@ -537,6 +551,17 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    capable of decrypting content-encryption keys using the rsaEncryption
    algorithm.
 
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 10]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
 2.4.  General Syntax
 
    There are several CMS content types.  Of these, only the Data,
@@ -552,16 +577,8 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    identifier and the media type MUST be stored in the SignedData
    encapContentInfo eContent OCTET STRING (unless the sending agent is
    using multipart/signed, in which case the eContent is absent, per
-   Section 3.4.3 of this document).  As another example, when applying
+   Section 3.5.3 of this document).  As another example, when applying
    encryption to MIME data, the CMS EnvelopedData encryptedContentInfo
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 10]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    contentType MUST include the id-data object identifier and the
    encrypted MIME content MUST be stored in the EnvelopedData
    encryptedContentInfo encryptedContent OCTET STRING.
@@ -580,14 +597,28 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    A sender needs to have access to a public key for each intended
    message recipient to use this service.
 
-2.4.4.  CompressedData Content Type
+2.4.4.  AuthEnvelopedData Content Type
+
+   This content type is used to apply data confidentiality and message
+   integrity to a message.  This content type does not provide
+   authentication or non-repudiation.  A sender needs to have access to
+   a public key for each intended message recipient to use this service.
+
+2.4.5.  CompressedData Content Type
 
    This content type is used to apply data compression to a message.
    This content type does not provide authentication, message integrity,
    non-repudiation, or data confidentiality, and is only used to reduce
    the message's size.
 
-   See Section 3.6 for further guidance on the use of this type in
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 11]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
+   See Section 3.7 for further guidance on the use of this type in
    conjunction with other CMS types.
 
 2.5.  Attributes and the SignerInfo Type
@@ -600,23 +631,15 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    one instance of each of the following signed attributes in each
    S/MIME message:
 
-   -  Signing Time (section (Section 2.5.1 in this document)
+   -  Signing Time (Section 2.5.1 in this document)
 
-   -  SMIME Capabilities (section (Section 2.5.2 in this document)
+   -  SMIME Capabilities (Section 2.5.2 in this document)
 
-   -  Encryption Key Preference (section (Section 2.5.3 in this
-      document)
+   -  Encryption Key Preference (Section 2.5.3 in this document)
 
-   -  Message Digest (section (Section 11.2 in [RFC5652])
+   -  Message Digest (Section 11.2 in [RFC5652])
 
-   -  Content Type (section (Section 11.1 in [RFC5652])
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 11]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
+   -  Content Type (Section 11.1 in [RFC5652])
 
    Further, receiving agents SHOULD be able to handle zero or one
    instance of the signingCertificate and signingCertificatev2 signed
@@ -642,6 +665,15 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    message originator and therefore is only as trustworthy as the
    originator.
 
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 12]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    Sending agents MUST encode signing time through the year 2049 as
    UTCTime; signing times in 2050 or later MUST be encoded as
    GeneralizedTime.  When the UTCTime CHOICE is used, S/MIME agents MUST
@@ -657,22 +689,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    The SMIMECapabilities attribute includes signature algorithms (such
    as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128
-   CBC"), and key encipherment algorithms (such as "rsaEncryption").
-   There are also several identifiers that indicate support for other
-   optional features such as binary encoding and compression.  The
-   SMIMECapabilities were designed to be flexible and extensible so
-   that, in the future, a means of identifying other capabilities and
-   preferences such as certificates can be added in a way that will not
-   cause current clients to break.
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 12]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
+   CBC"), authenticated symmetric algorithms (such as "AES-GCM") and key
+   encipherment algorithms (such as "rsaEncryption").  There are also
+   several identifiers that indicate support for other optional features
+   such as binary encoding and compression.  The SMIMECapabilities were
+   designed to be flexible and extensible so that, in the future, a
+   means of identifying other capabilities and preferences such as
+   certificates can be added in a way that will not cause current
+   clients to break.
 
    If present, the SMIMECapabilities attribute MUST be a
    SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines
@@ -698,6 +722,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    simple table lookups and binary comparisons in order to determine
    matches.  For instance, the DER-encoding for the SMIMECapability for
    AES-128 CBC MUST be identically encoded regardless of the
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 13]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    implementation.  Because of the requirement for identical encoding,
    individuals documenting algorithms to be used in the
    SMIMECapabilities attribute SHOULD explicitly document the correct
@@ -722,14 +754,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    variable-length symmetric ciphers.  In the event that there are no
    differentiating parameters for a particular OID, the parameters MUST
    be omitted, and MUST NOT be encoded as NULL.  Additional values for
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 13]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    the SMIMECapabilities attribute might be defined in the future.
    Receiving agents MUST handle a SMIMECapabilities object that has
    values that it does not recognize in a graceful manner.
@@ -754,6 +778,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    SMIMEEncryptionKeyPreference attribute.  CMS defines the ASN.1 syntax
    for Attribute to include attrValues SET OF AttributeValue.  A
    SMIMEEncryptionKeyPreference attribute MUST only include a single
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 14]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    instance of AttributeValue.  There MUST NOT be zero or multiple
    instances of AttributeValue present in the attrValues SET OF
    AttributeValue.
@@ -776,15 +808,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    replying to the sender that is valid.
 
    Section 2.7.1 explains a strategy for caching preference data.
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 14]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
 2.5.3.1.  Selection of Recipient Key Management Certificate
 
@@ -809,9 +832,19 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
       multiple X.509 key management certificates are found, the S/MIME
       agent can make an arbitrary choice between them.
 
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 15]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
 2.6.  SignerIdentifier SignerInfo Type
 
-   S/MIME v3.2 implementations MUST support both issuerAndSerialNumber
+   S/MIME v3.5 implementations MUST support both issuerAndSerialNumber
    and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier
    choice cannot be read by S/MIME v2 clients.
 
@@ -827,20 +860,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Sending and receiving agents:
 
-   -  MUST support encryption and decryption with AES-128 CBC [RFC3565].
+   -  MUST support encryption and decryption with AES-128 CBC [RFC3565]
+      and AES-128 GCM [RFC5084].
 
-   -  SHOULD+ support encryption and decryption with AES-192 CBC and
-      AES-256 CBC [RFC3565].
+   -  SHOULD+ support encryption and decryption with AES-192 CBC,
+      AES-256 CBC [RFC3565], AES-192 GCM and AES-256 GCM [RFC5084].
 
    -  SHOULD- support encryption and decryption with DES EDE3 CBC,
       hereinafter called "tripleDES" [RFC3370].
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 15]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
 2.7.1.  Deciding Which Encryption Method to Use
 
@@ -863,6 +890,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
       agent SHOULD create a new list containing at least the signing
       time and the symmetric capabilities.
 
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 16]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    -  If such a list already exists, the receiving agent SHOULD verify
       that the signing time in the incoming message is greater than the
       signing time stored in the list and that the signature is valid.
@@ -883,20 +918,10 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    overrides any other decision in this section about which encryption
    algorithm to use.
 
-   Sections 2.7.1.1 through 2.7.1.2 describe the decisions a sending
+   Section 2.7.1.1 and Section 2.7.1.2 describe the decisions a sending
    agent SHOULD use in deciding which type of encryption will be applied
    to a message.  These rules are ordered, so the sending agent SHOULD
    make its decision in the order given.
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 16]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
 2.7.1.1.  Rule 1: Known Capabilities
 
@@ -918,6 +943,16 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    -  the sending agent has no knowledge of the version of S/MIME of the
       recipient,
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 17]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
    then the sending agent SHOULD use AES-128 because it is a stronger
    algorithm and is required by S/MIME v3.2.  If the sending agent
@@ -943,17 +978,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    communications channel could learn the contents of the strongly
    encrypted message simply by decrypting the weakly encrypted message.
 
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 17]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
 3.  Creating S/MIME Messages
 
    This section describes the S/MIME message formats and how they are
@@ -978,6 +1002,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    The reader of this section is expected to understand MIME as
    described in [MIME-SPEC] and [RFC1847].
 
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 18]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
 3.1.  Preparing the MIME Entity for Signing, Enveloping, or Compressing
 
    S/MIME is used to secure MIME entities.  A MIME entity can be a sub-
@@ -993,7 +1025,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    thought of as the "inside" MIME entity.  That is, it is the
    "innermost" object in what is possibly a larger MIME message.
    Processing "outside" MIME entities into CMS content types is
-   described in Sections 3.2, 3.4, and elsewhere.
+   described in Section 3.2, Section 3.5, and elsewhere.
 
    The procedure for preparing a MIME entity is given in [MIME-SPEC].
    The same procedure is used here with some additional restrictions
@@ -1001,14 +1033,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    repeated here, but it is suggested that the reader refer to that
    document for the exact procedure.  This section also describes
    additional requirements.
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 18]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    A single procedure is used for creating MIME entities that are to
    have any combination of signing, enveloping, and compressing applied.
@@ -1034,6 +1058,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    When an S/MIME message is received, the security services on the
    message are processed, and the result is the MIME entity.  That MIME
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 19]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    entity is typically passed to a MIME-capable user agent where it is
    further decoded and presented to the user or receiving application.
 
@@ -1058,14 +1090,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    verified.  MIME entities MUST be canonicalized for enveloping and
    compressing as well as signing.
 
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 19]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    The exact details of canonicalization depend on the actual media type
    and subtype of an entity, and are not described here.  Instead, the
    standard for the particular media type SHOULD be consulted.  For
@@ -1088,6 +1112,15 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    representations for the same characters.  When preparing such text
    for signing, the canonical representation specified for the charset
    MUST be used.
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 20]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
 3.1.2.  Transfer Encoding
 
@@ -1114,14 +1147,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    SHOULD use binary encoding as opposed to a 7-bit-safe transfer
    encoding for the inner entities.  The use of a 7-bit-safe encoding
    (such as base64) would unnecessarily expand the message size.
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 20]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    Implementations MAY "know" that recipient implementations are capable
    of handling inner binary MIME entities either by interpreting the id-
    cap-preferBinaryInside SMIMECapabilities attribute, by prior
@@ -1145,6 +1170,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    The primary reason for the 7-bit requirement is that the Internet
    mail transport infrastructure cannot guarantee transport of 8-bit or
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 21]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    binary data.  Even though many segments of the transport
    infrastructure now handle 8-bit and even binary data, it is sometimes
    not possible to know whether the transport path is 8-bit clean.  If a
@@ -1163,20 +1196,9 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    [RFC1847] prohibits an agent from changing the transfer encoding of
    the first part of a multipart/signed message.  If a compliant agent
-   that cannot transmit 8-bit or binary data encounters a multipart/
-   signed message with 8-bit or binary data in the first part, it would
-   have to return the message to the sender as undeliverable.
-
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 21]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
+   that cannot transmit 8-bit or binary data encounters a
+   multipart/signed message with 8-bit or binary data in the first part,
+   it would have to return the message to the sender as undeliverable.
 
 3.1.4.  Sample Canonical MIME Entity
 
@@ -1189,6 +1211,29 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Note that this example is not of an S/MIME message.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 22]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
       Content-Type: multipart/mixed; boundary=bar
 
       --bar
@@ -1197,7 +1242,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
       =A1Hola Michael!
 
-      How do you like the new S/ MIME specification?
+      How do you like the new S/MIME specification?
 
       It's generally a good idea to encode lines that begin with
       From=20because some mail transport agents will insert a greater-
@@ -1223,17 +1268,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
       --bar--
 
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 22]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
 3.2.  The application/pkcs7-mime Media Type
 
    The application/pkcs7-mime media type is used to carry CMS content
@@ -1246,6 +1280,15 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    as described in Section 3.1 if the eContentType is id-data.  Other
    contents MAY be carried when the eContentType contains different
    values.  See [ESS] for an example of this with signed receipts.
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 23]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
    Since CMS content types are binary data, in most cases base-64
    transfer encoding is appropriate, in particular, when used with SMTP
@@ -1282,14 +1325,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
      application/pkcs7-mime (CompressedData)                 .p7z
      application/pkcs7-signature (SignedData)                .p7s
 
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 23]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    In addition, the file name SHOULD be limited to eight characters
    followed by a three-letter extension.  The eight-character filename
    base can be any distinct name; the use of the filename base "smime"
@@ -1298,18 +1333,26 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Including a file name serves two purposes.  It facilitates easier use
    of S/MIME objects as files on disk.  It also can convey type
-   information across gateways.  When a MIME entity of type application/
-   pkcs7-mime (for example) arrives at a gateway that has no special
-   knowledge of S/MIME, it will default the entity's media type to
-   application/octet-stream and treat it as a generic attachment, thus
-   losing the type information.  However, the suggested filename for an
-   attachment is often carried across a gateway.  This often allows the
-   receiving systems to determine the appropriate application to hand
-   the attachment off to, in this case, a stand-alone S/MIME processing
-   application.  Note that this mechanism is provided as a convenience
-   for implementations in certain environments.  A proper S/MIME
-   implementation MUST use the media types and MUST NOT rely on the file
-   extensions.
+   information across gateways.  When a MIME entity of type
+   application/pkcs7-mime (for example) arrives at a gateway that has no
+   special knowledge of S/MIME, it will default the entity's media type
+   to application/octet-stream and treat it as a generic attachment,
+   thus losing the type information.  However, the suggested filename
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 24]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
+   for an attachment is often carried across a gateway.  This often
+   allows the receiving systems to determine the appropriate application
+   to hand the attachment off to, in this case, a stand-alone S/MIME
+   processing application.  Note that this mechanism is provided as a
+   convenience for implementations in certain environments.  A proper
+   S/MIME implementation MUST use the media types and MUST NOT rely on
+   the file extensions.
 
 3.2.2.  The smime-type Parameter
 
@@ -1324,6 +1367,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
       signed-data            SignedData              id-data
       certs-only             SignedData              id-data
       compressed-data        CompressedData          id-data
+      authEnvelopedData      AuthEnvelopedData       id-data
 
    In order for consistency to be obtained with future specifications,
    the following guidelines SHOULD be followed when assigning a new
@@ -1339,13 +1383,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
        "data" for the id-data content OID when MIME is the inner
        content.
 
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 24]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    3.  If no common string is assigned, then the common string of
        "OID.<oid>" is recommended (for example,
        "OID.2.16.840.1.101.3.4.1.2" would be AES-128 CBC).
@@ -1353,6 +1390,17 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    It is explicitly intended that this field be a suitable hint for mail
    client applications to indicate whether a message is "signed" or
    "enveloped" without having to tunnel into the CMS payload.
+
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 25]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
 3.3.  Creating an Enveloped-Only Message
 
@@ -1375,8 +1423,8 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Step 3.  The EnvelopedData object is wrapped in a CMS ContentInfo
             object.
 
-   Step 4.  The ContentInfo object is inserted into an application/
-            pkcs7-mime MIME entity.
+   Step 4.  The ContentInfo object is inserted into an
+            application/pkcs7-mime MIME entity.
 
    The smime-type parameter for enveloped-only messages is "enveloped-
    data".  The file extension for this type of message is ".p7m".
@@ -1393,16 +1441,56 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
    0GhIGfHfQbnj756YT64V
 
+3.4.  Creating an Authenticated Enveloped-Only Message
+
+   This section describes the format for enveloping a MIME entity
+   without signing it.  It is important to note that sending
+   authenticated enveloped but not signed messages does not provide for
+   authentication or non-repudiation.  It is possible to replace
+   ciphertext in such a way that the processed message will still be
+   valid, but the meaning can be altered.
 
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 25]
+Schaad, et al.          Expires October 27, 2016               [Page 26]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
-3.4.  Creating a Signed-Only Message
+   Step 1.  The MIME entity to be enveloped is prepared according to
+            Section 3.1.
+
+   Step 2.  The MIME entity and other required data is processed into a
+            CMS object of type AuthEnvelopedData.  In addition to
+            encrypting a copy of the content-encryption key for each
+            recipient, a copy of the content-encryption key SHOULD be
+            encrypted for the originator and included in the
+            AuthEnvelopedData (see [RFC5083]).
+
+   Step 3.  The AuthEnvelopedData object is wrapped in a CMS ContentInfo
+            object.
+
+   Step 4.  The ContentInfo object is inserted into an
+            application/pkcs7-mime MIME entity.
+
+   The smime-type parameter for authenticated enveloped-only messages is
+   "authEnvelopedData".  The file extension for this type of message is
+   ".p7m".
+
+   A sample message would be:
+
+   Content-Type: application/pkcs7-mime; smime-type=authEnvelopedData;
+        name=smime.p7m
+   Content-Transfer-Encoding: base64
+   Content-Disposition: attachment; filename=smime.p7m
+
+   rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+   7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+   f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+   0GhIGfHfQbnj756YT64V
+
+3.5.  Creating a Signed-Only Message
 
    There are two formats for signed messages defined for S/MIME:
 
@@ -1413,11 +1501,19 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    In general, the multipart/signed form is preferred for sending, and
    receiving agents MUST be able to handle both.
 
-3.4.1.  Choosing a Format for Signed-Only Messages
+3.5.1.  Choosing a Format for Signed-Only Messages
 
    There are no hard-and-fast rules as to when a particular signed-only
    format is chosen.  It depends on the capabilities of all the
    receivers and the relative importance of receivers with S/MIME
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 27]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    facilities being able to verify the signature versus the importance
    of receivers without S/MIME software being able to view the message.
 
@@ -1435,7 +1531,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    benign intermediate agents.  Such agents might do line wrapping or
    content-transfer encoding changes that would break the signature.
 
-3.4.2.  Signing Using application/pkcs7-mime with SignedData
+3.5.2.  Signing Using application/pkcs7-mime with SignedData
 
    This signing format uses the application/pkcs7-mime media type.  The
    steps to create this format are:
@@ -1448,15 +1544,8 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Step 3.  The SignedData object is wrapped in a CMS ContentInfo
             object.
 
-   Step 4.  The ContentInfo object is inserted into an application/
-            pkcs7-mime MIME entity.
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 26]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
+   Step 4.  The ContentInfo object is inserted into an
+            application/pkcs7-mime MIME entity.
 
    The smime-type parameter for messages using application/pkcs7-mime
    with SignedData is "signed-data".  The file extension for this type
@@ -1474,7 +1563,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
       HUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H7n8HHGghyHh
       6YT64V0GhIGfHfQbnj75
 
-3.4.3.  Signing Using the multipart/signed Format
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 28]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
+3.5.3.  Signing Using the multipart/signed Format
 
    This format is a clear-signing format.  Recipients without any S/MIME
    or CMS processing facilities are able to view the message.  It makes
@@ -1484,7 +1580,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    "detached signature" CMS SignedData object in which the
    encapContentInfo eContent field is absent.
 
-3.4.3.1.  The application/pkcs7-signature Media Type
+3.5.3.1.  The application/pkcs7-signature Media Type
 
    This media type always contains a CMS ContentInfo containing a single
    CMS object of type SignedData.  The SignedData encapContentInfo
@@ -1494,7 +1590,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    The file extension for signed-only messages using application/pkcs7-
    signature is ".p7s".
 
-3.4.3.2.  Creating a multipart/signed Message
+3.5.3.2.  Creating a multipart/signed Message
 
    Step 1.  The MIME entity to be signed is prepared according to
             Section 3.1, taking special care for clear-signing.
@@ -1506,13 +1602,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Step 3.  The MIME entity is inserted into the first part of a
             multipart/signed message with no processing other than that
             described in Section 3.1.
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 27]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    Step 4.  Transfer encoding is applied to the "detached signature" CMS
             SignedData object, and it is inserted into a MIME entity of
@@ -1529,6 +1618,13 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    that quotation marks are required around the protocol parameter
    because MIME requires that the "/" character in the parameter value
    MUST be quoted.
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 29]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
    The micalg parameter allows for one-pass processing when the
    signature is being verified.  The value of the micalg parameter is
@@ -1556,7 +1652,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    parameter will be consistent with the IANA "Hash Function Textual
    Names" registry.
 
-3.4.3.3.  Sample multipart/signed Message
+3.5.3.3.  Sample multipart/signed Message
 
 
 
@@ -1565,9 +1661,25 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 28]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 30]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    Content-Type: multipart/signed;
@@ -1598,7 +1710,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    6e 0d 0a 0d 0a 54 68 69 73 20 69 73 20 61 20 63 6c 65 61 72 2d 73 69
    67 6e 65 64 20 6d 65 73 73 61 67 65 2e 0d 0a
 
-3.5.  Creating a Compressed-Only Message
+3.6.  Creating a Compressed-Only Message
 
    This section describes the format for compressing a MIME entity.
    Please note that versions of S/MIME prior to version 3.1 did not
@@ -1616,14 +1728,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Step 3.  The CompressedData object is wrapped in a CMS ContentInfo
             object.
 
-   Step 4.  The ContentInfo object is inserted into an application/
-            pkcs7-mime MIME entity.
+   Step 4.  The ContentInfo object is inserted into an
+            application/pkcs7-mime MIME entity.
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 29]
+Schaad, et al.          Expires October 27, 2016               [Page 31]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    The smime-type parameter for compressed-only messages is "compressed-
@@ -1632,7 +1744,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    A sample message would be:
 
    Content-Type: application/pkcs7-mime; smime-type=compressed-data;
-       name=smime.p7z
+      name=smime.p7z
    Content-Transfer-Encoding: base64
    Content-Disposition: attachment; filename=smime.p7z
 
@@ -1641,7 +1753,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
    0GhIGfHfQbnj756YT64V
 
-3.6.  Multiple Operations
+3.7.  Multiple Operations
 
    The signed-only, enveloped-only, and compressed-only MIME formats can
    be nested.  This works because these formats are all MIME entities
@@ -1677,15 +1789,15 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 30]
+Schaad, et al.          Expires October 27, 2016               [Page 32]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    -  If a lossy compression algorithm is used with signing, you will
       need to compress first, then sign.
 
-3.7.  Creating a Certificate Management Message
+3.8.  Creating a Certificate Management Message
 
    The certificate management message or MIME entity is used to
    transport certificates and/or Certificate Revocation Lists, such as
@@ -1700,13 +1812,13 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Step 2.  The SignedData object is wrapped in a CMS ContentInfo
             object.
 
-   Step 3.  The ContentInfo object is enclosed in an application/
-            pkcs7-mime MIME entity.
+   Step 3.  The ContentInfo object is enclosed in an
+            application/pkcs7-mime MIME entity.
 
    The smime-type parameter for a certificate management message is
    "certs-only".  The file extension for this type of message is ".p7c".
 
-3.8.  Registration Requests
+3.9.  Registration Requests
 
    A sending agent that signs messages MUST have a certificate for the
    signature so that a receiving agent can verify the signature.  There
@@ -1720,7 +1832,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    methods for requesting certificates.  However, S/MIME v3.2 does not
    require a particular certificate request mechanism.
 
-3.9.  Identifying an S/MIME Message
+3.10.  Identifying an S/MIME Message
 
    Because S/MIME takes into account interoperation in non-MIME
    environments, several different mechanisms are employed to carry the
@@ -1733,9 +1845,9 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 31]
+Schaad, et al.          Expires October 27, 2016               [Page 33]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    The file suffix in the table below comes from the "name" parameter in
@@ -1789,9 +1901,9 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 32]
+Schaad, et al.          Expires October 27, 2016               [Page 34]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    object identifier, and the second provides the signature algorithm's
@@ -1845,9 +1957,9 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 33]
+Schaad, et al.          Expires October 27, 2016               [Page 35]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 4.5.  Decryption
@@ -1901,9 +2013,9 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 34]
+Schaad, et al.          Expires October 27, 2016               [Page 36]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    Type name: application
@@ -1931,7 +2043,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Additional information: NONE
 
    Person & email to contact for further information:
-   S/ MIME working group chairs smime-chairs@tools.ietf.org
+      S/MIME working group chairs smime-chairs@tools.ietf.org
 
    Intended usage: COMMON
 
@@ -1939,7 +2051,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Author: Sean Turner
 
-   Change Controller: S/ MIME working group delegated from the IESG
+   Change Controller: S/MIME working group delegated from the IESG
 
 5.2.  Media Type for application/pkcs7-signature
 
@@ -1957,9 +2069,9 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 35]
+Schaad, et al.          Expires October 27, 2016               [Page 37]
 
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
    Type name: application
@@ -1983,7 +2095,7 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    Additional information: NONE
 
    Person & email to contact for further information:
-   S/ MIME working group chairs smime-chairs@tools.ietf.org
+      S/MIME working group chairs smime-chairs@tools.ietf.org
 
    Intended usage: COMMON
 
@@ -1991,7 +2103,17 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    Author: Sean Turner
 
-   Change Controller: S/ MIME working group delegated from the IESG
+   Change Controller: S/MIME working group delegated from the IESG
+
+5.3.  Register authEnvelopedData smime-type
+
+   IANA is required to register the following value in the "Parameter
+   Values for the smime-type Parameter" registry.  The values to be
+   registered are:
+
+      smime-type value: authEnvelopedData
+
+      Reference: [[This Document, Section 3.2.2]]
 
 6.  Security Considerations
 
@@ -2001,6 +2123,13 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    level of security.  The IETF from time to time may issue documents
    dealing with the current state of the art.  For example:
 
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 38]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    -  The Million Message Attack described in RFC 3218 [RFC3218].
 
    -  The Diffie-Hellman "small-subgroup" attacks described in RFC 2785
@@ -2008,15 +2137,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    -  The attacks against hash algorithms described in RFC 4270
       [RFC4270].
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 36]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    This specification uses Public-Key Cryptography technologies.  It is
    assumed that the private key is protected to ensure that it is not
@@ -2058,6 +2178,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    sending plaintext.  However, other features of S/MIME, such as the
    specification of AES and the ability to announce stronger
    cryptographic capabilities to parties with whom you communicate,
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 39]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    allow senders to create messages that use strong encryption.  Using
    weak cryptography is never recommended unless the only alternative is
    no cryptography.
@@ -2066,14 +2194,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    experts to be cryptographically insecure (due to advances in
    computing power), and should no longer be used to protect messages.
    Such keys were previously considered secure, so processing previously
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 37]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    received signed and encrypted mail will often result in the use of
    weak keys.  Implementations that wish to support previous versions of
    S/MIME or process old messages need to consider the security risks
@@ -2113,22 +2233,19 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
    the message is actually signed and knowing the state of the
    signature, this can lead to incorrect handling of the message.
    Visual indicators on messages may need to have the signature
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 40]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    validation code checked periodically if the indicator is supposed to
    give information on the current status of a message.
 
 7.  References
-
-
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 38]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
 7.1.  Normative References
 
@@ -2136,7 +2253,13 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               "Character sets assigned by IANA.",
               <http://www.iana.org/assignments/character-sets.>.
 
-   [ESS]      "Enhanced Security Services for S/ MIME".
+   [CMS]      "Cryptograhic Message Syntax".
+
+              This is the set of documents dealing with the
+              cryptographic message syntax and refers to [RFC5652] and
+              [RFC5083].
+
+   [ESS]      "Enhanced Security Services for S/MIME".
 
               This is the set of documents dealing with enhanged
               security services and refers to [RFC2634] and [RFC5035].
@@ -2164,6 +2287,17 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               Multipart/Encrypted", RFC 1847, DOI 10.17487/RFC1847,
               October 1995, <http://www.rfc-editor.org/info/rfc1847>.
 
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 41]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
               Bodies", RFC 2045, DOI 10.17487/RFC2045, November 1996,
@@ -2178,13 +2312,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               Part Three: Message Header Extensions for Non-ASCII Text",
               RFC 2047, DOI 10.17487/RFC2047, November 1996,
               <http://www.rfc-editor.org/info/rfc2047>.
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 39]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    [RFC2049]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Five: Conformance Criteria and
@@ -2219,6 +2346,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               RFC 3560, DOI 10.17487/RFC3560, July 2003,
               <http://www.rfc-editor.org/info/rfc3560>.
 
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 42]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    [RFC3565]  Schaad, J., "Use of the Advanced Encryption Standard (AES)
               Encryption Algorithm in Cryptographic Message Syntax
               (CMS)", RFC 3565, DOI 10.17487/RFC3565, July 2003,
@@ -2234,14 +2369,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               DOI 10.17487/RFC4086, June 2005,
               <http://www.rfc-editor.org/info/rfc4086>.
 
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 40]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    [RFC4288]  Freed, N. and J. Klensin, "Media Type Specifications and
               Registration Procedures", RFC 4288, DOI 10.17487/RFC4288,
               December 2005, <http://www.rfc-editor.org/info/rfc4288>.
@@ -2256,18 +2383,32 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               DOI 10.17487/RFC5035, August 2007,
               <http://www.rfc-editor.org/info/rfc5035>.
 
+   [RFC5083]  Housley, R., "Cryptographic Message Syntax (CMS)
+              Authenticated-Enveloped-Data Content Type", RFC 5083,
+              DOI 10.17487/RFC5083, November 2007,
+              <http://www.rfc-editor.org/info/rfc5083>.
+
+   [RFC5084]  Housley, R., "Using AES-CCM and AES-GCM Authenticated
+              Encryption in the Cryptographic Message Syntax (CMS)",
+              RFC 5084, DOI 10.17487/RFC5084, November 2007,
+              <http://www.rfc-editor.org/info/rfc5084>.
+
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <http://www.rfc-editor.org/info/rfc5652>.
 
-   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
-              Mail Extensions (S/MIME) Version 3.2 Certificate
-              Handling", RFC 5750, DOI 10.17487/RFC5750, January 2010,
-              <http://www.rfc-editor.org/info/rfc5750>.
-
    [RFC5754]  Turner, S., "Using SHA2 Algorithms with Cryptographic
               Message Syntax", RFC 5754, DOI 10.17487/RFC5754, January
               2010, <http://www.rfc-editor.org/info/rfc5754>.
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 43]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
 
    [SP800-56A]
               National Institute of Standards and Technology (NIST),
@@ -2286,17 +2427,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               (DER).".
 
 7.2.  Informative References
-
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 41]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    [RFC2311]  Dusse, S., Hoffman, P., Ramsdell, B., Lundblade, L., and
               L. Repka, "S/MIME Version 2 Message Specification",
@@ -2328,6 +2458,14 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               RFC 2631, DOI 10.17487/RFC2631, June 1999,
               <http://www.rfc-editor.org/info/rfc2631>.
 
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 44]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    [RFC2632]  Ramsdell, B., Ed., "S/MIME Version 3 Certificate
               Handling", RFC 2632, DOI 10.17487/RFC2632, June 1999,
               <http://www.rfc-editor.org/info/rfc2632>.
@@ -2345,14 +2483,6 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               Cryptographic Message Syntax", RFC 3218,
               DOI 10.17487/RFC3218, January 2002,
               <http://www.rfc-editor.org/info/rfc3218>.
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 42]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
    [RFC3766]  Orman, H. and P. Hoffman, "Determining Strengths For
               Public Keys Used For Exchanging Symmetric Keys", BCP 86,
@@ -2378,6 +2508,25 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               DOI 10.17487/RFC4270, November 2005,
               <http://www.rfc-editor.org/info/rfc4270>.
 
+   [RFC5750]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
+              Mail Extensions (S/MIME) Version 3.2 Certificate
+              Handling", RFC 5750, DOI 10.17487/RFC5750, January 2010,
+              <http://www.rfc-editor.org/info/rfc5750>.
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 45]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
+   [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
+              Mail Extensions (S/MIME) Version 3.2 Message
+              Specification", RFC 5751, DOI 10.17487/RFC5751, January
+              2010, <http://www.rfc-editor.org/info/rfc5751>.
+
    [SMIMEv2]  "S/MIME version v2".
 
               This group of documents represents S/MIME version 2.  This
@@ -2397,18 +2546,17 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
               This set of documents are [RFC2634], [RFC3850], [RFC3851],
               [RFC3852], and [RFC5035].
 
+   [SMIMEv3.2]
+              "S/MIME version 3.2".
+
+              This group of documents represents S/MIME version 3.2.
+              This set of documents are [RFC2634], [RFC5750], [RFC5751],
+              [RFC5652], and [RFC5035].
+
    [SP800-57]
               National Institute of Standards and Technology (NIST),
               "Special Publication 800-57: Recommendation for Key
               Management", August 2005.
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 43]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
 
 Appendix A.  ASN.1 Module
 
@@ -2423,6 +2571,13 @@ Appendix A.  ASN.1 Module
 
    DEFINITIONS IMPLICIT TAGS ::=
 
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 46]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    BEGIN
 
    IMPORTS
@@ -2435,12 +2590,12 @@ Appendix A.  ASN.1 Module
                   pkcs(1) pkcs-9(9) smime(16) modules(0) cms-2001(14) };
 
    --  id-aa is the arc with all new authenticated and unauthenticated
-   --  attributes produced by the S/ MIME Working Group
+   --  attributes produced by the S/MIME Working Group
 
    id-aa OBJECT IDENTIFIER ::= {iso(1) member-body(2) usa(840)
            rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) attributes(2)}
 
-   -- S/ MIME Capabilities provides a method of broadcasting the
+   -- S/MIME Capabilities provides a method of broadcasting the
    -- symmetric capabilities understood.  Algorithms SHOULD be ordered
    -- by preference and grouped by type
 
@@ -2458,14 +2613,6 @@ Appendix A.  ASN.1 Module
 
    id-aa-encrypKeyPref OBJECT IDENTIFIER ::= {id-aa 11}
 
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 44]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
    SMIMEEncryptionKeyPreference ::= CHOICE {
       issuerAndSerialNumber   [0] IssuerAndSerialNumber,
       receipentKeyId          [1] RecipientKeyIdentifier,
@@ -2480,13 +2627,20 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    id-cap  OBJECT IDENTIFIER ::= { id-smime 11 }
 
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 47]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    -- The preferBinaryInside OID indicates an ability to receive
    -- messages with binary encoding inside the CMS wrapper.
    -- The preferBinaryInside attribute's value field is ABSENT.
 
    id-cap-preferBinaryInside  OBJECT IDENTIFIER ::= { id-cap 1 }
 
-   --  The following list OIDs to be used with S/ MIME V3
+   --  The following list OIDs to be used with S/MIME V3
 
    -- Signature Algorithms Not Found in [CMSALG], [CMS-SHA2], [RSAPSS],
    -- and [RSAOAEP]
@@ -2510,22 +2664,10 @@ Internet-Draft      S/MIME 3.2 Message Specification          April 2016
 
    END
 
-
-
-
-
-
-
-
-Schaad, et al.          Expires October 24, 2016               [Page 45]
-
-Internet-Draft      S/MIME 3.2 Message Specification          April 2016
-
-
 Appendix B.  Moving S/MIME v2 Message Specification to Historic Status
 
-   The S/MIME v3 [SMIMEv3], v3.1 [SMIMEv3.1], and v3.2 (this document)
-   are backwards compatible with the S/MIME v2 Message Specification
+   The S/MIME v3 [SMIMEv3], v3.1 [SMIMEv3.1], and v3.2 [SMIMEv3.2] are
+   backwards compatible with the S/MIME v2 Message Specification
    [SMIMEv2], with the exception of the algorithms (dropped RC2/40
    requirement and added DSA and RSASSA-PSS requirements).  Therefore,
    it is recommended that RFC 2311 [SMIMEv2] be moved to Historic
@@ -2536,10 +2678,18 @@ Appendix C.  Acknowledgments
    Many thanks go out to the other authors of the S/MIME version 2
    Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence
    Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1,
-   or v3.2.
+   v3.2 or v3.5.
 
    A number of the members of the S/MIME Working Group have also worked
    very hard and contributed to this document.  Any list of people is
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 48]
+
+Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+
+
    doomed to omission, and for that I apologize.  In alphabetical order,
    the following people stand out in my mind because they made direct
    contributions to this document:
@@ -2573,4 +2723,22 @@ Authors' Addresses
 
 
 
-Schaad, et al.          Expires October 24, 2016               [Page 46]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Schaad, et al.          Expires October 27, 2016               [Page 49]
