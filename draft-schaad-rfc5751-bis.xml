@@ -181,7 +181,7 @@
         <t>
           <list style="hanging" hangIndent="19">
             <t hangText="ASN.1:">
-              Abstract Syntax Notation One, as defined in ITU-T Recommendation X.680 <xref target="X.680"/>.
+              Abstract Syntax Notation One, as defined in ITU-T Recommendations X.680, X.681, X.682 and X.683 <xref target="ASN.1"/>.
             </t>
           <t hangText="BER:">               Basic Encoding Rules for ASN.1, as defined in ITU-
           T Recommendation X.690 <xref target="X.690"/>.
@@ -2336,6 +2336,7 @@ Change Controller: S/MIME working group delegated from the IESG
                       value="186-2"/>
         </reference>
 
+        <!-- FIPS 186-4 is not the current version -->
         <reference anchor="FIPS186-3">
           <front>
             <title>Digital Signature Standard (DSS)</title>
@@ -2348,35 +2349,85 @@ Change Controller: S/MIME working group delegated from the IESG
 
         <reference anchor="SP800-56A">
           <front>
-            <title>Special Publication 800-56A: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography (Revised)</title>
+            <title>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</title>
             <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
-            <date month="March" year="2007"/>
+            <date month="May" year="2013"/>
           </front>
         </reference>
 
+        <reference anchor="ASN.1">
+          <front>
+            <title>Information Technology - Abstract Syntax Notation (ASN.1)</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            ASN.1 syntax consists of the following references <xref target="X.680"/>, <xref target="X.681"/>, <xref target="X.682"/>, and <xref target="X.683"/>.
+          </annotation>
+        </reference>
+            
         <reference anchor="X.680">
           <front>
             <title>Information Technology - Abstract Syntax
             Notation One (ASN.1):  Specification of basic notation.
-            ITU-T Recommendation X.680 (2002) | ISO/IEC 8824-1:2002. 
+            ITU-T Recommendation X.680 (2002)
             </title>
             <author/>
-            <date/>
+            <date month="November" year="2008"/>
           </front>
+          <seriesInfo name="ITU-T" value="X.680"/>
+          <seriesInfo name="ISO/IEC"  value="8824-1:2008"/>
+        </reference>
+
+        <reference anchor="X.681">
+          <front>
+            <title>Information Technology - Abstract Syntax
+            Notation One (ASN.1):  Information object specification
+            </title>
+            <author/>
+            <date month="November" year="2008"/>
+          </front>
+          <seriesInfo name="ITU-T" value="X.681"/>
+          <seriesInfo name="ISO/IEC"  value="8824-2:2008"/>
+        </reference>
+
+        <reference anchor="X.682">
+          <front>
+            <title>Information Technology - Abstract Syntax
+            Notation One (ASN.1):  Constraint specification
+            </title>
+            <author/>
+            <date month="November" year="2008"/>
+          </front>
+          <seriesInfo name="ITU-T" value="X.682"/>
+          <seriesInfo name="ISO/IEC"  value="8824-3:2008"/>
+        </reference>
+
+        <reference anchor="X.683">
+          <front>
+            <title>Information Technology - Abstract Syntax
+            Notation One (ASN.1):  Parameteriztion of ASN.1 specifications
+            </title>
+            <author/>
+            <date month="November" year="2008"/>
+          </front>
+          <seriesInfo name="ITU-T" value="X.683"/>
+          <seriesInfo name="ISO/IEC"  value="8824-4:2008"/>
         </reference>
 
         <reference anchor="X.690">
           <front>
             <title>
-              ITU-T Recommendation X.690 (2002) | ISO/IEC
-              8825-1:2002.  Information Technology - ASN.1 encoding
+              Information Technology - ASN.1 encoding
               rules: Specification of Basic Encoding Rules (BER),
               Canonical Encoding Rules (CER) and Distinguished
               Encoding Rules (DER).
             </title>
             <author/>
-            <date/>
+            <date month="July" year="2002"/>
           </front>
+          <seriesInfo name="ITU-T" value="X.690"/>
+          <seriesInfo name="ISO/IEC"  value="8825-1:2002"/>
         </reference>
 
       </references>
