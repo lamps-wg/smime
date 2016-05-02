@@ -6,9 +6,9 @@ SPASM                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Obsoletes: RFC5751 (if approved)                             B. Ramsdell
 Intended status: Standards Track                  Brute Squad Labs, Inc.
-Expires: October 27, 2016                                      S. Turner
+Expires: November 3, 2016                                      S. Turner
                                                               IECA, Inc.
-                                                          April 25, 2016
+                                                             May 2, 2016
 
 
    Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5
@@ -23,6 +23,14 @@ Abstract
    message integrity, and non-repudiation with proof of origin.
    Encryption provides data confidentiality.  Compression can be used to
    reduce data size.  This document obsoletes RFC 5751.
+
+Contributing to this document
+
+   The source for this draft is being maintained in GitHub.  Suggested
+   changes should be submitted as pull requests at <https://github.com/
+   spasm-wg/smime>.  Instructions are on that page as well.  Editorial
+   changes can be managed in GitHub, but any substantial issues need to
+   be discussed on the SPASM mailing list.
 
 Status of This Memo
 
@@ -39,7 +47,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 27, 2016.
+   This Internet-Draft will expire on November 3, 2016.
+
+
+
+
+
+Schaad, et al.          Expires November 3, 2016                [Page 1]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
 
 Copyright Notice
 
@@ -50,14 +67,6 @@ Copyright Notice
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
-
-
-
-Schaad, et al.          Expires October 27, 2016                [Page 1]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
-
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
@@ -78,7 +87,7 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   4
      1.1.  Specification Overview  . . . . . . . . . . . . . . . . .   4
      1.2.  Definitions . . . . . . . . . . . . . . . . . . . . . . .   5
      1.3.  Conventions Used in This Document . . . . . . . . . . . .   6
@@ -97,6 +106,14 @@ Table of Contents
        2.4.4.  AuthEnvelopedData Content Type  . . . . . . . . . . .  11
        2.4.5.  CompressedData Content Type . . . . . . . . . . . . .  11
      2.5.  Attributes and the SignerInfo Type  . . . . . . . . . . .  12
+
+
+
+Schaad, et al.          Expires November 3, 2016                [Page 2]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
        2.5.1.  Signing Time Attribute  . . . . . . . . . . . . . . .  12
        2.5.2.  SMIME Capabilities Attribute  . . . . . . . . . . . .  13
        2.5.3.  Encryption Key Preference Attribute . . . . . . . . .  14
@@ -106,14 +123,6 @@ Table of Contents
        2.7.2.  Choosing Weak Encryption  . . . . . . . . . . . . . .  18
        2.7.3.  Multiple Recipients . . . . . . . . . . . . . . . . .  18
    3.  Creating S/MIME Messages  . . . . . . . . . . . . . . . . . .  18
-
-
-
-Schaad, et al.          Expires October 27, 2016                [Page 2]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
-
      3.1.  Preparing the MIME Entity for Signing, Enveloping, or
            Compressing . . . . . . . . . . . . . . . . . . . . . . .  19
        3.1.1.  Canonicalization  . . . . . . . . . . . . . . . . . .  20
@@ -148,11 +157,18 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  41
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  41
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  44
-   Appendix A.  ASN.1 Module . . . . . . . . . . . . . . . . . . . .  46
+   Appendix A.  ASN.1 Module . . . . . . . . . . . . . . . . . . . .  47
    Appendix B.  Moving S/MIME v2 Message Specification to Historic
-                Status . . . . . . . . . . . . . . . . . . . . . . .  48
-   Appendix C.  Acknowledgments  . . . . . . . . . . . . . . . . . .  48
+                Status . . . . . . . . . . . . . . . . . . . . . . .  49
+   Appendix C.  Acknowledgments  . . . . . . . . . . . . . . . . . .  49
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  49
+
+
+
+Schaad, et al.          Expires November 3, 2016                [Page 3]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
 
 1.  Introduction
 
@@ -162,14 +178,6 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
    cryptographic security services for electronic messaging
    applications: authentication, message integrity and non-repudiation
    of origin (using digital signatures), and data confidentiality (using
-
-
-
-Schaad, et al.          Expires October 27, 2016                [Page 3]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
-
    encryption).  As a supplementary service, S/MIME provides for message
    compression.
 
@@ -211,21 +219,19 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
    in the Cryptographic Message Syntax document [CMS], [RFC3370],
    [RFC4056], [RFC3560], and [RFC5754].
 
+
+
+Schaad, et al.          Expires November 3, 2016                [Page 4]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    Throughout this specification, there are requirements and
    recommendations made for how receiving agents handle incoming
    messages.  There are separate requirements and recommendations for
    how sending agents create outgoing messages.  In general, the best
    strategy is to "be liberal in what you receive and conservative in
    what you send".  Most of the requirements are placed on the handling
-
-
-
-
-Schaad, et al.          Expires October 27, 2016                [Page 4]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
-
    of incoming messages, while the recommendations are mostly on the
    creation of outgoing messages.
 
@@ -244,7 +250,8 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
    apply.
 
    ASN.1:             Abstract Syntax Notation One, as defined in ITU-T
-                      Recommendation X.680 [X.680].
+                      Recommendations X.680, X.681, X.682 and X.683
+                      [ASN.1].
 
    BER:               Basic Encoding Rules for ASN.1, as defined in ITU-
                       T Recommendation X.690 [X.690].
@@ -268,19 +275,16 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
    Binary data:       Arbitrary data.
 
+
+
+Schaad, et al.          Expires November 3, 2016                [Page 5]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    Transfer encoding: A reversible transformation made on data so 8-bit
                       or binary data can be sent via a channel that only
                       transmits 7-bit data.
-
-
-
-
-
-
-Schaad, et al.          Expires October 27, 2016                [Page 5]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    Receiving agent:   Software that interprets and processes S/MIME CMS
                       objects, MIME body parts that contain CMS content
@@ -329,13 +333,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-
-
-
-
-Schaad, et al.          Expires October 27, 2016                [Page 6]
+Schaad, et al.          Expires November 3, 2016                [Page 6]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 1.5.  Changes from S/MIME v3 to S/MIME v3.1
@@ -389,9 +389,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016                [Page 7]
+Schaad, et al.          Expires November 3, 2016                [Page 7]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    SHA-256 added as SHOULD+.  Also added note about what S/MIME v3.1
@@ -445,9 +445,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016                [Page 8]
+Schaad, et al.          Expires November 3, 2016                [Page 8]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 1.7.  Changes since S/MIME v3.2
@@ -501,9 +501,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016                [Page 9]
+Schaad, et al.          Expires November 3, 2016                [Page 9]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    -  SHOULD- support RSA with SHA-1 or DSA with SHA-1.
@@ -557,9 +557,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 10]
+Schaad, et al.          Expires November 3, 2016               [Page 10]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 2.4.  General Syntax
@@ -613,9 +613,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 11]
+Schaad, et al.          Expires November 3, 2016               [Page 11]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    See Section 3.7 for further guidance on the use of this type in
@@ -669,9 +669,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 12]
+Schaad, et al.          Expires November 3, 2016               [Page 12]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    Sending agents MUST encode signing time through the year 2049 as
@@ -725,9 +725,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 13]
+Schaad, et al.          Expires November 3, 2016               [Page 13]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    implementation.  Because of the requirement for identical encoding,
@@ -781,9 +781,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 14]
+Schaad, et al.          Expires November 3, 2016               [Page 14]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    instance of AttributeValue.  There MUST NOT be zero or multiple
@@ -837,9 +837,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 15]
+Schaad, et al.          Expires November 3, 2016               [Page 15]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 2.6.  SignerIdentifier SignerInfo Type
@@ -893,9 +893,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 16]
+Schaad, et al.          Expires November 3, 2016               [Page 16]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    -  If such a list already exists, the receiving agent SHOULD verify
@@ -949,9 +949,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 17]
+Schaad, et al.          Expires November 3, 2016               [Page 17]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    then the sending agent SHOULD use AES-128 because it is a stronger
@@ -1005,9 +1005,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 18]
+Schaad, et al.          Expires November 3, 2016               [Page 18]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 3.1.  Preparing the MIME Entity for Signing, Enveloping, or Compressing
@@ -1061,9 +1061,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 19]
+Schaad, et al.          Expires November 3, 2016               [Page 19]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    entity is typically passed to a MIME-capable user agent where it is
@@ -1117,9 +1117,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 20]
+Schaad, et al.          Expires November 3, 2016               [Page 20]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 3.1.2.  Transfer Encoding
@@ -1173,9 +1173,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 21]
+Schaad, et al.          Expires November 3, 2016               [Page 21]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    binary data.  Even though many segments of the transport
@@ -1229,9 +1229,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 22]
+Schaad, et al.          Expires November 3, 2016               [Page 22]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
       Content-Type: multipart/mixed; boundary=bar
@@ -1285,9 +1285,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 23]
+Schaad, et al.          Expires November 3, 2016               [Page 23]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    Since CMS content types are binary data, in most cases base-64
@@ -1341,9 +1341,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 24]
+Schaad, et al.          Expires November 3, 2016               [Page 24]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    for an attachment is often carried across a gateway.  This often
@@ -1397,9 +1397,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 25]
+Schaad, et al.          Expires November 3, 2016               [Page 25]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 3.3.  Creating an Enveloped-Only Message
@@ -1453,9 +1453,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 26]
+Schaad, et al.          Expires November 3, 2016               [Page 26]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    Step 1.  The MIME entity to be enveloped is prepared according to
@@ -1509,9 +1509,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 27]
+Schaad, et al.          Expires November 3, 2016               [Page 27]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    facilities being able to verify the signature versus the importance
@@ -1565,9 +1565,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 28]
+Schaad, et al.          Expires November 3, 2016               [Page 28]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 3.5.3.  Signing Using the multipart/signed Format
@@ -1621,9 +1621,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 29]
+Schaad, et al.          Expires November 3, 2016               [Page 29]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    The micalg parameter allows for one-pass processing when the
@@ -1677,9 +1677,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 30]
+Schaad, et al.          Expires November 3, 2016               [Page 30]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    Content-Type: multipart/signed;
@@ -1733,9 +1733,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 31]
+Schaad, et al.          Expires November 3, 2016               [Page 31]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    The smime-type parameter for compressed-only messages is "compressed-
@@ -1789,9 +1789,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 32]
+Schaad, et al.          Expires November 3, 2016               [Page 32]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    -  If a lossy compression algorithm is used with signing, you will
@@ -1845,9 +1845,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 33]
+Schaad, et al.          Expires November 3, 2016               [Page 33]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    The file suffix in the table below comes from the "name" parameter in
@@ -1901,9 +1901,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 34]
+Schaad, et al.          Expires November 3, 2016               [Page 34]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    object identifier, and the second provides the signature algorithm's
@@ -1957,9 +1957,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 35]
+Schaad, et al.          Expires November 3, 2016               [Page 35]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
 4.5.  Decryption
@@ -2013,9 +2013,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 36]
+Schaad, et al.          Expires November 3, 2016               [Page 36]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    Type name: application
@@ -2069,9 +2069,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 37]
+Schaad, et al.          Expires November 3, 2016               [Page 37]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    Type name: application
@@ -2125,9 +2125,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 38]
+Schaad, et al.          Expires November 3, 2016               [Page 38]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    -  The Million Message Attack described in RFC 3218 [RFC3218].
@@ -2181,9 +2181,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 39]
+Schaad, et al.          Expires November 3, 2016               [Page 39]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    allow senders to create messages that use strong encryption.  Using
@@ -2237,9 +2237,9 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
 
 
-Schaad, et al.          Expires October 27, 2016               [Page 40]
+Schaad, et al.          Expires November 3, 2016               [Page 40]
 
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
 
 
    validation code checked periodically if the indicator is supposed to
@@ -2248,6 +2248,12 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 7.  References
 
 7.1.  Normative References
+
+   [ASN.1]    "Information Technology - Abstract Syntax Notation
+              (ASN.1)".
+
+              ASN.1 syntax consists of the following references [X.680],
+              [X.681], [X.682], and [X.683].
 
    [CHARSETS]
               "Character sets assigned by IANA.",
@@ -2282,21 +2288,20 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               This set of documents is [RFC2045], [RFC2046], [RFC2047],
               [RFC2049], [RFC4288], and [RFC4289].
 
+
+
+
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 41]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    [RFC1847]  Galvin, J., Murphy, S., Crocker, S., and N. Freed,
               "Security Multiparts for MIME: Multipart/Signed and
               Multipart/Encrypted", RFC 1847, DOI 10.17487/RFC1847,
               October 1995, <http://www.rfc-editor.org/info/rfc1847>.
-
-
-
-
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 41]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message
@@ -2341,18 +2346,18 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               Algorithms", RFC 3370, DOI 10.17487/RFC3370, August 2002,
               <http://www.rfc-editor.org/info/rfc3370>.
 
+
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 42]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    [RFC3560]  Housley, R., "Use of the RSAES-OAEP Key Transport
               Algorithm in Cryptographic Message Syntax (CMS)",
               RFC 3560, DOI 10.17487/RFC3560, July 2003,
               <http://www.rfc-editor.org/info/rfc3560>.
-
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 42]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    [RFC3565]  Schaad, J., "Use of the Advanced Encryption Standard (AES)
               Encryption Algorithm in Cryptographic Message Syntax
@@ -2397,34 +2402,45 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <http://www.rfc-editor.org/info/rfc5652>.
 
+
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 43]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    [RFC5754]  Turner, S., "Using SHA2 Algorithms with Cryptographic
               Message Syntax", RFC 5754, DOI 10.17487/RFC5754, January
               2010, <http://www.rfc-editor.org/info/rfc5754>.
 
-
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 43]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
-
    [SP800-56A]
               National Institute of Standards and Technology (NIST),
-              "Special Publication 800-56A: Recommendation Pair-Wise Key
-              Establishment Schemes Using Discrete Logarithm
-              Cryptography (Revised)", March 2007.
+              "Special Publication 800-56A Revision 2: Recommendation
+              Pair-Wise Key Establishment Schemes Using Discrete
+              Logarithm Cryptography", May 2013.
 
    [X.680]    "Information Technology - Abstract Syntax Notation One
               (ASN.1): Specification of basic notation.  ITU-T
-              Recommendation X.680 (2002) | ISO/IEC 8824-1:2002.".
+              Recommendation X.680 (2002)", ITU-T X.680, ISO/
+              IEC 8824-1:2008, November 2008.
 
-   [X.690]    "ITU-T Recommendation X.690 (2002) | ISO/IEC 8825-1:2002.
-              Information Technology - ASN.1 encoding rules:
+   [X.681]    "Information Technology - Abstract Syntax Notation One
+              (ASN.1): Information object specification", ITU-T X.681,
+              ISO/IEC 8824-2:2008, November 2008.
+
+   [X.682]    "Information Technology - Abstract Syntax Notation One
+              (ASN.1): Constraint specification", ITU-T X.682, ISO/
+              IEC 8824-3:2008, November 2008.
+
+   [X.683]    "Information Technology - Abstract Syntax Notation One
+              (ASN.1): Parameteriztion of ASN.1 specifications",
+              ITU-T X.683, ISO/IEC 8824-4:2008, November 2008.
+
+   [X.690]    "Information Technology - ASN.1 encoding rules:
               Specification of Basic Encoding Rules (BER), Canonical
               Encoding Rules (CER) and Distinguished Encoding Rules
-              (DER).".
+              (DER).", ITU-T X.690, ISO/IEC 8825-1:2002, July 2002.
 
 7.2.  Informative References
 
@@ -2442,6 +2458,14 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               RFC 2313, DOI 10.17487/RFC2313, March 1998,
               <http://www.rfc-editor.org/info/rfc2313>.
 
+
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 44]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    [RFC2314]  Kaliski, B., "PKCS #10: Certification Request Syntax
               Version 1.5", RFC 2314, DOI 10.17487/RFC2314, March 1998,
               <http://www.rfc-editor.org/info/rfc2314>.
@@ -2457,14 +2481,6 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
    [RFC2631]  Rescorla, E., "Diffie-Hellman Key Agreement Method",
               RFC 2631, DOI 10.17487/RFC2631, June 1999,
               <http://www.rfc-editor.org/info/rfc2631>.
-
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 44]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    [RFC2632]  Ramsdell, B., Ed., "S/MIME Version 3 Certificate
               Handling", RFC 2632, DOI 10.17487/RFC2632, June 1999,
@@ -2499,6 +2515,13 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               RFC 3851, DOI 10.17487/RFC3851, July 2004,
               <http://www.rfc-editor.org/info/rfc3851>.
 
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 45]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    [RFC3852]  Housley, R., "Cryptographic Message Syntax (CMS)",
               RFC 3852, DOI 10.17487/RFC3852, July 2004,
               <http://www.rfc-editor.org/info/rfc3852>.
@@ -2512,15 +2535,6 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               Mail Extensions (S/MIME) Version 3.2 Certificate
               Handling", RFC 5750, DOI 10.17487/RFC5750, January 2010,
               <http://www.rfc-editor.org/info/rfc5750>.
-
-
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 45]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
               Mail Extensions (S/MIME) Version 3.2 Message
@@ -2553,6 +2567,17 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
               This set of documents are [RFC2634], [RFC5750], [RFC5751],
               [RFC5652], and [RFC5035].
 
+
+
+
+
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 46]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    [SP800-57]
               National Institute of Standards and Technology (NIST),
               "Special Publication 800-57: Recommendation for Key
@@ -2570,13 +2595,6 @@ Appendix A.  ASN.1 Module
             pkcs(1) pkcs-9(9) smime(16) modules(0) msg-v3dot1(21) }
 
    DEFINITIONS IMPLICIT TAGS ::=
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 46]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    BEGIN
 
@@ -2608,6 +2626,14 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
    SMIMECapabilities ::= SEQUENCE OF SMIMECapability
 
+
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 47]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
    -- Encryption Key Preference provides a method of broadcasting the
    -- preferred encryption certificate.
 
@@ -2626,13 +2652,6 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
            rsadsi(113549) pkcs(1) pkcs9(9) 16 }
 
    id-cap  OBJECT IDENTIFIER ::= { id-smime 11 }
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 47]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
 
    -- The preferBinaryInside OID indicates an ability to receive
    -- messages with binary encoding inside the CMS wrapper.
@@ -2664,6 +2683,13 @@ Internet-Draft      S/MIME 3.5 Message Specification          April 2016
 
    END
 
+
+
+Schaad, et al.          Expires November 3, 2016               [Page 48]
+
+Internet-Draft      S/MIME 3.5 Message Specification            May 2016
+
+
 Appendix B.  Moving S/MIME v2 Message Specification to Historic Status
 
    The S/MIME v3 [SMIMEv3], v3.1 [SMIMEv3.1], and v3.2 [SMIMEv3.2] are
@@ -2682,14 +2708,6 @@ Appendix C.  Acknowledgments
 
    A number of the members of the S/MIME Working Group have also worked
    very hard and contributed to this document.  Any list of people is
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 48]
-
-Internet-Draft      S/MIME 3.5 Message Specification          April 2016
-
-
    doomed to omission, and for that I apologize.  In alphabetical order,
    the following people stand out in my mind because they made direct
    contributions to this document:
@@ -2723,22 +2741,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Schaad, et al.          Expires October 27, 2016               [Page 49]
+Schaad, et al.          Expires November 3, 2016               [Page 49]
