@@ -550,7 +550,7 @@
       <section title="General Syntax">
         <t>
           There are several CMS content types.  Of these, only the Data,
-          SignedData, EnvelopedData, and CompressedData content types are
+          SignedData, EnvelopedData, CompressedData, and AuthEnvelopedData content types are
           currently used for S/&wj;MIME.
         </t>
         <section title="Data Content Type">
@@ -674,10 +674,12 @@
             UTCTime; signing times in 2050 or later MUST be encoded as
             GeneralizedTime.  When the UTCTime CHOICE is used, S/&wj;MIME agents MUST
             interpret the year field (YY) as follows:
-          </t>
-          <t>
-            If YY is greater than or equal to 50, the year is interpreted as
-            19YY; if YY is less than 50, the year is interpreted as 20YY.
+            <list style="none">
+              <t>
+                If YY is greater than or equal to 50, the year is interpreted as
+                19YY; if YY is less than 50, the year is interpreted as 20YY.
+              </t>
+            </list>
           </t>
           <t>
             Receiving agents MUST be able to process signing-time attributes that
@@ -1307,16 +1309,14 @@
                   If a sending agent emits the above parameters, the value of the
                   parameters SHOULD be a file name with the appropriate extension:
                 </t>
-<figure>
-<artwork>
-Media Type                                            File Extension
-  application/pkcs7-mime (SignedData, EnvelopedData)      .p7m
-  application/pkcs7-mime (degenerate SignedData           .p7c
-     certificate management message)
-  application/pkcs7-mime (CompressedData)                 .p7z
-  application/pkcs7-signature (SignedData)                .p7s
-</artwork>
-</figure>
+                
+                  <texttable style="none">
+                    <ttcol>Media Type</ttcol><ttcol align="center">File Extension</ttcol>
+                    <c>application/pkcs7-mime (SignedData, EnvelopedData)</c><c>.p7m</c>
+                    <c>application/pkcs7-mime (degenerate SignedData certificate management message)</c><c>.p7c</c>
+                    <c>application/pkcs7-mime (CompressedData)</c><c>.p7z</c>
+                    <c>application/pkcs7-signature (SignedData)</c><c>.p7s</c>
+                  </texttable>
                 <t>
 
                   In addition, the file name SHOULD be limited to eight characters
@@ -1351,16 +1351,14 @@ Media Type                                            File Extension
                   information about the contained content.  This specification defines
                   the following smime-types.
                 </t>
-                <figure>
-                <artwork>
-   Name                   CMS Type                Inner Content
-   enveloped-data         EnvelopedData           id-data
-   signed-data            SignedData              id-data
-   certs-only             SignedData              id-data
-   compressed-data        CompressedData          id-data
-   authEnvelopedData      AuthEnvelopedData       id-data
-                </artwork>
-                </figure>
+                <texttable style="none">
+                  <ttcol>Name</ttcol><ttcol>CMS Type</ttcol><ttcol>Inner Content</ttcol>
+                  <c>enveloped-data</c><c>EnvelopedData</c><c>id-data</c>
+                  <c>signed-data</c><c>SignedData</c><c>id-data</c>
+                  <c>certs-only</c><c>SignedData</c><c>id-data</c>
+                  <c>compressed-data</c><c>CompressedData</c><c>id-data</c>
+                  <c>authEnvelopedData</c><c>AuthEnvelopedData</c><c>id-data</c>
+                </texttable>
                 <t>
                   In order for consistency to be obtained with future specifications,
                   the following guidelines SHOULD be followed when assigning a new
@@ -1650,21 +1648,17 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                   from the following:
                 </t>
 
-
-                <figure>
-                <artwork>
-Algorithm   Value Used
-
-MD5         md5
-SHA-1       sha-1
-SHA-224     sha-224
-SHA-256     sha-256
-SHA-384     sha-384
-SHA-512     sha-512
-Any other   (defined separately in algorithm profile or "unknown"
-             if not defined)
-                </artwork>
-                </figure>
+                <texttable style="none">
+                  <ttcol>Algorithm</ttcol><ttcol>Value Used</ttcol>
+                  <c>MD5</c><c>md5</c>
+                  <c>SHA-1</c><c>sha-1</c>
+                  <c>SHA-224</c><c>sha-224</c>
+                  <c>SHA-256</c><c>sha-256</c>
+                  <c>SHA-384</c><c>sha-384</c>
+                  <c>SHA-512</c><c>sha-512</c>
+                  <c>Any other</c><c>  (defined separately in algorithm profile or "unknown" if not defined)</c>
+                </texttable>
+                
                 <t>
                   (Historical note: some early implementations of S/MIME emitted and
                   expected "rsa-md5", "rsa-sha1", and "sha1" for the micalg parameter.)
@@ -1865,21 +1859,12 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 Content-Disposition header field.  These parameters that give the
                 file suffix are not listed below as part of the parameter section.
               </t>
-              <figure>
-              <artwork>
-Media type:  application/pkcs7-mime
-parameters:  any
-file suffix: any
-
-Media type:  multipart/signed
-parameters:  protocol="application/pkcs7-signature"
-file suffix: any
-
-Media type:  application/octet-stream
-parameters:  any
-file suffix: p7m, p7s, p7c, p7z
-              </artwork>
-              </figure>
+              <texttable style="none">
+                <ttcol>Media type</ttcol><ttcol>parameters</ttcol><ttcol>file suffix</ttcol>
+                <c>application/pkcs7-mime</c><c>any</c><c>any</c>
+                <c>multipart/signed</c><c>protocol="application/pkcs7-signature"</c><c>any</c>
+                <c>application/octet-stream</c><c>any</c><c>p7m, p7s, p7c, p7z</c>
+              </texttable>
             </section>
           </section>
           <section title="Certificate Processing" anchor="CertProcessing">
@@ -2548,13 +2533,14 @@ Change Controller: S/MIME working group delegated from the IESG
 
 
 
-    <section title="ASN.1 Module" anchor="ASN1Module">
-              <figure>
-      <artwork>
+      <section title="ASN.1 Module" anchor="ASN1Module">
+        <t>
 Note: The ASN.1 module contained herein is unchanged from RFC 3851
 [SMIMEv3.1] with the exception of a change to the prefersBinaryInside
 ASN.1 comment.  This module uses the 1988 version of ASN.1.
-
+        </t>
+              <figure>
+      <artwork>
 SecureMimeMessageV3dot1
 
   { iso(1) member-body(2) us(840) rsadsi(113549)
