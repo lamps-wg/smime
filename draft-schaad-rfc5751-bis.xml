@@ -406,7 +406,8 @@
           <xref target="SecurityConsiderations"/>: Updated security considerations.
         </t>
         <t>
-          Section 7: Moved references from Appendix B to this section.  Updated
+          <!-- <xref target="references"/> -->
+          Section 7 : Moved references from Appendix B to this section.  Updated
           references.  Added informational references to SMIMEv2, SMIMEv3, and
           SMIMEv3.1.
         </t>
@@ -418,10 +419,10 @@
         <t>
           <list style="symbols">
             <t>
-              Add the use of AuthEnvelopedData, including defining and registering an smime-type value.
+              Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<xref target="AuthEnvelopedData1"/> and <xref target="AuthEnvelopedData2"/>).
             </t>
             <t>
-              Add the use of AES-GCM.
+              Add the use of AES-GCM (<xref target="ContentEncryptionAlgorithmIdentifier"/>).
             </t>
           </list>
         </t>
@@ -550,7 +551,7 @@
       <section title="General Syntax">
         <t>
           There are several CMS content types.  Of these, only the Data,
-          SignedData, EnvelopedData, CompressedData, and AuthEnvelopedData content types are
+          SignedData, EnvelopedData, AuthEnvelopedData, and CompressedData content types are
           currently used for S/&wj;MIME.
         </t>
         <section title="Data Content Type">
@@ -588,7 +589,7 @@
           </t>
         </section>
 
-        <section title="AuthEnvelopedData Content Type">
+        <section title="AuthEnvelopedData Content Type" anchor="AuthEnvelopedData1">
           <t>
             This content type is used to apply data confidentiality and message integrity to a message.
             This content type does not provide authentication or non-repudiation.
@@ -668,6 +669,9 @@
             was signed.  The time of signing will most likely be created by a
             message originator and therefore is only as trustworthy as the
             originator.
+            <cref source="JLS">
+              We could kill this section and just reference RFC5652 if we wanted.
+            </cref>
           </t>
           <t>
             Sending agents MUST encode signing time through the year 2049 as
@@ -957,9 +961,11 @@
                     the recipient,
                   </t>
                 </list>
-                then the sending agent SHOULD use AES-128 because it is a stronger
+                then the sending agent SHOULD use AES-128 CBC because it is a stronger
                 algorithm and is required by S/&wj;MIME v3.2.  If the sending agent
-                chooses not to use AES-128 in this step, it SHOULD use tripleDES.
+                chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.
+                <cref source="JLS">Should this be updated to say SHOULD AES-12 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES?
+                </cref>
               </t>
             </section>
           </section>
@@ -971,6 +977,7 @@
                 weak encryption algorithm before sending the data, and possibly allow
                 the human to use a stronger encryption method such as tripleDES or
                 AES.
+                <cref source="JLS">Does this become a MUST NOT now.</cref>
               </t>
             </section>
 
@@ -1056,15 +1063,15 @@
               These steps are descriptive rather than prescriptive.  The
               implementer is free to use any procedure as long as the result is the
               same.
-              <list style="hanging" hangIndent="9">
-                <t hangText="Step 1.">  The MIME entity is prepared according to the local
+              <list style="format Step %d.">
+                <t>  The MIME entity is prepared according to the local
                 conventions.
                 </t>
 
-              <t hangText="Step 2.">  The leaf parts of the MIME entity are converted to canonical
+              <t>  The leaf parts of the MIME entity are converted to canonical
               form.
-</t>
-              <t hangText="Step 3.">  Appropriate transfer encoding is applied to the leaves of
+              </t>
+              <t>  Appropriate transfer encoding is applied to the leaves of
               the MIME entity.
               </t>
               </list>
@@ -1237,10 +1244,6 @@
    From=20because some mail transport agents will insert a greater-
    than (&gt;) sign, thus invalidating the signature.
 
-
-
-
-
    Also, in some cases it might be desirable to encode any =20
    trailing whitespace that occurs on lines in order to ensure =20
    that the message signature is not invalidated when passing =20
@@ -1399,21 +1402,21 @@
                 message will still be valid, but the meaning can be altered.
               </t>
               <t>
-                <list style="hanging" hangIndent="9">
-                <t hangText="Step 1.">  The MIME entity to be enveloped is prepared according to
+              <list style="format Step %d.">
+                <t>  The MIME entity to be enveloped is prepared according to
                 <xref target="MimePrep"/>.
 </t>
-                <t hangText="Step 2.">  The MIME entity and other required data is processed into a
+                <t>  The MIME entity and other required data is processed into a
                 CMS object of type EnvelopedData.  In addition to encrypting
                 a copy of the content-encryption key for each recipient, a
                 copy of the content-encryption key SHOULD be encrypted for
                 the originator and included in the EnvelopedData (see <xref target="RFC5652"/>,
                 Section 6).
 </t>
-                <t hangText="Step 3.">  The EnvelopedData object is wrapped in a CMS ContentInfo
+                <t>  The EnvelopedData object is wrapped in a CMS ContentInfo
                 object.
 </t>
-                <t hangText="Step 4.">  The ContentInfo object is inserted into an
+                <t>  The ContentInfo object is inserted into an
                 application/&wj;pkcs7-mime MIME entity.
 </t>
                 </list>
@@ -1440,29 +1443,29 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
               </artwork>
               </figure>
             </section>
-            <section title="Creating an Authenticated Enveloped-Only Message">
+            <section title="Creating an Authenticated Enveloped-Only Message" anchor="AuthEnvelopedData2">
               <t>
                 This section describes the format for enveloping a MIME entity without signing it.
                 It is important to note that sending authenticated enveloped but not signed messages does not provide for authentication or non-repudiation.
                 It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
               </t>
               <t>
-                <list style="hanging" hangIndent="9">
-                  <t hangText="Step 1.">
+              <list style="format Step %d.">
+                  <t>
                     The MIME entity to be enveloped is prepared according to <xref target="MimePrep"/>.
                   </t>
                   
-                  <t hangText="Step 2.">
+                  <t>
                     The MIME entity and other required data is processed into a CMS object of type AuthEnvelopedData.
                     In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD
                     be encrypted for the originator and included in the AuthEnvelopedData (see <xref target="RFC5083"/>).
                   </t>
                   
-                  <t hangText="Step 3.">
+                  <t>
                     The AuthEnvelopedData object is wrapped in a CMS ContentInfo object.
                   </t>
                   
-                  <t hangText="Step 4.">
+                  <t>
                     The ContentInfo object is inserted into an application/&wj;pkcs7-mime MIME entity.
                   </t>
                   
@@ -1539,16 +1542,16 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                   This signing format uses the application/&wj;pkcs7-mime media type.  The
                   steps to create this format are:
 
-                  <list style="hanging" hangIndent="9">
-                  <t hangText="Step 1.">  The MIME entity is prepared according to <xref target="MimePrep"/>.
+                  <list style="format Step %d.">
+                  <t>  The MIME entity is prepared according to <xref target="MimePrep"/>.
 </t>
-                  <t hangText="Step 2.">  The MIME entity and other required data are processed into a
+                  <t>  The MIME entity and other required data are processed into a
                   CMS object of type SignedData.
                   </t>
-                  <t hangText="Step 3.">  The SignedData object is wrapped in a CMS ContentInfo
+                  <t>  The SignedData object is wrapped in a CMS ContentInfo
                   object.
 </t>
-                  <t hangText="Step 4.">  The ContentInfo object is inserted into an
+                  <t>  The ContentInfo object is inserted into an
                   application/&wj;pkcs7-mime MIME entity.
                   </t>
                   </list>
@@ -1606,23 +1609,23 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
               
               <section title="Creating a multipart/signed Message">
                 <t>
-                  <list style="hanging" hangIndent="9">
-                  <t hangText="Step 1.">  The MIME entity to be signed is prepared according to
+                  <list style="format Step %d.">
+                  <t>  The MIME entity to be signed is prepared according to
                   <xref target="MimePrep"/>, taking special care for clear-signing.
 </t>
-                  <t hangText="Step 2.">  The MIME entity is presented to CMS processing in order to
+                  <t>  The MIME entity is presented to CMS processing in order to
                   obtain an object of type SignedData in which the
                   encapContentInfo eContent field is absent.
 </t>
-                  <t hangText="Step 3.">  The MIME entity is inserted into the first part of a
+                  <t>  The MIME entity is inserted into the first part of a
                   multipart/&wj;signed message with no processing other than that
                   described in <xref target="MimePrep"/>.
 </t>
-                  <t hangText="Step 4.">  Transfer encoding is applied to the "detached signature" CMS
+                  <t>  Transfer encoding is applied to the "detached signature" CMS
                   SignedData object, and it is inserted into a MIME entity of
                   type application/&wj;pkcs7-signature.
 </t>
-                  <t hangText="Step 5.">  The MIME entity of the application/&wj;pkcs7-signature is
+                  <t>  The MIME entity of the application/&wj;pkcs7-signature is
                   inserted into the second part of the multipart/&wj;signed
                   entity.
 </t>
@@ -1718,18 +1721,18 @@ n8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 compatibility.
               </t>
               <t>
-                <list style="hanging" hangIndent="9">
-                <t hangText="Step 1.">  The MIME entity to be compressed is prepared according to
+                <list style="format Step %d." hangIndent="9">
+                <t>  The MIME entity to be compressed is prepared according to
                 <xref target="MimePrep"/>.
 </t>
-                <t hangText="Step 2.">  The MIME entity and other required data are processed into a
+                <t>  The MIME entity and other required data are processed into a
                 CMS object of type CompressedData.
                 </t>
                 
-                <t hangText="Step 3.">  The CompressedData object is wrapped in a CMS ContentInfo
+                <t>  The CompressedData object is wrapped in a CMS ContentInfo
                 object.
 </t>
-                <t hangText="Step 4.">  The ContentInfo object is inserted into an
+                <t>  The ContentInfo object is inserted into an
                 application/&wj;pkcs7-mime MIME entity.
 </t>
                 </list>
@@ -1808,17 +1811,17 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 in response to a registration request.
               </t>
               <t>
-                <list style="hanging" hangIndent="9">
-                <t hangText="Step 1.">  The certificates and/or Certificate Revocation Lists are
+                <list style="format Step %d.">
+                <t>  The certificates and/or Certificate Revocation Lists are
                 made available to the CMS generating process that creates a
                 CMS object of type SignedData.  The SignedData
                 encapContentInfo eContent field MUST be absent and
                 signerInfos field MUST be empty.
                 </t>
-<t hangText="Step 2.">  The SignedData object is wrapped in a CMS ContentInfo
+<t>  The SignedData object is wrapped in a CMS ContentInfo
                 object.
 </t>
-<t hangText="Step 3.">  The ContentInfo object is enclosed in an
+<t>  The ContentInfo object is enclosed in an
                 application/&wj;pkcs7-mime MIME entity.
 </t>
                 </list>
@@ -2070,6 +2073,9 @@ Change Controller: S/MIME working group delegated from the IESG
               <t>
                 IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.
                 The values to be registered are:
+                <cref source="JLS">
+                  This can be done by modifying the registration above instead.
+                </cref>
                 <list style="none">
                   <t>smime-type value: authEnvelopedData</t>
                   <t>Reference: [[This Document, <xref target="smime-type"/>]]</t>
@@ -2233,7 +2239,7 @@ Change Controller: S/MIME working group delegated from the IESG
 
       </section>
       -->
-      <references title="Normative References">
+      <references title="Normative References" >
         &rfc1847;
         &rfc2045; &rfc2046; &rfc2047; &rfc2049;
         &rfc2119;
@@ -2653,12 +2659,12 @@ END
         very hard and contributed to this document.  Any list of people is
         doomed to omission, and for that I apologize.  In alphabetical order,
         the following people stand out in my mind because they made direct
-        contributions to this document:
+        contributions to various versions of this document:
       </t>
       <t>
         Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter
         Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway,
-        John Pawling, and Jim Schaad.
+        and John Pawling.
       </t>
     </section>
   </back>
