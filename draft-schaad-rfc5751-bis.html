@@ -340,7 +340,7 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-schaad-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-5-6" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-6-24" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -368,7 +368,7 @@ li, p {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: November 7, 2016</td>
+  <td class="left">Expires: December 26, 2016</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -377,7 +377,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">May 6, 2016</td>
+  <td class="right">June 24, 2016</td>
 </tr>
 
     	
@@ -401,7 +401,7 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 7, 2016.</p>
+<p>This Internet-Draft will expire on December 26, 2016.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -570,14 +570,14 @@ li, p {
 <p><a href="#KeyPairs">Section 4.1</a>: Updated RSA and DSA key size discussion.  Moved last four sentences to security considerations.  Updated reference to randomness requirements for security.  </p>
 <p><a href="#IANA">Section 5</a>: Added IANA registration templates to update media type registry to point to this document as opposed to RFC 2311.  </p>
 <p><a href="#SecurityConsiderations">Section 6</a>: Updated security considerations.  </p>
-<p id="rfc.section.1.6.p.22">Section 7: Moved references from Appendix B to this section.  Updated references.  Added informational references to SMIMEv2, SMIMEv3, and SMIMEv3.1.  </p>
+<p id="rfc.section.1.6.p.22">Section 7 : Moved references from Appendix B to this section.  Updated references.  Added informational references to SMIMEv2, SMIMEv3, and SMIMEv3.1.  </p>
 <p><a href="#V2Historic">Appendix B</a>: Added Appendix B to move S/&#8288;MIME v2 to Historic status.  </p>
 <h1 id="rfc.section.1.7"><a href="#rfc.section.1.7">1.7.</a> Changes since S/MIME v3.2</h1>
 <p/>
 
 <ul>
-  <li>Add the use of AuthEnvelopedData, including defining and registering an smime-type value.  </li>
-  <li>Add the use of AES-GCM.  </li>
+  <li>Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<a href="#AuthEnvelopedData1">Section 2.4.4</a> and <a href="#AuthEnvelopedData2">Section 3.4</a>).  </li>
+  <li>Add the use of AES-GCM (<a href="#ContentEncryptionAlgorithmIdentifier">Section 2.7</a>).  </li>
 </ul>
 
 <p> </p>
@@ -624,14 +624,14 @@ li, p {
 <p id="rfc.section.2.3.p.2">When DH ephemeral-static is used, a key wrap algorithm is also specified in the KeyEncryptionAlgorithmIdentifier <a href="#RFC5652">[RFC5652]</a>.  The underlying encryption functions for the key wrap and content encryption algorithm (<a href="#RFC3370">[RFC3370]</a> and <a href="#RFC3565">[RFC3565]</a>) and the key sizes for the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm with AES-128 content encryption algorithm).  As AES-128 CBC is the mandatory-to-implement content encryption algorithm, the AES-128 key wrap algorithm MUST also be supported when DH ephemeral-static is used.  </p>
 <p id="rfc.section.2.3.p.3">Note that S/&#8288;MIME v3.1 clients might only implement key encryption and decryption using the rsaEncryption algorithm.  Note that S/&#8288;MIME v3 clients might only implement key encryption and decryption using the Diffie-Hellman algorithm.  Also note that S/&#8288;MIME v2 clients are only capable of decrypting content-encryption keys using the rsaEncryption algorithm.  </p>
 <h1 id="rfc.section.2.4"><a href="#rfc.section.2.4">2.4.</a> General Syntax</h1>
-<p id="rfc.section.2.4.p.1">There are several CMS content types.  Of these, only the Data, SignedData, EnvelopedData, CompressedData, and AuthEnvelopedData content types are currently used for S/&#8288;MIME.  </p>
+<p id="rfc.section.2.4.p.1">There are several CMS content types.  Of these, only the Data, SignedData, EnvelopedData, AuthEnvelopedData, and CompressedData content types are currently used for S/&#8288;MIME.  </p>
 <h1 id="rfc.section.2.4.1"><a href="#rfc.section.2.4.1">2.4.1.</a> Data Content Type</h1>
 <p id="rfc.section.2.4.1.p.1">Sending agents MUST use the id-data content type identifier to identify the "inner" MIME message content.  For example, when applying a digital signature to MIME data, the CMS SignedData encapContentInfo eContentType MUST include the id-data object identifier and the media type MUST be stored in the SignedData encapContentInfo eContent OCTET STRING (unless the sending agent is using multipart/&#8288;signed, in which case the eContent is absent, per <a href="#SignMultipart">Section 3.5.3</a> of this document).  As another example, when applying encryption to MIME data, the CMS EnvelopedData encryptedContentInfo contentType MUST include the id-data object identifier and the encrypted MIME content MUST be stored in the EnvelopedData encryptedContentInfo encryptedContent OCTET STRING.  </p>
 <h1 id="rfc.section.2.4.2"><a href="#rfc.section.2.4.2">2.4.2.</a> SignedData Content Type</h1>
 <p id="rfc.section.2.4.2.p.1">Sending agents MUST use the SignedData content type to apply a digital signature to a message or, in a degenerate case where there is no signature information, to convey certificates.  Applying a signature to a message provides authentication, message integrity, and non-repudiation of origin.  </p>
 <h1 id="rfc.section.2.4.3"><a href="#rfc.section.2.4.3">2.4.3.</a> EnvelopedData Content Type</h1>
 <p id="rfc.section.2.4.3.p.1">This content type is used to apply data confidentiality to a message.  A sender needs to have access to a public key for each intended message recipient to use this service.  </p>
-<h1 id="rfc.section.2.4.4"><a href="#rfc.section.2.4.4">2.4.4.</a> AuthEnvelopedData Content Type</h1>
+<h1 id="rfc.section.2.4.4"><a href="#rfc.section.2.4.4">2.4.4.</a> <a href="#AuthEnvelopedData1" id="AuthEnvelopedData1">AuthEnvelopedData Content Type</a></h1>
 <p id="rfc.section.2.4.4.p.1">This content type is used to apply data confidentiality and message integrity to a message.  This content type does not provide authentication or non-repudiation.  A sender needs to have access to a public key for each intended message recipient to use this service.  </p>
 <h1 id="rfc.section.2.4.5"><a href="#rfc.section.2.4.5">2.4.5.</a> CompressedData Content Type</h1>
 <p id="rfc.section.2.4.5.p.1">This content type is used to apply data compression to a message.  This content type does not provide authentication, message integrity, non-repudiation, or data confidentiality, and is only used to reduce the message's size.  </p>
@@ -654,7 +654,7 @@ li, p {
 <p id="rfc.section.2.5.p.5">Additional attributes and values for these attributes might be defined in the future.  Receiving agents SHOULD handle attributes or values that they do not recognize in a graceful manner.  </p>
 <p id="rfc.section.2.5.p.6">Interactive sending agents that include signed attributes that are not listed here SHOULD display those attributes to the user, so that the user is aware of all of the data being signed.  </p>
 <h1 id="rfc.section.2.5.1"><a href="#rfc.section.2.5.1">2.5.1.</a> <a href="#SignTime" id="SignTime">Signing Time Attribute</a></h1>
-<p id="rfc.section.2.5.1.p.1">The signing-time attribute is used to convey the time that a message was signed.  The time of signing will most likely be created by a message originator and therefore is only as trustworthy as the originator.  </p>
+<p id="rfc.section.2.5.1.p.1">The signing-time attribute is used to convey the time that a message was signed.  The time of signing will most likely be created by a message originator and therefore is only as trustworthy as the originator.  <a id="CREF1" class="info">[CREF1]<span class="info">JLS: We could kill this section and just reference RFC5652 if we wanted.  </span></a> </p>
 <p id="rfc.section.2.5.1.p.2">Sending agents MUST encode signing time through the year 2049 as UTCTime; signing times in 2050 or later MUST be encoded as GeneralizedTime.  When the UTCTime CHOICE is used, S/&#8288;MIME agents MUST interpret the year field (YY) as follows: </p>
 
 <ul class="empty">
@@ -717,16 +717,16 @@ li, p {
 <h1 id="rfc.section.2.7.1.1"><a href="#rfc.section.2.7.1.1">2.7.1.1.</a> <a href="#KnownCaps" id="KnownCaps">Rule 1: Known Capabilities</a></h1>
 <p id="rfc.section.2.7.1.1.p.1">If the sending agent has received a set of capabilities from the recipient for the message the agent is about to encrypt, then the sending agent SHOULD use that information by selecting the first capability in the list (that is, the capability most preferred by the intended recipient) that the sending agent knows how to encrypt.  The sending agent SHOULD use one of the capabilities in the list if the agent reasonably expects the recipient to be able to decrypt the message.  </p>
 <h1 id="rfc.section.2.7.1.2"><a href="#rfc.section.2.7.1.2">2.7.1.2.</a> <a href="#UnknownCaps" id="UnknownCaps">Rule 2: Unknown Capabilities, Unknown Version of S/MIME</a></h1>
-<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: </p>
+<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: <a id="CREF2" class="info">[CREF2]<span class="info">JLS: Should this be updated to say SHOULD AES-12 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES? </span></a> </p>
 
 <ul>
   <li>the sending agent has no knowledge of the encryption capabilities of the recipient, and </li>
   <li>the sending agent has no knowledge of the version of S/&#8288;MIME of the recipient, </li>
 </ul>
 
-<p> then the sending agent SHOULD use AES-128 because it is a stronger algorithm and is required by S/&#8288;MIME v3.2.  If the sending agent chooses not to use AES-128 in this step, it SHOULD use tripleDES.  </p>
+<p> then the sending agent SHOULD use AES-128 CBC because it is a stronger algorithm and is required by S/&#8288;MIME v3.2.  If the sending agent chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.  </p>
 <h1 id="rfc.section.2.7.2"><a href="#rfc.section.2.7.2">2.7.2.</a> <a href="#WeakEncryption" id="WeakEncryption">Choosing Weak Encryption</a></h1>
-<p id="rfc.section.2.7.2.p.1">All algorithms that use 40-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as tripleDES or AES.  </p>
+<p id="rfc.section.2.7.2.p.1">All algorithms that use 40-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as tripleDES or AES.  <a id="CREF3" class="info">[CREF3]<span class="info">JLS: Does this become a MUST NOT now.</span></a> </p>
 <h1 id="rfc.section.2.7.3"><a href="#rfc.section.2.7.3">2.7.3.</a> Multiple Recipients</h1>
 <p id="rfc.section.2.7.3.p.1">If a sending agent is composing an encrypted message to a group of recipients where the encryption capabilities of some of the recipients do not overlap, the sending agent is forced to send more than one message.  Please note that if the sending agent chooses to send a message encrypted with a strong algorithm, and then send the same message encrypted with a weak algorithm, someone watching the communications channel could learn the contents of the strongly encrypted message simply by decrypting the weakly encrypted message.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Creating S/MIME Messages</h1>
@@ -741,12 +741,12 @@ li, p {
 <p id="rfc.section.3.1.p.5">These steps are descriptive rather than prescriptive.  The implementer is free to use any procedure as long as the result is the same.  </p>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The MIME entity is prepared according to the local conventions.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The leaf parts of the MIME entity are converted to canonical form.  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">Appropriate transfer encoding is applied to the leaves of the MIME entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity is prepared according to the local conventions.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The leaf parts of the MIME entity are converted to canonical form.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>Appropriate transfer encoding is applied to the leaves of the MIME entity.  </dd>
 </dl>
 
 <p> </p>
@@ -792,10 +792,6 @@ li, p {
    It's generally a good idea to encode lines that begin with
    From=20because some mail transport agents will insert a greater-
    than (&gt;) sign, thus invalidating the signature.
-
-
-
-
 
    Also, in some cases it might be desirable to encode any =20
    trailing whitespace that occurs on lines in order to ensure =20
@@ -902,14 +898,14 @@ li, p {
 <p/>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The MIME entity to be enveloped is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The MIME entity and other required data is processed into a CMS object of type EnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the EnvelopedData (see <a href="#RFC5652">[RFC5652]</a>, Section 6).  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">The EnvelopedData object is wrapped in a CMS ContentInfo object.  </dd>
-  <dt>Step 4.</dt>
-  <dd style="margin-left: 9">The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be enveloped is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data is processed into a CMS object of type EnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the EnvelopedData (see <a href="#RFC5652">[RFC5652]</a>, Section 6).  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The EnvelopedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
 </dl>
 
 <p> </p>
@@ -926,19 +922,19 @@ rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
 f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 0GhIGfHfQbnj756YT64V
               </pre>
-<h1 id="rfc.section.3.4"><a href="#rfc.section.3.4">3.4.</a> Creating an Authenticated Enveloped-Only Message</h1>
+<h1 id="rfc.section.3.4"><a href="#rfc.section.3.4">3.4.</a> <a href="#AuthEnvelopedData2" id="AuthEnvelopedData2">Creating an Authenticated Enveloped-Only Message</a></h1>
 <p id="rfc.section.3.4.p.1">This section describes the format for enveloping a MIME entity without signing it.  It is important to note that sending authenticated enveloped but not signed messages does not provide for authentication or non-repudiation.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  </p>
 <p/>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The MIME entity to be enveloped is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The MIME entity and other required data is processed into a CMS object of type AuthEnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the AuthEnvelopedData (see <a href="#RFC5083">[RFC5083]</a>).  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">The AuthEnvelopedData object is wrapped in a CMS ContentInfo object.  </dd>
-  <dt>Step 4.</dt>
-  <dd style="margin-left: 9">The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be enveloped is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data is processed into a CMS object of type AuthEnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the AuthEnvelopedData (see <a href="#RFC5083">[RFC5083]</a>).  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The AuthEnvelopedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
 </dl>
 
 <p> </p>
@@ -973,14 +969,14 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 <p id="rfc.section.3.5.2.p.1">This signing format uses the application/&#8288;pkcs7-mime media type.  The steps to create this format are: </p>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The MIME entity is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The MIME entity and other required data are processed into a CMS object of type SignedData.  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">The SignedData object is wrapped in a CMS ContentInfo object.  </dd>
-  <dt>Step 4.</dt>
-  <dd style="margin-left: 9">The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data are processed into a CMS object of type SignedData.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The SignedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
 </dl>
 
 <p> </p>
@@ -1006,16 +1002,16 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 <p/>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The MIME entity to be signed is prepared according to <a href="#MimePrep">Section 3.1</a>, taking special care for clear-signing.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The MIME entity is presented to CMS processing in order to obtain an object of type SignedData in which the encapContentInfo eContent field is absent.  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">The MIME entity is inserted into the first part of a multipart/&#8288;signed message with no processing other than that described in <a href="#MimePrep">Section 3.1</a>.  </dd>
-  <dt>Step 4.</dt>
-  <dd style="margin-left: 9">Transfer encoding is applied to the "detached signature" CMS SignedData object, and it is inserted into a MIME entity of type application/&#8288;pkcs7-signature.  </dd>
-  <dt>Step 5.</dt>
-  <dd style="margin-left: 9">The MIME entity of the application/&#8288;pkcs7-signature is inserted into the second part of the multipart/&#8288;signed entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be signed is prepared according to <a href="#MimePrep">Section 3.1</a>, taking special care for clear-signing.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity is presented to CMS processing in order to obtain an object of type SignedData in which the encapContentInfo eContent field is absent.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The MIME entity is inserted into the first part of a multipart/&#8288;signed message with no processing other than that described in <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>Transfer encoding is applied to the "detached signature" CMS SignedData object, and it is inserted into a MIME entity of type application/&#8288;pkcs7-signature.  </dd>
+  <dt>Step 5.   </dt>
+  <dd>The MIME entity of the application/&#8288;pkcs7-signature is inserted into the second part of the multipart/&#8288;signed entity.  </dd>
 </dl>
 
 <p> </p>
@@ -1096,14 +1092,14 @@ n8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 <p/>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The MIME entity to be compressed is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The MIME entity and other required data are processed into a CMS object of type CompressedData.  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">The CompressedData object is wrapped in a CMS ContentInfo object.  </dd>
-  <dt>Step 4.</dt>
-  <dd style="margin-left: 9">The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be compressed is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data are processed into a CMS object of type CompressedData.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The CompressedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
 </dl>
 
 <p> </p>
@@ -1138,12 +1134,12 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 <p/>
 
 <dl>
-  <dt>Step 1.</dt>
-  <dd style="margin-left: 9">The certificates and/or Certificate Revocation Lists are made available to the CMS generating process that creates a CMS object of type SignedData.  The SignedData encapContentInfo eContent field MUST be absent and signerInfos field MUST be empty.  </dd>
-  <dt>Step 2.</dt>
-  <dd style="margin-left: 9">The SignedData object is wrapped in a CMS ContentInfo object.  </dd>
-  <dt>Step 3.</dt>
-  <dd style="margin-left: 9">The ContentInfo object is enclosed in an application/&#8288;pkcs7-mime MIME entity.  </dd>
+  <dt>Step 1.   </dt>
+  <dd>The certificates and/or Certificate Revocation Lists are made available to the CMS generating process that creates a CMS object of type SignedData.  The SignedData encapContentInfo eContent field MUST be absent and signerInfos field MUST be empty.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The SignedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The ContentInfo object is enclosed in an application/&#8288;pkcs7-mime MIME entity.  </dd>
 </dl>
 
 <p> </p>
@@ -1293,7 +1289,7 @@ Author: Sean Turner
 Change Controller: S/MIME working group delegated from the IESG
               </pre>
 <h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Register authEnvelopedData smime-type</h1>
-<p id="rfc.section.5.3.p.1">IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.  The values to be registered are: </p>
+<p id="rfc.section.5.3.p.1">IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.  The values to be registered are: <a id="CREF4" class="info">[CREF4]<span class="info">JLS: This can be done by modifying the registration above instead.  </span></a> </p>
 
 <ul class="empty">
   <li>smime-type value: authEnvelopedData</li>
@@ -1698,8 +1694,8 @@ END
 <p id="rfc.section.B.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 <a href="#SMIMEv3.2">[SMIMEv3.2]</a> are backwards compatible with the S/&#8288;MIME v2 Message Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2311 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
 <h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> Acknowledgments</h1>
 <p id="rfc.section.C.p.1">Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v3.5.  </p>
-<p id="rfc.section.C.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to this document: </p>
-<p id="rfc.section.C.p.3">Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, John Pawling, and Jim Schaad.  </p>
+<p id="rfc.section.C.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to various versions of this document: </p>
+<p id="rfc.section.C.p.3">Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, and John Pawling.  </p>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Authors' Addresses</a>
 </h1>
