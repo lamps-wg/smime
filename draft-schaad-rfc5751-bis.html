@@ -340,7 +340,7 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-schaad-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-6-24" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-7-8" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -368,7 +368,7 @@ li, p {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: December 26, 2016</td>
+  <td class="left">Expires: January 9, 2017</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -377,7 +377,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">June 24, 2016</td>
+  <td class="right">July 8, 2016</td>
 </tr>
 
     	
@@ -401,7 +401,7 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on December 26, 2016.</p>
+<p>This Internet-Draft will expire on January 9, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -717,7 +717,7 @@ li, p {
 <h1 id="rfc.section.2.7.1.1"><a href="#rfc.section.2.7.1.1">2.7.1.1.</a> <a href="#KnownCaps" id="KnownCaps">Rule 1: Known Capabilities</a></h1>
 <p id="rfc.section.2.7.1.1.p.1">If the sending agent has received a set of capabilities from the recipient for the message the agent is about to encrypt, then the sending agent SHOULD use that information by selecting the first capability in the list (that is, the capability most preferred by the intended recipient) that the sending agent knows how to encrypt.  The sending agent SHOULD use one of the capabilities in the list if the agent reasonably expects the recipient to be able to decrypt the message.  </p>
 <h1 id="rfc.section.2.7.1.2"><a href="#rfc.section.2.7.1.2">2.7.1.2.</a> <a href="#UnknownCaps" id="UnknownCaps">Rule 2: Unknown Capabilities, Unknown Version of S/MIME</a></h1>
-<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: <a id="CREF2" class="info">[CREF2]<span class="info">JLS: Should this be updated to say SHOULD AES-12 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES? </span></a> </p>
+<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: <a id="CREF2" class="info">[CREF2]<span class="info">JLS: Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES? </span></a> </p>
 
 <ul>
   <li>the sending agent has no knowledge of the encryption capabilities of the recipient, and </li>
@@ -923,7 +923,7 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 0GhIGfHfQbnj756YT64V
               </pre>
 <h1 id="rfc.section.3.4"><a href="#rfc.section.3.4">3.4.</a> <a href="#AuthEnvelopedData2" id="AuthEnvelopedData2">Creating an Authenticated Enveloped-Only Message</a></h1>
-<p id="rfc.section.3.4.p.1">This section describes the format for enveloping a MIME entity without signing it.  It is important to note that sending authenticated enveloped but not signed messages does not provide for authentication or non-repudiation.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  </p>
+<p id="rfc.section.3.4.p.1">This section describes the format for enveloping a MIME entity without signing it.  Authenticated enveloped messages provide confidentiality and integrity.  It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  However this is substantially more difficult than it is for an enveloped-only message as the </p>
 <p/>
 
 <dl>
@@ -1318,6 +1318,16 @@ Change Controller: S/MIME working group delegated from the IESG
 <p id="rfc.section.6.p.10">Modification of the ciphertext can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  </p>
 <p id="rfc.section.6.p.11">If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <a href="#SP800-57">[SP800-57]</a>.  </p>
 <p id="rfc.section.6.p.12">If messaging environments make use of the fact that a message is signed to change the behavior of message processing (examples would be running rules or UI display hints), without first verifying that the message is actually signed and knowing the state of the signature, this can lead to incorrect handling of the message.  Visual indicators on messages may need to have the signature validation code checked periodically if the indicator is supposed to give information on the current status of a message.  </p>
+<p id="rfc.section.6.p.13">Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situtation where the sender of the message will be authenticated.  In almost all cases this is not a correct statement.  There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service: <a href="#RFC6278">[RFC6278]</a> which defined how to use static-static key agreement with CMS so that is readably doable.  Currently, all S/MIME key agreement methods derive a KEK and wrap a CEK.  This violates the third precondition above.  New key key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.  </p>
+
+<ul>
+  <li>The starting key must be bound to a single entity.  The use of a group key only would allow for the statement that a message was sent by one of the entities that held the key but will not identify a specific entity.  </li>
+  <li>The message must have exactly one sender and one recipient.  Having more than one recipient would allow for the second recipient to create a message that the first recipient would believe is from the sender by stripping them as a recipient from the message.  </li>
+  <li>A direct path needs to exist from the starting key to the key used as the content encryption key (CEK) which guarantees that no third party could have seen the resulting CEK.  This means that one needs to be using an algorithm that is called a "Direct Encryption" or a "Direct Key Agreement" algorithm in other contexts.  This means that the starting key is used directly as the CEK key, or that the starting key is used to create a secret which then is transformed into the CEK via a KDF step.  </li>
+</ul>
+
+<p> S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a pre-existing shared secret when doing encryption, this means that the first precondition is not met.  There is a document </p>
+<p id="rfc.section.6.p.14">Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.  This is because either of the parties can successfully create the message (or just alter the content) based on the fact that the CEK is going to be known to both parties.  Thus the origination is always built on a presumption that "I did not send this message to myself." </p>
 <h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
 <table>
@@ -1587,7 +1597,13 @@ Change Controller: S/MIME working group delegated from the IESG
       <td class="reference">
         <b id="RFC5751">[RFC5751]</b>
       </td>
-      <td class="top"><a>Ramsdell, B.</a> and <a>S. Turner</a>, <a href="http://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
+      <td class="top"><a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6278">[RFC6278]</b>
+      </td>
+      <td class="top"><a>Herzog, J.</a> and <a>R. Khazan</a>, <a href="http://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
     </tr>
     <tr><td class="reference"><b id="SMIMEv2">[SMIMEv2]</b></td><td class="top"><a>S/MIME version v2</a>"<p>This group of documents represents S/MIME version 2.  This set of documents are </p></td>, "</tr>
     <tr><td class="reference"><b id="SMIMEv3">[SMIMEv3]</b></td><td class="top"><a>S/MIME version 3</a>"<p>This group of documents represents S/MIME version 3.  This set of documents are </p></td>, "</tr>
