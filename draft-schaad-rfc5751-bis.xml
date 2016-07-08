@@ -40,6 +40,7 @@
   <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
+  <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
 ]>
 
 
@@ -964,7 +965,7 @@
                 then the sending agent SHOULD use AES-128 CBC because it is a stronger
                 algorithm and is required by S/&wj;MIME v3.2.  If the sending agent
                 chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.
-                <cref source="JLS">Should this be updated to say SHOULD AES-12 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES?
+                <cref source="JLS">Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES?
                 </cref>
               </t>
             </section>
@@ -1446,8 +1447,10 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
             <section title="Creating an Authenticated Enveloped-Only Message" anchor="AuthEnvelopedData2">
               <t>
                 This section describes the format for enveloping a MIME entity without signing it.
-                It is important to note that sending authenticated enveloped but not signed messages does not provide for authentication or non-repudiation.
+                Authenticated enveloped messages provide confidentiality and integrity.
+                It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.
                 It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
+                However this is substantially more difficult than it is for an enveloped-only message as the 
               </t>
               <t>
               <list style="format Step %d.">
@@ -2125,11 +2128,6 @@ Change Controller: S/MIME working group delegated from the IESG
               The choice of 2048 bits as the RSA asymmetric key size in this
               specification is based on the desire to provide at least 100 bits of
               security.  The key sizes that must be supported to conform to this
-
-
-
-
-
               specification seem appropriate for the Internet based on <xref target="RFC3766"/>.
               Of course, there are environments, such as financial and medical
               systems, that may select different key sizes.  For this reason, an
@@ -2208,6 +2206,36 @@ Change Controller: S/MIME working group delegated from the IESG
               Visual indicators on messages may need to have the signature
               validation code checked periodically if the indicator is supposed to
               give information on the current status of a message.
+            </t>
+            <t>
+              Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situtation where the sender of the message will be authenticated.
+              In almost all cases this is not a correct statement.
+              There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service:
+              <list style="symbols">
+                <t>
+                  The starting key must be bound to a single entity.
+                  The use of a group key only would allow for the statement that a message was sent by one of the entities that held the key but will not identify a specific entity.
+                </t>
+                <t>
+                  The message must have exactly one sender and one recipient.
+                  Having more than one recipient would allow for the second recipient to create a message that the first recipient would believe is from the sender by stripping them as a recipient from the message.
+                </t>
+                <t>
+                  A direct path needs to exist from the starting key to the key used as the content encryption key (CEK) which guarantees that no third party could have seen the resulting CEK.
+                  This means that one needs to be using an algorithm that is called a "Direct Encryption" or a "Direct Key Agreement" algorithm in other contexts.
+                  This means that the starting key is used directly as the CEK key, or that the starting key is used to create a secret which then is transformed into the CEK via a KDF step.
+                </t>
+              </list>
+              S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a pre-existing shared secret when doing encryption, this means that the first precondition is not met.
+              There is a document <xref target="RFC6278"/> which defined how to use static-static key agreement with CMS so that is readably doable.
+              Currently, all S/MIME key agreement methods derive a KEK and wrap a CEK.
+              This violates the third precondition above.
+              New key key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.
+            </t>
+            <t>
+              Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.
+              This is because either of the parties can successfully create the message (or just alter the content) based on the fact that the CEK is going to be known to both parties.
+              Thus the origination is always built on a presumption that "I did not send this message to myself."
             </t>
           </section>
   </middle>
@@ -2441,6 +2469,7 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc4270;
         &rfc3766;
         &rfc5750; &rfc5751;
+        &rfc6278;
 
         <!--
         <referencegroup target="SMIMEv2">
