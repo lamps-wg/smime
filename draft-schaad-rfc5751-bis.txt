@@ -1987,7 +1987,7 @@ Internet-Draft      S/MIME 3.5 Message Specification           July 2016
    Additional information: NONE
 
    Person & email to contact for further information:
-      S/MIME working group chairs smime-chairs@tools.ietf.org
+      S/MIME working group chairs smime-chairs@ietf.org
 
    Intended usage: COMMON
 
@@ -2039,7 +2039,7 @@ Internet-Draft      S/MIME 3.5 Message Specification           July 2016
    Additional information: NONE
 
    Person & email to contact for further information:
-      S/MIME working group chairs smime-chairs@tools.ietf.org
+      S/MIME working group chairs smime-chairs@ietf.org
 
    Intended usage: COMMON
 
