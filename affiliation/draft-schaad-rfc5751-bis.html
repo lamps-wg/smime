@@ -1,0 +1,1785 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification </title>
+
+  <style type="text/css">/*<![CDATA[*/
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+
+@media screen and (min-width: 1024px) {
+  ul.toc, #rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #rfc\.toc {
+    top: 16px;
+  }
+  ul.toc {
+    top: 80px;
+    overflow: auto;
+  }
+
+  body {
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+}
+
+body {
+  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 130%;
+  margin: 2.5em auto;
+  max-width: 724px;
+}
+
+.title, .filename, h1, h2, h3, h4 {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: 500;
+  color: #333;
+  line-height: 100%;
+  margin: 0.8em 0 0.3em;
+}
+.title { font-size: 36px; }
+h1 { font-size: 30px; }
+h2 { font-size: 24px; }
+h3, h4 { font-size: 18px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+ul.toc li {
+  list-style: none;
+  text-indent: -2.5em;
+  padding-left: 2.5em;
+  padding-bottom: 5px;
+  margin: 0;
+}
+ul.toc, ul.toc ul {
+  margin: 0 0 0 1.5em;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header {
+  width: 100%;
+}
+table.header td {
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+.filename {
+  color: rgb(119, 119, 119);
+  font-size: 23px;
+  font-weight: normal;
+  height: auto;
+  line-height: 100%;
+}
+#rfc\.abstract+p {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 130%;
+}
+
+samp, tt, code, pre {
+  font: 11pt consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure {
+  font-style: italic;
+  margin: 0 1.5em;
+}
+
+address {
+  margin: 10px 0 0;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn {
+  font-weight: bold;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+ol, ul, li, p {
+  padding: 0;
+  margin: 0.5em 0 0.5em 2em;
+}
+li, p {
+  margin-left: 0;
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+
+  <link href="#rfc.toc" rel="Contents"/>
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Specification Overview"/>
+<link href="#rfc.section.1.2" rel="Chapter" title="1.2 Definitions"/>
+<link href="#rfc.section.1.3" rel="Chapter" title="1.3 Conventions Used in This Document"/>
+<link href="#rfc.section.1.4" rel="Chapter" title="1.4 Compatibility with Prior Practice of S/MIME"/>
+<link href="#rfc.section.1.5" rel="Chapter" title="1.5 Changes from S/MIME v3 to S/MIME v3.1"/>
+<link href="#rfc.section.1.6" rel="Chapter" title="1.6 Changes from S/MIME v3.1 to S/MIME v3.2"/>
+<link href="#rfc.section.1.7" rel="Chapter" title="1.7 Changes since S/MIME v3.2"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 CMS Options"/>
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 DigestAlgorithmIdentifier"/>
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 SignatureAlgorithmIdentifier"/>
+<link href="#rfc.section.2.3" rel="Chapter" title="2.3 KeyEncryptionAlgorithmIdentifier"/>
+<link href="#rfc.section.2.4" rel="Chapter" title="2.4 General Syntax"/>
+<link href="#rfc.section.2.4.1" rel="Chapter" title="2.4.1 Data Content Type"/>
+<link href="#rfc.section.2.4.2" rel="Chapter" title="2.4.2 SignedData Content Type"/>
+<link href="#rfc.section.2.4.3" rel="Chapter" title="2.4.3 EnvelopedData Content Type"/>
+<link href="#rfc.section.2.4.4" rel="Chapter" title="2.4.4 AuthEnvelopedData Content Type"/>
+<link href="#rfc.section.2.4.5" rel="Chapter" title="2.4.5 CompressedData Content Type"/>
+<link href="#rfc.section.2.5" rel="Chapter" title="2.5 Attributes and the SignerInfo Type"/>
+<link href="#rfc.section.2.5.1" rel="Chapter" title="2.5.1 Signing Time Attribute"/>
+<link href="#rfc.section.2.5.2" rel="Chapter" title="2.5.2 SMIME Capabilities Attribute"/>
+<link href="#rfc.section.2.5.3" rel="Chapter" title="2.5.3 Encryption Key Preference Attribute"/>
+<link href="#rfc.section.2.6" rel="Chapter" title="2.6 SignerIdentifier SignerInfo Type"/>
+<link href="#rfc.section.2.7" rel="Chapter" title="2.7 ContentEncryptionAlgorithmIdentifier"/>
+<link href="#rfc.section.2.7.1" rel="Chapter" title="2.7.1 Deciding Which Encryption Method to Use"/>
+<link href="#rfc.section.2.7.2" rel="Chapter" title="2.7.2 Choosing Weak Encryption"/>
+<link href="#rfc.section.2.7.3" rel="Chapter" title="2.7.3 Multiple Recipients"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Creating S/MIME Messages"/>
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Preparing the MIME Entity for Signing, Enveloping, or Compressing"/>
+<link href="#rfc.section.3.1.1" rel="Chapter" title="3.1.1 Canonicalization"/>
+<link href="#rfc.section.3.1.2" rel="Chapter" title="3.1.2 Transfer Encoding"/>
+<link href="#rfc.section.3.1.3" rel="Chapter" title="3.1.3 Transfer Encoding for Signing Using multipart/signed"/>
+<link href="#rfc.section.3.1.4" rel="Chapter" title="3.1.4 Sample Canonical MIME Entity"/>
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 The application/pkcs7-mime Media Type"/>
+<link href="#rfc.section.3.2.1" rel="Chapter" title="3.2.1 The name and filename Parameters"/>
+<link href="#rfc.section.3.2.2" rel="Chapter" title="3.2.2 The smime-type Parameter"/>
+<link href="#rfc.section.3.3" rel="Chapter" title="3.3 Creating an Enveloped-Only Message"/>
+<link href="#rfc.section.3.4" rel="Chapter" title="3.4 Creating an Authenticated Enveloped-Only Message"/>
+<link href="#rfc.section.3.5" rel="Chapter" title="3.5 Creating a Signed-Only Message"/>
+<link href="#rfc.section.3.5.1" rel="Chapter" title="3.5.1 Choosing a Format for Signed-Only Messages"/>
+<link href="#rfc.section.3.5.2" rel="Chapter" title="3.5.2 Signing Using application/pkcs7-mime with SignedData"/>
+<link href="#rfc.section.3.5.3" rel="Chapter" title="3.5.3 Signing Using the multipart/signed Format"/>
+<link href="#rfc.section.3.6" rel="Chapter" title="3.6 Creating a Compressed-Only Message"/>
+<link href="#rfc.section.3.7" rel="Chapter" title="3.7 Multiple Operations"/>
+<link href="#rfc.section.3.8" rel="Chapter" title="3.8 Creating a Certificate Management Message"/>
+<link href="#rfc.section.3.9" rel="Chapter" title="3.9 Registration Requests"/>
+<link href="#rfc.section.3.10" rel="Chapter" title="3.10 Identifying an S/MIME Message"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Certificate Processing"/>
+<link href="#rfc.section.4.1" rel="Chapter" title="4.1 Key Pair Generation"/>
+<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Signature Generation"/>
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 Signature Verification"/>
+<link href="#rfc.section.4.4" rel="Chapter" title="4.4 Encryption"/>
+<link href="#rfc.section.4.5" rel="Chapter" title="4.5 Decryption"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 IANA Considerations"/>
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Media Type for application/pkcs7-mime"/>
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Media Type for application/pkcs7-signature"/>
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Register authEnvelopedData smime-type"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations"/>
+<link href="#rfc.references" rel="Chapter" title="7 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
+<link href="#rfc.appendix.A" rel="Chapter" title="A ASN.1 Module"/>
+<link href="#rfc.appendix.B" rel="Chapter" title="B Moving S/MIME v2 Message Specification to Historic Status"/>
+<link href="#rfc.appendix.C" rel="Chapter" title="C Acknowledgments"/>
+<link href="#rfc.authors" rel="Chapter"/>
+
+
+  <meta name="generator" content="xml2rfc version 2.5.1 - http://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-schaad-rfc5751-bis-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-7-21" />
+  <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
+  <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+  <td class="left">SPASM</td>
+  <td class="right">J. Schaad</td>
+</tr>
+<tr>
+  <td class="left">Internet-Draft</td>
+  <td class="right">August Cellars</td>
+</tr>
+<tr>
+  <td class="left">Obsoletes: RFC5751 (if approved)</td>
+  <td class="right">B. Ramsdell</td>
+</tr>
+<tr>
+  <td class="left">Intended status: Standards Track</td>
+  <td class="right">Brute Squad Labs, Inc.</td>
+</tr>
+<tr>
+  <td class="left">Expires: January 22, 2017</td>
+  <td class="right">S. Turner</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">sn3rd</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">July 21, 2016</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification <br />
+  <span class="filename">draft-schaad-rfc5751-bis-latest</span></p>
+  
+  <h1 id="rfc.abstract">
+  <a href="#rfc.abstract">Abstract</a>
+</h1>
+<p>This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  </p>
+<h1>
+  <a>Contributing to this document</a>
+</h1>
+<p>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <span>&lt;</span><a href="https://github.com/spasm-wg/smime">https://github.com/spasm-wg/smime</a><span>&gt;</span>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the SPASM mailing list.  </p>
+<h1 id="rfc.status">
+  <a href="#rfc.status">Status of This Memo</a>
+</h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on January 22, 2017.</p>
+<h1 id="rfc.copyrightnotice">
+  <a href="#rfc.copyrightnotice">Copyright Notice</a>
+</h1>
+<p>Copyright (c) 2016 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+<p>This document may contain material from IETF Documents or IETF Contributions published or made publicly available before November 10, 2008.  The person(s) controlling the copyright in some of this material may not have granted the IETF Trust the right to allow modifications of such material outside the IETF Standards Process. Without obtaining an adequate license from the person(s) controlling the copyright in such materials, this document may not be modified outside the IETF Standards Process, and derivative works of it may not be created outside the IETF Standards Process, except to format it for publication as an RFC or to translate it into languages other than English.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
+<ul><li>1.1.   <a href="#rfc.section.1.1">Specification Overview</a></li>
+<li>1.2.   <a href="#rfc.section.1.2">Definitions</a></li>
+<li>1.3.   <a href="#rfc.section.1.3">Conventions Used in This Document</a></li>
+<li>1.4.   <a href="#rfc.section.1.4">Compatibility with Prior Practice of S/MIME</a></li>
+<li>1.5.   <a href="#rfc.section.1.5">Changes from S/MIME v3 to S/MIME v3.1</a></li>
+<li>1.6.   <a href="#rfc.section.1.6">Changes from S/MIME v3.1 to S/MIME v3.2</a></li>
+<li>1.7.   <a href="#rfc.section.1.7">Changes since S/MIME v3.2</a></li>
+</ul><li>2.   <a href="#rfc.section.2">CMS Options</a></li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">DigestAlgorithmIdentifier</a></li>
+<li>2.2.   <a href="#rfc.section.2.2">SignatureAlgorithmIdentifier</a></li>
+<li>2.3.   <a href="#rfc.section.2.3">KeyEncryptionAlgorithmIdentifier</a></li>
+<li>2.4.   <a href="#rfc.section.2.4">General Syntax</a></li>
+<ul><li>2.4.1.   <a href="#rfc.section.2.4.1">Data Content Type</a></li>
+<li>2.4.2.   <a href="#rfc.section.2.4.2">SignedData Content Type</a></li>
+<li>2.4.3.   <a href="#rfc.section.2.4.3">EnvelopedData Content Type</a></li>
+<li>2.4.4.   <a href="#rfc.section.2.4.4">AuthEnvelopedData Content Type</a></li>
+<li>2.4.5.   <a href="#rfc.section.2.4.5">CompressedData Content Type</a></li>
+</ul><li>2.5.   <a href="#rfc.section.2.5">Attributes and the SignerInfo Type</a></li>
+<ul><li>2.5.1.   <a href="#rfc.section.2.5.1">Signing Time Attribute</a></li>
+<li>2.5.2.   <a href="#rfc.section.2.5.2">SMIME Capabilities Attribute</a></li>
+<li>2.5.3.   <a href="#rfc.section.2.5.3">Encryption Key Preference Attribute</a></li>
+</ul><li>2.6.   <a href="#rfc.section.2.6">SignerIdentifier SignerInfo Type</a></li>
+<li>2.7.   <a href="#rfc.section.2.7">ContentEncryptionAlgorithmIdentifier</a></li>
+<ul><li>2.7.1.   <a href="#rfc.section.2.7.1">Deciding Which Encryption Method to Use</a></li>
+<li>2.7.2.   <a href="#rfc.section.2.7.2">Choosing Weak Encryption</a></li>
+<li>2.7.3.   <a href="#rfc.section.2.7.3">Multiple Recipients</a></li>
+</ul></ul><li>3.   <a href="#rfc.section.3">Creating S/MIME Messages</a></li>
+<ul><li>3.1.   <a href="#rfc.section.3.1">Preparing the MIME Entity for Signing, Enveloping, or Compressing</a></li>
+<ul><li>3.1.1.   <a href="#rfc.section.3.1.1">Canonicalization</a></li>
+<li>3.1.2.   <a href="#rfc.section.3.1.2">Transfer Encoding</a></li>
+<li>3.1.3.   <a href="#rfc.section.3.1.3">Transfer Encoding for Signing Using multipart/signed</a></li>
+<li>3.1.4.   <a href="#rfc.section.3.1.4">Sample Canonical MIME Entity</a></li>
+</ul><li>3.2.   <a href="#rfc.section.3.2">The application/pkcs7-mime Media Type</a></li>
+<ul><li>3.2.1.   <a href="#rfc.section.3.2.1">The name and filename Parameters</a></li>
+<li>3.2.2.   <a href="#rfc.section.3.2.2">The smime-type Parameter</a></li>
+</ul><li>3.3.   <a href="#rfc.section.3.3">Creating an Enveloped-Only Message</a></li>
+<li>3.4.   <a href="#rfc.section.3.4">Creating an Authenticated Enveloped-Only Message</a></li>
+<li>3.5.   <a href="#rfc.section.3.5">Creating a Signed-Only Message</a></li>
+<ul><li>3.5.1.   <a href="#rfc.section.3.5.1">Choosing a Format for Signed-Only Messages</a></li>
+<li>3.5.2.   <a href="#rfc.section.3.5.2">Signing Using application/pkcs7-mime with SignedData</a></li>
+<li>3.5.3.   <a href="#rfc.section.3.5.3">Signing Using the multipart/signed Format</a></li>
+</ul><li>3.6.   <a href="#rfc.section.3.6">Creating a Compressed-Only Message</a></li>
+<li>3.7.   <a href="#rfc.section.3.7">Multiple Operations</a></li>
+<li>3.8.   <a href="#rfc.section.3.8">Creating a Certificate Management Message</a></li>
+<li>3.9.   <a href="#rfc.section.3.9">Registration Requests</a></li>
+<li>3.10.   <a href="#rfc.section.3.10">Identifying an S/MIME Message</a></li>
+</ul><li>4.   <a href="#rfc.section.4">Certificate Processing</a></li>
+<ul><li>4.1.   <a href="#rfc.section.4.1">Key Pair Generation</a></li>
+<li>4.2.   <a href="#rfc.section.4.2">Signature Generation</a></li>
+<li>4.3.   <a href="#rfc.section.4.3">Signature Verification</a></li>
+<li>4.4.   <a href="#rfc.section.4.4">Encryption</a></li>
+<li>4.5.   <a href="#rfc.section.4.5">Decryption</a></li>
+</ul><li>5.   <a href="#rfc.section.5">IANA Considerations</a></li>
+<ul><li>5.1.   <a href="#rfc.section.5.1">Media Type for application/pkcs7-mime</a></li>
+<li>5.2.   <a href="#rfc.section.5.2">Media Type for application/pkcs7-signature</a></li>
+<li>5.3.   <a href="#rfc.section.5.3">Register authEnvelopedData smime-type</a></li>
+</ul><li>6.   <a href="#rfc.section.6">Security Considerations</a></li>
+<li>7.   <a href="#rfc.references">References</a></li>
+<ul><li>7.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
+</ul><li>Appendix A.   <a href="#rfc.appendix.A">ASN.1 Module</a></li>
+<li>Appendix B.   <a href="#rfc.appendix.B">Moving S/MIME v2 Message Specification to Historic Status</a></li>
+<li>Appendix C.   <a href="#rfc.appendix.C">Acknowledgments</a></li>
+<li><a href="#rfc.authors">Authors' Addresses</a></li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> Introduction</h1>
+<p id="rfc.section.1.p.1">S/&#8288;MIME (Secure/Multipurpose Internet Mail Extensions) provides a consistent way to send and receive secure MIME data.  Based on the popular Internet MIME standard, S/&#8288;MIME provides the following cryptographic security services for electronic messaging applications:  authentication, message integrity and non-repudiation of origin (using digital signatures), and data confidentiality (using encryption).  As a supplementary service, S/&#8288;MIME provides for message compression.  </p>
+<p id="rfc.section.1.p.2">S/&#8288;MIME can be used by traditional mail user agents (MUAs) to add cryptographic security services to mail that is sent, and to interpret cryptographic security services in mail that is received.  However, S/&#8288;MIME is not restricted to mail; it can be used with any transport mechanism that transports MIME data, such as HTTP or SIP.  As such, S/&#8288;MIME takes advantage of the object-based features of MIME and allows secure messages to be exchanged in mixed-transport systems.  </p>
+<p id="rfc.section.1.p.3">Further, S/&#8288;MIME can be used in automated message transfer agents that use cryptographic security services that do not require any human intervention, such as the signing of software-generated documents and the encryption of FAX messages sent over the Internet.  </p>
+<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#SpecOverview" id="SpecOverview">Specification Overview</a></h1>
+<p id="rfc.section.1.1.p.1">This document describes a protocol for adding cryptographic signature and encryption services to MIME data.  The MIME standard <a href="#MIME-SPEC">[MIME-SPEC]</a> provides a general structure for the content of Internet messages and allows extensions for new content-type-based applications.  </p>
+<p id="rfc.section.1.1.p.2">This specification defines how to create a MIME body part that has been cryptographically enhanced according to the Cryptographic Message Syntax (CMS) <a href="#CMS">[CMS]</a>, which is derived from PKCS #7 <a href="#RFC2315">[RFC2315]</a>.  This specification also defines the application/&#8288;pkcs7-mime media type that can be used to transport those body parts.  </p>
+<p id="rfc.section.1.1.p.3">This document also discusses how to use the multipart/&#8288;signed media type defined in <a href="#RFC1847">[RFC1847]</a> to transport S/&#8288;MIME signed messages.  multipart/&#8288;signed is used in conjunction with the application/&#8288;pkcs7-signature media type, which is used to transport a detached S/&#8288;MIME signature.  </p>
+<p id="rfc.section.1.1.p.4">In order to create S/&#8288;MIME messages, an S/&#8288;MIME agent MUST follow the specifications in this document, as well as the specifications listed in the Cryptographic Message Syntax document <a href="#CMS">[CMS]</a>, <a href="#RFC3370">[RFC3370]</a>, <a href="#RFC4056">[RFC4056]</a>, <a href="#RFC3560">[RFC3560]</a>, and <a href="#RFC5754">[RFC5754]</a>.  </p>
+<p id="rfc.section.1.1.p.5">Throughout this specification, there are requirements and recommendations made for how receiving agents handle incoming messages.  There are separate requirements and recommendations for how sending agents create outgoing messages.  In general, the best strategy is to "be liberal in what you receive and conservative in what you send".  Most of the requirements are placed on the handling of incoming messages, while the recommendations are mostly on the creation of outgoing messages.  </p>
+<p id="rfc.section.1.1.p.6">The separation for requirements on receiving agents and sending agents also derives from the likelihood that there will be S/&#8288;MIME systems that involve software other than traditional Internet mail clients.  S/&#8288;MIME can be used with any system that transports MIME data.  An automated process that sends an encrypted message might not be able to receive an encrypted message at all, for example.  Thus, the requirements and recommendations for the two types of agents are listed separately when appropriate.  </p>
+<h1 id="rfc.section.1.2"><a href="#rfc.section.1.2">1.2.</a> <a href="#Definitions" id="Definitions">Definitions</a></h1>
+<p id="rfc.section.1.2.p.1">For the purposes of this specification, the following definitions apply.  </p>
+<p/>
+
+<dl>
+  <dt>ASN.1:</dt>
+  <dd style="margin-left: 19">Abstract Syntax Notation One, as defined in ITU-T Recommendations X.680, X.681, X.682 and X.683 <a href="#ASN.1">[ASN.1]</a>.  </dd>
+  <dt>BER:</dt>
+  <dd style="margin-left: 19">Basic Encoding Rules for ASN.1, as defined in ITU- T Recommendation X.690 <a href="#X.690">[X.690]</a>.  </dd>
+  <dt>Certificate:</dt>
+  <dd style="margin-left: 19">A type that binds an entity's name to a public key with a digital signature.  </dd>
+  <dt>DER:</dt>
+  <dd style="margin-left: 19">Distinguished Encoding Rules for ASN.1, as defined in ITU-T Recommendation X.690 <a href="#X.690">[X.690]</a>.  </dd>
+  <dt>7-bit data:</dt>
+  <dd style="margin-left: 19">Text data with lines less than 998 characters long, where none of the characters have the 8th bit set, and there are no NULL characters.  &lt;CR&gt; and &lt;LF&gt; occur only as part of a &lt;CR&gt;&lt;LF&gt; end-of- line delimiter.  </dd>
+  <dt>8-bit data:</dt>
+  <dd style="margin-left: 19">Text data with lines less than 998 characters, and where none of the characters are NULL characters.  &lt;CR&gt; and &lt;LF&gt; occur only as part of a &lt;CR&gt;&lt;LF&gt; end-of-line delimiter.  </dd>
+  <dt>Binary data:</dt>
+  <dd style="margin-left: 19">Arbitrary data.  </dd>
+  <dt>Transfer encoding:</dt>
+  <dd style="margin-left: 19">A reversible transformation made on data so 8-bit or binary data can be sent via a channel that only transmits 7-bit data.  </dd>
+  <dt>Receiving agent:</dt>
+  <dd style="margin-left: 19">Software that interprets and processes S/&#8288;MIME CMS objects, MIME body parts that contain CMS content types, or both.  </dd>
+  <dt>Sending agent:</dt>
+  <dd style="margin-left: 19">Software that creates S/&#8288;MIME CMS content types, MIME body parts that contain CMS content types, or both.  </dd>
+  <dt>S/MIME agent:</dt>
+  <dd style="margin-left: 19">User software that is a receiving agent, a sending agent, or both.  </dd>
+</dl>
+
+<p> </p>
+<h1 id="rfc.section.1.3"><a href="#rfc.section.1.3">1.3.</a> <a href="#MUSTS" id="MUSTS">Conventions Used in This Document</a></h1>
+<p id="rfc.section.1.3.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a>.  </p>
+<p id="rfc.section.1.3.p.2">We define some additional terms here: </p>
+
+<dl>
+  <dt>SHOULD+</dt>
+  <dd style="margin-left: 10">This term means the same as SHOULD.  However, the authors expect that a requirement marked as SHOULD+ will be promoted at some future time to be a MUST.  </dd>
+  <dt>SHOULD-</dt>
+  <dd style="margin-left: 10">This term means the same as SHOULD.  However, the authors expect that a requirement marked as SHOULD- will be demoted to a MAY in a future version of this document.  </dd>
+  <dt>MUST-</dt>
+  <dd style="margin-left: 10">This term means the same as MUST.  However, the authors expect that this requirement will no longer be a MUST in a future document.  Although its status will be determined at a later time, it is reasonable to expect that if a future revision of a document alters the status of a MUST- requirement, it will remain at least a SHOULD or a SHOULD-.  </dd>
+</dl>
+
+<p> </p>
+<h1 id="rfc.section.1.4"><a href="#rfc.section.1.4">1.4.</a> <a href="#Compatability" id="Compatability">Compatibility with Prior Practice of S/MIME</a></h1>
+<p id="rfc.section.1.4.p.1">S/&#8288;MIME version 3.5 agents ought to attempt to have the greatest interoperability possible with agents for prior versions of S/&#8288;MIME.  S/&#8288;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive <a href="#SMIMEv2">[SMIMEv2]</a>, S/&#8288;MIME version 3 is described in RFC 2630 through RFC 2634 inclusive and RFC 5035 <a href="#SMIMEv3">[SMIMEv3]</a>, S/&#8288;MIME version 3.1 is described in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and S/&#8288;MIME version 3.2 is described in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  RFC 2311 also has historical information about the development of S/&#8288;MIME.  </p>
+<h1 id="rfc.section.1.5"><a href="#rfc.section.1.5">1.5.</a> Changes from S/MIME v3 to S/MIME v3.1</h1>
+<p id="rfc.section.1.5.p.1">The RSA public key algorithm was changed to a MUST implement key wrapping algorithm, and the Diffie-Hellman (DH) algorithm changed to a SHOULD implement.  </p>
+<p id="rfc.section.1.5.p.2">The AES symmetric encryption algorithm has been included as a SHOULD implement.  </p>
+<p id="rfc.section.1.5.p.3">The RSA public key algorithm was changed to a MUST implement signature algorithm.  </p>
+<p id="rfc.section.1.5.p.4">Ambiguous language about the use of "empty" SignedData messages to transmit certificates was clarified to reflect that transmission of Certificate Revocation Lists is also allowed.  </p>
+<p id="rfc.section.1.5.p.5">The use of binary encoding for some MIME entities is now explicitly discussed.  </p>
+<p id="rfc.section.1.5.p.6">Header protection through the use of the message/rfc822 media type has been added.  </p>
+<p id="rfc.section.1.5.p.7">Use of the CompressedData CMS type is allowed, along with required media type and file extension additions.  </p>
+<h1 id="rfc.section.1.6"><a href="#rfc.section.1.6">1.6.</a> Changes from S/MIME v3.1 to S/MIME v3.2</h1>
+<p id="rfc.section.1.6.p.1">Editorial changes, e.g., replaced "MIME type" with "media type", content-type with Content-Type.  </p>
+<p id="rfc.section.1.6.p.2">Moved "Conventions Used in This Document" to <a href="#MUSTS">Section 1.3</a>.  Added definitions for SHOULD+, SHOULD-, and MUST-.  </p>
+<p><a href="#SpecOverview">Section 1.1</a> and <a href="#ASN1Module">Appendix A</a>: Added references to RFCs for RSASSA-PSS, RSAES-OAEP, and SHA2 CMS algorithms.  Added CMS Multiple Signers Clarification to CMS reference.  </p>
+<p><a href="#Definitions">Section 1.2</a>: Updated references to ASN.1 to X.680 and BER and DER to X.690.  </p>
+<p><a href="#Compatability">Section 1.4</a>: Added references to S/&#8288;MIME MSG 3.1 RFCs.  </p>
+<p><a href="#DigestAlgorithmIdentifier">Section 2.1</a> (digest algorithm): SHA-256 added as MUST, SHA&#8209;1 and MD5 made SHOULD-.  </p>
+<p><a href="#SignatureAlgorithmIdentifier">Section 2.2</a> (signature algorithms): RSA with SHA-256 added as MUST, and DSA with SHA-256 added as SHOULD+, RSA with SHA&#8209;1, DSA with SHA&#8209;1, and RSA with MD5 changed to SHOULD-, and RSASSA-PSS with SHA-256 added as SHOULD+.  Also added note about what S/&#8288;MIME v3.1 clients support.  </p>
+<p><a href="#KeyEncryptionAlgorithmIdentifier">Section 2.3</a> (key encryption): DH changed to SHOULD-, and RSAES-OAEP added as SHOULD+.  Elaborated requirements for key wrap algorithm.  </p>
+<p><a href="#SignTime">Section 2.5.1</a>: Added requirement that receiving agents MUST support both GeneralizedTime and UTCTime.  </p>
+<p><a href="#SMIMECaps">Section 2.5.2</a>: Replaced reference "sha1WithRSAEncryption" with "sha256WithRSAEncryption", "DES-3EDE-CBC" with "AES-128 CBC", and deleted the RC5 example.  </p>
+<p id="rfc.section.1.6.p.11">Section 2.5.2.1: Deleted entire section (discussed deprecated RC2).  </p>
+<p><a href="#ContentEncryptionAlgorithmIdentifier">Section 2.7</a>, 2.7.1, <a href="#ASN1Module">Appendix A</a>: references to RC2/40 removed.  </p>
+<p><a href="#ContentEncryptionAlgorithmIdentifier">Section 2.7</a> (content encryption): AES-128 CBC added as MUST, AES-192 and AES-256 CBC SHOULD+, tripleDES now SHOULD-.  </p>
+<p><a href="#WhichEncAlg">Section 2.7.1</a>: Updated pointers from 2.7.2.1 through 2.7.2.4 to 2.7.1.1 to 2.7.1.2.  </p>
+<p><a href="#Canonicalization">Section 3.1.1</a>: Removed text about MIME character sets.  </p>
+<p><a href="#smime-type">Section 3.2.2</a> and 3.6: Replaced "encrypted" with "enveloped".  Update OID example to use AES-128 CBC oid.  </p>
+<p id="rfc.section.1.6.p.17">Section 3.4.3.2: Replace micalg parameter for SHA&#8209;1 with sha-1.  </p>
+<p><a href="#CertProcessing">Section 4</a>: Updated reference to CERT v3.2.  </p>
+<p><a href="#KeyPairs">Section 4.1</a>: Updated RSA and DSA key size discussion.  Moved last four sentences to security considerations.  Updated reference to randomness requirements for security.  </p>
+<p><a href="#IANA">Section 5</a>: Added IANA registration templates to update media type registry to point to this document as opposed to RFC 2311.  </p>
+<p><a href="#SecurityConsiderations">Section 6</a>: Updated security considerations.  </p>
+<p id="rfc.section.1.6.p.22">Section 7 : Moved references from Appendix B to this section.  Updated references.  Added informational references to SMIMEv2, SMIMEv3, and SMIMEv3.1.  </p>
+<p><a href="#V2Historic">Appendix B</a>: Added Appendix B to move S/&#8288;MIME v2 to Historic status.  </p>
+<h1 id="rfc.section.1.7"><a href="#rfc.section.1.7">1.7.</a> Changes since S/MIME v3.2</h1>
+<p/>
+
+<ul>
+  <li>Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<a href="#AuthEnvelopedData1">Section 2.4.4</a> and <a href="#AuthEnvelopedData2">Section 3.4</a>).  </li>
+  <li>Add the use of AES-GCM (<a href="#ContentEncryptionAlgorithmIdentifier">Section 2.7</a>).  </li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> CMS Options</h1>
+<p id="rfc.section.2.p.1">CMS allows for a wide variety of options in content, attributes, and algorithm support.  This section puts forth a number of support requirements and recommendations in order to achieve a base level of interoperability among all S/&#8288;MIME implementations.  <a href="#RFC3370">[RFC3370]</a> and <a href="#RFC5754">[RFC5754]</a> provides additional details regarding the use of the cryptographic algorithms.  <a href="#ESS">[ESS]</a> provides additional details regarding the use of additional attributes.  </p>
+<h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> <a href="#DigestAlgorithmIdentifier" id="DigestAlgorithmIdentifier">DigestAlgorithmIdentifier</a></h1>
+<p id="rfc.section.2.1.p.1">Sending and receiving agents MUST support SHA-256 <a href="#RFC5754">[RFC5754]</a> and SHOULD- support SHA&#8209;1 <a href="#RFC3370">[RFC3370]</a>.  Receiving agents SHOULD- support MD5 <a href="#RFC3370">[RFC3370]</a> for the purpose of providing backward compatibility with MD5-digested S/&#8288;MIME v2 SignedData objects.  </p>
+<h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#SignatureAlgorithmIdentifier" id="SignatureAlgorithmIdentifier">SignatureAlgorithmIdentifier</a></h1>
+<p id="rfc.section.2.2.p.1">Receiving agents: </p>
+
+<ul>
+  <li>MUST support RSA with SHA-256.  </li>
+  <li>SHOULD+ support DSA with SHA-256.  </li>
+  <li>SHOULD+ support RSASSA-PSS with SHA-256.  </li>
+  <li>SHOULD- support RSA with SHA&#8209;1.  </li>
+  <li>SHOULD- support DSA with SHA&#8209;1.  </li>
+  <li>SHOULD- support RSA with MD5.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.2.p.2">Sending agents: </p>
+
+<ul>
+  <li>MUST support RSA with SHA-256.  </li>
+  <li>SHOULD+ support DSA with SHA-256.  </li>
+  <li>SHOULD+ support RSASSA-PSS with SHA-256.  </li>
+  <li>SHOULD- support RSA with SHA&#8209;1 or DSA with SHA&#8209;1.  </li>
+  <li>SHOULD- support RSA with MD5.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.2.p.3">See <a href="#KeyPairs">Section 4.1</a> for information on key size and algorithm references.  </p>
+<p id="rfc.section.2.2.p.4">Note that S/&#8288;MIME v3.1 clients support verifying id-dsa-with-sha1 and rsaEncryption and might not implement sha256withRSAEncryption.  Note that S/&#8288;MIME v3 clients might only implement signing or signature verification using id-dsa-with-sha1, and might also use id-dsa as an AlgorithmIdentifier in this field.  Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note that S/&#8288;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&#8209;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.  </p>
+<h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> <a href="#KeyEncryptionAlgorithmIdentifier" id="KeyEncryptionAlgorithmIdentifier">KeyEncryptionAlgorithmIdentifier</a></h1>
+<p id="rfc.section.2.3.p.1">Receiving and sending agents: </p>
+
+<ul>
+  <li>MUST support RSA Encryption, as specified in <a href="#RFC3370">[RFC3370]</a>.  </li>
+  <li>SHOULD+ support RSAES-OAEP, as specified in <a href="#RFC3560">[RFC3560]</a>.  </li>
+  <li>SHOULD- support DH ephemeral-static mode, as specified in <a href="#RFC3370">[RFC3370]</a> and <a href="#SP800-57">[SP800-57]</a>.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.3.p.2">When DH ephemeral-static is used, a key wrap algorithm is also specified in the KeyEncryptionAlgorithmIdentifier <a href="#RFC5652">[RFC5652]</a>.  The underlying encryption functions for the key wrap and content encryption algorithm (<a href="#RFC3370">[RFC3370]</a> and <a href="#RFC3565">[RFC3565]</a>) and the key sizes for the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm with AES-128 content encryption algorithm).  As AES-128 CBC is the mandatory-to-implement content encryption algorithm, the AES-128 key wrap algorithm MUST also be supported when DH ephemeral-static is used.  </p>
+<p id="rfc.section.2.3.p.3">Note that S/&#8288;MIME v3.1 clients might only implement key encryption and decryption using the rsaEncryption algorithm.  Note that S/&#8288;MIME v3 clients might only implement key encryption and decryption using the Diffie-Hellman algorithm.  Also note that S/&#8288;MIME v2 clients are only capable of decrypting content-encryption keys using the rsaEncryption algorithm.  </p>
+<h1 id="rfc.section.2.4"><a href="#rfc.section.2.4">2.4.</a> General Syntax</h1>
+<p id="rfc.section.2.4.p.1">There are several CMS content types.  Of these, only the Data, SignedData, EnvelopedData, AuthEnvelopedData, and CompressedData content types are currently used for S/&#8288;MIME.  </p>
+<h1 id="rfc.section.2.4.1"><a href="#rfc.section.2.4.1">2.4.1.</a> Data Content Type</h1>
+<p id="rfc.section.2.4.1.p.1">Sending agents MUST use the id-data content type identifier to identify the "inner" MIME message content.  For example, when applying a digital signature to MIME data, the CMS SignedData encapContentInfo eContentType MUST include the id-data object identifier and the media type MUST be stored in the SignedData encapContentInfo eContent OCTET STRING (unless the sending agent is using multipart/&#8288;signed, in which case the eContent is absent, per <a href="#SignMultipart">Section 3.5.3</a> of this document).  As another example, when applying encryption to MIME data, the CMS EnvelopedData encryptedContentInfo contentType MUST include the id-data object identifier and the encrypted MIME content MUST be stored in the EnvelopedData encryptedContentInfo encryptedContent OCTET STRING.  </p>
+<h1 id="rfc.section.2.4.2"><a href="#rfc.section.2.4.2">2.4.2.</a> SignedData Content Type</h1>
+<p id="rfc.section.2.4.2.p.1">Sending agents MUST use the SignedData content type to apply a digital signature to a message or, in a degenerate case where there is no signature information, to convey certificates.  Applying a signature to a message provides authentication, message integrity, and non-repudiation of origin.  </p>
+<h1 id="rfc.section.2.4.3"><a href="#rfc.section.2.4.3">2.4.3.</a> EnvelopedData Content Type</h1>
+<p id="rfc.section.2.4.3.p.1">This content type is used to apply data confidentiality to a message.  A sender needs to have access to a public key for each intended message recipient to use this service.  </p>
+<h1 id="rfc.section.2.4.4"><a href="#rfc.section.2.4.4">2.4.4.</a> <a href="#AuthEnvelopedData1" id="AuthEnvelopedData1">AuthEnvelopedData Content Type</a></h1>
+<p id="rfc.section.2.4.4.p.1">This content type is used to apply data confidentiality and message integrity to a message.  This content type does not provide authentication or non-repudiation.  A sender needs to have access to a public key for each intended message recipient to use this service.  </p>
+<h1 id="rfc.section.2.4.5"><a href="#rfc.section.2.4.5">2.4.5.</a> CompressedData Content Type</h1>
+<p id="rfc.section.2.4.5.p.1">This content type is used to apply data compression to a message.  This content type does not provide authentication, message integrity, non-repudiation, or data confidentiality, and is only used to reduce the message's size.  </p>
+<p id="rfc.section.2.4.5.p.2">See <a href="#MultipleOperations">Section 3.7</a> for further guidance on the use of this type in conjunction with other CMS types.  </p>
+<h1 id="rfc.section.2.5"><a href="#rfc.section.2.5">2.5.</a> Attributes and the SignerInfo Type</h1>
+<p id="rfc.section.2.5.p.1">The SignerInfo type allows the inclusion of unsigned and signed attributes along with a signature.  </p>
+<p id="rfc.section.2.5.p.2">Receiving agents MUST be able to handle zero or one instance of each of the signed attributes listed here.  Sending agents SHOULD generate one instance of each of the following signed attributes in each S/&#8288;MIME message: </p>
+
+<ul>
+  <li>Signing Time (<a href="#SignTime">Section 2.5.1</a> in this document) </li>
+  <li>SMIME Capabilities (<a href="#SMIMECaps">Section 2.5.2</a> in this document) </li>
+  <li>Encryption Key Preference (<a href="#EncryptKeyPref">Section 2.5.3</a> in this document) </li>
+  <li>Message Digest (Section 11.2 in <a href="#RFC5652">[RFC5652]</a>) </li>
+  <li>Content Type (Section 11.1 in <a href="#RFC5652">[RFC5652]</a>) </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.5.p.3">Further, receiving agents SHOULD be able to handle zero or one instance of the signingCertificate and signingCertificatev2 signed attributes, as defined in Section 5 of RFC 2634 <a href="#ESS">[ESS]</a> and Section 3 of RFC 5035 <a href="#ESS">[ESS]</a>.  </p>
+<p id="rfc.section.2.5.p.4">Sending agents SHOULD generate one instance of the signingCertificate or signingCertificatev2 signed attribute in each SignerInfo structure.  </p>
+<p id="rfc.section.2.5.p.5">Additional attributes and values for these attributes might be defined in the future.  Receiving agents SHOULD handle attributes or values that they do not recognize in a graceful manner.  </p>
+<p id="rfc.section.2.5.p.6">Interactive sending agents that include signed attributes that are not listed here SHOULD display those attributes to the user, so that the user is aware of all of the data being signed.  </p>
+<h1 id="rfc.section.2.5.1"><a href="#rfc.section.2.5.1">2.5.1.</a> <a href="#SignTime" id="SignTime">Signing Time Attribute</a></h1>
+<p id="rfc.section.2.5.1.p.1">The signing-time attribute is used to convey the time that a message was signed.  The time of signing will most likely be created by a message originator and therefore is only as trustworthy as the originator.  <a id="CREF1" class="info">[CREF1]<span class="info">JLS: We could kill this section and just reference RFC5652 if we wanted.  </span></a> </p>
+<p id="rfc.section.2.5.1.p.2">Sending agents MUST encode signing time through the year 2049 as UTCTime; signing times in 2050 or later MUST be encoded as GeneralizedTime.  When the UTCTime CHOICE is used, S/&#8288;MIME agents MUST interpret the year field (YY) as follows: </p>
+
+<ul class="empty">
+  <li>If YY is greater than or equal to 50, the year is interpreted as 19YY; if YY is less than 50, the year is interpreted as 20YY.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.5.1.p.3">Receiving agents MUST be able to process signing-time attributes that are encoded in either UTCTime or GeneralizedTime.  </p>
+<h1 id="rfc.section.2.5.2"><a href="#rfc.section.2.5.2">2.5.2.</a> <a href="#SMIMECaps" id="SMIMECaps">SMIME Capabilities Attribute</a></h1>
+<p id="rfc.section.2.5.2.p.1">The SMIMECapabilities attribute includes signature algorithms (such as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128 CBC"), authenticated symmetric algorithms (such as "AES-GCM") and key encipherment algorithms (such as "rsaEncryption").  There are also several identifiers that indicate support for other optional features such as binary encoding and compression.  The SMIMECapabilities were designed to be flexible and extensible so that, in the future, a means of identifying other capabilities and preferences such as certificates can be added in a way that will not cause current clients to break.  </p>
+<p id="rfc.section.2.5.2.p.2">If present, the SMIMECapabilities attribute MUST be a SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines SignedAttributes as a SET OF Attribute.  The SignedAttributes in a signerInfo MUST NOT include multiple instances of the SMIMECapabilities attribute.  CMS defines the ASN.1 syntax for Attribute to include attrValues SET OF AttributeValue.  A SMIMECapabilities attribute MUST only include a single instance of AttributeValue.  There MUST NOT be zero or multiple instances of AttributeValue present in the attrValues SET OF AttributeValue.  </p>
+<p id="rfc.section.2.5.2.p.3">The semantics of the SMIMECapabilities attribute specify a partial list as to what the client announcing the SMIMECapabilities can support.  A client does not have to list every capability it supports, and need not list all its capabilities so that the capabilities list doesn't get too long.  In an SMIMECapabilities attribute, the object identifiers (OIDs) are listed in order of their preference, but SHOULD be separated logically along the lines of their categories (signature algorithms, symmetric algorithms, key encipherment algorithms, etc.).  </p>
+<p id="rfc.section.2.5.2.p.4">The structure of the SMIMECapabilities attribute is to facilitate simple table lookups and binary comparisons in order to determine matches.  For instance, the DER-encoding for the SMIMECapability for AES-128 CBC MUST be identically encoded regardless of the implementation.  Because of the requirement for identical encoding, individuals documenting algorithms to be used in the SMIMECapabilities attribute SHOULD explicitly document the correct byte sequence for the common cases.  </p>
+<p id="rfc.section.2.5.2.p.5">For any capability, the associated parameters for the OID MUST specify all of the parameters necessary to differentiate between two instances of the same algorithm.  </p>
+<p id="rfc.section.2.5.2.p.6">The OIDs that correspond to algorithms SHOULD use the same OID as the actual algorithm, except in the case where the algorithm usage is ambiguous from the OID.  For instance, in an earlier specification, rsaEncryption was ambiguous because it could refer to either a signature algorithm or a key encipherment algorithm.  In the event that an OID is ambiguous, it needs to be arbitrated by the maintainer of the registered SMIMECapabilities list as to which type of algorithm will use the OID, and a new OID MUST be allocated under the smimeCapabilities OID to satisfy the other use of the OID.  </p>
+<p id="rfc.section.2.5.2.p.7">The registered SMIMECapabilities list specifies the parameters for OIDs that need them, most notably key lengths in the case of variable-length symmetric ciphers.  In the event that there are no differentiating parameters for a particular OID, the parameters MUST be omitted, and MUST NOT be encoded as NULL.  Additional values for the SMIMECapabilities attribute might be defined in the future.  Receiving agents MUST handle a SMIMECapabilities object that has values that it does not recognize in a graceful manner.  </p>
+<p><a href="#WhichEncAlg">Section 2.7.1</a> explains a strategy for caching capabilities.  </p>
+<h1 id="rfc.section.2.5.3"><a href="#rfc.section.2.5.3">2.5.3.</a> <a href="#EncryptKeyPref" id="EncryptKeyPref">Encryption Key Preference Attribute</a></h1>
+<p id="rfc.section.2.5.3.p.1">The encryption key preference attribute allows the signer to unambiguously describe which of the signer's certificates has the signer's preferred encryption key.  This attribute is designed to enhance behavior for interoperating with those clients that use separate keys for encryption and signing.  This attribute is used to convey to anyone viewing the attribute which of the listed certificates is appropriate for encrypting a session key for future encrypted messages.  </p>
+<p id="rfc.section.2.5.3.p.2">If present, the SMIMEEncryptionKeyPreference attribute MUST be a SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines SignedAttributes as a SET OF Attribute.  The SignedAttributes in a signerInfo MUST NOT include multiple instances of the SMIMEEncryptionKeyPreference attribute.  CMS defines the ASN.1 syntax for Attribute to include attrValues SET OF AttributeValue.  A SMIMEEncryptionKeyPreference attribute MUST only include a single instance of AttributeValue.  There MUST NOT be zero or multiple instances of AttributeValue present in the attrValues SET OF AttributeValue.  </p>
+<p id="rfc.section.2.5.3.p.3">The sending agent SHOULD include the referenced certificate in the set of certificates included in the signed message if this attribute is used.  The certificate MAY be omitted if it has been previously made available to the receiving agent.  Sending agents SHOULD use this attribute if the commonly used or preferred encryption certificate is not the same as the certificate used to sign the message.  </p>
+<p id="rfc.section.2.5.3.p.4">Receiving agents SHOULD store the preference data if the signature on the message is valid and the signing time is greater than the currently stored value.  (As with the SMIMECapabilities, the clock skew SHOULD be checked and the data not used if the skew is too great.)  Receiving agents SHOULD respect the sender's encryption key preference attribute if possible.  This, however, represents only a preference and the receiving agent can use any certificate in replying to the sender that is valid.  </p>
+<p><a href="#WhichEncAlg">Section 2.7.1</a> explains a strategy for caching preference data.  </p>
+<h1 id="rfc.section.2.5.3.1"><a href="#rfc.section.2.5.3.1">2.5.3.1.</a> Selection of Recipient Key Management Certificate</h1>
+<p id="rfc.section.2.5.3.1.p.1">In order to determine the key management certificate to be used when sending a future CMS EnvelopedData message for a particular recipient, the following steps SHOULD be followed: </p>
+
+<ul>
+  <li>If an SMIMEEncryptionKeyPreference attribute is found in a SignedData object received from the desired recipient, this identifies the X.509 certificate that SHOULD be used as the X.509 key management certificate for the recipient.  </li>
+  <li>If an SMIMEEncryptionKeyPreference attribute is not found in a SignedData object received from the desired recipient, the set of X.509 certificates SHOULD be searched for a X.509 certificate with the same subject name as the signer of a X.509 certificate that can be used for key management.  </li>
+  <li>Or use some other method of determining the user's key management key.  If a X.509 key management certificate is not found, then encryption cannot be done with the signer of the message.  If multiple X.509 key management certificates are found, the S/&#8288;MIME agent can make an arbitrary choice between them.  </li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.section.2.6"><a href="#rfc.section.2.6">2.6.</a> SignerIdentifier SignerInfo Type</h1>
+<p id="rfc.section.2.6.p.1">S/&#8288;MIME v3.5 implementations MUST support both issuerAndSerialNumber and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier choice cannot be read by S/&#8288;MIME v2 clients.  </p>
+<p id="rfc.section.2.6.p.2">It is important to understand that some certificates use a value for subjectKeyIdentifier that is not suitable for uniquely identifying a certificate.  Implementations MUST be prepared for multiple certificates for potentially different entities to have the same value for subjectKeyIdentifier, and MUST be prepared to try each matching certificate during signature verification before indicating an error condition.  </p>
+<h1 id="rfc.section.2.7"><a href="#rfc.section.2.7">2.7.</a> <a href="#ContentEncryptionAlgorithmIdentifier" id="ContentEncryptionAlgorithmIdentifier">ContentEncryptionAlgorithmIdentifier</a></h1>
+<p id="rfc.section.2.7.p.1">Sending and receiving agents: </p>
+
+<ul>
+  <li>MUST support encryption and decryption with AES-128 CBC <a href="#RFC3565">[RFC3565]</a> and AES-128 GCM <a href="#RFC5084">[RFC5084]</a>.  </li>
+  <li>SHOULD+ support encryption and decryption with AES-192 CBC, AES-256 CBC <a href="#RFC3565">[RFC3565]</a>, AES-192 GCM and AES-256 GCM <a href="#RFC5084">[RFC5084]</a>.  </li>
+  <li>SHOULD- support encryption and decryption with DES EDE3 CBC, hereinafter called "tripleDES" <a href="#RFC3370">[RFC3370]</a>.  </li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.section.2.7.1"><a href="#rfc.section.2.7.1">2.7.1.</a> <a href="#WhichEncAlg" id="WhichEncAlg">Deciding Which Encryption Method to Use</a></h1>
+<p id="rfc.section.2.7.1.p.1">When a sending agent creates an encrypted message, it has to decide which type of encryption to use.  The decision process involves using information garnered from the capabilities lists included in messages received from the recipient, as well as out-of-band information such as private agreements, user preferences, legal restrictions, and so on.  </p>
+<p><a href="#SMIMECaps">Section 2.5.2</a> defines a method by which a sending agent can optionally announce, among other things, its decrypting capabilities in its order of preference.  The following method for processing and remembering the encryption capabilities attribute in incoming signed messages SHOULD be used.  </p>
+
+<ul>
+  <li>If the receiving agent has not yet created a list of capabilities for the sender's public key, then, after verifying the signature on the incoming message and checking the timestamp, the receiving agent SHOULD create a new list containing at least the signing time and the symmetric capabilities.  </li>
+  <li>If such a list already exists, the receiving agent SHOULD verify that the signing time in the incoming message is greater than the signing time stored in the list and that the signature is valid.  If so, the receiving agent SHOULD update both the signing time and capabilities in the list.  Values of the signing time that lie far in the future (that is, a greater discrepancy than any reasonable clock skew), or a capabilities list in messages whose signature could not be verified, MUST NOT be accepted.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.7.1.p.3">The list of capabilities SHOULD be stored for future use in creating messages.  </p>
+<p id="rfc.section.2.7.1.p.4">Before sending a message, the sending agent MUST decide whether it is willing to use weak encryption for the particular data in the message.  If the sending agent decides that weak encryption is unacceptable for this data, then the sending agent MUST NOT use a weak algorithm.  The decision to use or not use weak encryption overrides any other decision in this section about which encryption algorithm to use.  </p>
+<p><a href="#KnownCaps">Section 2.7.1.1</a> and <a href="#UnknownCaps">Section 2.7.1.2</a> describe the decisions a sending agent SHOULD use in deciding which type of encryption will be applied to a message.  These rules are ordered, so the sending agent SHOULD make its decision in the order given.  </p>
+<h1 id="rfc.section.2.7.1.1"><a href="#rfc.section.2.7.1.1">2.7.1.1.</a> <a href="#KnownCaps" id="KnownCaps">Rule 1: Known Capabilities</a></h1>
+<p id="rfc.section.2.7.1.1.p.1">If the sending agent has received a set of capabilities from the recipient for the message the agent is about to encrypt, then the sending agent SHOULD use that information by selecting the first capability in the list (that is, the capability most preferred by the intended recipient) that the sending agent knows how to encrypt.  The sending agent SHOULD use one of the capabilities in the list if the agent reasonably expects the recipient to be able to decrypt the message.  </p>
+<h1 id="rfc.section.2.7.1.2"><a href="#rfc.section.2.7.1.2">2.7.1.2.</a> <a href="#UnknownCaps" id="UnknownCaps">Rule 2: Unknown Capabilities, Unknown Version of S/MIME</a></h1>
+<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: <a id="CREF2" class="info">[CREF2]<span class="info">JLS: Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES? </span></a> </p>
+
+<ul>
+  <li>the sending agent has no knowledge of the encryption capabilities of the recipient, and </li>
+  <li>the sending agent has no knowledge of the version of S/&#8288;MIME of the recipient, </li>
+</ul>
+
+<p> then the sending agent SHOULD use AES-128 CBC because it is a stronger algorithm and is required by S/&#8288;MIME v3.2.  If the sending agent chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.  </p>
+<h1 id="rfc.section.2.7.2"><a href="#rfc.section.2.7.2">2.7.2.</a> <a href="#WeakEncryption" id="WeakEncryption">Choosing Weak Encryption</a></h1>
+<p id="rfc.section.2.7.2.p.1">All algorithms that use 40-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as tripleDES or AES.  <a id="CREF3" class="info">[CREF3]<span class="info">JLS: Does this become a MUST NOT now.</span></a> </p>
+<h1 id="rfc.section.2.7.3"><a href="#rfc.section.2.7.3">2.7.3.</a> Multiple Recipients</h1>
+<p id="rfc.section.2.7.3.p.1">If a sending agent is composing an encrypted message to a group of recipients where the encryption capabilities of some of the recipients do not overlap, the sending agent is forced to send more than one message.  Please note that if the sending agent chooses to send a message encrypted with a strong algorithm, and then send the same message encrypted with a weak algorithm, someone watching the communications channel could learn the contents of the strongly encrypted message simply by decrypting the weakly encrypted message.  </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Creating S/MIME Messages</h1>
+<p id="rfc.section.3.p.1">This section describes the S/&#8288;MIME message formats and how they are created.  S/&#8288;MIME messages are a combination of MIME bodies and CMS content types.  Several media types as well as several CMS content types are used.  The data to be secured is always a canonical MIME entity.  The MIME entity and other data, such as certificates and algorithm identifiers, are given to CMS processing facilities that produce a CMS object.  Finally, the CMS object is wrapped in MIME.  The Enhanced Security Services for S/&#8288;MIME <a href="#ESS">[ESS]</a> document provides descriptions of how nested, secured S/&#8288;MIME messages are formatted.  ESS provides a description of how a triple-wrapped S/&#8288;MIME message is formatted using multipart/&#8288;signed and application/&#8288;pkcs7-mime for the signatures.  </p>
+<p id="rfc.section.3.p.2">S/&#8288;MIME provides one format for enveloped-only data, several formats for signed-only data, and several formats for signed and enveloped data.  Several formats are required to accommodate several environments, in particular for signed messages.  The criteria for choosing among these formats are also described.  </p>
+<p id="rfc.section.3.p.3">The reader of this section is expected to understand MIME as described in <a href="#MIME-SPEC">[MIME-SPEC]</a> and <a href="#RFC1847">[RFC1847]</a>.  </p>
+<h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> <a href="#MimePrep" id="MimePrep">Preparing the MIME Entity for Signing, Enveloping, or Compressing</a></h1>
+<p id="rfc.section.3.1.p.1">S/&#8288;MIME is used to secure MIME entities.  A MIME entity can be a sub- part, sub-parts of a message, or the whole message with all its sub- parts.  A MIME entity that is the whole message includes only the MIME message headers and MIME body, and does not include the RFC-822 header.  Note that S/&#8288;MIME can also be used to secure MIME entities used in applications other than Internet mail.  If protection of the RFC-822 header is required, the use of the message/rfc822 media type is explained later in this section.  </p>
+<p id="rfc.section.3.1.p.2">The MIME entity that is secured and described in this section can be thought of as the "inside" MIME entity.  That is, it is the "innermost" object in what is possibly a larger MIME message.  Processing "outside" MIME entities into CMS content types is described in <a href="#pkcs7-mime-media-type">Section 3.2</a>, <a href="#Signed-Only">Section 3.5</a>, and elsewhere.  </p>
+<p id="rfc.section.3.1.p.3">The procedure for preparing a MIME entity is given in <a href="#MIME-SPEC">[MIME-SPEC]</a>.  The same procedure is used here with some additional restrictions when signing.  The description of the procedures from <a href="#MIME-SPEC">[MIME-SPEC]</a> is repeated here, but it is suggested that the reader refer to that document for the exact procedure.  This section also describes additional requirements.  </p>
+<p id="rfc.section.3.1.p.4">A single procedure is used for creating MIME entities that are to have any combination of signing, enveloping, and compressing applied.  Some additional steps are recommended to defend against known corruptions that can occur during mail transport that are of particular importance for clear-signing using the multipart/&#8288;signed format.  It is recommended that these additional steps be performed on enveloped messages, or signed and enveloped messages, so that the message can be forwarded to any environment without modification.  </p>
+<p id="rfc.section.3.1.p.5">These steps are descriptive rather than prescriptive.  The implementer is free to use any procedure as long as the result is the same.  </p>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity is prepared according to the local conventions.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The leaf parts of the MIME entity are converted to canonical form.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>Appropriate transfer encoding is applied to the leaves of the MIME entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.1.p.6">When an S/&#8288;MIME message is received, the security services on the message are processed, and the result is the MIME entity.  That MIME entity is typically passed to a MIME-capable user agent where it is further decoded and presented to the user or receiving application.  </p>
+<p id="rfc.section.3.1.p.7">In order to protect outer, non-content-related message header fields (for instance, the "Subject", "To", "From", and "Cc" fields), the sending client MAY wrap a full MIME message in a message/rfc822 wrapper in order to apply S/&#8288;MIME security services to these header fields.  It is up to the receiving client to decide how to present this "inner" header along with the unprotected "outer" header.  </p>
+<p id="rfc.section.3.1.p.8">When an S/&#8288;MIME message is received, if the top-level protected MIME entity has a Content-Type of message/rfc822, it can be assumed that the intent was to provide header protection.  This entity SHOULD be presented as the top-level message, taking into account header merging issues as previously discussed.  </p>
+<h1 id="rfc.section.3.1.1"><a href="#rfc.section.3.1.1">3.1.1.</a> <a href="#Canonicalization" id="Canonicalization">Canonicalization</a></h1>
+<p id="rfc.section.3.1.1.p.1">Each MIME entity MUST be converted to a canonical form that is uniquely and unambiguously representable in the environment where the signature is created and the environment where the signature will be verified.  MIME entities MUST be canonicalized for enveloping and compressing as well as signing.  </p>
+<p id="rfc.section.3.1.1.p.2">The exact details of canonicalization depend on the actual media type and subtype of an entity, and are not described here.  Instead, the standard for the particular media type SHOULD be consulted.  For example, canonicalization of type text/plain is different from canonicalization of audio/basic.  Other than text types, most types have only one representation regardless of computing platform or environment that can be considered their canonical representation.  In general, canonicalization will be performed by the non-security part of the sending agent rather than the S/&#8288;MIME implementation.  </p>
+<p id="rfc.section.3.1.1.p.3">The most common and important canonicalization is for text, which is often represented differently in different environments.  MIME entities of major type "text" MUST have both their line endings and character set canonicalized.  The line ending MUST be the pair of characters &lt;CR&gt;&lt;LF&gt;, and the charset SHOULD be a registered charset <a href="#CHARSETS">[CHARSETS]</a>.  The details of the canonicalization are specified in <a href="#MIME-SPEC">[MIME-SPEC]</a>.  </p>
+<p id="rfc.section.3.1.1.p.4">Note that some charsets such as ISO-2022 have multiple representations for the same characters.  When preparing such text for signing, the canonical representation specified for the charset MUST be used.  </p>
+<h1 id="rfc.section.3.1.2"><a href="#rfc.section.3.1.2">3.1.2.</a> Transfer Encoding</h1>
+<p id="rfc.section.3.1.2.p.1">When generating any of the secured MIME entities below, except the signing using the multipart/&#8288;signed format, no transfer encoding is required at all.  S/&#8288;MIME implementations MUST be able to deal with binary MIME objects.  If no Content-Transfer-Encoding header field is present, the transfer encoding is presumed to be 7BIT.  </p>
+<p id="rfc.section.3.1.2.p.2">S/&#8288;MIME implementations SHOULD however use transfer encoding described in <a href="#Transfer-multipart">Section 3.1.3</a> for all MIME entities they secure.  The reason for securing only 7-bit MIME entities, even for enveloped data that are not exposed to the transport, is that it allows the MIME entity to be handled in any environment without changing it.  For example, a trusted gateway might remove the envelope, but not the signature, of a message, and then forward the signed message on to the end recipient so that they can verify the signatures directly.  If the transport internal to the site is not 8-bit clean, such as on a wide- area network with a single mail gateway, verifying the signature will not be possible unless the original MIME entity was only 7-bit data.  </p>
+<p id="rfc.section.3.1.2.p.3">S/&#8288;MIME implementations that "know" that all intended recipients are capable of handling inner (all but the outermost) binary MIME objects SHOULD use binary encoding as opposed to a 7-bit-safe transfer encoding for the inner entities.  The use of a 7-bit-safe encoding (such as base64) would unnecessarily expand the message size.  Implementations MAY "know" that recipient implementations are capable of handling inner binary MIME entities either by interpreting the id- cap-preferBinaryInside SMIMECapabilities attribute, by prior agreement, or by other means.  </p>
+<p id="rfc.section.3.1.2.p.4">If one or more intended recipients are unable to handle inner binary MIME objects, or if this capability is unknown for any of the intended recipients, S/&#8288;MIME implementations SHOULD use transfer encoding described in <a href="#Transfer-multipart">Section 3.1.3</a> for all MIME entities they secure.  </p>
+<h1 id="rfc.section.3.1.3"><a href="#rfc.section.3.1.3">3.1.3.</a> <a href="#Transfer-multipart" id="Transfer-multipart">Transfer Encoding for Signing Using multipart/signed</a></h1>
+<p id="rfc.section.3.1.3.p.1">If a multipart/&#8288;signed entity is ever to be transmitted over the standard Internet SMTP infrastructure or other transport that is constrained to 7-bit text, it MUST have transfer encoding applied so that it is represented as 7-bit text.  MIME entities that are 7-bit data already need no transfer encoding.  Entities such as 8-bit text and binary data can be encoded with quoted-printable or base-64 transfer encoding.  </p>
+<p id="rfc.section.3.1.3.p.2">The primary reason for the 7-bit requirement is that the Internet mail transport infrastructure cannot guarantee transport of 8-bit or binary data.  Even though many segments of the transport infrastructure now handle 8-bit and even binary data, it is sometimes not possible to know whether the transport path is 8-bit clean.  If a mail message with 8-bit data were to encounter a message transfer agent that cannot transmit 8-bit or binary data, the agent has three options, none of which are acceptable for a clear-signed message: </p>
+
+<ul>
+  <li>The agent could change the transfer encoding; this would invalidate the signature.  </li>
+  <li>The agent could transmit the data anyway, which would most likely result in the 8th bit being corrupted; this too would invalidate the signature.  </li>
+  <li>The agent could return the message to the sender.  </li>
+</ul>
+
+<p> </p>
+<p><a href="#RFC1847">[RFC1847]</a> prohibits an agent from changing the transfer encoding of the first part of a multipart/&#8288;signed message.  If a compliant agent that cannot transmit 8-bit or binary data encounters a multipart/&#8288;signed message with 8-bit or binary data in the first part, it would have to return the message to the sender as undeliverable.  </p>
+<h1 id="rfc.section.3.1.4"><a href="#rfc.section.3.1.4">3.1.4.</a> Sample Canonical MIME Entity</h1>
+<p id="rfc.section.3.1.4.p.1">This example shows a multipart/&#8288;mixed message with full transfer encoding.  This message contains a text part and an attachment.  The sample message text includes characters that are not US-ASCII and thus need to be transfer encoded.  Though not shown here, the end of each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.  </p>
+<p id="rfc.section.3.1.4.p.2">Note that this example is not of an S/&#8288;MIME message.  </p>
+<pre>
+   Content-Type: multipart/mixed; boundary=bar
+
+   --bar
+   Content-Type: text/plain; charset=iso-8859-1
+   Content-Transfer-Encoding: quoted-printable
+
+   =A1Hola Michael!
+
+   How do you like the new S/MIME specification?
+
+   It's generally a good idea to encode lines that begin with
+   From=20because some mail transport agents will insert a greater-
+   than (&gt;) sign, thus invalidating the signature.
+
+   Also, in some cases it might be desirable to encode any =20
+   trailing whitespace that occurs on lines in order to ensure =20
+   that the message signature is not invalidated when passing =20
+   a gateway that modifies such whitespace (like BITNET). =20
+
+   --bar
+   Content-Type: image/jpeg
+   Content-Transfer-Encoding: base64
+
+   iQCVAwUBMJrRF2N9oWBghPDJAQE9UQQAtl7LuRVndBjrk4EqYBIb3h5QXIX/LC//
+   jJV5bNvkZIGPIcEmI5iFd9boEgvpirHtIREEqLQRkYNoBActFBZmh9GC3C041WGq
+   uMbrbxc+nIs1TIKlA08rVi9ig/2Yh7LFrK5Ein57U/W72vgSxLhe/zhdfolT9Brn
+   HOxEa44b+EI=
+
+   --bar--
+              </pre>
+<h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> <a href="#pkcs7-mime-media-type" id="pkcs7-mime-media-type">The application/pkcs7-mime Media Type</a></h1>
+<p id="rfc.section.3.2.p.1">The application/&#8288;pkcs7-mime media type is used to carry CMS content types including EnvelopedData, SignedData, and CompressedData.  The details of constructing these entities are described in subsequent sections.  This section describes the general characteristics of the application/&#8288;pkcs7-mime media type.  </p>
+<p id="rfc.section.3.2.p.2">The carried CMS object always contains a MIME entity that is prepared as described in <a href="#MimePrep">Section 3.1</a> if the eContentType is id-data.  Other contents MAY be carried when the eContentType contains different values.  See <a href="#ESS">[ESS]</a> for an example of this with signed receipts.  </p>
+<p id="rfc.section.3.2.p.3">Since CMS content types are binary data, in most cases base-64 transfer encoding is appropriate, in particular, when used with SMTP transport.  The transfer encoding used depends on the transport through which the object is to be sent, and is not a characteristic of the media type.  </p>
+<p id="rfc.section.3.2.p.4">Note that this discussion refers to the transfer encoding of the CMS object or "outside" MIME entity.  It is completely distinct from, and unrelated to, the transfer encoding of the MIME entity secured by the CMS object, the "inside" object, which is described in <a href="#MimePrep">Section 3.1</a>.  </p>
+<p id="rfc.section.3.2.p.5">Because there are several types of application/&#8288;pkcs7-mime objects, a sending agent SHOULD do as much as possible to help a receiving agent know about the contents of the object without forcing the receiving agent to decode the ASN.1 for the object.  The Content-Type header field of all application/&#8288;pkcs7-mime objects SHOULD include the optional "smime-type" parameter, as described in the following sections.  </p>
+<h1 id="rfc.section.3.2.1"><a href="#rfc.section.3.2.1">3.2.1.</a> The name and filename Parameters</h1>
+<p id="rfc.section.3.2.1.p.1">For the application/&#8288;pkcs7-mime, sending agents SHOULD emit the optional "name" parameter to the Content-Type field for compatibility with older systems.  Sending agents SHOULD also emit the optional Content-Disposition field <a href="#RFC2138">[RFC2138]</a> with the "filename" parameter.  If a sending agent emits the above parameters, the value of the parameters SHOULD be a file name with the appropriate extension: </p>
+<table cellpadding="3" cellspacing="0" class="tt none center">
+  <thead>
+    <tr>
+      <th class="left">Media Type</th>
+      <th class="center">File Extension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="left">application/pkcs7-mime (SignedData, EnvelopedData)</td>
+      <td class="center">.p7m</td>
+    </tr>
+    <tr>
+      <td class="left">application/pkcs7-mime (degenerate SignedData certificate management message)</td>
+      <td class="center">.p7c</td>
+    </tr>
+    <tr>
+      <td class="left">application/pkcs7-mime (CompressedData)</td>
+      <td class="center">.p7z</td>
+    </tr>
+    <tr>
+      <td class="left">application/pkcs7-signature (SignedData)</td>
+      <td class="center">.p7s</td>
+    </tr>
+  </tbody>
+</table>
+<p id="rfc.section.3.2.1.p.2">In addition, the file name SHOULD be limited to eight characters followed by a three-letter extension.  The eight-character filename base can be any distinct name; the use of the filename base "smime" SHOULD be used to indicate that the MIME entity is associated with S/&#8288;MIME.  </p>
+<p id="rfc.section.3.2.1.p.3">Including a file name serves two purposes.  It facilitates easier use of S/&#8288;MIME objects as files on disk.  It also can convey type information across gateways.  When a MIME entity of type application/&#8288;pkcs7-mime (for example) arrives at a gateway that has no special knowledge of S/&#8288;MIME, it will default the entity's media type to application/&#8288;octet-stream and treat it as a generic attachment, thus losing the type information.  However, the suggested filename for an attachment is often carried across a gateway.  This often allows the receiving systems to determine the appropriate application to hand the attachment off to, in this case, a stand-alone S/&#8288;MIME processing application.  Note that this mechanism is provided as a convenience for implementations in certain environments.  A proper S/&#8288;MIME implementation MUST use the media types and MUST NOT rely on the file extensions.  </p>
+<h1 id="rfc.section.3.2.2"><a href="#rfc.section.3.2.2">3.2.2.</a> <a href="#smime-type" id="smime-type">The smime-type Parameter</a></h1>
+<p id="rfc.section.3.2.2.p.1">The application/&#8288;pkcs7-mime content type defines the optional "smime- type" parameter.  The intent of this parameter is to convey details about the security applied (signed or enveloped) along with information about the contained content.  This specification defines the following smime-types.  </p>
+<table cellpadding="3" cellspacing="0" class="tt none center">
+  <thead>
+    <tr>
+      <th class="left">Name</th>
+      <th class="left">CMS Type</th>
+      <th class="left">Inner Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="left">enveloped-data</td>
+      <td class="left">EnvelopedData</td>
+      <td class="left">id-data</td>
+    </tr>
+    <tr>
+      <td class="left">signed-data</td>
+      <td class="left">SignedData</td>
+      <td class="left">id-data</td>
+    </tr>
+    <tr>
+      <td class="left">certs-only</td>
+      <td class="left">SignedData</td>
+      <td class="left">id-data</td>
+    </tr>
+    <tr>
+      <td class="left">compressed-data</td>
+      <td class="left">CompressedData</td>
+      <td class="left">id-data</td>
+    </tr>
+    <tr>
+      <td class="left">authEnvelopedData</td>
+      <td class="left">AuthEnvelopedData</td>
+      <td class="left">id-data</td>
+    </tr>
+  </tbody>
+</table>
+<p id="rfc.section.3.2.2.p.2">In order for consistency to be obtained with future specifications, the following guidelines SHOULD be followed when assigning a new smime-type parameter.  </p>
+
+<ol>
+  <li>If both signing and encryption can be applied to the content, then two values for smime-type SHOULD be assigned "signed-*" and "enveloped-*".  If one operation can be assigned, then this can be omitted.  Thus, since "certs-only" can only be signed, "signed-" is omitted.  </li>
+  <li>A common string for a content OID SHOULD be assigned.  We use "data" for the id-data content OID when MIME is the inner content.  </li>
+  <li>If no common string is assigned, then the common string of "OID.&lt;oid&gt;" is recommended (for example, "OID.2.16.840.1.101.3.4.1.2" would be AES-128 CBC).  </li>
+</ol>
+
+<p> </p>
+<p id="rfc.section.3.2.2.p.3">It is explicitly intended that this field be a suitable hint for mail client applications to indicate whether a message is "signed" or "enveloped" without having to tunnel into the CMS payload.  </p>
+<h1 id="rfc.section.3.3"><a href="#rfc.section.3.3">3.3.</a> Creating an Enveloped-Only Message</h1>
+<p id="rfc.section.3.3.p.1">This section describes the format for enveloping a MIME entity without signing it.  It is important to note that sending enveloped but not signed messages does not provide for data integrity.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  </p>
+<p/>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be enveloped is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data is processed into a CMS object of type EnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the EnvelopedData (see <a href="#RFC5652">[RFC5652]</a>, Section 6).  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The EnvelopedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.3.p.3">The smime-type parameter for enveloped-only messages is "enveloped- data".  The file extension for this type of message is ".p7m".  </p>
+<p id="rfc.section.3.3.p.4">A sample message would be: </p>
+<pre>
+Content-Type: application/pkcs7-mime; smime-type=enveloped-data;
+     name=smime.p7m
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7m
+
+rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+0GhIGfHfQbnj756YT64V
+              </pre>
+<h1 id="rfc.section.3.4"><a href="#rfc.section.3.4">3.4.</a> <a href="#AuthEnvelopedData2" id="AuthEnvelopedData2">Creating an Authenticated Enveloped-Only Message</a></h1>
+<p id="rfc.section.3.4.p.1">This section describes the format for enveloping a MIME entity without signing it.  Authenticated enveloped messages provide confidentiality and integrity.  It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  However this is substantially more difficult than it is for an enveloped-only message as the </p>
+<p/>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be enveloped is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data is processed into a CMS object of type AuthEnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the AuthEnvelopedData (see <a href="#RFC5083">[RFC5083]</a>).  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The AuthEnvelopedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.4.p.3">The smime-type parameter for authenticated enveloped-only messages is "authEnvelopedData".  The file extension for this type of message is ".p7m".  </p>
+<p id="rfc.section.3.4.p.4">A sample message would be: </p>
+<pre>
+Content-Type: application/pkcs7-mime; smime-type=authEnvelopedData;
+     name=smime.p7m
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7m
+
+rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+0GhIGfHfQbnj756YT64V
+              </pre>
+<h1 id="rfc.section.3.5"><a href="#rfc.section.3.5">3.5.</a> <a href="#Signed-Only" id="Signed-Only">Creating a Signed-Only Message</a></h1>
+<p id="rfc.section.3.5.p.1">There are two formats for signed messages defined for S/&#8288;MIME: </p>
+
+<ul>
+  <li>application/&#8288;pkcs7-mime with SignedData.  </li>
+  <li>multipart/signed.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.3.5.p.2">In general, the multipart/signed form is preferred for sending, and receiving agents MUST be able to handle both.  </p>
+<h1 id="rfc.section.3.5.1"><a href="#rfc.section.3.5.1">3.5.1.</a> Choosing a Format for Signed-Only Messages</h1>
+<p id="rfc.section.3.5.1.p.1">There are no hard-and-fast rules as to when a particular signed-only format is chosen.  It depends on the capabilities of all the receivers and the relative importance of receivers with S/&#8288;MIME facilities being able to verify the signature versus the importance of receivers without S/&#8288;MIME software being able to view the message.  </p>
+<p id="rfc.section.3.5.1.p.2">Messages signed using the multipart/&#8288;signed format can always be viewed by the receiver whether or not they have S/&#8288;MIME software.  They can also be viewed whether they are using a MIME-native user agent or they have messages translated by a gateway.  In this context, "be viewed" means the ability to process the message essentially as if it were not a signed message, including any other MIME structure the message might have.  </p>
+<p id="rfc.section.3.5.1.p.3">Messages signed using the SignedData format cannot be viewed by a recipient unless they have S/&#8288;MIME facilities.  However, the SignedData format protects the message content from being changed by benign intermediate agents.  Such agents might do line wrapping or content-transfer encoding changes that would break the signature.  </p>
+<h1 id="rfc.section.3.5.2"><a href="#rfc.section.3.5.2">3.5.2.</a> Signing Using application/pkcs7-mime with SignedData</h1>
+<p id="rfc.section.3.5.2.p.1">This signing format uses the application/&#8288;pkcs7-mime media type.  The steps to create this format are: </p>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data are processed into a CMS object of type SignedData.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The SignedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.5.2.p.2">The smime-type parameter for messages using application/&#8288;pkcs7-mime with SignedData is "signed-data".  The file extension for this type of message is ".p7m".  </p>
+<p id="rfc.section.3.5.2.p.3">A sample message would be: </p>
+<pre>
+   Content-Type: application/pkcs7-mime; smime-type=signed-data;
+        name=smime.p7m
+   Content-Transfer-Encoding: base64
+   Content-Disposition: attachment; filename=smime.p7m
+
+   567GhIGfHfYT6ghyHhHUujpfyF4f8HHGTrfvhJhjH776tbB9HG4VQbnj7
+   77n8HHGT9HG4VQpfyF467GhIGfHfYT6rfvbnj756tbBghyHhHUujhJhjH
+   HUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H7n8HHGghyHh
+   6YT64V0GhIGfHfQbnj75
+                </pre>
+<h1 id="rfc.section.3.5.3"><a href="#rfc.section.3.5.3">3.5.3.</a> <a href="#SignMultipart" id="SignMultipart">Signing Using the multipart/signed Format</a></h1>
+<p id="rfc.section.3.5.3.p.1">This format is a clear-signing format.  Recipients without any S/&#8288;MIME or CMS processing facilities are able to view the message.  It makes use of the multipart/&#8288;signed media type described in <a href="#RFC1847">[RFC1847]</a>.  The multipart/&#8288;signed media type has two parts.  The first part contains the MIME entity that is signed; the second part contains the "detached signature" CMS SignedData object in which the encapContentInfo eContent field is absent.  </p>
+<h1 id="rfc.section.3.5.3.1"><a href="#rfc.section.3.5.3.1">3.5.3.1.</a> The application/pkcs7-signature Media Type</h1>
+<p id="rfc.section.3.5.3.1.p.1">This media type always contains a CMS ContentInfo containing a single CMS object of type SignedData.  The SignedData encapContentInfo eContent field MUST be absent.  The signerInfos field contains the signatures for the MIME entity.  </p>
+<p id="rfc.section.3.5.3.1.p.2">The file extension for signed-only messages using application/&#8288;pkcs7- signature is ".p7s".  </p>
+<h1 id="rfc.section.3.5.3.2"><a href="#rfc.section.3.5.3.2">3.5.3.2.</a> Creating a multipart/signed Message</h1>
+<p/>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be signed is prepared according to <a href="#MimePrep">Section 3.1</a>, taking special care for clear-signing.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity is presented to CMS processing in order to obtain an object of type SignedData in which the encapContentInfo eContent field is absent.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The MIME entity is inserted into the first part of a multipart/&#8288;signed message with no processing other than that described in <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>Transfer encoding is applied to the "detached signature" CMS SignedData object, and it is inserted into a MIME entity of type application/&#8288;pkcs7-signature.  </dd>
+  <dt>Step 5.   </dt>
+  <dd>The MIME entity of the application/&#8288;pkcs7-signature is inserted into the second part of the multipart/&#8288;signed entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.5.3.2.p.2">The multipart/&#8288;signed Content-Type has two required parameters: the protocol parameter and the micalg parameter.  </p>
+<p id="rfc.section.3.5.3.2.p.3">The protocol parameter MUST be "application/&#8288;pkcs7-signature".  Note that quotation marks are required around the protocol parameter because MIME requires that the "/" character in the parameter value MUST be quoted.  </p>
+<p id="rfc.section.3.5.3.2.p.4">The micalg parameter allows for one-pass processing when the signature is being verified.  The value of the micalg parameter is dependent on the message digest algorithm(s) used in the calculation of the Message Integrity Check.  If multiple message digest algorithms are used, they MUST be separated by commas per [MIME- SECURE].  The values to be placed in the micalg parameter SHOULD be from the following: </p>
+<table cellpadding="3" cellspacing="0" class="tt none center">
+  <thead>
+    <tr>
+      <th class="left">Algorithm</th>
+      <th class="left">Value Used</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="left">MD5</td>
+      <td class="left">md5</td>
+    </tr>
+    <tr>
+      <td class="left">SHA-1</td>
+      <td class="left">sha-1</td>
+    </tr>
+    <tr>
+      <td class="left">SHA-224</td>
+      <td class="left">sha-224</td>
+    </tr>
+    <tr>
+      <td class="left">SHA-256</td>
+      <td class="left">sha-256</td>
+    </tr>
+    <tr>
+      <td class="left">SHA-384</td>
+      <td class="left">sha-384</td>
+    </tr>
+    <tr>
+      <td class="left">SHA-512</td>
+      <td class="left">sha-512</td>
+    </tr>
+    <tr>
+      <td class="left">Any other</td>
+      <td class="left">(defined separately in algorithm profile or "unknown" if not defined)</td>
+    </tr>
+  </tbody>
+</table>
+<p id="rfc.section.3.5.3.2.p.5">(Historical note: some early implementations of S/MIME emitted and expected "rsa-md5", "rsa-sha1", and "sha1" for the micalg parameter.) Receiving agents SHOULD be able to recover gracefully from a micalg parameter value that they do not recognize.  Future names for this parameter will be consistent with the IANA "Hash Function Textual Names" registry.  </p>
+<h1 id="rfc.section.3.5.3.3"><a href="#rfc.section.3.5.3.3">3.5.3.3.</a> Sample multipart/signed Message</h1>
+<pre>
+                    
+Content-Type: multipart/signed;
+     protocol="application/pkcs7-signature";
+     micalg=sha-1; boundary=boundary42
+
+--boundary42
+Content-Type: text/plain
+
+This is a clear-signed message.
+
+--boundary42
+Content-Type: application/pkcs7-signature; name=smime.p7s
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7s
+
+ghyHhHUujhJhjH77n8HHGTrfvbnj756tbB9HG4VQpfyF467GhIGfHfYT6
+4VQpfyF467GhIGfHfYT6jH77n8HHGghyHhHUujhJh756tbB9HGTrfvbnj
+n8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+7GhIGfHfYT64VQbnj756
+
+--boundary42--
+                </pre>
+<p id="rfc.section.3.5.3.3.p.1">The content that is digested (the first part of the multipart/&#8288;signed) consists of the bytes: </p>
+<pre>
+43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74 65 78 74 2f 70 6c 61 69
+6e 0d 0a 0d 0a 54 68 69 73 20 69 73 20 61 20 63 6c 65 61 72 2d 73 69
+67 6e 65 64 20 6d 65 73 73 61 67 65 2e 0d 0a
+                </pre>
+<h1 id="rfc.section.3.6"><a href="#rfc.section.3.6">3.6.</a> Creating a Compressed-Only Message</h1>
+<p id="rfc.section.3.6.p.1">This section describes the format for compressing a MIME entity.  Please note that versions of S/&#8288;MIME prior to version 3.1 did not specify any use of CompressedData, and will not recognize it.  The use of a capability to indicate the ability to receive CompressedData is described in <a href="#RFC3274">[RFC3274]</a> and is the preferred method for compatibility.  </p>
+<p/>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The MIME entity to be compressed is prepared according to <a href="#MimePrep">Section 3.1</a>.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The MIME entity and other required data are processed into a CMS object of type CompressedData.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The CompressedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 4.   </dt>
+  <dd>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.6.p.3">The smime-type parameter for compressed-only messages is "compressed- data".  The file extension for this type of message is ".p7z".  </p>
+<p id="rfc.section.3.6.p.4">A sample message would be: </p>
+<pre>
+Content-Type: application/pkcs7-mime; smime-type=compressed-data;
+   name=smime.p7z
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7z
+
+rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+0GhIGfHfQbnj756YT64V
+              </pre>
+<h1 id="rfc.section.3.7"><a href="#rfc.section.3.7">3.7.</a> <a href="#MultipleOperations" id="MultipleOperations">Multiple Operations</a></h1>
+<p id="rfc.section.3.7.p.1">The signed-only, enveloped-only, and compressed-only MIME formats can be nested.  This works because these formats are all MIME entities that encapsulate other MIME entities.  </p>
+<p id="rfc.section.3.7.p.2">An S/&#8288;MIME implementation MUST be able to receive and process arbitrarily nested S/&#8288;MIME within reasonable resource limits of the recipient computer.  </p>
+<p id="rfc.section.3.7.p.3">It is possible to apply any of the signing, encrypting, and compressing operations in any order.  It is up to the implementer and the user to choose.  When signing first, the signatories are then securely obscured by the enveloping.  When enveloping first the signatories are exposed, but it is possible to verify signatures without removing the enveloping.  This can be useful in an environment where automatic signature verification is desired, as no private key material is required to verify a signature.  </p>
+<p id="rfc.section.3.7.p.4">There are security ramifications to choosing whether to sign first or encrypt first.  A recipient of a message that is encrypted and then signed can validate that the encrypted block was unaltered, but cannot determine any relationship between the signer and the unencrypted contents of the message.  A recipient of a message that is signed then encrypted can assume that the signed message itself has not been altered, but that a careful attacker could have changed the unauthenticated portions of the encrypted message.  </p>
+<p id="rfc.section.3.7.p.5">When using compression, keep the following guidelines in mind: </p>
+
+<ul>
+  <li>Compression of binary encoded encrypted data is discouraged, since it will not yield significant compression.  Base64 encrypted data could very well benefit, however.  </li>
+  <li>If a lossy compression algorithm is used with signing, you will need to compress first, then sign.  </li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.section.3.8"><a href="#rfc.section.3.8">3.8.</a> Creating a Certificate Management Message</h1>
+<p id="rfc.section.3.8.p.1">The certificate management message or MIME entity is used to transport certificates and/or Certificate Revocation Lists, such as in response to a registration request.  </p>
+<p/>
+
+<dl>
+  <dt>Step 1.   </dt>
+  <dd>The certificates and/or Certificate Revocation Lists are made available to the CMS generating process that creates a CMS object of type SignedData.  The SignedData encapContentInfo eContent field MUST be absent and signerInfos field MUST be empty.  </dd>
+  <dt>Step 2.   </dt>
+  <dd>The SignedData object is wrapped in a CMS ContentInfo object.  </dd>
+  <dt>Step 3.   </dt>
+  <dd>The ContentInfo object is enclosed in an application/&#8288;pkcs7-mime MIME entity.  </dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.3.8.p.3">The smime-type parameter for a certificate management message is "certs-only".  The file extension for this type of message is ".p7c".  </p>
+<h1 id="rfc.section.3.9"><a href="#rfc.section.3.9">3.9.</a> Registration Requests</h1>
+<p id="rfc.section.3.9.p.1">A sending agent that signs messages MUST have a certificate for the signature so that a receiving agent can verify the signature.  There are many ways of getting certificates, such as through an exchange with a certification authority, through a hardware token or diskette, and so on.  </p>
+<p id="rfc.section.3.9.p.2">S/&#8288;MIME v2 <a href="#SMIMEv2">[SMIMEv2]</a> specified a method for "registering" public keys with certificate authorities using an application/&#8288;pkcs10 body part.  Since that time, the IETF PKIX Working Group has developed other methods for requesting certificates.  However, S/&#8288;MIME v3.2 does not require a particular certificate request mechanism.  </p>
+<h1 id="rfc.section.3.10"><a href="#rfc.section.3.10">3.10.</a> Identifying an S/MIME Message</h1>
+<p id="rfc.section.3.10.p.1">Because S/&#8288;MIME takes into account interoperation in non-MIME environments, several different mechanisms are employed to carry the type information, and it becomes a bit difficult to identify S/&#8288;MIME messages.  The following table lists criteria for determining whether or not a message is an S/&#8288;MIME message.  A message is considered an S/&#8288;MIME message if it matches any of the criteria listed below.  </p>
+<p id="rfc.section.3.10.p.2">The file suffix in the table below comes from the "name" parameter in the Content-Type header field, or the "filename" parameter on the Content-Disposition header field.  These parameters that give the file suffix are not listed below as part of the parameter section.  </p>
+<table cellpadding="3" cellspacing="0" class="tt none center">
+  <thead>
+    <tr>
+      <th class="left">Media type</th>
+      <th class="left">parameters</th>
+      <th class="left">file suffix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="left">application/pkcs7-mime</td>
+      <td class="left">any</td>
+      <td class="left">any</td>
+    </tr>
+    <tr>
+      <td class="left">multipart/signed</td>
+      <td class="left">protocol="application/pkcs7-signature"</td>
+      <td class="left">any</td>
+    </tr>
+    <tr>
+      <td class="left">application/octet-stream</td>
+      <td class="left">any</td>
+      <td class="left">p7m, p7s, p7c, p7z</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#CertProcessing" id="CertProcessing">Certificate Processing</a></h1>
+<p id="rfc.section.4.p.1">A receiving agent MUST provide some certificate retrieval mechanism in order to gain access to certificates for recipients of digital envelopes.  This specification does not cover how S/&#8288;MIME agents handle certificates, only what they do after a certificate has been validated or rejected.  S/&#8288;MIME certificate issues are covered in <a href="#RFC5750">[RFC5750]</a>.  </p>
+<p id="rfc.section.4.p.2">At a minimum, for initial S/&#8288;MIME deployment, a user agent could automatically generate a message to an intended recipient requesting that recipient's certificate in a signed return message.  Receiving and sending agents SHOULD also provide a mechanism to allow a user to "store and protect" certificates for correspondents in such a way so as to guarantee their later retrieval.  </p>
+<h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> <a href="#KeyPairs" id="KeyPairs">Key Pair Generation</a></h1>
+<p id="rfc.section.4.1.p.1">All generated key pairs MUST be generated from a good source of non- deterministic random input <a href="#RFC4086">[RFC4086]</a> and the private key MUST be protected in a secure fashion.  </p>
+<p id="rfc.section.4.1.p.2">An S/&#8288;MIME user agent MUST NOT generate asymmetric keys less than 512 bits for use with the RSA or DSA signature algorithms.  </p>
+<p id="rfc.section.4.1.p.3">For 512-bit RSA with SHA&#8209;1 see <a href="#RFC3370">[RFC3370]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit RSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1.  The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.  </p>
+<p id="rfc.section.4.1.p.4">For 512-bit DSA with SHA&#8209;1 see <a href="#RFC3370">[RFC3370]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit DSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 1024-bit DSA with SHA&#8209;1 see <a href="#RFC3370">[RFC3370]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-3">[FIPS186-3]</a>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
+<p id="rfc.section.4.1.p.5">For RSASSA-PSS with SHA-256, see <a href="#RFC4056">[RFC4056]</a>.  For 1024-bit DH, see <a href="#RFC3370">[RFC3370]</a>.  For 1024-bit and larger DH, see <a href="#SP800-56A">[SP800-56A]</a>; regardless, use the KDF, which is from X9.42, specified in <a href="#RFC3370">[RFC3370]</a>.  For RSAES- OAEP, see <a href="#RFC3560">[RFC3560]</a>.  </p>
+<h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Signature Generation</h1>
+<p id="rfc.section.4.2.p.1">The following are the requirements for an S/&#8288;MIME agent generated RSA, RSASSA-PSS, and DSA signatures: </p>
+<pre>
+        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </pre>
+<h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Signature Verification</h1>
+<p id="rfc.section.4.3.p.1">The following are the requirements for S/&#8288;MIME receiving agents during signature verification of RSA, RSASSA-PSS, and DSA signatures: </p>
+<pre>
+        key size &lt;= 1023 : MAY        (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </pre>
+<h1 id="rfc.section.4.4"><a href="#rfc.section.4.4">4.4.</a> Encryption</h1>
+<p id="rfc.section.4.4.p.1">The following are the requirements for an S/&#8288;MIME agent when establishing keys for content encryption using the RSA, RSA-OAEP, and DH algorithms: </p>
+<pre>
+        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </pre>
+<h1 id="rfc.section.4.5"><a href="#rfc.section.4.5">4.5.</a> Decryption</h1>
+<p id="rfc.section.4.5.p.1">The following are the requirements for an S/&#8288;MIME agent when establishing keys for content decryption using the RSA, RSAES-OAEP, and DH algorithms: </p>
+<pre>
+        key size &lt;= 1023 : MAY        (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </pre>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#IANA" id="IANA">IANA Considerations</a></h1>
+<p id="rfc.section.5.p.1">The following information updates the media type registration for application/&#8288;pkcs7-mime and application/&#8288;pkcs7-signature to refer to this document as opposed to RFC 2311.  </p>
+<p id="rfc.section.5.p.2">Note that other documents can define additional MIME media types for S/&#8288;MIME.  </p>
+<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Media Type for application/pkcs7-mime</h1>
+<pre>
+                  
+Type name: application
+
+Subtype Name: pkcs7-mime
+
+Required Parameters: NONE
+
+Optional Parameters: smime-type/signed-data
+                     smime-type/enveloped-data
+                     smime-type/compressed-data
+                     smime-type/certs-only
+                     name
+
+Encoding Considerations: See Section 3 of this document
+
+Security Considerations: See Section 6 of this document
+
+Interoperability Considerations: See Sections 1-6 of this document
+
+Published Specification: RFC 2311, RFC 2633, and this document
+
+Applications that use this media type: Security applications
+
+Additional information: NONE
+
+Person &amp; email to contact for further information:
+   S/MIME working group chairs smime-chairs@tools.ietf.org
+
+Intended usage: COMMON
+
+Restrictions on usage: NONE
+
+Author: Sean Turner
+
+Change Controller: S/MIME working group delegated from the IESG
+              </pre>
+<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Media Type for application/pkcs7-signature</h1>
+<pre>
+                  
+Type name: application
+
+Subtype Name: pkcs7-signature
+
+Required Parameters: NONE
+
+Optional Parameters: NONE
+
+Encoding Considerations: See Section 3 of this document
+
+Security Considerations: See Section 6 of this document
+
+Interoperability Considerations: See Sections 1-6 of this document
+
+Published Specification: RFC 2311, RFC 2633, and this document
+
+Applications that use this media type: Security applications
+
+Additional information: NONE
+
+Person &amp; email to contact for further information:
+   S/MIME working group chairs smime-chairs@tools.ietf.org
+
+Intended usage: COMMON
+
+Restrictions on usage: NONE
+
+Author: Sean Turner
+
+Change Controller: S/MIME working group delegated from the IESG
+              </pre>
+<h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Register authEnvelopedData smime-type</h1>
+<p id="rfc.section.5.3.p.1">IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.  The values to be registered are: <a id="CREF4" class="info">[CREF4]<span class="info">JLS: This can be done by modifying the registration above instead.  </span></a> </p>
+
+<ul class="empty">
+  <li>smime-type value: authEnvelopedData</li>
+  <li>Reference: [[This Document, <a href="#smime-type">Section 3.2.2</a>]]</li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#SecurityConsiderations" id="SecurityConsiderations">Security Considerations</a></h1>
+<p id="rfc.section.6.p.1">Cryptographic algorithms will be broken or weakened over time.  Implementers and users need to check that the cryptographic algorithms listed in this document continue to provide the expected level of security.  The IETF from time to time may issue documents dealing with the current state of the art.  For example: </p>
+
+<ul>
+  <li>The Million Message Attack described in RFC 3218 <a href="#RFC3218">[RFC3218]</a>.  </li>
+  <li>The Diffie-Hellman "small-subgroup" attacks described in RFC 2785 <a href="#RFC2785">[RFC2785]</a>.  </li>
+  <li>The attacks against hash algorithms described in RFC 4270 <a href="#RFC4270">[RFC4270]</a>.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.6.p.2">This specification uses Public-Key Cryptography technologies.  It is assumed that the private key is protected to ensure that it is not accessed or altered by unauthorized parties.  </p>
+<p id="rfc.section.6.p.3">It is impossible for most people or software to estimate the value of a message's content.  Further, it is impossible for most people or software to estimate the actual cost of recovering an encrypted message content that is encrypted with a key of a particular size.  Further, it is quite difficult to determine the cost of a failed decryption if a recipient cannot process a message's content.  Thus, choosing between different key sizes (or choosing whether to just use plaintext) is also impossible for most people or software.  However, decisions based on these criteria are made all the time, and therefore this specification gives a framework for using those estimates in choosing algorithms.  </p>
+<p id="rfc.section.6.p.4">The choice of 2048 bits as the RSA asymmetric key size in this specification is based on the desire to provide at least 100 bits of security.  The key sizes that must be supported to conform to this specification seem appropriate for the Internet based on <a href="#RFC3766">[RFC3766]</a>.  Of course, there are environments, such as financial and medical systems, that may select different key sizes.  For this reason, an implementation MAY support key sizes beyond those recommended in this specification.  </p>
+<p id="rfc.section.6.p.5">Receiving agents that validate signatures and sending agents that encrypt messages need to be cautious of cryptographic processing usage when validating signatures and encrypting messages using keys larger than those mandated in this specification.  An attacker could send certificates with keys that would result in excessive cryptographic processing, for example, keys larger than those mandated in this specification, which could swamp the processing element.  Agents that use such keys without first validating the certificate to a trust anchor are advised to have some sort of cryptographic resource management system to prevent such attacks.  </p>
+<p id="rfc.section.6.p.6">Using weak cryptography in S/&#8288;MIME offers little actual security over sending plaintext.  However, other features of S/&#8288;MIME, such as the specification of AES and the ability to announce stronger cryptographic capabilities to parties with whom you communicate, allow senders to create messages that use strong encryption.  Using weak cryptography is never recommended unless the only alternative is no cryptography.  </p>
+<p id="rfc.section.6.p.7">RSA and DSA keys of less than 1024 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to protect messages.  Such keys were previously considered secure, so processing previously received signed and encrypted mail will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  If an implementation supports verification of digital signatures generated with RSA and DSA keys of less than 1024 bits, it MUST warn the user.  Implementers should consider providing different warnings for newly received messages and previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak signatures.  </p>
+<p id="rfc.section.6.p.8">Implementers SHOULD be aware that multiple active key pairs can be associated with a single individual.  For example, one key pair can be used to support confidentiality, while a different key pair can be used for digital signatures.  </p>
+<p id="rfc.section.6.p.9">If a sending agent is sending the same message using different strengths of cryptography, an attacker watching the communications channel might be able to determine the contents of the strongly encrypted message by decrypting the weakly encrypted version.  In other words, a sender SHOULD NOT send a copy of a message using weaker cryptography than they would use for the original of the message.  </p>
+<p id="rfc.section.6.p.10">Modification of the ciphertext can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  </p>
+<p id="rfc.section.6.p.11">If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <a href="#SP800-57">[SP800-57]</a>.  </p>
+<p id="rfc.section.6.p.12">If messaging environments make use of the fact that a message is signed to change the behavior of message processing (examples would be running rules or UI display hints), without first verifying that the message is actually signed and knowing the state of the signature, this can lead to incorrect handling of the message.  Visual indicators on messages may need to have the signature validation code checked periodically if the indicator is supposed to give information on the current status of a message.  </p>
+<p id="rfc.section.6.p.13">Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situtation where the sender of the message will be authenticated.  In almost all cases this is not a correct statement.  There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service: <a href="#RFC6278">[RFC6278]</a> which defined how to use static-static key agreement with CMS so that is readably doable.  Currently, all S/MIME key agreement methods derive a KEK and wrap a CEK.  This violates the third precondition above.  New key key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.  </p>
+
+<ul>
+  <li>The starting key must be bound to a single entity.  The use of a group key only would allow for the statement that a message was sent by one of the entities that held the key but will not identify a specific entity.  </li>
+  <li>The message must have exactly one sender and one recipient.  Having more than one recipient would allow for the second recipient to create a message that the first recipient would believe is from the sender by stripping them as a recipient from the message.  </li>
+  <li>A direct path needs to exist from the starting key to the key used as the content encryption key (CEK) which guarantees that no third party could have seen the resulting CEK.  This means that one needs to be using an algorithm that is called a "Direct Encryption" or a "Direct Key Agreement" algorithm in other contexts.  This means that the starting key is used directly as the CEK key, or that the starting key is used to create a secret which then is transformed into the CEK via a KDF step.  </li>
+</ul>
+
+<p> S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a pre-existing shared secret when doing encryption, this means that the first precondition is not met.  There is a document </p>
+<p id="rfc.section.6.p.14">Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.  This is because either of the parties can successfully create the message (or just alter the content) based on the fact that the CEK is going to be known to both parties.  Thus the origination is always built on a presumption that "I did not send this message to myself." </p>
+<h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
+<table>
+  <tbody>
+    <tr><td class="reference"><b id="ASN.1">[ASN.1]</b></td><td class="top"><a>Information Technology - Abstract Syntax Notation (ASN.1)</a>"<p>ASN.1 syntax consists of the following references </p></td>, "</tr>
+    <tr><td class="reference"><b id="CHARSETS">[CHARSETS]</b></td><td class="top"><a href="http://www.iana.org/assignments/character-sets.">Character sets assigned by IANA.</a>"</td>, "</tr>
+    <tr><td class="reference"><b id="CMS">[CMS]</b></td><td class="top"><a>Cryptograhic Message Syntax</a>"<p>This is the set of documents dealing with the cryptographic message syntax and refers to </p></td>, "</tr>
+    <tr><td class="reference"><b id="ESS">[ESS]</b></td><td class="top"><a>Enhanced Security Services for S/MIME</a>"<p>This is the set of documents dealing with enhanged security services and refers to </p></td>, "</tr>
+    <tr>
+      <td class="reference">
+        <b id="FIPS186-2">[FIPS186-2]</b>
+      </td>
+      <td class="top"><a>National Institute of Standards and Technology (NIST)</a>, "<a>Digital Signature Standard (DSS) [With Change Notice 1]</a>", Federal Information Processing Standards Publication 186-2, January 2000.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="FIPS186-3">[FIPS186-3]</b>
+      </td>
+      <td class="top"><a>National Institute of Standards and Technology (NIST)</a>, "<a>Digital Signature Standard (DSS)</a>", Federal Information Processing Standards Publication 186-3, June 2009.</td>
+    </tr>
+    <tr><td class="reference"><b id="MIME-SPEC">[MIME-SPEC]</b></td><td class="top"><a>MIME Message Specifications</a>"<p>This is the set of documents that define how to use MIME.  This set of documents is </p></td>, "</tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC1847">[RFC1847]</b>
+      </td>
+      <td class="top"><a>Galvin, J.</a>, <a>Murphy, S.</a>, <a>Crocker, S.</a> and <a>N. Freed</a>, "<a href="http://tools.ietf.org/html/rfc1847">Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted</a>", RFC 1847, DOI 10.17487/RFC1847, October 1995.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2045">[RFC2045]</b>
+      </td>
+      <td class="top"><a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="http://tools.ietf.org/html/rfc2045">Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</a>", RFC 2045, DOI 10.17487/RFC2045, November 1996.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2046">[RFC2046]</b>
+      </td>
+      <td class="top"><a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>", RFC 2046, DOI 10.17487/RFC2046, November 1996.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2047">[RFC2047]</b>
+      </td>
+      <td class="top"><a>Moore, K.</a>, "<a href="http://tools.ietf.org/html/rfc2047">MIME (Multipurpose Internet Mail Extensions) Part Three: Message Header Extensions for Non-ASCII Text</a>", RFC 2047, DOI 10.17487/RFC2047, November 1996.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2049">[RFC2049]</b>
+      </td>
+      <td class="top"><a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="http://tools.ietf.org/html/rfc2049">Multipurpose Internet Mail Extensions (MIME) Part Five: Conformance Criteria and Examples</a>", RFC 2049, DOI 10.17487/RFC2049, November 1996.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2119">[RFC2119]</b>
+      </td>
+      <td class="top"><a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2138">[RFC2138]</b>
+      </td>
+      <td class="top"><a>Rigney, C.</a>, <a>Rubens, A.</a>, <a>Simpson, W.</a> and <a>S. Willens</a>, "<a href="http://tools.ietf.org/html/rfc2138">Remote Authentication Dial In User Service (RADIUS)</a>", RFC 2138, DOI 10.17487/RFC2138, April 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2634">[RFC2634]</b>
+      </td>
+      <td class="top"><a>Hoffman, P.</a>, "<a href="http://tools.ietf.org/html/rfc2634">Enhanced Security Services for S/MIME</a>", RFC 2634, DOI 10.17487/RFC2634, June 1999.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3274">[RFC3274]</b>
+      </td>
+      <td class="top"><a>Gutmann, P.</a>, "<a href="http://tools.ietf.org/html/rfc3274">Compressed Data Content Type for Cryptographic Message Syntax (CMS)</a>", RFC 3274, DOI 10.17487/RFC3274, June 2002.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3370">[RFC3370]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3370">Cryptographic Message Syntax (CMS) Algorithms</a>", RFC 3370, DOI 10.17487/RFC3370, August 2002.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3560">[RFC3560]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3560">Use of the RSAES-OAEP Key Transport Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 3560, DOI 10.17487/RFC3560, July 2003.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3565">[RFC3565]</b>
+      </td>
+      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc3565">Use of the Advanced Encryption Standard (AES) Encryption Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 3565, DOI 10.17487/RFC3565, July 2003.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4056">[RFC4056]</b>
+      </td>
+      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc4056">Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 4056, DOI 10.17487/RFC4056, June 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4086">[RFC4086]</b>
+      </td>
+      <td class="top"><a>Eastlake 3rd, D.</a>, <a>Schiller, J.</a> and <a>S. Crocker</a>, "<a href="http://tools.ietf.org/html/rfc4086">Randomness Requirements for Security</a>", BCP 106, RFC 4086, DOI 10.17487/RFC4086, June 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4288">[RFC4288]</b>
+      </td>
+      <td class="top"><a>Freed, N.</a> and <a>J. Klensin</a>, "<a href="http://tools.ietf.org/html/rfc4288">Media Type Specifications and Registration Procedures</a>", RFC 4288, DOI 10.17487/RFC4288, December 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4289">[RFC4289]</b>
+      </td>
+      <td class="top"><a>Freed, N.</a> and <a>J. Klensin</a>, "<a href="http://tools.ietf.org/html/rfc4289">Multipurpose Internet Mail Extensions (MIME) Part Four: Registration Procedures</a>", BCP 13, RFC 4289, DOI 10.17487/RFC4289, December 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5035">[RFC5035]</b>
+      </td>
+      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc5035">Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility</a>", RFC 5035, DOI 10.17487/RFC5035, August 2007.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5083">[RFC5083]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc5083">Cryptographic Message Syntax (CMS) Authenticated-Enveloped-Data Content Type</a>", RFC 5083, DOI 10.17487/RFC5083, November 2007.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5084">[RFC5084]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, <a href="http://tools.ietf.org/html/rfc5084">Using AES-CCM and AES-GCM Authenticated Encryption in the Cryptographic Message Syntax (CMS)</a>", RFC 5084, DOI 10.17487/RFC5084, November 2007.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5652">[RFC5652]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc5652">Cryptographic Message Syntax (CMS)</a>", STD 70, RFC 5652, DOI 10.17487/RFC5652, September 2009.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5754">[RFC5754]</b>
+      </td>
+      <td class="top"><a>Turner, S.</a>, "<a href="http://tools.ietf.org/html/rfc5754">Using SHA2 Algorithms with Cryptographic Message Syntax</a>", RFC 5754, DOI 10.17487/RFC5754, January 2010.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="SP800-56A">[SP800-56A]</b>
+      </td>
+      <td class="top"><a>National Institute of Standards and Technology (NIST)</a>, <a>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</a>", May 2013.</td>
+    </tr>
+    <tr><td class="reference"><b id="X.680">[X.680]</b></td><td class="top"><a>Information Technology - Abstract Syntax Notation One (ASN.1):  Specification of basic notation.  ITU-T Recommendation X.680 (2002)</a>", ITU-T X.680, ISO/IEC 8824-1:2008, November 2008.</td>, "</tr>
+    <tr><td class="reference"><b id="X.681">[X.681]</b></td><td class="top"><a>Information Technology - Abstract Syntax Notation One (ASN.1):  Information object specification</a>", ITU-T X.681, ISO/IEC 8824-2:2008, November 2008.</td>, "</tr>
+    <tr><td class="reference"><b id="X.682">[X.682]</b></td><td class="top"><a>Information Technology - Abstract Syntax Notation One (ASN.1):  Constraint specification</a>", ITU-T X.682, ISO/IEC 8824-3:2008, November 2008.</td>, "</tr>
+    <tr><td class="reference"><b id="X.683">[X.683]</b></td><td class="top"><a>Information Technology - Abstract Syntax Notation One (ASN.1):  Parameteriztion of ASN.1 specifications</a>", ITU-T X.683, ISO/IEC 8824-4:2008, November 2008.</td>, "</tr>
+    <tr><td class="reference"><b id="X.690">[X.690]</b></td><td class="top"><a>Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER).</a>", ITU-T X.690, ISO/IEC 8825-1:2002, July 2002.</td>, "</tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">7.2.</a> Informative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="RFC2311">[RFC2311]</b>
+      </td>
+      <td class="top"><a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a>, <a>Lundblade, L.</a> and <a>L. Repka</a>, "<a href="http://tools.ietf.org/html/rfc2311">S/MIME Version 2 Message Specification</a>", RFC 2311, DOI 10.17487/RFC2311, March 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2312">[RFC2312]</b>
+      </td>
+      <td class="top"><a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a> and <a>J. Weinstein</a>, "<a href="http://tools.ietf.org/html/rfc2312">S/MIME Version 2 Certificate Handling</a>", RFC 2312, DOI 10.17487/RFC2312, March 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2313">[RFC2313]</b>
+      </td>
+      <td class="top"><a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2313">PKCS #1: RSA Encryption Version 1.5</a>", RFC 2313, DOI 10.17487/RFC2313, March 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2314">[RFC2314]</b>
+      </td>
+      <td class="top"><a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2314">PKCS #10: Certification Request Syntax Version 1.5</a>", RFC 2314, DOI 10.17487/RFC2314, March 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2315">[RFC2315]</b>
+      </td>
+      <td class="top"><a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2315">PKCS #7: Cryptographic Message Syntax Version 1.5</a>", RFC 2315, DOI 10.17487/RFC2315, March 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2630">[RFC2630]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc2630">Cryptographic Message Syntax</a>", RFC 2630, DOI 10.17487/RFC2630, June 1999.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2631">[RFC2631]</b>
+      </td>
+      <td class="top"><a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc2631">Diffie-Hellman Key Agreement Method</a>", RFC 2631, DOI 10.17487/RFC2631, June 1999.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2632">[RFC2632]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc2632">S/MIME Version 3 Certificate Handling</a>", RFC 2632, DOI 10.17487/RFC2632, June 1999.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2633">[RFC2633]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc2633">S/MIME Version 3 Message Specification</a>", RFC 2633, DOI 10.17487/RFC2633, June 1999.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2785">[RFC2785]</b>
+      </td>
+      <td class="top"><a>Zuccherato, R.</a>, "<a href="http://tools.ietf.org/html/rfc2785">Methods for Avoiding the "Small-Subgroup" Attacks on the Diffie-Hellman Key Agreement Method for S/MIME</a>", RFC 2785, DOI 10.17487/RFC2785, March 2000.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3218">[RFC3218]</b>
+      </td>
+      <td class="top"><a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc3218">Preventing the Million Message Attack on Cryptographic Message Syntax</a>", RFC 3218, DOI 10.17487/RFC3218, January 2002.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3766">[RFC3766]</b>
+      </td>
+      <td class="top"><a>Orman, H.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc3766">Determining Strengths For Public Keys Used For Exchanging Symmetric Keys</a>", BCP 86, RFC 3766, DOI 10.17487/RFC3766, April 2004.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3850">[RFC3850]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc3850">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.1 Certificate Handling</a>", RFC 3850, DOI 10.17487/RFC3850, July 2004.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3851">[RFC3851]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc3851">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.1 Message Specification</a>", RFC 3851, DOI 10.17487/RFC3851, July 2004.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC3852">[RFC3852]</b>
+      </td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3852">Cryptographic Message Syntax (CMS)</a>", RFC 3852, DOI 10.17487/RFC3852, July 2004.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4270">[RFC4270]</b>
+      </td>
+      <td class="top"><a>Hoffman, P.</a> and <a>B. Schneier</a>, "<a href="http://tools.ietf.org/html/rfc4270">Attacks on Cryptographic Hashes in Internet Protocols</a>", RFC 4270, DOI 10.17487/RFC4270, November 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5750">[RFC5750]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Certificate Handling</a>", RFC 5750, DOI 10.17487/RFC5750, January 2010.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5751">[RFC5751]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6278">[RFC6278]</b>
+      </td>
+      <td class="top"><a>Herzog, J.</a> and <a>R. Khazan</a>, <a href="http://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
+    </tr>
+    <tr><td class="reference"><b id="SMIMEv2">[SMIMEv2]</b></td><td class="top"><a>S/MIME version v2</a>"<p>This group of documents represents S/MIME version 2.  This set of documents are </p></td>, "</tr>
+    <tr><td class="reference"><b id="SMIMEv3">[SMIMEv3]</b></td><td class="top"><a>S/MIME version 3</a>"<p>This group of documents represents S/MIME version 3.  This set of documents are </p></td>, "</tr>
+    <tr><td class="reference"><b id="SMIMEv3.1">[SMIMEv3.1]</b></td><td class="top"><a>S/MIME version 3.1</a>"<p>This group of documents represents S/MIME version 3.1.  This set of documents are </p></td>, "</tr>
+    <tr><td class="reference"><b id="SMIMEv3.2">[SMIMEv3.2]</b></td><td class="top"><a>S/MIME version 3.2</a>"<p>This group of documents represents S/MIME version 3.2.  This set of documents are </p></td>, "</tr>
+    <tr>
+      <td class="reference">
+        <b id="SP800-57">[SP800-57]</b>
+      </td>
+      <td class="top"><a>National Institute of Standards and Technology (NIST)</a>, "<a>Special Publication 800-57: Recommendation for Key Management</a>", August 2005.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.appendix.A"><a href="#rfc.appendix.A">Appendix A.</a> <a href="#ASN1Module" id="ASN1Module">ASN.1 Module</a></h1>
+<p id="rfc.section.A.p.1">Note: The ASN.1 module contained herein is unchanged from RFC 3851 [SMIMEv3.1] with the exception of a change to the prefersBinaryInside ASN.1 comment.  This module uses the 1988 version of ASN.1.  </p>
+<pre>
+SecureMimeMessageV3dot1
+
+  { iso(1) member-body(2) us(840) rsadsi(113549)
+         pkcs(1) pkcs-9(9) smime(16) modules(0) msg-v3dot1(21) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+-- Cryptographic Message Syntax [CMS]
+   SubjectKeyIdentifier, IssuerAndSerialNumber,
+   RecipientKeyIdentifier
+       FROM  CryptographicMessageSyntax
+             { iso(1) member-body(2) us(840) rsadsi(113549)
+               pkcs(1) pkcs-9(9) smime(16) modules(0) cms-2001(14) };
+
+--  id-aa is the arc with all new authenticated and unauthenticated
+--  attributes produced by the S/MIME Working Group
+
+id-aa OBJECT IDENTIFIER ::= {iso(1) member-body(2) usa(840)
+        rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) attributes(2)}
+
+-- S/MIME Capabilities provides a method of broadcasting the
+-- symmetric capabilities understood.  Algorithms SHOULD be ordered
+-- by preference and grouped by type
+
+smimeCapabilities OBJECT IDENTIFIER ::= {iso(1) member-body(2)
+        us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 15}
+
+SMIMECapability ::= SEQUENCE {
+   capabilityID OBJECT IDENTIFIER,
+   parameters ANY DEFINED BY capabilityID OPTIONAL }
+
+SMIMECapabilities ::= SEQUENCE OF SMIMECapability
+
+-- Encryption Key Preference provides a method of broadcasting the
+-- preferred encryption certificate.
+
+id-aa-encrypKeyPref OBJECT IDENTIFIER ::= {id-aa 11}
+
+SMIMEEncryptionKeyPreference ::= CHOICE {
+   issuerAndSerialNumber   [0] IssuerAndSerialNumber,
+   receipentKeyId          [1] RecipientKeyIdentifier,
+   subjectAltKeyIdentifier [2] SubjectKeyIdentifier
+}
+
+-- receipentKeyId is spelt incorrectly, but kept for historical
+-- reasons.
+
+id-smime OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+        rsadsi(113549) pkcs(1) pkcs9(9) 16 }
+
+id-cap  OBJECT IDENTIFIER ::= { id-smime 11 }
+
+-- The preferBinaryInside OID indicates an ability to receive
+-- messages with binary encoding inside the CMS wrapper.
+-- The preferBinaryInside attribute's value field is ABSENT.
+
+id-cap-preferBinaryInside  OBJECT IDENTIFIER ::= { id-cap 1 }
+
+--  The following list OIDs to be used with S/MIME V3
+
+-- Signature Algorithms Not Found in [CMSALG], [CMS-SHA2], [RSAPSS],
+-- and [RSAOAEP]
+
+--
+-- md2WithRSAEncryption OBJECT IDENTIFIER ::=
+--    {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1)
+--     2}
+
+--
+-- Other Signed Attributes
+--
+-- signingTime OBJECT IDENTIFIER ::=
+--    {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+--     5}
+--    See [CMS] for a description of how to encode the attribute
+--    value.
+
+SMIMECapabilitiesParametersForRC2CBC ::= INTEGER
+--        (RC2 Key Length (number of bits))
+
+END
+      </pre>
+<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> <a href="#V2Historic" id="V2Historic">Moving S/MIME v2 Message Specification to Historic Status</a></h1>
+<p id="rfc.section.B.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 <a href="#SMIMEv3.2">[SMIMEv3.2]</a> are backwards compatible with the S/&#8288;MIME v2 Message Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2311 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
+<h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> Acknowledgments</h1>
+<p id="rfc.section.C.p.1">Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v3.5.  </p>
+<p id="rfc.section.C.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to various versions of this document: </p>
+<p id="rfc.section.C.p.3">Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, and John Pawling.  </p>
+<h1 id="rfc.authors">
+  <a href="#rfc.authors">Authors' Addresses</a>
+</h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Jim Schaad</span> 
+	  <span class="n hidden">
+		<span class="family-name">Schaad</span>
+	  </span>
+	</span>
+	<span class="org vcardline">August Cellars</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:ietf@augustcellars.com">ietf@augustcellars.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Blake Ramsdell</span> 
+	  <span class="n hidden">
+		<span class="family-name">Ramsdell</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Brute Squad Labs, Inc.</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:blaker@gmail.com">blaker@gmail.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Sean Turner</span> 
+	  <span class="n hidden">
+		<span class="family-name">Turner</span>
+	  </span>
+	</span>
+	<span class="org vcardline">sn3rd</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:sean@sn3rd.com">sean@sn3rd.com</a></span>
+
+  </address>
+</div>
+
+  <div class="github-fork-ribbon-wrapper"><div class="github-fork-ribbon"><a href="https://github.com/spasm-wg/smime">Fork me on GitHub</a></div></div>
+</body>
+</html>
