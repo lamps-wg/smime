@@ -1,0 +1,762 @@
+<?xml version='1.0' encoding='ascii'?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc='yes'?>
+<?rfc symrefs='yes'?>
+<?rfc sortrefs='yes' ?>
+<?rfc compact='yes'?>
+<?rfc subcompact='no' ?>
+<?rfc text-list-symbols='-*o" ?>
+<rfc ipr="pre5378Trust200902" docName="draft-schaad-rfc5751-bis-01" category="std" obsoletes="RFC5751" updates="" submissionType="IETF" xml:lang="en">
+  <front>
+    <title abbrev="S/MIME 3.5 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification </title>
+    <author fullname="Jim Schaad" initials="J." surname="Schaad">
+      <organization>August Cellars</organization>
+      <address>
+        <email>ietf@augustcellars.com</email>
+      </address>
+    </author>
+    <author fullname="Blake Ramsdell" initials="B." surname="Ramsdell">
+      <organization>Brute Squad Labs, Inc.</organization>
+      <address>
+        <email>blaker@gmail.com</email>
+      </address>
+    </author>
+    <author fullname="Sean Turner" initials="S." surname="Turner">
+      <!--3057 Nutley Street, Suite 106 Fairfax, VA 22031 USA EMail: turners@ieca.com -->
+      <organization>IECA, Inc.</organization>
+      <address>
+        <email>turners@ieca.com</email>
+      </address>
+    </author>
+    <date/>
+    <area>Security Area</area>
+    <workgroup>SPASM</workgroup>
+    <keyword>S/MIME</keyword>
+    <abstract>
+      <t>This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  </t>
+    </abstract>
+    <note title="Contributing to this document">
+      <!--RFC EDITOR - Please remove this note before publishing -->
+      <t>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <eref target="https://github.com/spasm-wg/smime"/>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the SPASM mailing list.  </t>
+    </note>
+  </front>
+  <middle>
+    <section title="Introduction" toc="default">
+      <t>S/&#8288;MIME (Secure/Multipurpose Internet Mail Extensions) provides a consistent way to send and receive secure MIME data.  Based on the popular Internet MIME standard, S/&#8288;MIME provides the following cryptographic security services for electronic messaging applications:  authentication, message integrity and non-repudiation of origin (using digital signatures), and data confidentiality (using encryption).  As a supplementary service, S/&#8288;MIME provides for message compression.  </t>
+      <t>S/&#8288;MIME can be used by traditional mail user agents (MUAs) to add cryptographic security services to mail that is sent, and to interpret cryptographic security services in mail that is received.  However, S/&#8288;MIME is not restricted to mail; it can be used with any transport mechanism that transports MIME data, such as HTTP or SIP.  As such, S/&#8288;MIME takes advantage of the object-based features of MIME and allows secure messages to be exchanged in mixed-transport systems.  </t>
+      <t>Further, S/&#8288;MIME can be used in automated message transfer agents that use cryptographic security services that do not require any human intervention, such as the signing of software-generated documents and the encryption of FAX messages sent over the Internet.  </t>
+      <section title="Specification Overview" anchor="SpecOverview" toc="default">
+        <t>This document describes a protocol for adding cryptographic signature and encryption services to MIME data.  The MIME standard <xref target="MIME-SPEC" pageno="false" format="default"/> provides a general structure for the content of Internet messages and allows extensions for new content-type-based applications.  </t>
+        <t>This specification defines how to create a MIME body part that has been cryptographically enhanced according to the Cryptographic Message Syntax (CMS) <xref target="CMS" pageno="false" format="default"/>, which is derived from PKCS #7 <xref target="RFC2315" pageno="false" format="default"/>.  This specification also defines the application/&#8288;pkcs7-mime media type that can be used to transport those body parts.  </t>
+        <t>This document also discusses how to use the multipart/&#8288;signed media type defined in <xref target="RFC1847" pageno="false" format="default"/> to transport S/&#8288;MIME signed messages.  multipart/&#8288;signed is used in conjunction with the application/&#8288;pkcs7-signature media type, which is used to transport a detached S/&#8288;MIME signature.  </t>
+        <t>In order to create S/&#8288;MIME messages, an S/&#8288;MIME agent MUST follow the specifications in this document, as well as the specifications listed in the Cryptographic Message Syntax document <xref target="CMS" pageno="false" format="default"/>, <xref target="RFC3370" pageno="false" format="default"/>, <xref target="RFC4056" pageno="false" format="default"/>, <xref target="RFC3560" pageno="false" format="default"/>, and <xref target="RFC5754" pageno="false" format="default"/>.  </t>
+        <t>Throughout this specification, there are requirements and recommendations made for how receiving agents handle incoming messages.  There are separate requirements and recommendations for how sending agents create outgoing messages.  In general, the best strategy is to "be liberal in what you receive and conservative in what you send".  Most of the requirements are placed on the handling of incoming messages, while the recommendations are mostly on the creation of outgoing messages.  </t>
+        <t>The separation for requirements on receiving agents and sending agents also derives from the likelihood that there will be S/&#8288;MIME systems that involve software other than traditional Internet mail clients.  S/&#8288;MIME can be used with any system that transports MIME data.  An automated process that sends an encrypted message might not be able to receive an encrypted message at all, for example.  Thus, the requirements and recommendations for the two types of agents are listed separately when appropriate.  </t>
+      </section>
+      <section title="Definitions" anchor="Definitions" toc="default">
+        <t>For the purposes of this specification, the following definitions apply.  </t>
+        <t><list style="hanging" hangIndent="19"><t hangText="ASN.1:">Abstract Syntax Notation One, as defined in ITU-T Recommendations X.680, X.681, X.682 and X.683 <xref target="ASN.1" pageno="false" format="default"/>.  </t><t hangText="BER:">Basic Encoding Rules for ASN.1, as defined in ITU- T Recommendation X.690 <xref target="X.690" pageno="false" format="default"/>.  </t><t hangText="Certificate:">A type that binds an entity's name to a public key with a digital signature.  </t><t hangText="DER:">Distinguished Encoding Rules for ASN.1, as defined in ITU-T Recommendation X.690 <xref target="X.690" pageno="false" format="default"/>.  </t><t hangText="7-bit data:">Text data with lines less than 998 characters long, where none of the characters have the 8th bit set, and there are no NULL characters.  &lt;CR&gt; and &lt;LF&gt; occur only as part of a &lt;CR&gt;&lt;LF&gt; end-of- line delimiter.  </t><t hangText="8-bit data:">Text data with lines less than 998 characters, and where none of the characters are NULL characters.  &lt;CR&gt; and &lt;LF&gt; occur only as part of a &lt;CR&gt;&lt;LF&gt; end-of-line delimiter.  </t><t hangText="Binary data:">Arbitrary data.  </t><t hangText="Transfer encoding:">A reversible transformation made on data so 8-bit or binary data can be sent via a channel that only transmits 7-bit data.  </t><t hangText="Receiving agent:">Software that interprets and processes S/&#8288;MIME CMS objects, MIME body parts that contain CMS content types, or both.  </t><t hangText="Sending agent:">Software that creates S/&#8288;MIME CMS content types, MIME body parts that contain CMS content types, or both.  </t><t hangText="S/MIME agent:">User software that is a receiving agent, a sending agent, or both.  </t></list> </t>
+      </section>
+      <section title="Conventions Used in This Document" anchor="MUSTS" toc="default">
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119" pageno="false" format="default"/>.  </t>
+        <t>We define some additional terms here: <list style="hanging" hangIndent="10"><t hangText="SHOULD+">This term means the same as SHOULD.  However, the authors expect that a requirement marked as SHOULD+ will be promoted at some future time to be a MUST.  </t><t hangText="SHOULD-">This term means the same as SHOULD.  However, the authors expect that a requirement marked as SHOULD- will be demoted to a MAY in a future version of this document.  </t><t hangText="MUST-">This term means the same as MUST.  However, the authors expect that this requirement will no longer be a MUST in a future document.  Although its status will be determined at a later time, it is reasonable to expect that if a future revision of a document alters the status of a MUST- requirement, it will remain at least a SHOULD or a SHOULD-.  </t></list> </t>
+      </section>
+      <section title="Compatibility with Prior Practice of S/MIME" anchor="Compatability" toc="default">
+        <t>S/&#8288;MIME version 3.5 agents ought to attempt to have the greatest interoperability possible with agents for prior versions of S/&#8288;MIME.  S/&#8288;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive <xref target="SMIMEv2" pageno="false" format="default"/>, S/&#8288;MIME version 3 is described in RFC 2630 through RFC 2634 inclusive and RFC 5035 <xref target="SMIMEv3" pageno="false" format="default"/>, S/&#8288;MIME version 3.1 is described in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <xref target="SMIMEv3.1" pageno="false" format="default"/>, and S/&#8288;MIME version 3.2 is described in <xref target="SMIMEv3.2" pageno="false" format="default"/>.  RFC 2311 also has historical information about the development of S/&#8288;MIME.  </t>
+      </section>
+      <section title="Changes from S/MIME v3 to S/MIME v3.1" toc="default">
+        <t>The RSA public key algorithm was changed to a MUST implement key wrapping algorithm, and the Diffie-Hellman (DH) algorithm changed to a SHOULD implement.  </t>
+        <t>The AES symmetric encryption algorithm has been included as a SHOULD implement.  </t>
+        <t>The RSA public key algorithm was changed to a MUST implement signature algorithm.  </t>
+        <t>Ambiguous language about the use of "empty" SignedData messages to transmit certificates was clarified to reflect that transmission of Certificate Revocation Lists is also allowed.  </t>
+        <t>The use of binary encoding for some MIME entities is now explicitly discussed.  </t>
+        <t>Header protection through the use of the message/rfc822 media type has been added.  </t>
+        <t>Use of the CompressedData CMS type is allowed, along with required media type and file extension additions.  </t>
+      </section>
+      <section title="Changes from S/MIME v3.1 to S/MIME v3.2" toc="default">
+        <t>Editorial changes, e.g., replaced "MIME type" with "media type", content-type with Content-Type.  </t>
+        <t>Moved "Conventions Used in This Document" to <xref target="MUSTS" pageno="false" format="default"/>.  Added definitions for SHOULD+, SHOULD-, and MUST-.  </t>
+        <t><xref target="SpecOverview" pageno="false" format="default"/> and <xref target="ASN1Module" pageno="false" format="default"/>: Added references to RFCs for RSASSA-PSS, RSAES-OAEP, and SHA2 CMS algorithms.  Added CMS Multiple Signers Clarification to CMS reference.  </t>
+        <t><xref target="Definitions" pageno="false" format="default"/>: Updated references to ASN.1 to X.680 and BER and DER to X.690.  </t>
+        <t><xref target="Compatability" pageno="false" format="default"/>: Added references to S/&#8288;MIME MSG 3.1 RFCs.  </t>
+        <t><xref target="DigestAlgorithmIdentifier" pageno="false" format="default"/> (digest algorithm): SHA-256 added as MUST, SHA&#8209;1 and MD5 made SHOULD-.  </t>
+        <t><xref target="SignatureAlgorithmIdentifier" pageno="false" format="default"/> (signature algorithms): RSA with SHA-256 added as MUST, and DSA with SHA-256 added as SHOULD+, RSA with SHA&#8209;1, DSA with SHA&#8209;1, and RSA with MD5 changed to SHOULD-, and RSASSA-PSS with SHA-256 added as SHOULD+.  Also added note about what S/&#8288;MIME v3.1 clients support.  </t>
+        <t><xref target="KeyEncryptionAlgorithmIdentifier" pageno="false" format="default"/> (key encryption): DH changed to SHOULD-, and RSAES-OAEP added as SHOULD+.  Elaborated requirements for key wrap algorithm.  </t>
+        <t><xref target="SignTime" pageno="false" format="default"/>: Added requirement that receiving agents MUST support both GeneralizedTime and UTCTime.  </t>
+        <t><xref target="SMIMECaps" pageno="false" format="default"/>: Replaced reference "sha1WithRSAEncryption" with "sha256WithRSAEncryption", "DES-3EDE-CBC" with "AES-128 CBC", and deleted the RC5 example.  </t>
+        <t>Section 2.5.2.1: Deleted entire section (discussed deprecated RC2).  </t>
+        <t><xref target="ContentEncryptionAlgorithmIdentifier" pageno="false" format="default"/>, 2.7.1, <xref target="ASN1Module" pageno="false" format="default"/>: references to RC2/40 removed.  </t>
+        <t><xref target="ContentEncryptionAlgorithmIdentifier" pageno="false" format="default"/> (content encryption): AES-128 CBC added as MUST, AES-192 and AES-256 CBC SHOULD+, tripleDES now SHOULD-.  </t>
+        <t><xref target="WhichEncAlg" pageno="false" format="default"/>: Updated pointers from 2.7.2.1 through 2.7.2.4 to 2.7.1.1 to 2.7.1.2.  </t>
+        <t><xref target="Canonicalization" pageno="false" format="default"/>: Removed text about MIME character sets.  </t>
+        <t><xref target="smime-type" pageno="false" format="default"/> and 3.6: Replaced "encrypted" with "enveloped".  Update OID example to use AES-128 CBC oid.  </t>
+        <t>Section 3.4.3.2: Replace micalg parameter for SHA&#8209;1 with sha-1.  </t>
+        <t><xref target="CertProcessing" pageno="false" format="default"/>: Updated reference to CERT v3.2.  </t>
+        <t><xref target="KeyPairs" pageno="false" format="default"/>: Updated RSA and DSA key size discussion.  Moved last four sentences to security considerations.  Updated reference to randomness requirements for security.  </t>
+        <t><xref target="IANA" pageno="false" format="default"/>: Added IANA registration templates to update media type registry to point to this document as opposed to RFC 2311.  </t>
+        <t><xref target="SecurityConsiderations" pageno="false" format="default"/>: Updated security considerations.  </t>
+        <t><!--<xref target="references"/> --> Section 7 : Moved references from Appendix B to this section.  Updated references.  Added informational references to SMIMEv2, SMIMEv3, and SMIMEv3.1.  </t>
+        <t><xref target="V2Historic" pageno="false" format="default"/>: Added Appendix B to move S/&#8288;MIME v2 to Historic status.  </t>
+      </section>
+      <section title="Changes since S/MIME v3.2" toc="default">
+        <t><list style="symbols"><t>Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<xref target="AuthEnvelopedData1" pageno="false" format="default"/> and <xref target="AuthEnvelopedData2" pageno="false" format="default"/>).  </t><t>Add the use of AES-GCM (<xref target="ContentEncryptionAlgorithmIdentifier" pageno="false" format="default"/>).  </t></list> </t>
+      </section>
+    </section>
+    <section title="CMS Options" toc="default">
+      <t>CMS allows for a wide variety of options in content, attributes, and algorithm support.  This section puts forth a number of support requirements and recommendations in order to achieve a base level of interoperability among all S/&#8288;MIME implementations.  <xref target="RFC3370" pageno="false" format="default"/> and <xref target="RFC5754" pageno="false" format="default"/> provides additional details regarding the use of the cryptographic algorithms.  <xref target="ESS" pageno="false" format="default"/> provides additional details regarding the use of additional attributes.  </t>
+      <section title="DigestAlgorithmIdentifier" anchor="DigestAlgorithmIdentifier" toc="default">
+        <t>Sending and receiving agents MUST support SHA-256 <xref target="RFC5754" pageno="false" format="default"/> and SHOULD- support SHA&#8209;1 <xref target="RFC3370" pageno="false" format="default"/>.  Receiving agents SHOULD- support MD5 <xref target="RFC3370" pageno="false" format="default"/> for the purpose of providing backward compatibility with MD5-digested S/&#8288;MIME v2 SignedData objects.  </t>
+      </section>
+      <section title="SignatureAlgorithmIdentifier" anchor="SignatureAlgorithmIdentifier" toc="default">
+        <t>Receiving agents: <list style="symbols"><t>MUST support RSA with SHA-256.  </t><t>SHOULD+ support DSA with SHA-256.  </t><t>SHOULD+ support RSASSA-PSS with SHA-256.  </t><t>SHOULD- support RSA with SHA&#8209;1.  </t><t>SHOULD- support DSA with SHA&#8209;1.  </t><t>SHOULD- support RSA with MD5.  </t></list> </t>
+        <t>Sending agents: <list style="symbols"><t>MUST support RSA with SHA-256.  </t><t>SHOULD+ support DSA with SHA-256.  </t><t>SHOULD+ support RSASSA-PSS with SHA-256.  </t><t>SHOULD- support RSA with SHA&#8209;1 or DSA with SHA&#8209;1.  </t><t>SHOULD- support RSA with MD5.  </t></list> </t>
+        <t>See <xref target="KeyPairs" pageno="false" format="default"/> for information on key size and algorithm references.  </t>
+        <t>Note that S/&#8288;MIME v3.1 clients support verifying id-dsa-with-sha1 and rsaEncryption and might not implement sha256withRSAEncryption.  Note that S/&#8288;MIME v3 clients might only implement signing or signature verification using id-dsa-with-sha1, and might also use id-dsa as an AlgorithmIdentifier in this field.  Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note that S/&#8288;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&#8209;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.  </t>
+      </section>
+      <section title="KeyEncryptionAlgorithmIdentifier" anchor="KeyEncryptionAlgorithmIdentifier" toc="default">
+        <t>Receiving and sending agents: <list style="symbols"><t>MUST support RSA Encryption, as specified in <xref target="RFC3370" pageno="false" format="default"/>.  </t><t>SHOULD+ support RSAES-OAEP, as specified in <xref target="RFC3560" pageno="false" format="default"/>.  </t><t>SHOULD- support DH ephemeral-static mode, as specified in <xref target="RFC3370" pageno="false" format="default"/> and <xref target="SP800-57" pageno="false" format="default"/>.  </t></list> </t>
+        <t>When DH ephemeral-static is used, a key wrap algorithm is also specified in the KeyEncryptionAlgorithmIdentifier <xref target="RFC5652" pageno="false" format="default"/>.  The underlying encryption functions for the key wrap and content encryption algorithm (<xref target="RFC3370" pageno="false" format="default"/> and <xref target="RFC3565" pageno="false" format="default"/>) and the key sizes for the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm with AES-128 content encryption algorithm).  As AES-128 CBC is the mandatory-to-implement content encryption algorithm, the AES-128 key wrap algorithm MUST also be supported when DH ephemeral-static is used.  </t>
+        <t>Note that S/&#8288;MIME v3.1 clients might only implement key encryption and decryption using the rsaEncryption algorithm.  Note that S/&#8288;MIME v3 clients might only implement key encryption and decryption using the Diffie-Hellman algorithm.  Also note that S/&#8288;MIME v2 clients are only capable of decrypting content-encryption keys using the rsaEncryption algorithm.  </t>
+      </section>
+      <section title="General Syntax" toc="default">
+        <t>There are several CMS content types.  Of these, only the Data, SignedData, EnvelopedData, AuthEnvelopedData, and CompressedData content types are currently used for S/&#8288;MIME.  </t>
+        <section title="Data Content Type" toc="default">
+          <t>Sending agents MUST use the id-data content type identifier to identify the "inner" MIME message content.  For example, when applying a digital signature to MIME data, the CMS SignedData encapContentInfo eContentType MUST include the id-data object identifier and the media type MUST be stored in the SignedData encapContentInfo eContent OCTET STRING (unless the sending agent is using multipart/&#8288;signed, in which case the eContent is absent, per <xref target="SignMultipart" pageno="false" format="default"/> of this document).  As another example, when applying encryption to MIME data, the CMS EnvelopedData encryptedContentInfo contentType MUST include the id-data object identifier and the encrypted MIME content MUST be stored in the EnvelopedData encryptedContentInfo encryptedContent OCTET STRING.  </t>
+        </section>
+        <section title="SignedData Content Type" toc="default">
+          <t>Sending agents MUST use the SignedData content type to apply a digital signature to a message or, in a degenerate case where there is no signature information, to convey certificates.  Applying a signature to a message provides authentication, message integrity, and non-repudiation of origin.  </t>
+        </section>
+        <section title="EnvelopedData Content Type" toc="default">
+          <t>This content type is used to apply data confidentiality to a message.  A sender needs to have access to a public key for each intended message recipient to use this service.  </t>
+        </section>
+        <section title="AuthEnvelopedData Content Type" anchor="AuthEnvelopedData1" toc="default">
+          <t>This content type is used to apply data confidentiality and message integrity to a message.  This content type does not provide authentication or non-repudiation.  A sender needs to have access to a public key for each intended message recipient to use this service.  </t>
+        </section>
+        <section title="CompressedData Content Type" toc="default">
+          <t>This content type is used to apply data compression to a message.  This content type does not provide authentication, message integrity, non-repudiation, or data confidentiality, and is only used to reduce the message's size.  </t>
+          <t>See <xref target="MultipleOperations" pageno="false" format="default"/> for further guidance on the use of this type in conjunction with other CMS types.  </t>
+        </section>
+      </section>
+      <section title="Attributes and the SignerInfo Type" toc="default">
+        <t>The SignerInfo type allows the inclusion of unsigned and signed attributes along with a signature.  </t>
+        <t>Receiving agents MUST be able to handle zero or one instance of each of the signed attributes listed here.  Sending agents SHOULD generate one instance of each of the following signed attributes in each S/&#8288;MIME message: <list style="symbols"><t>Signing Time (<xref target="SignTime" pageno="false" format="default"/> in this document) </t><t>SMIME Capabilities (<xref target="SMIMECaps" pageno="false" format="default"/> in this document) </t><t>Encryption Key Preference (<xref target="EncryptKeyPref" pageno="false" format="default"/> in this document) </t><t>Message Digest (Section 11.2 in <xref target="RFC5652" pageno="false" format="default"/>) </t><t>Content Type (Section 11.1 in <xref target="RFC5652" pageno="false" format="default"/>) </t></list> </t>
+        <t>Further, receiving agents SHOULD be able to handle zero or one instance of the signingCertificate and signingCertificatev2 signed attributes, as defined in Section 5 of RFC 2634 <xref target="ESS" pageno="false" format="default"/> and Section 3 of RFC 5035 <xref target="ESS" pageno="false" format="default"/>.  </t>
+        <t>Sending agents SHOULD generate one instance of the signingCertificate or signingCertificatev2 signed attribute in each SignerInfo structure.  </t>
+        <t>Additional attributes and values for these attributes might be defined in the future.  Receiving agents SHOULD handle attributes or values that they do not recognize in a graceful manner.  </t>
+        <t>Interactive sending agents that include signed attributes that are not listed here SHOULD display those attributes to the user, so that the user is aware of all of the data being signed.  </t>
+        <section title="Signing Time Attribute" anchor="SignTime" toc="default">
+          <t>The signing-time attribute is used to convey the time that a message was signed.  The time of signing will most likely be created by a message originator and therefore is only as trustworthy as the originator.  <cref source="JLS">We could kill this section and just reference RFC5652 if we wanted.  </cref> </t>
+          <t>Sending agents MUST encode signing time through the year 2049 as UTCTime; signing times in 2050 or later MUST be encoded as GeneralizedTime.  When the UTCTime CHOICE is used, S/&#8288;MIME agents MUST interpret the year field (YY) as follows: <list style="none"><t>If YY is greater than or equal to 50, the year is interpreted as 19YY; if YY is less than 50, the year is interpreted as 20YY.  </t></list> </t>
+          <t>Receiving agents MUST be able to process signing-time attributes that are encoded in either UTCTime or GeneralizedTime.  </t>
+        </section>
+        <section title="SMIME Capabilities Attribute" anchor="SMIMECaps" toc="default">
+          <t>The SMIMECapabilities attribute includes signature algorithms (such as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128 CBC"), authenticated symmetric algorithms (such as "AES-GCM") and key encipherment algorithms (such as "rsaEncryption").  There are also several identifiers that indicate support for other optional features such as binary encoding and compression.  The SMIMECapabilities were designed to be flexible and extensible so that, in the future, a means of identifying other capabilities and preferences such as certificates can be added in a way that will not cause current clients to break.  </t>
+          <t>If present, the SMIMECapabilities attribute MUST be a SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines SignedAttributes as a SET OF Attribute.  The SignedAttributes in a signerInfo MUST NOT include multiple instances of the SMIMECapabilities attribute.  CMS defines the ASN.1 syntax for Attribute to include attrValues SET OF AttributeValue.  A SMIMECapabilities attribute MUST only include a single instance of AttributeValue.  There MUST NOT be zero or multiple instances of AttributeValue present in the attrValues SET OF AttributeValue.  </t>
+          <t>The semantics of the SMIMECapabilities attribute specify a partial list as to what the client announcing the SMIMECapabilities can support.  A client does not have to list every capability it supports, and need not list all its capabilities so that the capabilities list doesn't get too long.  In an SMIMECapabilities attribute, the object identifiers (OIDs) are listed in order of their preference, but SHOULD be separated logically along the lines of their categories (signature algorithms, symmetric algorithms, key encipherment algorithms, etc.).  </t>
+          <t>The structure of the SMIMECapabilities attribute is to facilitate simple table lookups and binary comparisons in order to determine matches.  For instance, the DER-encoding for the SMIMECapability for AES-128 CBC MUST be identically encoded regardless of the implementation.  Because of the requirement for identical encoding, individuals documenting algorithms to be used in the SMIMECapabilities attribute SHOULD explicitly document the correct byte sequence for the common cases.  </t>
+          <t>For any capability, the associated parameters for the OID MUST specify all of the parameters necessary to differentiate between two instances of the same algorithm.  </t>
+          <t>The OIDs that correspond to algorithms SHOULD use the same OID as the actual algorithm, except in the case where the algorithm usage is ambiguous from the OID.  For instance, in an earlier specification, rsaEncryption was ambiguous because it could refer to either a signature algorithm or a key encipherment algorithm.  In the event that an OID is ambiguous, it needs to be arbitrated by the maintainer of the registered SMIMECapabilities list as to which type of algorithm will use the OID, and a new OID MUST be allocated under the smimeCapabilities OID to satisfy the other use of the OID.  </t>
+          <t>The registered SMIMECapabilities list specifies the parameters for OIDs that need them, most notably key lengths in the case of variable-length symmetric ciphers.  In the event that there are no differentiating parameters for a particular OID, the parameters MUST be omitted, and MUST NOT be encoded as NULL.  Additional values for the SMIMECapabilities attribute might be defined in the future.  Receiving agents MUST handle a SMIMECapabilities object that has values that it does not recognize in a graceful manner.  </t>
+          <t><xref target="WhichEncAlg" pageno="false" format="default"/> explains a strategy for caching capabilities.  </t>
+        </section>
+        <section title="Encryption Key Preference Attribute" anchor="EncryptKeyPref" toc="default">
+          <t>The encryption key preference attribute allows the signer to unambiguously describe which of the signer's certificates has the signer's preferred encryption key.  This attribute is designed to enhance behavior for interoperating with those clients that use separate keys for encryption and signing.  This attribute is used to convey to anyone viewing the attribute which of the listed certificates is appropriate for encrypting a session key for future encrypted messages.  </t>
+          <t>If present, the SMIMEEncryptionKeyPreference attribute MUST be a SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines SignedAttributes as a SET OF Attribute.  The SignedAttributes in a signerInfo MUST NOT include multiple instances of the SMIMEEncryptionKeyPreference attribute.  CMS defines the ASN.1 syntax for Attribute to include attrValues SET OF AttributeValue.  A SMIMEEncryptionKeyPreference attribute MUST only include a single instance of AttributeValue.  There MUST NOT be zero or multiple instances of AttributeValue present in the attrValues SET OF AttributeValue.  </t>
+          <t>The sending agent SHOULD include the referenced certificate in the set of certificates included in the signed message if this attribute is used.  The certificate MAY be omitted if it has been previously made available to the receiving agent.  Sending agents SHOULD use this attribute if the commonly used or preferred encryption certificate is not the same as the certificate used to sign the message.  </t>
+          <t>Receiving agents SHOULD store the preference data if the signature on the message is valid and the signing time is greater than the currently stored value.  (As with the SMIMECapabilities, the clock skew SHOULD be checked and the data not used if the skew is too great.)  Receiving agents SHOULD respect the sender's encryption key preference attribute if possible.  This, however, represents only a preference and the receiving agent can use any certificate in replying to the sender that is valid.  </t>
+          <t><xref target="WhichEncAlg" pageno="false" format="default"/> explains a strategy for caching preference data.  </t>
+          <section title="Selection of Recipient Key Management Certificate" toc="default">
+            <t>In order to determine the key management certificate to be used when sending a future CMS EnvelopedData message for a particular recipient, the following steps SHOULD be followed: <list style="symbols"><t>If an SMIMEEncryptionKeyPreference attribute is found in a SignedData object received from the desired recipient, this identifies the X.509 certificate that SHOULD be used as the X.509 key management certificate for the recipient.  </t><t>If an SMIMEEncryptionKeyPreference attribute is not found in a SignedData object received from the desired recipient, the set of X.509 certificates SHOULD be searched for a X.509 certificate with the same subject name as the signer of a X.509 certificate that can be used for key management.  </t><t>Or use some other method of determining the user's key management key.  If a X.509 key management certificate is not found, then encryption cannot be done with the signer of the message.  If multiple X.509 key management certificates are found, the S/&#8288;MIME agent can make an arbitrary choice between them.  </t></list> </t>
+          </section>
+        </section>
+      </section>
+      <section title="SignerIdentifier SignerInfo Type" toc="default">
+        <t>S/&#8288;MIME v3.5 implementations MUST support both issuerAndSerialNumber and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier choice cannot be read by S/&#8288;MIME v2 clients.  </t>
+        <t>It is important to understand that some certificates use a value for subjectKeyIdentifier that is not suitable for uniquely identifying a certificate.  Implementations MUST be prepared for multiple certificates for potentially different entities to have the same value for subjectKeyIdentifier, and MUST be prepared to try each matching certificate during signature verification before indicating an error condition.  </t>
+      </section>
+      <section title="ContentEncryptionAlgorithmIdentifier" anchor="ContentEncryptionAlgorithmIdentifier" toc="default">
+        <t>Sending and receiving agents: <list style="symbols"><t>MUST support encryption and decryption with AES-128 CBC <xref target="RFC3565" pageno="false" format="default"/> and AES-128 GCM <xref target="RFC5084" pageno="false" format="default"/>.  </t><t>SHOULD+ support encryption and decryption with AES-192 CBC, AES-256 CBC <xref target="RFC3565" pageno="false" format="default"/>, AES-192 GCM and AES-256 GCM <xref target="RFC5084" pageno="false" format="default"/>.  </t><t>SHOULD- support encryption and decryption with DES EDE3 CBC, hereinafter called "tripleDES" <xref target="RFC3370" pageno="false" format="default"/>.  </t></list> </t>
+        <section title="Deciding Which Encryption Method to Use" anchor="WhichEncAlg" toc="default">
+          <t>When a sending agent creates an encrypted message, it has to decide which type of encryption to use.  The decision process involves using information garnered from the capabilities lists included in messages received from the recipient, as well as out-of-band information such as private agreements, user preferences, legal restrictions, and so on.  </t>
+          <t><xref target="SMIMECaps" pageno="false" format="default"/> defines a method by which a sending agent can optionally announce, among other things, its decrypting capabilities in its order of preference.  The following method for processing and remembering the encryption capabilities attribute in incoming signed messages SHOULD be used.  <list style="symbols"><t>If the receiving agent has not yet created a list of capabilities for the sender's public key, then, after verifying the signature on the incoming message and checking the timestamp, the receiving agent SHOULD create a new list containing at least the signing time and the symmetric capabilities.  </t><t>If such a list already exists, the receiving agent SHOULD verify that the signing time in the incoming message is greater than the signing time stored in the list and that the signature is valid.  If so, the receiving agent SHOULD update both the signing time and capabilities in the list.  Values of the signing time that lie far in the future (that is, a greater discrepancy than any reasonable clock skew), or a capabilities list in messages whose signature could not be verified, MUST NOT be accepted.  </t></list> </t>
+          <t>The list of capabilities SHOULD be stored for future use in creating messages.  </t>
+          <t>Before sending a message, the sending agent MUST decide whether it is willing to use weak encryption for the particular data in the message.  If the sending agent decides that weak encryption is unacceptable for this data, then the sending agent MUST NOT use a weak algorithm.  The decision to use or not use weak encryption overrides any other decision in this section about which encryption algorithm to use.  </t>
+          <t><xref target="KnownCaps" pageno="false" format="default"/> and <xref target="UnknownCaps" pageno="false" format="default"/> describe the decisions a sending agent SHOULD use in deciding which type of encryption will be applied to a message.  These rules are ordered, so the sending agent SHOULD make its decision in the order given.  </t>
+          <section title="Rule 1: Known Capabilities" anchor="KnownCaps" toc="default">
+            <t>If the sending agent has received a set of capabilities from the recipient for the message the agent is about to encrypt, then the sending agent SHOULD use that information by selecting the first capability in the list (that is, the capability most preferred by the intended recipient) that the sending agent knows how to encrypt.  The sending agent SHOULD use one of the capabilities in the list if the agent reasonably expects the recipient to be able to decrypt the message.  </t>
+          </section>
+          <section title="Rule 2: Unknown Capabilities, Unknown Version of S/MIME" anchor="UnknownCaps" toc="default">
+            <t>If the following two conditions are met: <list style="symbols"><t>the sending agent has no knowledge of the encryption capabilities of the recipient, and </t><t>the sending agent has no knowledge of the version of S/&#8288;MIME of the recipient, </t></list> then the sending agent SHOULD use AES-128 CBC because it is a stronger algorithm and is required by S/&#8288;MIME v3.2.  If the sending agent chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.  <cref source="JLS">Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES? </cref> </t>
+          </section>
+        </section>
+        <section title="Choosing Weak Encryption" anchor="WeakEncryption" toc="default">
+          <t>All algorithms that use 40-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as tripleDES or AES.  <cref source="JLS">Does this become a MUST NOT now.</cref> </t>
+        </section>
+        <section title="Multiple Recipients" toc="default">
+          <t>If a sending agent is composing an encrypted message to a group of recipients where the encryption capabilities of some of the recipients do not overlap, the sending agent is forced to send more than one message.  Please note that if the sending agent chooses to send a message encrypted with a strong algorithm, and then send the same message encrypted with a weak algorithm, someone watching the communications channel could learn the contents of the strongly encrypted message simply by decrypting the weakly encrypted message.  </t>
+        </section>
+      </section>
+    </section>
+    <section title="Creating S/MIME Messages" toc="default">
+      <t>This section describes the S/&#8288;MIME message formats and how they are created.  S/&#8288;MIME messages are a combination of MIME bodies and CMS content types.  Several media types as well as several CMS content types are used.  The data to be secured is always a canonical MIME entity.  The MIME entity and other data, such as certificates and algorithm identifiers, are given to CMS processing facilities that produce a CMS object.  Finally, the CMS object is wrapped in MIME.  The Enhanced Security Services for S/&#8288;MIME <xref target="ESS" pageno="false" format="default"/> document provides descriptions of how nested, secured S/&#8288;MIME messages are formatted.  ESS provides a description of how a triple-wrapped S/&#8288;MIME message is formatted using multipart/&#8288;signed and application/&#8288;pkcs7-mime for the signatures.  </t>
+      <t>S/&#8288;MIME provides one format for enveloped-only data, several formats for signed-only data, and several formats for signed and enveloped data.  Several formats are required to accommodate several environments, in particular for signed messages.  The criteria for choosing among these formats are also described.  </t>
+      <t>The reader of this section is expected to understand MIME as described in <xref target="MIME-SPEC" pageno="false" format="default"/> and <xref target="RFC1847" pageno="false" format="default"/>.  </t>
+      <section title="Preparing the MIME Entity for Signing, Enveloping, or Compressing" anchor="MimePrep" toc="default">
+        <t>S/&#8288;MIME is used to secure MIME entities.  A MIME entity can be a sub- part, sub-parts of a message, or the whole message with all its sub- parts.  A MIME entity that is the whole message includes only the MIME message headers and MIME body, and does not include the RFC-822 header.  Note that S/&#8288;MIME can also be used to secure MIME entities used in applications other than Internet mail.  If protection of the RFC-822 header is required, the use of the message/rfc822 media type is explained later in this section.  </t>
+        <t>The MIME entity that is secured and described in this section can be thought of as the "inside" MIME entity.  That is, it is the "innermost" object in what is possibly a larger MIME message.  Processing "outside" MIME entities into CMS content types is described in <xref target="pkcs7-mime-media-type" pageno="false" format="default"/>, <xref target="Signed-Only" pageno="false" format="default"/>, and elsewhere.  </t>
+        <t>The procedure for preparing a MIME entity is given in <xref target="MIME-SPEC" pageno="false" format="default"/>.  The same procedure is used here with some additional restrictions when signing.  The description of the procedures from <xref target="MIME-SPEC" pageno="false" format="default"/> is repeated here, but it is suggested that the reader refer to that document for the exact procedure.  This section also describes additional requirements.  </t>
+        <t>A single procedure is used for creating MIME entities that are to have any combination of signing, enveloping, and compressing applied.  Some additional steps are recommended to defend against known corruptions that can occur during mail transport that are of particular importance for clear-signing using the multipart/&#8288;signed format.  It is recommended that these additional steps be performed on enveloped messages, or signed and enveloped messages, so that the message can be forwarded to any environment without modification.  </t>
+        <t>These steps are descriptive rather than prescriptive.  The implementer is free to use any procedure as long as the result is the same.  <list style="format Step %d."><t>The MIME entity is prepared according to the local conventions.  </t><t>The leaf parts of the MIME entity are converted to canonical form.  </t><t>Appropriate transfer encoding is applied to the leaves of the MIME entity.  </t></list> </t>
+        <t>When an S/&#8288;MIME message is received, the security services on the message are processed, and the result is the MIME entity.  That MIME entity is typically passed to a MIME-capable user agent where it is further decoded and presented to the user or receiving application.  </t>
+        <t>In order to protect outer, non-content-related message header fields (for instance, the "Subject", "To", "From", and "Cc" fields), the sending client MAY wrap a full MIME message in a message/rfc822 wrapper in order to apply S/&#8288;MIME security services to these header fields.  It is up to the receiving client to decide how to present this "inner" header along with the unprotected "outer" header.  </t>
+        <t>When an S/&#8288;MIME message is received, if the top-level protected MIME entity has a Content-Type of message/rfc822, it can be assumed that the intent was to provide header protection.  This entity SHOULD be presented as the top-level message, taking into account header merging issues as previously discussed.  </t>
+        <section title="Canonicalization" anchor="Canonicalization" toc="default">
+          <t>Each MIME entity MUST be converted to a canonical form that is uniquely and unambiguously representable in the environment where the signature is created and the environment where the signature will be verified.  MIME entities MUST be canonicalized for enveloping and compressing as well as signing.  </t>
+          <t>The exact details of canonicalization depend on the actual media type and subtype of an entity, and are not described here.  Instead, the standard for the particular media type SHOULD be consulted.  For example, canonicalization of type text/plain is different from canonicalization of audio/basic.  Other than text types, most types have only one representation regardless of computing platform or environment that can be considered their canonical representation.  In general, canonicalization will be performed by the non-security part of the sending agent rather than the S/&#8288;MIME implementation.  </t>
+          <t>The most common and important canonicalization is for text, which is often represented differently in different environments.  MIME entities of major type "text" MUST have both their line endings and character set canonicalized.  The line ending MUST be the pair of characters &lt;CR&gt;&lt;LF&gt;, and the charset SHOULD be a registered charset <xref target="CHARSETS" pageno="false" format="default"/>.  The details of the canonicalization are specified in <xref target="MIME-SPEC" pageno="false" format="default"/>.  </t>
+          <t>Note that some charsets such as ISO-2022 have multiple representations for the same characters.  When preparing such text for signing, the canonical representation specified for the charset MUST be used.  </t>
+        </section>
+        <section title="Transfer Encoding" toc="default">
+          <t>When generating any of the secured MIME entities below, except the signing using the multipart/&#8288;signed format, no transfer encoding is required at all.  S/&#8288;MIME implementations MUST be able to deal with binary MIME objects.  If no Content-Transfer-Encoding header field is present, the transfer encoding is presumed to be 7BIT.  </t>
+          <t>S/&#8288;MIME implementations SHOULD however use transfer encoding described in <xref target="Transfer-multipart" pageno="false" format="default"/> for all MIME entities they secure.  The reason for securing only 7-bit MIME entities, even for enveloped data that are not exposed to the transport, is that it allows the MIME entity to be handled in any environment without changing it.  For example, a trusted gateway might remove the envelope, but not the signature, of a message, and then forward the signed message on to the end recipient so that they can verify the signatures directly.  If the transport internal to the site is not 8-bit clean, such as on a wide- area network with a single mail gateway, verifying the signature will not be possible unless the original MIME entity was only 7-bit data.  </t>
+          <t>S/&#8288;MIME implementations that "know" that all intended recipients are capable of handling inner (all but the outermost) binary MIME objects SHOULD use binary encoding as opposed to a 7-bit-safe transfer encoding for the inner entities.  The use of a 7-bit-safe encoding (such as base64) would unnecessarily expand the message size.  Implementations MAY "know" that recipient implementations are capable of handling inner binary MIME entities either by interpreting the id- cap-preferBinaryInside SMIMECapabilities attribute, by prior agreement, or by other means.  </t>
+          <t>If one or more intended recipients are unable to handle inner binary MIME objects, or if this capability is unknown for any of the intended recipients, S/&#8288;MIME implementations SHOULD use transfer encoding described in <xref target="Transfer-multipart" pageno="false" format="default"/> for all MIME entities they secure.  </t>
+        </section>
+        <section title="Transfer Encoding for Signing Using multipart/signed" anchor="Transfer-multipart" toc="default">
+          <t>If a multipart/&#8288;signed entity is ever to be transmitted over the standard Internet SMTP infrastructure or other transport that is constrained to 7-bit text, it MUST have transfer encoding applied so that it is represented as 7-bit text.  MIME entities that are 7-bit data already need no transfer encoding.  Entities such as 8-bit text and binary data can be encoded with quoted-printable or base-64 transfer encoding.  </t>
+          <t>The primary reason for the 7-bit requirement is that the Internet mail transport infrastructure cannot guarantee transport of 8-bit or binary data.  Even though many segments of the transport infrastructure now handle 8-bit and even binary data, it is sometimes not possible to know whether the transport path is 8-bit clean.  If a mail message with 8-bit data were to encounter a message transfer agent that cannot transmit 8-bit or binary data, the agent has three options, none of which are acceptable for a clear-signed message: <list style="symbols"><t>The agent could change the transfer encoding; this would invalidate the signature.  </t><t>The agent could transmit the data anyway, which would most likely result in the 8th bit being corrupted; this too would invalidate the signature.  </t><t>The agent could return the message to the sender.  </t></list> </t>
+          <t><xref target="RFC1847" pageno="false" format="default"/> prohibits an agent from changing the transfer encoding of the first part of a multipart/&#8288;signed message.  If a compliant agent that cannot transmit 8-bit or binary data encounters a multipart/&#8288;signed message with 8-bit or binary data in the first part, it would have to return the message to the sender as undeliverable.  </t>
+        </section>
+        <section title="Sample Canonical MIME Entity" toc="default">
+          <t>This example shows a multipart/&#8288;mixed message with full transfer encoding.  This message contains a text part and an attachment.  The sample message text includes characters that are not US-ASCII and thus need to be transfer encoded.  Though not shown here, the end of each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.  </t>
+          <t>Note that this example is not of an S/&#8288;MIME message.  </t>
+          <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+            <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+   Content-Type: multipart/mixed; boundary=bar
+
+   --bar
+   Content-Type: text/plain; charset=iso-8859-1
+   Content-Transfer-Encoding: quoted-printable
+
+   =A1Hola Michael!
+
+   How do you like the new S/MIME specification?
+
+   It's generally a good idea to encode lines that begin with
+   From=20because some mail transport agents will insert a greater-
+   than (&gt;) sign, thus invalidating the signature.
+
+   Also, in some cases it might be desirable to encode any =20
+   trailing whitespace that occurs on lines in order to ensure =20
+   that the message signature is not invalidated when passing =20
+   a gateway that modifies such whitespace (like BITNET). =20
+
+   --bar
+   Content-Type: image/jpeg
+   Content-Transfer-Encoding: base64
+
+   iQCVAwUBMJrRF2N9oWBghPDJAQE9UQQAtl7LuRVndBjrk4EqYBIb3h5QXIX/LC//
+   jJV5bNvkZIGPIcEmI5iFd9boEgvpirHtIREEqLQRkYNoBActFBZmh9GC3C041WGq
+   uMbrbxc+nIs1TIKlA08rVi9ig/2Yh7LFrK5Ein57U/W72vgSxLhe/zhdfolT9Brn
+   HOxEa44b+EI=
+
+   --bar--
+              </artwork>
+          </figure>
+        </section>
+      </section>
+      <section title="The application/pkcs7-mime Media Type" anchor="pkcs7-mime-media-type" toc="default">
+        <t>The application/&#8288;pkcs7-mime media type is used to carry CMS content types including EnvelopedData, SignedData, and CompressedData.  The details of constructing these entities are described in subsequent sections.  This section describes the general characteristics of the application/&#8288;pkcs7-mime media type.  </t>
+        <t>The carried CMS object always contains a MIME entity that is prepared as described in <xref target="MimePrep" pageno="false" format="default"/> if the eContentType is id-data.  Other contents MAY be carried when the eContentType contains different values.  See <xref target="ESS" pageno="false" format="default"/> for an example of this with signed receipts.  </t>
+        <t>Since CMS content types are binary data, in most cases base-64 transfer encoding is appropriate, in particular, when used with SMTP transport.  The transfer encoding used depends on the transport through which the object is to be sent, and is not a characteristic of the media type.  </t>
+        <t>Note that this discussion refers to the transfer encoding of the CMS object or "outside" MIME entity.  It is completely distinct from, and unrelated to, the transfer encoding of the MIME entity secured by the CMS object, the "inside" object, which is described in <xref target="MimePrep" pageno="false" format="default"/>.  </t>
+        <t>Because there are several types of application/&#8288;pkcs7-mime objects, a sending agent SHOULD do as much as possible to help a receiving agent know about the contents of the object without forcing the receiving agent to decode the ASN.1 for the object.  The Content-Type header field of all application/&#8288;pkcs7-mime objects SHOULD include the optional "smime-type" parameter, as described in the following sections.  </t>
+        <section title="The name and filename Parameters" toc="default">
+          <t>For the application/&#8288;pkcs7-mime, sending agents SHOULD emit the optional "name" parameter to the Content-Type field for compatibility with older systems.  Sending agents SHOULD also emit the optional Content-Disposition field <xref target="RFC2138" pageno="false" format="default"/> with the "filename" parameter.  If a sending agent emits the above parameters, the value of the parameters SHOULD be a file name with the appropriate extension: </t>
+          <texttable style="none" title="" suppress-title="false" align="center">
+            <ttcol align="left">Media Type</ttcol>
+            <ttcol align="center">File Extension</ttcol>
+            <c>application/pkcs7-mime (SignedData, EnvelopedData)</c>
+            <c>.p7m</c>
+            <c>application/pkcs7-mime (degenerate SignedData certificate management message)</c>
+            <c>.p7c</c>
+            <c>application/pkcs7-mime (CompressedData)</c>
+            <c>.p7z</c>
+            <c>application/pkcs7-signature (SignedData)</c>
+            <c>.p7s</c>
+          </texttable>
+          <t>In addition, the file name SHOULD be limited to eight characters followed by a three-letter extension.  The eight-character filename base can be any distinct name; the use of the filename base "smime" SHOULD be used to indicate that the MIME entity is associated with S/&#8288;MIME.  </t>
+          <t>Including a file name serves two purposes.  It facilitates easier use of S/&#8288;MIME objects as files on disk.  It also can convey type information across gateways.  When a MIME entity of type application/&#8288;pkcs7-mime (for example) arrives at a gateway that has no special knowledge of S/&#8288;MIME, it will default the entity's media type to application/&#8288;octet-stream and treat it as a generic attachment, thus losing the type information.  However, the suggested filename for an attachment is often carried across a gateway.  This often allows the receiving systems to determine the appropriate application to hand the attachment off to, in this case, a stand-alone S/&#8288;MIME processing application.  Note that this mechanism is provided as a convenience for implementations in certain environments.  A proper S/&#8288;MIME implementation MUST use the media types and MUST NOT rely on the file extensions.  </t>
+        </section>
+        <section title="The smime-type Parameter" anchor="smime-type" toc="default">
+          <t>The application/&#8288;pkcs7-mime content type defines the optional "smime- type" parameter.  The intent of this parameter is to convey details about the security applied (signed or enveloped) along with information about the contained content.  This specification defines the following smime-types.  </t>
+          <texttable style="none" title="" suppress-title="false" align="center">
+            <ttcol align="left">Name</ttcol>
+            <ttcol align="left">CMS Type</ttcol>
+            <ttcol align="left">Inner Content</ttcol>
+            <c>enveloped-data</c>
+            <c>EnvelopedData</c>
+            <c>id-data</c>
+            <c>signed-data</c>
+            <c>SignedData</c>
+            <c>id-data</c>
+            <c>certs-only</c>
+            <c>SignedData</c>
+            <c>id-data</c>
+            <c>compressed-data</c>
+            <c>CompressedData</c>
+            <c>id-data</c>
+            <c>authEnvelopedData</c>
+            <c>AuthEnvelopedData</c>
+            <c>id-data</c>
+          </texttable>
+          <t>In order for consistency to be obtained with future specifications, the following guidelines SHOULD be followed when assigning a new smime-type parameter.  <list style="numbers"><t>If both signing and encryption can be applied to the content, then two values for smime-type SHOULD be assigned "signed-*" and "enveloped-*".  If one operation can be assigned, then this can be omitted.  Thus, since "certs-only" can only be signed, "signed-" is omitted.  </t><t>A common string for a content OID SHOULD be assigned.  We use "data" for the id-data content OID when MIME is the inner content.  </t><t>If no common string is assigned, then the common string of "OID.&lt;oid&gt;" is recommended (for example, "OID.2.16.840.1.101.3.4.1.2" would be AES-128 CBC).  </t></list> </t>
+          <t>It is explicitly intended that this field be a suitable hint for mail client applications to indicate whether a message is "signed" or "enveloped" without having to tunnel into the CMS payload.  </t>
+        </section>
+      </section>
+      <section title="Creating an Enveloped-Only Message" toc="default">
+        <t>This section describes the format for enveloping a MIME entity without signing it.  It is important to note that sending enveloped but not signed messages does not provide for data integrity.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  </t>
+        <t><list style="format Step %d."><t>The MIME entity to be enveloped is prepared according to <xref target="MimePrep" pageno="false" format="default"/>.  </t><t>The MIME entity and other required data is processed into a CMS object of type EnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the EnvelopedData (see <xref target="RFC5652" pageno="false" format="default"/>, Section 6).  </t><t>The EnvelopedData object is wrapped in a CMS ContentInfo object.  </t><t>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </t></list> </t>
+        <t>The smime-type parameter for enveloped-only messages is "enveloped- data".  The file extension for this type of message is ".p7m".  </t>
+        <t>A sample message would be: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+Content-Type: application/pkcs7-mime; smime-type=enveloped-data;
+     name=smime.p7m
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7m
+
+rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+0GhIGfHfQbnj756YT64V
+              </artwork>
+        </figure>
+      </section>
+      <section title="Creating an Authenticated Enveloped-Only Message" anchor="AuthEnvelopedData2" toc="default">
+        <t>This section describes the format for enveloping a MIME entity without signing it.  Authenticated enveloped messages provide confidentiality and integrity.  It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.  It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.  However this is substantially more difficult than it is for an enveloped-only message as the </t>
+        <t><list style="format Step %d."><t>The MIME entity to be enveloped is prepared according to <xref target="MimePrep" pageno="false" format="default"/>.  </t><t>The MIME entity and other required data is processed into a CMS object of type AuthEnvelopedData.  In addition to encrypting a copy of the content-encryption key for each recipient, a copy of the content-encryption key SHOULD be encrypted for the originator and included in the AuthEnvelopedData (see <xref target="RFC5083" pageno="false" format="default"/>).  </t><t>The AuthEnvelopedData object is wrapped in a CMS ContentInfo object.  </t><t>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </t></list> </t>
+        <t>The smime-type parameter for authenticated enveloped-only messages is "authEnvelopedData".  The file extension for this type of message is ".p7m".  </t>
+        <t>A sample message would be: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+Content-Type: application/pkcs7-mime; smime-type=authEnvelopedData;
+     name=smime.p7m
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7m
+
+rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+0GhIGfHfQbnj756YT64V
+              </artwork>
+        </figure>
+      </section>
+      <section title="Creating a Signed-Only Message" anchor="Signed-Only" toc="default">
+        <t>There are two formats for signed messages defined for S/&#8288;MIME: <list style="symbols"><t>application/&#8288;pkcs7-mime with SignedData.  </t><t>multipart/signed.  </t></list> </t>
+        <t>In general, the multipart/signed form is preferred for sending, and receiving agents MUST be able to handle both.  </t>
+        <section title="Choosing a Format for Signed-Only Messages" toc="default">
+          <t>There are no hard-and-fast rules as to when a particular signed-only format is chosen.  It depends on the capabilities of all the receivers and the relative importance of receivers with S/&#8288;MIME facilities being able to verify the signature versus the importance of receivers without S/&#8288;MIME software being able to view the message.  </t>
+          <t>Messages signed using the multipart/&#8288;signed format can always be viewed by the receiver whether or not they have S/&#8288;MIME software.  They can also be viewed whether they are using a MIME-native user agent or they have messages translated by a gateway.  In this context, "be viewed" means the ability to process the message essentially as if it were not a signed message, including any other MIME structure the message might have.  </t>
+          <t>Messages signed using the SignedData format cannot be viewed by a recipient unless they have S/&#8288;MIME facilities.  However, the SignedData format protects the message content from being changed by benign intermediate agents.  Such agents might do line wrapping or content-transfer encoding changes that would break the signature.  </t>
+        </section>
+        <section title="Signing Using application/pkcs7-mime with SignedData" toc="default">
+          <t>This signing format uses the application/&#8288;pkcs7-mime media type.  The steps to create this format are: <list style="format Step %d."><t>The MIME entity is prepared according to <xref target="MimePrep" pageno="false" format="default"/>.  </t><t>The MIME entity and other required data are processed into a CMS object of type SignedData.  </t><t>The SignedData object is wrapped in a CMS ContentInfo object.  </t><t>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </t></list> </t>
+          <t>The smime-type parameter for messages using application/&#8288;pkcs7-mime with SignedData is "signed-data".  The file extension for this type of message is ".p7m".  </t>
+          <t>A sample message would be: </t>
+          <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+            <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+   Content-Type: application/pkcs7-mime; smime-type=signed-data;
+        name=smime.p7m
+   Content-Transfer-Encoding: base64
+   Content-Disposition: attachment; filename=smime.p7m
+
+   567GhIGfHfYT6ghyHhHUujpfyF4f8HHGTrfvhJhjH776tbB9HG4VQbnj7
+   77n8HHGT9HG4VQpfyF467GhIGfHfYT6rfvbnj756tbBghyHhHUujhJhjH
+   HUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H7n8HHGghyHh
+   6YT64V0GhIGfHfQbnj75
+                </artwork>
+          </figure>
+        </section>
+        <section title="Signing Using the multipart/signed Format" anchor="SignMultipart" toc="default">
+          <t>This format is a clear-signing format.  Recipients without any S/&#8288;MIME or CMS processing facilities are able to view the message.  It makes use of the multipart/&#8288;signed media type described in <xref target="RFC1847" pageno="false" format="default"/>.  The multipart/&#8288;signed media type has two parts.  The first part contains the MIME entity that is signed; the second part contains the "detached signature" CMS SignedData object in which the encapContentInfo eContent field is absent.  </t>
+          <section title="The application/pkcs7-signature Media Type" toc="default">
+            <t>This media type always contains a CMS ContentInfo containing a single CMS object of type SignedData.  The SignedData encapContentInfo eContent field MUST be absent.  The signerInfos field contains the signatures for the MIME entity.  </t>
+            <t>The file extension for signed-only messages using application/&#8288;pkcs7- signature is ".p7s".  </t>
+          </section>
+          <section title="Creating a multipart/signed Message" toc="default">
+            <t><list style="format Step %d."><t>The MIME entity to be signed is prepared according to <xref target="MimePrep" pageno="false" format="default"/>, taking special care for clear-signing.  </t><t>The MIME entity is presented to CMS processing in order to obtain an object of type SignedData in which the encapContentInfo eContent field is absent.  </t><t>The MIME entity is inserted into the first part of a multipart/&#8288;signed message with no processing other than that described in <xref target="MimePrep" pageno="false" format="default"/>.  </t><t>Transfer encoding is applied to the "detached signature" CMS SignedData object, and it is inserted into a MIME entity of type application/&#8288;pkcs7-signature.  </t><t>The MIME entity of the application/&#8288;pkcs7-signature is inserted into the second part of the multipart/&#8288;signed entity.  </t></list> </t>
+            <t>The multipart/&#8288;signed Content-Type has two required parameters: the protocol parameter and the micalg parameter.  </t>
+            <t>The protocol parameter MUST be "application/&#8288;pkcs7-signature".  Note that quotation marks are required around the protocol parameter because MIME requires that the "/" character in the parameter value MUST be quoted.  </t>
+            <t>The micalg parameter allows for one-pass processing when the signature is being verified.  The value of the micalg parameter is dependent on the message digest algorithm(s) used in the calculation of the Message Integrity Check.  If multiple message digest algorithms are used, they MUST be separated by commas per [MIME- SECURE].  The values to be placed in the micalg parameter SHOULD be from the following: </t>
+            <texttable style="none" title="" suppress-title="false" align="center">
+              <ttcol align="left">Algorithm</ttcol>
+              <ttcol align="left">Value Used</ttcol>
+              <c>MD5</c>
+              <c>md5</c>
+              <c>SHA-1</c>
+              <c>sha-1</c>
+              <c>SHA-224</c>
+              <c>sha-224</c>
+              <c>SHA-256</c>
+              <c>sha-256</c>
+              <c>SHA-384</c>
+              <c>sha-384</c>
+              <c>SHA-512</c>
+              <c>sha-512</c>
+              <c>Any other</c>
+              <c>(defined separately in algorithm profile or "unknown" if not defined)</c>
+            </texttable>
+            <t>(Historical note: some early implementations of S/MIME emitted and expected "rsa-md5", "rsa-sha1", and "sha1" for the micalg parameter.) Receiving agents SHOULD be able to recover gracefully from a micalg parameter value that they do not recognize.  Future names for this parameter will be consistent with the IANA "Hash Function Textual Names" registry.  </t>
+          </section>
+          <section title="Sample multipart/signed Message" toc="default">
+            <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+              <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+                    
+Content-Type: multipart/signed;
+     protocol="application/pkcs7-signature";
+     micalg=sha-1; boundary=boundary42
+
+--boundary42
+Content-Type: text/plain
+
+This is a clear-signed message.
+
+--boundary42
+Content-Type: application/pkcs7-signature; name=smime.p7s
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7s
+
+ghyHhHUujhJhjH77n8HHGTrfvbnj756tbB9HG4VQpfyF467GhIGfHfYT6
+4VQpfyF467GhIGfHfYT6jH77n8HHGghyHhHUujhJh756tbB9HGTrfvbnj
+n8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+7GhIGfHfYT64VQbnj756
+
+--boundary42--
+                </artwork>
+            </figure>
+            <t>The content that is digested (the first part of the multipart/&#8288;signed) consists of the bytes: </t>
+            <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+              <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74 65 78 74 2f 70 6c 61 69
+6e 0d 0a 0d 0a 54 68 69 73 20 69 73 20 61 20 63 6c 65 61 72 2d 73 69
+67 6e 65 64 20 6d 65 73 73 61 67 65 2e 0d 0a
+                </artwork>
+            </figure>
+          </section>
+        </section>
+      </section>
+      <section title="Creating a Compressed-Only Message" toc="default">
+        <t>This section describes the format for compressing a MIME entity.  Please note that versions of S/&#8288;MIME prior to version 3.1 did not specify any use of CompressedData, and will not recognize it.  The use of a capability to indicate the ability to receive CompressedData is described in <xref target="RFC3274" pageno="false" format="default"/> and is the preferred method for compatibility.  </t>
+        <t><list style="format Step %d." hangIndent="9"><t>The MIME entity to be compressed is prepared according to <xref target="MimePrep" pageno="false" format="default"/>.  </t><t>The MIME entity and other required data are processed into a CMS object of type CompressedData.  </t><t>The CompressedData object is wrapped in a CMS ContentInfo object.  </t><t>The ContentInfo object is inserted into an application/&#8288;pkcs7-mime MIME entity.  </t></list> </t>
+        <t>The smime-type parameter for compressed-only messages is "compressed- data".  The file extension for this type of message is ".p7z".  </t>
+        <t>A sample message would be: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+Content-Type: application/pkcs7-mime; smime-type=compressed-data;
+   name=smime.p7z
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=smime.p7z
+
+rfvbnj756tbBghyHhHUujhJhjH77n8HHGT9HG4VQpfyF467GhIGfHfYT6
+7n8HHGghyHhHUujhJh4VQpfyF467GhIGfHfYGTrfvbnjT6jH7756tbB9H
+f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
+0GhIGfHfQbnj756YT64V
+              </artwork>
+        </figure>
+      </section>
+      <section title="Multiple Operations" anchor="MultipleOperations" toc="default">
+        <t>The signed-only, enveloped-only, and compressed-only MIME formats can be nested.  This works because these formats are all MIME entities that encapsulate other MIME entities.  </t>
+        <t>An S/&#8288;MIME implementation MUST be able to receive and process arbitrarily nested S/&#8288;MIME within reasonable resource limits of the recipient computer.  </t>
+        <t>It is possible to apply any of the signing, encrypting, and compressing operations in any order.  It is up to the implementer and the user to choose.  When signing first, the signatories are then securely obscured by the enveloping.  When enveloping first the signatories are exposed, but it is possible to verify signatures without removing the enveloping.  This can be useful in an environment where automatic signature verification is desired, as no private key material is required to verify a signature.  </t>
+        <t>There are security ramifications to choosing whether to sign first or encrypt first.  A recipient of a message that is encrypted and then signed can validate that the encrypted block was unaltered, but cannot determine any relationship between the signer and the unencrypted contents of the message.  A recipient of a message that is signed then encrypted can assume that the signed message itself has not been altered, but that a careful attacker could have changed the unauthenticated portions of the encrypted message.  </t>
+        <t>When using compression, keep the following guidelines in mind: <list style="symbols"><t>Compression of binary encoded encrypted data is discouraged, since it will not yield significant compression.  Base64 encrypted data could very well benefit, however.  </t><t>If a lossy compression algorithm is used with signing, you will need to compress first, then sign.  </t></list> </t>
+      </section>
+      <section title="Creating a Certificate Management Message" toc="default">
+        <t>The certificate management message or MIME entity is used to transport certificates and/or Certificate Revocation Lists, such as in response to a registration request.  </t>
+        <t><list style="format Step %d."><t>The certificates and/or Certificate Revocation Lists are made available to the CMS generating process that creates a CMS object of type SignedData.  The SignedData encapContentInfo eContent field MUST be absent and signerInfos field MUST be empty.  </t><t>The SignedData object is wrapped in a CMS ContentInfo object.  </t><t>The ContentInfo object is enclosed in an application/&#8288;pkcs7-mime MIME entity.  </t></list> </t>
+        <t>The smime-type parameter for a certificate management message is "certs-only".  The file extension for this type of message is ".p7c".  </t>
+      </section>
+      <section title="Registration Requests" toc="default">
+        <t>A sending agent that signs messages MUST have a certificate for the signature so that a receiving agent can verify the signature.  There are many ways of getting certificates, such as through an exchange with a certification authority, through a hardware token or diskette, and so on.  </t>
+        <t>S/&#8288;MIME v2 <xref target="SMIMEv2" pageno="false" format="default"/> specified a method for "registering" public keys with certificate authorities using an application/&#8288;pkcs10 body part.  Since that time, the IETF PKIX Working Group has developed other methods for requesting certificates.  However, S/&#8288;MIME v3.2 does not require a particular certificate request mechanism.  </t>
+      </section>
+      <section title="Identifying an S/MIME Message" toc="default">
+        <t>Because S/&#8288;MIME takes into account interoperation in non-MIME environments, several different mechanisms are employed to carry the type information, and it becomes a bit difficult to identify S/&#8288;MIME messages.  The following table lists criteria for determining whether or not a message is an S/&#8288;MIME message.  A message is considered an S/&#8288;MIME message if it matches any of the criteria listed below.  </t>
+        <t>The file suffix in the table below comes from the "name" parameter in the Content-Type header field, or the "filename" parameter on the Content-Disposition header field.  These parameters that give the file suffix are not listed below as part of the parameter section.  </t>
+        <texttable style="none" title="" suppress-title="false" align="center">
+          <ttcol align="left">Media type</ttcol>
+          <ttcol align="left">parameters</ttcol>
+          <ttcol align="left">file suffix</ttcol>
+          <c>application/pkcs7-mime</c>
+          <c>any</c>
+          <c>any</c>
+          <c>multipart/signed</c>
+          <c>protocol="application/pkcs7-signature"</c>
+          <c>any</c>
+          <c>application/octet-stream</c>
+          <c>any</c>
+          <c>p7m, p7s, p7c, p7z</c>
+        </texttable>
+      </section>
+    </section>
+    <section title="Certificate Processing" anchor="CertProcessing" toc="default">
+      <t>A receiving agent MUST provide some certificate retrieval mechanism in order to gain access to certificates for recipients of digital envelopes.  This specification does not cover how S/&#8288;MIME agents handle certificates, only what they do after a certificate has been validated or rejected.  S/&#8288;MIME certificate issues are covered in <xref target="RFC5750" pageno="false" format="default"/>.  </t>
+      <t>At a minimum, for initial S/&#8288;MIME deployment, a user agent could automatically generate a message to an intended recipient requesting that recipient's certificate in a signed return message.  Receiving and sending agents SHOULD also provide a mechanism to allow a user to "store and protect" certificates for correspondents in such a way so as to guarantee their later retrieval.  </t>
+      <section title="Key Pair Generation" anchor="KeyPairs" toc="default">
+        <t>All generated key pairs MUST be generated from a good source of non- deterministic random input <xref target="RFC4086" pageno="false" format="default"/> and the private key MUST be protected in a secure fashion.  </t>
+        <t>An S/&#8288;MIME user agent MUST NOT generate asymmetric keys less than 512 bits for use with the RSA or DSA signature algorithms.  </t>
+        <t>For 512-bit RSA with SHA&#8209;1 see <xref target="RFC3370" pageno="false" format="default"/> and <xref target="FIPS186-2" pageno="false" format="default"/> without Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC5754" pageno="false" format="default"/> and <xref target="FIPS186-2" pageno="false" format="default"/> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <xref target="RFC5754" pageno="false" format="default"/> and <xref target="FIPS186-2" pageno="false" format="default"/> with Change Notice 1.  The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.  </t>
+        <t>For 512-bit DSA with SHA&#8209;1 see <xref target="RFC3370" pageno="false" format="default"/> and <xref target="FIPS186-2" pageno="false" format="default"/> without Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5754" pageno="false" format="default"/> and <xref target="FIPS186-2" pageno="false" format="default"/> without Change Notice 1, for 1024-bit DSA with SHA&#8209;1 see <xref target="RFC3370" pageno="false" format="default"/> and <xref target="FIPS186-2" pageno="false" format="default"/> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <xref target="RFC5754" pageno="false" format="default"/> and <xref target="FIPS186-3" pageno="false" format="default"/>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </t>
+        <t>For RSASSA-PSS with SHA-256, see <xref target="RFC4056" pageno="false" format="default"/>.  For 1024-bit DH, see <xref target="RFC3370" pageno="false" format="default"/>.  For 1024-bit and larger DH, see <xref target="SP800-56A" pageno="false" format="default"/>; regardless, use the KDF, which is from X9.42, specified in <xref target="RFC3370" pageno="false" format="default"/>.  For RSAES- OAEP, see <xref target="RFC3560" pageno="false" format="default"/>.  </t>
+      </section>
+      <section title="Signature Generation" toc="default">
+        <t>The following are the requirements for an S/&#8288;MIME agent generated RSA, RSASSA-PSS, and DSA signatures: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </artwork>
+        </figure>
+      </section>
+      <section title="Signature Verification" toc="default">
+        <t>The following are the requirements for S/&#8288;MIME receiving agents during signature verification of RSA, RSASSA-PSS, and DSA signatures: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+        key size &lt;= 1023 : MAY        (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </artwork>
+        </figure>
+      </section>
+      <section title="Encryption" toc="default">
+        <t>The following are the requirements for an S/&#8288;MIME agent when establishing keys for content encryption using the RSA, RSA-OAEP, and DH algorithms: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </artwork>
+        </figure>
+      </section>
+      <section title="Decryption" toc="default">
+        <t>The following are the requirements for an S/&#8288;MIME agent when establishing keys for content decryption using the RSA, RSAES-OAEP, and DH algorithms: </t>
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+        key size &lt;= 1023 : MAY        (see Security Considerations)
+1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
+2048 &lt;  key size         : MAY        (see Security Considerations)
+              </artwork>
+        </figure>
+      </section>
+    </section>
+    <section title="IANA Considerations" anchor="IANA" toc="default">
+      <t>The following information updates the media type registration for application/&#8288;pkcs7-mime and application/&#8288;pkcs7-signature to refer to this document as opposed to RFC 2311.  </t>
+      <t>Note that other documents can define additional MIME media types for S/&#8288;MIME.  </t>
+      <section title="Media Type for application/pkcs7-mime" toc="default">
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+                  
+Type name: application
+
+Subtype Name: pkcs7-mime
+
+Required Parameters: NONE
+
+Optional Parameters: smime-type/signed-data
+                     smime-type/enveloped-data
+                     smime-type/compressed-data
+                     smime-type/certs-only
+                     name
+
+Encoding Considerations: See Section 3 of this document
+
+Security Considerations: See Section 6 of this document
+
+Interoperability Considerations: See Sections 1-6 of this document
+
+Published Specification: RFC 2311, RFC 2633, and this document
+
+Applications that use this media type: Security applications
+
+Additional information: NONE
+
+Person &amp; email to contact for further information:
+   S/MIME working group chairs smime-chairs@tools.ietf.org
+
+Intended usage: COMMON
+
+Restrictions on usage: NONE
+
+Author: Sean Turner
+
+Change Controller: S/MIME working group delegated from the IESG
+              </artwork>
+        </figure>
+      </section>
+      <section title="Media Type for application/pkcs7-signature" toc="default">
+        <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+          <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+                  
+Type name: application
+
+Subtype Name: pkcs7-signature
+
+Required Parameters: NONE
+
+Optional Parameters: NONE
+
+Encoding Considerations: See Section 3 of this document
+
+Security Considerations: See Section 6 of this document
+
+Interoperability Considerations: See Sections 1-6 of this document
+
+Published Specification: RFC 2311, RFC 2633, and this document
+
+Applications that use this media type: Security applications
+
+Additional information: NONE
+
+Person &amp; email to contact for further information:
+   S/MIME working group chairs smime-chairs@tools.ietf.org
+
+Intended usage: COMMON
+
+Restrictions on usage: NONE
+
+Author: Sean Turner
+
+Change Controller: S/MIME working group delegated from the IESG
+              </artwork>
+        </figure>
+      </section>
+      <section title="Register authEnvelopedData smime-type" toc="default">
+        <t>IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.  The values to be registered are: <cref source="JLS">This can be done by modifying the registration above instead.  </cref> <list style="none"><t>smime-type value: authEnvelopedData</t><t>Reference: [[This Document, <xref target="smime-type" pageno="false" format="default"/>]]</t></list> </t>
+      </section>
+    </section>
+    <section title="Security Considerations" anchor="SecurityConsiderations" toc="default">
+      <t>Cryptographic algorithms will be broken or weakened over time.  Implementers and users need to check that the cryptographic algorithms listed in this document continue to provide the expected level of security.  The IETF from time to time may issue documents dealing with the current state of the art.  For example: <list style="symbols"><t>The Million Message Attack described in RFC 3218 <xref target="RFC3218" pageno="false" format="default"/>.  </t><t>The Diffie-Hellman "small-subgroup" attacks described in RFC 2785 <xref target="RFC2785" pageno="false" format="default"/>.  </t><t>The attacks against hash algorithms described in RFC 4270 <xref target="RFC4270" pageno="false" format="default"/>.  </t></list> </t>
+      <t>This specification uses Public-Key Cryptography technologies.  It is assumed that the private key is protected to ensure that it is not accessed or altered by unauthorized parties.  </t>
+      <t>It is impossible for most people or software to estimate the value of a message's content.  Further, it is impossible for most people or software to estimate the actual cost of recovering an encrypted message content that is encrypted with a key of a particular size.  Further, it is quite difficult to determine the cost of a failed decryption if a recipient cannot process a message's content.  Thus, choosing between different key sizes (or choosing whether to just use plaintext) is also impossible for most people or software.  However, decisions based on these criteria are made all the time, and therefore this specification gives a framework for using those estimates in choosing algorithms.  </t>
+      <t>The choice of 2048 bits as the RSA asymmetric key size in this specification is based on the desire to provide at least 100 bits of security.  The key sizes that must be supported to conform to this specification seem appropriate for the Internet based on <xref target="RFC3766" pageno="false" format="default"/>.  Of course, there are environments, such as financial and medical systems, that may select different key sizes.  For this reason, an implementation MAY support key sizes beyond those recommended in this specification.  </t>
+      <t>Receiving agents that validate signatures and sending agents that encrypt messages need to be cautious of cryptographic processing usage when validating signatures and encrypting messages using keys larger than those mandated in this specification.  An attacker could send certificates with keys that would result in excessive cryptographic processing, for example, keys larger than those mandated in this specification, which could swamp the processing element.  Agents that use such keys without first validating the certificate to a trust anchor are advised to have some sort of cryptographic resource management system to prevent such attacks.  </t>
+      <t>Using weak cryptography in S/&#8288;MIME offers little actual security over sending plaintext.  However, other features of S/&#8288;MIME, such as the specification of AES and the ability to announce stronger cryptographic capabilities to parties with whom you communicate, allow senders to create messages that use strong encryption.  Using weak cryptography is never recommended unless the only alternative is no cryptography.  </t>
+      <t>RSA and DSA keys of less than 1024 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to protect messages.  Such keys were previously considered secure, so processing previously received signed and encrypted mail will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  If an implementation supports verification of digital signatures generated with RSA and DSA keys of less than 1024 bits, it MUST warn the user.  Implementers should consider providing different warnings for newly received messages and previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak signatures.  </t>
+      <t>Implementers SHOULD be aware that multiple active key pairs can be associated with a single individual.  For example, one key pair can be used to support confidentiality, while a different key pair can be used for digital signatures.  </t>
+      <t>If a sending agent is sending the same message using different strengths of cryptography, an attacker watching the communications channel might be able to determine the contents of the strongly encrypted message by decrypting the weakly encrypted version.  In other words, a sender SHOULD NOT send a copy of a message using weaker cryptography than they would use for the original of the message.  </t>
+      <t>Modification of the ciphertext can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  </t>
+      <t>If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <xref target="SP800-57" pageno="false" format="default"/>.  </t>
+      <t>If messaging environments make use of the fact that a message is signed to change the behavior of message processing (examples would be running rules or UI display hints), without first verifying that the message is actually signed and knowing the state of the signature, this can lead to incorrect handling of the message.  Visual indicators on messages may need to have the signature validation code checked periodically if the indicator is supposed to give information on the current status of a message.  </t>
+      <t>Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situtation where the sender of the message will be authenticated.  In almost all cases this is not a correct statement.  There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service: <list style="symbols"><t>The starting key must be bound to a single entity.  The use of a group key only would allow for the statement that a message was sent by one of the entities that held the key but will not identify a specific entity.  </t><t>The message must have exactly one sender and one recipient.  Having more than one recipient would allow for the second recipient to create a message that the first recipient would believe is from the sender by stripping them as a recipient from the message.  </t><t>A direct path needs to exist from the starting key to the key used as the content encryption key (CEK) which guarantees that no third party could have seen the resulting CEK.  This means that one needs to be using an algorithm that is called a "Direct Encryption" or a "Direct Key Agreement" algorithm in other contexts.  This means that the starting key is used directly as the CEK key, or that the starting key is used to create a secret which then is transformed into the CEK via a KDF step.  </t></list> S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a pre-existing shared secret when doing encryption, this means that the first precondition is not met.  There is a document <xref target="RFC6278" pageno="false" format="default"/> which defined how to use static-static key agreement with CMS so that is readably doable.  Currently, all S/MIME key agreement methods derive a KEK and wrap a CEK.  This violates the third precondition above.  New key key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.  </t>
+      <t>Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.  This is because either of the parties can successfully create the message (or just alter the content) based on the fact that the CEK is going to be known to both parties.  Thus the origination is always built on a presumption that "I did not send this message to myself." </t>
+    </section>
+  </middle>
+  <back>
+    <!--<displayreference target="RFC2785" to="DHSUB"/> <displayreference target="RFC4270" to="HASH-ATTACK"/> <displayreference target="RFC3218" to="MMA"/> <displayreference target="RFC2315" to="PKCS-7"/> <displayreference target="RFC3766" to="STRENGTH"/> <displayreference target="RFC5750" to="CERT32"/> <displayreference target="RFC3565" to="CMSAES"/> <displayreference target="RFC3370" to="CMSALG"/> <displayreference target="RFC3274" to="CMSCOMPR"/> <displayreference target="RFC5754" to="CMS-SHA2"/> <displayreference target="RFC2138" to="CONTDISP"/> <displayreference target="RFC1847" to="MIME-SECURE"/> <displayreference target="RFC4086" to="RANDOM"/> <displayreference target="RFC3560" to="RSAOAEP"/> <displayreference target="RFC4056" to="RSAPSS"/> <displayreference target="RFC5652" use="CMS"/> -->
+    <!--<section title="7.1.  Reference Conventions"> </section> -->
+    <references title="Normative References"><reference anchor="RFC1847" target="http://www.rfc-editor.org/info/rfc1847" quote-title="true"><front><title>Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted</title><author initials="J." surname="Galvin" fullname="J. Galvin"><organization/></author><author initials="S." surname="Murphy" fullname="S. Murphy"><organization/></author><author initials="S." surname="Crocker" fullname="S. Crocker"><organization/></author><author initials="N." surname="Freed" fullname="N. Freed"><organization/></author><date year="1995" month="October"/><abstract><t>This document defines a framework within which security services may be applied to MIME body parts.  [STANDARDS-TRACK] This memo defines a new Simple Mail Transfer Protocol (SMTP) [1] reply code, 521, which one may use to indicate that an Internet host does not accept incoming mail.  This memo defines an Experimental Protocol for the Internet community. This memo defines an extension to the SMTP service whereby an interrupted SMTP transaction can be restarted at a later time without having to repeat all of the commands and message content sent prior to the interruption.  This memo defines an Experimental Protocol for the Internet community.</t></abstract></front><seriesInfo name="RFC" value="1847"/><seriesInfo name="DOI" value="10.17487/RFC1847"/></reference> <reference anchor="RFC2045" target="http://www.rfc-editor.org/info/rfc2045" quote-title="true"><front><title>Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</title><author initials="N." surname="Freed" fullname="N. Freed"><organization/></author><author initials="N." surname="Borenstein" fullname="N. Borenstein"><organization/></author><date year="1996" month="November"/><abstract><t>This initial document specifies the various headers used to describe the structure of MIME messages.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2045"/><seriesInfo name="DOI" value="10.17487/RFC2045"/></reference> <reference anchor="RFC2046" target="http://www.rfc-editor.org/info/rfc2046" quote-title="true"><front><title>Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</title><author initials="N." surname="Freed" fullname="N. Freed"><organization/></author><author initials="N." surname="Borenstein" fullname="N. Borenstein"><organization/></author><date year="1996" month="November"/><abstract><t>This second document defines the general structure of the MIME media typing system and defines an initial set of media types.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2046"/><seriesInfo name="DOI" value="10.17487/RFC2046"/></reference> <reference anchor="RFC2047" target="http://www.rfc-editor.org/info/rfc2047" quote-title="true"><front><title>MIME (Multipurpose Internet Mail Extensions) Part Three: Message Header Extensions for Non-ASCII Text</title><author initials="K." surname="Moore" fullname="K. Moore"><organization/></author><date year="1996" month="November"/><abstract><t>This particular document is the third document in the series.  It describes extensions to RFC 822 to allow non-US-ASCII text data in Internet mail header fields.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2047"/><seriesInfo name="DOI" value="10.17487/RFC2047"/></reference> <reference anchor="RFC2049" target="http://www.rfc-editor.org/info/rfc2049" quote-title="true"><front><title>Multipurpose Internet Mail Extensions (MIME) Part Five: Conformance Criteria and Examples</title><author initials="N." surname="Freed" fullname="N. Freed"><organization/></author><author initials="N." surname="Borenstein" fullname="N. Borenstein"><organization/></author><date year="1996" month="November"/><abstract><t>This set of documents, collectively called the Multipurpose Internet Mail Extensions, or MIME, redefines the format of messages.  This fifth and final document describes MIME conformance criteria as well as providing some illustrative examples of MIME message formats, acknowledgements, and the bibliography.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2049"/><seriesInfo name="DOI" value="10.17487/RFC2049"/></reference> <reference anchor="RFC2119" target="http://www.rfc-editor.org/info/rfc2119" quote-title="true"><front><title>Key words for use in RFCs to Indicate Requirement Levels</title><author initials="S." surname="Bradner" fullname="S. Bradner"><organization/></author><date year="1997" month="March"/><abstract><t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract></front><seriesInfo name="BCP" value="14"/><seriesInfo name="RFC" value="2119"/><seriesInfo name="DOI" value="10.17487/RFC2119"/></reference> <reference anchor="RFC2138" target="http://www.rfc-editor.org/info/rfc2138" quote-title="true"><front><title>Remote Authentication Dial In User Service (RADIUS)</title><author initials="C." surname="Rigney" fullname="C. Rigney"><organization/></author><author initials="A." surname="Rubens" fullname="A. Rubens"><organization/></author><author initials="W." surname="Simpson" fullname="W. Simpson"><organization/></author><author initials="S." surname="Willens" fullname="S. Willens"><organization/></author><date year="1997" month="April"/><abstract><t>This document describes a protocol for carrying authentication, authorization, and configuration information between a Network Access Server which desires to authenticate its links and a shared Authentication Server. [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2138"/><seriesInfo name="DOI" value="10.17487/RFC2138"/></reference> <reference anchor="RFC2634" target="http://www.rfc-editor.org/info/rfc2634" quote-title="true"><front><title>Enhanced Security Services for S/MIME</title><author initials="P." surname="Hoffman" fullname="P. Hoffman" role="editor"><organization/></author><date year="1999" month="June"/><abstract><t>This document describes four optional security service extensions for S/MIME.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2634"/><seriesInfo name="DOI" value="10.17487/RFC2634"/></reference> <reference anchor="RFC3274" target="http://www.rfc-editor.org/info/rfc3274" quote-title="true"><front><title>Compressed Data Content Type for Cryptographic Message Syntax (CMS)</title><author initials="P." surname="Gutmann" fullname="P. Gutmann"><organization/></author><date year="2002" month="June"/><abstract><t>This document defines a format for using compressed data as a Cryptographic Message Syntax (CMS) content type.  Compressing data before transmission provides a number of advantages, including the elimination of data redundancy which could help an attacker, speeding up processing by reducing the amount of data to be processed by later steps (such as signing or encryption), and reducing overall message size. Although there have been proposals for adding compression at other levels (for example at the MIME or SSL level), these don't address the problem of compression of CMS content unless the compression is supplied by an external means (for example by intermixing MIME and CMS). [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="3274"/><seriesInfo name="DOI" value="10.17487/RFC3274"/></reference> <reference anchor="RFC3370" target="http://www.rfc-editor.org/info/rfc3370" quote-title="true"><front><title>Cryptographic Message Syntax (CMS) Algorithms</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="2002" month="August"/></front><seriesInfo name="RFC" value="3370"/><seriesInfo name="DOI" value="10.17487/RFC3370"/></reference> <reference anchor="RFC3560" target="http://www.rfc-editor.org/info/rfc3560" quote-title="true"><front><title>Use of the RSAES-OAEP Key Transport Algorithm in Cryptographic Message Syntax (CMS)</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="2003" month="July"/><abstract><t>This document describes the conventions for using the RSAES-OAEP key transport algorithm with the Cryptographic Message Syntax (CMS).  The CMS specifies the enveloped-data content type, which consists of an encrypted content and encrypted content-encryption keys for one or more recipients.  The RSAES-OAEP key transport algorithm can be used to encrypt content-encryption keys for intended recipients.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="3560"/><seriesInfo name="DOI" value="10.17487/RFC3560"/></reference> <reference anchor="RFC3565" target="http://www.rfc-editor.org/info/rfc3565" quote-title="true"><front><title>Use of the Advanced Encryption Standard (AES) Encryption Algorithm in Cryptographic Message Syntax (CMS)</title><author initials="J." surname="Schaad" fullname="J. Schaad"><organization/></author><date year="2003" month="July"/><abstract><t>This document specifies the conventions for using the Advanced Encryption Standard (AES) algorithm for encryption with the Cryptographic Message Syntax (CMS).  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="3565"/><seriesInfo name="DOI" value="10.17487/RFC3565"/></reference> <reference anchor="RFC4056" target="http://www.rfc-editor.org/info/rfc4056" quote-title="true"><front><title>Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)</title><author initials="J." surname="Schaad" fullname="J. Schaad"><organization/></author><date year="2005" month="June"/><abstract><t>This document specifies the conventions for using the RSASSA-PSS (RSA Probabilistic Signature Scheme) digital signature algorithm with the Cryptographic Message Syntax (CMS).  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="4056"/><seriesInfo name="DOI" value="10.17487/RFC4056"/></reference> <reference anchor="RFC4288" target="http://www.rfc-editor.org/info/rfc4288" quote-title="true"><front><title>Media Type Specifications and Registration Procedures</title><author initials="N." surname="Freed" fullname="N. Freed"><organization/></author><author initials="J." surname="Klensin" fullname="J. Klensin"><organization/></author><date year="2005" month="December"/><abstract><t>This document defines procedures for the specification and registration of media types for use in MIME and other Internet protocols.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract></front><seriesInfo name="RFC" value="4288"/><seriesInfo name="DOI" value="10.17487/RFC4288"/></reference> <reference anchor="RFC4289" target="http://www.rfc-editor.org/info/rfc4289" quote-title="true"><front><title>Multipurpose Internet Mail Extensions (MIME) Part Four: Registration Procedures</title><author initials="N." surname="Freed" fullname="N. Freed"><organization/></author><author initials="J." surname="Klensin" fullname="J. Klensin"><organization/></author><date year="2005" month="December"/><abstract><t>This document specifies IANA registration procedures for MIME external body access types and content-transfer-encodings.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract></front><seriesInfo name="BCP" value="13"/><seriesInfo name="RFC" value="4289"/><seriesInfo name="DOI" value="10.17487/RFC4289"/></reference> <reference anchor="RFC5035" target="http://www.rfc-editor.org/info/rfc5035" quote-title="true"><front><title>Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility</title><author initials="J." surname="Schaad" fullname="J. Schaad"><organization/></author><date year="2007" month="August"/><abstract><t>In the original Enhanced Security Services for S/MIME document (RFC 2634), a structure for cryptographically linking the certificate to be used in validation with the signature was introduced; this structure was hardwired to use SHA-1.  This document allows for the structure to have algorithm agility and defines a new attribute for this purpose.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="5035"/><seriesInfo name="DOI" value="10.17487/RFC5035"/></reference> <reference anchor="RFC5652" target="http://www.rfc-editor.org/info/rfc5652" quote-title="true"><front><title>Cryptographic Message Syntax (CMS)</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="2009" month="September"/><abstract><t>This document describes the Cryptographic Message Syntax (CMS).  This syntax is used to digitally sign, digest, authenticate, or encrypt arbitrary message content.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="STD" value="70"/><seriesInfo name="RFC" value="5652"/><seriesInfo name="DOI" value="10.17487/RFC5652"/></reference> <reference anchor="RFC5083" target="http://www.rfc-editor.org/info/rfc5083" quote-title="true"><front><title>Cryptographic Message Syntax (CMS) Authenticated-Enveloped-Data Content Type</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="2007" month="November"/><abstract><t>This document describes an additional content type for the Cryptographic Message Syntax (CMS).  The authenticated-enveloped-data content type is intended for use with authenticated encryption modes. All of the various key management techniques that are supported in the CMS enveloped-data content type are also supported by the CMS authenticated-enveloped-data content type.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="5083"/><seriesInfo name="DOI" value="10.17487/RFC5083"/></reference> <reference anchor="RFC5754" target="http://www.rfc-editor.org/info/rfc5754" quote-title="true"><front><title>Using SHA2 Algorithms with Cryptographic Message Syntax</title><author initials="S." surname="Turner" fullname="S. Turner"><organization/></author><date year="2010" month="January"/><abstract><t>This document describes the conventions for using the Secure Hash Algorithm (SHA) message digest algorithms (SHA-224, SHA-256, SHA-384, SHA-512) with the Cryptographic Message Syntax (CMS).  It also describes the conventions for using these algorithms with the CMS and the Digital Signature Algorithm (DSA), Rivest Shamir Adleman (RSA), and Elliptic Curve DSA (ECDSA) signature algorithms.  Further, it provides SMIMECapabilities attribute values for each algorithm.   [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="5754"/><seriesInfo name="DOI" value="10.17487/RFC5754"/></reference> <reference anchor="RFC4086" target="http://www.rfc-editor.org/info/rfc4086" quote-title="true"><front><title>Randomness Requirements for Security</title><author initials="D." surname="Eastlake 3rd" fullname="D. Eastlake 3rd"><organization/></author><author initials="J." surname="Schiller" fullname="J. Schiller"><organization/></author><author initials="S." surname="Crocker" fullname="S. Crocker"><organization/></author><date year="2005" month="June"/><abstract><t>Security systems are built on strong cryptographic algorithms that foil pattern analysis attempts.  However, the security of these systems is dependent on generating secret quantities for passwords, cryptographic keys, and similar quantities.  The use of pseudo-random processes to generate secret quantities can result in pseudo-security. A sophisticated attacker may find it easier to reproduce the environment that produced the secret quantities and to search the resulting small set of possibilities than to locate the quantities in the whole of the potential number space.</t><t>Choosing random quantities to foil a resourceful and motivated adversary is surprisingly difficult.  This document points out many pitfalls in using poor entropy sources or traditional pseudo-random number generation techniques for generating such quantities.  It recommends the use of truly random hardware techniques and shows that the existing hardware on many systems can be used for this purpose. It provides suggestions to ameliorate the problem when a hardware solution is not available, and it gives examples of how large such quantities need to be for some applications.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract></front><seriesInfo name="BCP" value="106"/><seriesInfo name="RFC" value="4086"/><seriesInfo name="DOI" value="10.17487/RFC4086"/></reference> <reference anchor="RFC5084" target="http://www.rfc-editor.org/info/rfc5084" quote-title="true"><front><title>Using AES-CCM and AES-GCM Authenticated Encryption in the Cryptographic Message Syntax (CMS)</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="2007" month="November"/><abstract><t>This document specifies the conventions for using the AES-CCM and the AES-GCM authenticated encryption algorithms with the Cryptographic Message Syntax (CMS) authenticated-enveloped-data content type.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="5084"/><seriesInfo name="DOI" value="10.17487/RFC5084"/></reference> <!----><!--<referencegroup target="CMS"> &rfc5652; &rfc5083; </referencegroup> --><reference anchor="CMS" quote-title="true"><front><title>Cryptograhic Message Syntax</title><author/><date/></front><annotation>This is the set of documents dealing with the cryptographic message syntax and refers to <xref target="RFC5652" pageno="false" format="default"/> and <xref target="RFC5083" pageno="false" format="default"/>.  </annotation></reference><!--<referencegroup target="ESS"> &rfc2634; &rfc5035; </referencegroup> --><reference anchor="ESS" quote-title="true"><front><title>Enhanced Security Services for S/MIME</title><author/><date/></front><annotation>This is the set of documents dealing with enhanged security services and refers to <xref target="RFC2634" pageno="false" format="default"/> and <xref target="RFC5035" pageno="false" format="default"/>.  </annotation></reference><!--<referencegroup target="MIME-SPEC"> &rfc2045; &rfc2046; &rfc2047; &rfc2049; &rfc4288; &rfc4289; </referencegroup> --><reference anchor="MIME-SPEC" quote-title="true"><front><title>MIME Message Specifications</title><author/><date/></front><annotation>This is the set of documents that define how to use MIME.  This set of documents is <xref target="RFC2045" pageno="false" format="default"/>, <xref target="RFC2046" pageno="false" format="default"/>, <xref target="RFC2047" pageno="false" format="default"/>, <xref target="RFC2049" pageno="false" format="default"/>, <xref target="RFC4288" pageno="false" format="default"/>, and <xref target="RFC4289" pageno="false" format="default"/>.  </annotation></reference><reference anchor="CHARSETS" target="http://www.iana.org/assignments/character-sets." quote-title="true"><front><title>Character sets assigned by IANA.</title><author/><date/></front></reference><reference anchor="FIPS186-2" quote-title="true"><front><title>Digital Signature Standard (DSS) [With Change Notice 1]</title><author><organization>National Institute of Standards and Technology (NIST)</organization></author><date month="January" year="2000"/></front><seriesInfo name="Federal Information Processing Standards Publication" value="186-2"/></reference><!--FIPS 186-4 is not the current version --><reference anchor="FIPS186-3" quote-title="true"><front><title>Digital Signature Standard (DSS)</title><author><organization>National Institute of Standards and Technology (NIST)</organization></author><date month="June" year="2009"/></front><seriesInfo name="Federal Information Processing Standards Publication" value="186-3"/></reference><reference anchor="SP800-56A" quote-title="true"><front><title>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</title><author><organization>National Institute of Standards and Technology (NIST)</organization></author><date month="May" year="2013"/></front></reference><reference anchor="ASN.1" quote-title="true"><front><title>Information Technology - Abstract Syntax Notation (ASN.1)</title><author/><date/></front><annotation>ASN.1 syntax consists of the following references <xref target="X.680" pageno="false" format="default"/>, <xref target="X.681" pageno="false" format="default"/>, <xref target="X.682" pageno="false" format="default"/>, and <xref target="X.683" pageno="false" format="default"/>.  </annotation></reference><reference anchor="X.680" quote-title="true"><front><title>Information Technology - Abstract Syntax Notation One (ASN.1):  Specification of basic notation.  ITU-T Recommendation X.680 (2002) </title><author/><date month="November" year="2008"/></front><seriesInfo name="ITU-T" value="X.680"/><seriesInfo name="ISO/IEC" value="8824-1:2008"/></reference><reference anchor="X.681" quote-title="true"><front><title>Information Technology - Abstract Syntax Notation One (ASN.1):  Information object specification </title><author/><date month="November" year="2008"/></front><seriesInfo name="ITU-T" value="X.681"/><seriesInfo name="ISO/IEC" value="8824-2:2008"/></reference><reference anchor="X.682" quote-title="true"><front><title>Information Technology - Abstract Syntax Notation One (ASN.1):  Constraint specification </title><author/><date month="November" year="2008"/></front><seriesInfo name="ITU-T" value="X.682"/><seriesInfo name="ISO/IEC" value="8824-3:2008"/></reference><reference anchor="X.683" quote-title="true"><front><title>Information Technology - Abstract Syntax Notation One (ASN.1):  Parameteriztion of ASN.1 specifications </title><author/><date month="November" year="2008"/></front><seriesInfo name="ITU-T" value="X.683"/><seriesInfo name="ISO/IEC" value="8824-4:2008"/></reference><reference anchor="X.690" quote-title="true"><front><title>Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER).  </title><author/><date month="July" year="2002"/></front><seriesInfo name="ITU-T" value="X.690"/><seriesInfo name="ISO/IEC" value="8825-1:2002"/></reference></references>
+    <references title="Informative References"><reference anchor="RFC2311" target="http://www.rfc-editor.org/info/rfc2311" quote-title="true"><front><title>S/MIME Version 2 Message Specification</title><author initials="S." surname="Dusse" fullname="S. Dusse"><organization/></author><author initials="P." surname="Hoffman" fullname="P. Hoffman"><organization/></author><author initials="B." surname="Ramsdell" fullname="B. Ramsdell"><organization/></author><author initials="L." surname="Lundblade" fullname="L. Lundblade"><organization/></author><author initials="L." surname="Repka" fullname="L. Repka"><organization/></author><date year="1998" month="March"/><abstract><t>This document describes a protocol for adding cryptographic signature and encryption services to MIME data.  This memo provides information for the Internet community.  It does not specify an Internet standard of any kind.</t></abstract></front><seriesInfo name="RFC" value="2311"/><seriesInfo name="DOI" value="10.17487/RFC2311"/></reference> <reference anchor="RFC2312" target="http://www.rfc-editor.org/info/rfc2312" quote-title="true"><front><title>S/MIME Version 2 Certificate Handling</title><author initials="S." surname="Dusse" fullname="S. Dusse"><organization/></author><author initials="P." surname="Hoffman" fullname="P. Hoffman"><organization/></author><author initials="B." surname="Ramsdell" fullname="B. Ramsdell"><organization/></author><author initials="J." surname="Weinstein" fullname="J. Weinstein"><organization/></author><date year="1998" month="March"/><abstract><t>This memo describes the mechanisms S/MIME uses to create and validate keys using certificates.  This memo provides information for the Internet community.  It does not specify an Internet standard of any kind.</t></abstract></front><seriesInfo name="RFC" value="2312"/><seriesInfo name="DOI" value="10.17487/RFC2312"/></reference> <reference anchor="RFC2313" target="http://www.rfc-editor.org/info/rfc2313" quote-title="true"><front><title>PKCS #1: RSA Encryption Version 1.5</title><author initials="B." surname="Kaliski" fullname="B. Kaliski"><organization/></author><date year="1998" month="March"/><abstract><t>This document describes a method for encrypting data using the RSA public-key cryptosystem.  This memo provides information for the Internet community.  It does not specify an Internet standard of any kind.</t></abstract></front><seriesInfo name="RFC" value="2313"/><seriesInfo name="DOI" value="10.17487/RFC2313"/></reference> <reference anchor="RFC2314" target="http://www.rfc-editor.org/info/rfc2314" quote-title="true"><front><title>PKCS #10: Certification Request Syntax Version 1.5</title><author initials="B." surname="Kaliski" fullname="B. Kaliski"><organization/></author><date year="1998" month="March"/><abstract><t>This document describes a syntax for certification requests.  This memo provides information for the Internet community.  It does not specify an Internet standard of any kind.</t></abstract></front><seriesInfo name="RFC" value="2314"/><seriesInfo name="DOI" value="10.17487/RFC2314"/></reference> <reference anchor="RFC2315" target="http://www.rfc-editor.org/info/rfc2315" quote-title="true"><front><title>PKCS #7: Cryptographic Message Syntax Version 1.5</title><author initials="B." surname="Kaliski" fullname="B. Kaliski"><organization/></author><date year="1998" month="March"/><abstract><t>This document describes a general syntax for data that may have cryptography applied to it, such as digital signatures and digital envelopes.  This memo provides information for the Internet community. It does not specify an Internet standard of any kind.</t></abstract></front><seriesInfo name="RFC" value="2315"/><seriesInfo name="DOI" value="10.17487/RFC2315"/></reference> <reference anchor="RFC2630" target="http://www.rfc-editor.org/info/rfc2630" quote-title="true"><front><title>Cryptographic Message Syntax</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="1999" month="June"/><abstract><t>This document describes the Cryptographic Message Syntax.  This syntax is used to digitally sign, digest, authenticate, or encrypt arbitrary messages.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2630"/><seriesInfo name="DOI" value="10.17487/RFC2630"/></reference> <reference anchor="RFC2631" target="http://www.rfc-editor.org/info/rfc2631" quote-title="true"><front><title>Diffie-Hellman Key Agreement Method</title><author initials="E." surname="Rescorla" fullname="E. Rescorla"><organization/></author><date year="1999" month="June"/><abstract><t>This document standardizes one particular Diffie-Hellman variant, based on the ANSI X9.42 draft, developed by the ANSI X9F1 working group. [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2631"/><seriesInfo name="DOI" value="10.17487/RFC2631"/></reference> <reference anchor="RFC2632" target="http://www.rfc-editor.org/info/rfc2632" quote-title="true"><front><title>S/MIME Version 3 Certificate Handling</title><author initials="B." surname="Ramsdell" fullname="B. Ramsdell" role="editor"><organization/></author><date year="1999" month="June"/><abstract><t>S/MIME (Secure/Multipurpose Internet Mail Extensions), provides a method to send and receive secure MIME messages. Before using a public key to provide security services, the S/MIME agent MUST certify that the public key is valid. S/MIME agents MUST use PKIX certificates to validate public keys as described in the Internet X.509 Public Key Infrastructure (PKIX) Certificate and CRL Profile.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2632"/><seriesInfo name="DOI" value="10.17487/RFC2632"/></reference> <reference anchor="RFC2633" target="http://www.rfc-editor.org/info/rfc2633" quote-title="true"><front><title>S/MIME Version 3 Message Specification</title><author initials="B." surname="Ramsdell" fullname="B. Ramsdell" role="editor"><organization/></author><date year="1999" month="June"/><abstract><t>This document describes a protocol for adding cryptographic signature and encryption services to MIME data.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="2633"/><seriesInfo name="DOI" value="10.17487/RFC2633"/></reference> <reference anchor="RFC2785" target="http://www.rfc-editor.org/info/rfc2785" quote-title="true"><front><title>Methods for Avoiding the "Small-Subgroup" Attacks on the Diffie-Hellman Key Agreement Method for S/MIME</title><author initials="R." surname="Zuccherato" fullname="R. Zuccherato"><organization/></author><date year="2000" month="March"/><abstract><t>This document will describe the situations relevant to implementations of S/MIME version 3 in which protection is necessary and the methods that can be used to prevent these attacks.  This memo provides information for the Internet community.</t></abstract></front><seriesInfo name="RFC" value="2785"/><seriesInfo name="DOI" value="10.17487/RFC2785"/></reference> <reference anchor="RFC3218" target="http://www.rfc-editor.org/info/rfc3218" quote-title="true"><front><title>Preventing the Million Message Attack on Cryptographic Message Syntax</title><author initials="E." surname="Rescorla" fullname="E. Rescorla"><organization/></author><date year="2002" month="January"/><abstract><t>This memo describes a strategy for resisting the Million Message Attack. This memo provides information for the Internet community.</t></abstract></front><seriesInfo name="RFC" value="3218"/><seriesInfo name="DOI" value="10.17487/RFC3218"/></reference> <reference anchor="RFC3850" target="http://www.rfc-editor.org/info/rfc3850" quote-title="true"><front><title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.1 Certificate Handling</title><author initials="B." surname="Ramsdell" fullname="B. Ramsdell" role="editor"><organization/></author><date year="2004" month="July"/><abstract><t>This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/MIME) agents.  S/MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/MIME agent processing.  S/MIME agents validate certificates as described in RFC 3280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/MIME agents must meet the certificate processing requirements in this document as well as those in RFC 3280.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="3850"/><seriesInfo name="DOI" value="10.17487/RFC3850"/></reference> <reference anchor="RFC3851" target="http://www.rfc-editor.org/info/rfc3851" quote-title="true"><front><title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.1 Message Specification</title><author initials="B." surname="Ramsdell" fullname="B. Ramsdell" role="editor"><organization/></author><date year="2004" month="July"/><abstract><t>This document defines Secure/Multipurpose Internet Mail Extensions (S/MIME) version 3.1.  S/MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 2633.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="3851"/><seriesInfo name="DOI" value="10.17487/RFC3851"/></reference> <reference anchor="RFC3852" target="http://www.rfc-editor.org/info/rfc3852" quote-title="true"><front><title>Cryptographic Message Syntax (CMS)</title><author initials="R." surname="Housley" fullname="R. Housley"><organization/></author><date year="2004" month="July"/><abstract><t>This document describes the Cryptographic Message Syntax (CMS).  This syntax is used to digitally sign, digest, authenticate, or encrypt arbitrary message content.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="3852"/><seriesInfo name="DOI" value="10.17487/RFC3852"/></reference> <reference anchor="RFC4270" target="http://www.rfc-editor.org/info/rfc4270" quote-title="true"><front><title>Attacks on Cryptographic Hashes in Internet Protocols</title><author initials="P." surname="Hoffman" fullname="P. Hoffman"><organization/></author><author initials="B." surname="Schneier" fullname="B. Schneier"><organization/></author><date year="2005" month="November"/><abstract><t>Recent announcements of better-than-expected collision attacks in popular hash algorithms have caused some people to question whether common Internet protocols need to be changed, and if so, how.  This document summarizes the use of hashes in many protocols, discusses how the collision attacks affect and do not affect the protocols, shows how to thwart known attacks on digital certificates, and discusses future directions for protocol designers.  This memo provides information for the Internet community.</t></abstract></front><seriesInfo name="RFC" value="4270"/><seriesInfo name="DOI" value="10.17487/RFC4270"/></reference> <reference anchor="RFC3766" target="http://www.rfc-editor.org/info/rfc3766" quote-title="true"><front><title>Determining Strengths For Public Keys Used For Exchanging Symmetric Keys</title><author initials="H." surname="Orman" fullname="H. Orman"><organization/></author><author initials="P." surname="Hoffman" fullname="P. Hoffman"><organization/></author><date year="2004" month="April"/><abstract><t>Implementors of systems that use public key cryptography to exchange symmetric keys need to make the public keys resistant to some predetermined level of attack.  That level of attack resistance is the strength of the system, and the symmetric keys that are exchanged must be at least as strong as the system strength requirements.  The three quantities, system strength, symmetric key strength, and public key strength, must be consistently matched for any network protocol usage.  While it is fairly easy to express the system strength requirements in terms of a symmetric key length and to choose a cipher that has a key length equal to or exceeding that requirement, it is harder to choose a public key that has a cryptographic strength meeting a symmetric key strength requirement.  This document explains how to determine the length of an asymmetric key as a function of a symmetric key strength requirement.  Some rules of thumb for estimating equivalent resistance to large-scale attacks on various algorithms are given.  The document also addresses how changing the sizes of the underlying large integers (moduli, group sizes, exponents, and so on) changes the time to use the algorithms for key exchange.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t></abstract></front><seriesInfo name="BCP" value="86"/><seriesInfo name="RFC" value="3766"/><seriesInfo name="DOI" value="10.17487/RFC3766"/></reference> <reference anchor="RFC5750" target="http://www.rfc-editor.org/info/rfc5750" quote-title="true"><front><title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Certificate Handling</title><author initials="B." surname="Ramsdell" fullname="B. Ramsdell"><organization/></author><author initials="S." surname="Turner" fullname="S. Turner"><organization/></author><date year="2010" month="January"/><abstract><t>This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/MIME) v3.2 agents. S/MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/MIME agent processing. S/MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile. S/MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 3850.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="5750"/><seriesInfo name="DOI" value="10.17487/RFC5750"/></reference> <reference anchor="RFC5751" target="http://www.rfc-editor.org/info/rfc5751" quote-title="true"><front><title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification</title><author initials="B." surname="Ramsdell" fullname="B. Ramsdell"><organization/></author><author initials="S." surname="Turner" fullname="S. Turner"><organization/></author><date year="2010" month="January"/><abstract><t>This document defines Secure/Multipurpose Internet Mail Extensions (S/MIME) version 3.2.  S/MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin. Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 3851.  [STANDARDS-TRACK]</t></abstract></front><seriesInfo name="RFC" value="5751"/><seriesInfo name="DOI" value="10.17487/RFC5751"/></reference> <reference anchor="RFC6278" target="http://www.rfc-editor.org/info/rfc6278" quote-title="true"><front><title>Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</title><author initials="J." surname="Herzog" fullname="J. Herzog"><organization/></author><author initials="R." surname="Khazan" fullname="R. Khazan"><organization/></author><date year="2011" month="June"/><abstract><t>This document describes how to use the 'static-static Elliptic Curve Diffie-Hellman key-agreement scheme (i.e., Elliptic Curve Diffie- Hellman where both participants use static Diffie-Hellman values) with the Cryptographic Message Syntax.  In this form of key agreement, the Diffie-Hellman values of both the sender and receiver are long-term values contained in certificates.  This document is not  an Internet Standards Track specification; it is published for  informational purposes.</t></abstract></front><seriesInfo name="RFC" value="6278"/><seriesInfo name="DOI" value="10.17487/RFC6278"/></reference> <!--<referencegroup target="SMIMEv2"> &rfc2311; &rfc2312; &rfc2313; &rfc2314; &rfc2315; </referencegroup> --><reference anchor="SMIMEv2" quote-title="true"><front><title>S/MIME version v2</title><author/><date/></front><annotation>This group of documents represents S/MIME version 2.  This set of documents are <xref target="RFC2311" pageno="false" format="default"/>, <xref target="RFC2312" pageno="false" format="default"/>, <xref target="RFC2313" pageno="false" format="default"/>, <xref target="RFC2314" pageno="false" format="default"/>, and <xref target="RFC2315" pageno="false" format="default"/>.  </annotation></reference><!--<referencegroup target="SMIMEv3"> &rfc2630; &rfc2631; &rfc2632; &rfc2633; &rfc2634; &rfc5035; </referencegroup> --><reference anchor="SMIMEv3" quote-title="true"><front><title>S/MIME version 3</title><author/><date/></front><annotation>This group of documents represents S/MIME version 3.  This set of documents are <xref target="RFC2630" pageno="false" format="default"/>, <xref target="RFC2631" pageno="false" format="default"/>, <xref target="RFC2632" pageno="false" format="default"/>, <xref target="RFC2633" pageno="false" format="default"/>, <xref target="RFC2634" pageno="false" format="default"/>, and <xref target="RFC5035" pageno="false" format="default"/>.  </annotation></reference><!--<referencegroup target="SMIMEv3.1"> &rfc2634; &rfc3850; &rfc3851; &rfc3852; &rfc5035; </referencegroup> --><reference anchor="SMIMEv3.1" quote-title="true"><front><title>S/MIME version 3.1</title><author/><date/></front><annotation>This group of documents represents S/MIME version 3.1.  This set of documents are <xref target="RFC2634" pageno="false" format="default"/>, <xref target="RFC3850" pageno="false" format="default"/>, <xref target="RFC3851" pageno="false" format="default"/>, <xref target="RFC3852" pageno="false" format="default"/>,  and <xref target="RFC5035" pageno="false" format="default"/>.  </annotation></reference><reference anchor="SMIMEv3.2" quote-title="true"><front><title>S/MIME version 3.2</title><author/><date/></front><annotation>This group of documents represents S/MIME version 3.2.  This set of documents are <xref target="RFC2634" pageno="false" format="default"/>, <xref target="RFC5750" pageno="false" format="default"/>, <xref target="RFC5751" pageno="false" format="default"/>, <xref target="RFC5652" pageno="false" format="default"/>,  and <xref target="RFC5035" pageno="false" format="default"/>.  </annotation></reference><reference anchor="SP800-57" quote-title="true"><front><title>Special Publication 800-57: Recommendation for Key Management </title><author><organization>National Institute of Standards and Technology (NIST) </organization></author><date month="August" year="2005"/></front></reference></references>
+    <section title="ASN.1 Module" anchor="ASN1Module" toc="default">
+      <t>Note: The ASN.1 module contained herein is unchanged from RFC 3851 [SMIMEv3.1] with the exception of a change to the prefersBinaryInside ASN.1 comment.  This module uses the 1988 version of ASN.1.  </t>
+      <figure title="" suppress-title="false" align="left" alt="" width="" height="">
+        <artwork xml:space="preserve" name="" type="" align="left" alt="" width="" height="">
+SecureMimeMessageV3dot1
+
+  { iso(1) member-body(2) us(840) rsadsi(113549)
+         pkcs(1) pkcs-9(9) smime(16) modules(0) msg-v3dot1(21) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+
+BEGIN
+
+IMPORTS
+
+-- Cryptographic Message Syntax [CMS]
+   SubjectKeyIdentifier, IssuerAndSerialNumber,
+   RecipientKeyIdentifier
+       FROM  CryptographicMessageSyntax
+             { iso(1) member-body(2) us(840) rsadsi(113549)
+               pkcs(1) pkcs-9(9) smime(16) modules(0) cms-2001(14) };
+
+--  id-aa is the arc with all new authenticated and unauthenticated
+--  attributes produced by the S/MIME Working Group
+
+id-aa OBJECT IDENTIFIER ::= {iso(1) member-body(2) usa(840)
+        rsadsi(113549) pkcs(1) pkcs-9(9) smime(16) attributes(2)}
+
+-- S/MIME Capabilities provides a method of broadcasting the
+-- symmetric capabilities understood.  Algorithms SHOULD be ordered
+-- by preference and grouped by type
+
+smimeCapabilities OBJECT IDENTIFIER ::= {iso(1) member-body(2)
+        us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 15}
+
+SMIMECapability ::= SEQUENCE {
+   capabilityID OBJECT IDENTIFIER,
+   parameters ANY DEFINED BY capabilityID OPTIONAL }
+
+SMIMECapabilities ::= SEQUENCE OF SMIMECapability
+
+-- Encryption Key Preference provides a method of broadcasting the
+-- preferred encryption certificate.
+
+id-aa-encrypKeyPref OBJECT IDENTIFIER ::= {id-aa 11}
+
+SMIMEEncryptionKeyPreference ::= CHOICE {
+   issuerAndSerialNumber   [0] IssuerAndSerialNumber,
+   receipentKeyId          [1] RecipientKeyIdentifier,
+   subjectAltKeyIdentifier [2] SubjectKeyIdentifier
+}
+
+-- receipentKeyId is spelt incorrectly, but kept for historical
+-- reasons.
+
+id-smime OBJECT IDENTIFIER ::= { iso(1) member-body(2) us(840)
+        rsadsi(113549) pkcs(1) pkcs9(9) 16 }
+
+id-cap  OBJECT IDENTIFIER ::= { id-smime 11 }
+
+-- The preferBinaryInside OID indicates an ability to receive
+-- messages with binary encoding inside the CMS wrapper.
+-- The preferBinaryInside attribute's value field is ABSENT.
+
+id-cap-preferBinaryInside  OBJECT IDENTIFIER ::= { id-cap 1 }
+
+--  The following list OIDs to be used with S/MIME V3
+
+-- Signature Algorithms Not Found in [CMSALG], [CMS-SHA2], [RSAPSS],
+-- and [RSAOAEP]
+
+--
+-- md2WithRSAEncryption OBJECT IDENTIFIER ::=
+--    {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-1(1)
+--     2}
+
+--
+-- Other Signed Attributes
+--
+-- signingTime OBJECT IDENTIFIER ::=
+--    {iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9)
+--     5}
+--    See [CMS] for a description of how to encode the attribute
+--    value.
+
+SMIMECapabilitiesParametersForRC2CBC ::= INTEGER
+--        (RC2 Key Length (number of bits))
+
+END
+      </artwork>
+      </figure>
+    </section>
+    <section title="Moving S/MIME v2 Message Specification to Historic Status" anchor="V2Historic" toc="default">
+      <t>The S/&#8288;MIME v3 <xref target="SMIMEv3" pageno="false" format="default"/>, v3.1 <xref target="SMIMEv3.1" pageno="false" format="default"/>, and v3.2 <xref target="SMIMEv3.2" pageno="false" format="default"/> are backwards compatible with the S/&#8288;MIME v2 Message Specification <xref target="SMIMEv2" pageno="false" format="default"/>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2311 <xref target="SMIMEv2" pageno="false" format="default"/> be moved to Historic status.  </t>
+    </section>
+    <section title="Acknowledgments" toc="default">
+      <t>Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v3.5.  </t>
+      <t>A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to various versions of this document: </t>
+      <t>Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, and John Pawling.  </t>
+    </section>
+  </back>
+</rfc>

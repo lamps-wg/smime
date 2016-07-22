@@ -51,21 +51,14 @@
       </address>
     </author>
     <author fullname="Sean Turner" initials="S." surname="Turner">
-      <!--
-         3057 Nutley Street, Suite 106
-   Fairfax, VA 22031
-   USA
-
-   EMail: turners@ieca.com
--->
-      <organization>IECA, Inc.</organization>
+      <organization>sn3rd</organization>
       <address>
-        <email>turners@ieca.com</email>
+        <email>sean@sn3rd.com</email>
       </address>
     </author>
     <date/>
     <area>Security Area</area>
-    <workgroup>SPASM</workgroup>
+    <workgroup>LAMPS</workgroup>
     <keyword>S/MIME</keyword>
     <abstract>
       <t>
