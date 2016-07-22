@@ -244,7 +244,7 @@
           </t>
 
           <t hangText="Data Origination:">
-            The corroboration that the source of the data received is as claimed. <ref target="RFC4949"/>
+            The corroboration that the source of the data received is as claimed. <xref target="RFC4949"/>.
           </t>
           
           </list>
