@@ -33,6 +33,7 @@
   <!ENTITY rfc4270     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4270.xml">
   <!ENTITY rfc4288     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4288.xml">
   <!ENTITY rfc4289     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4289.xml">
+  <!ENTITY rfc4949     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4949.xml">
   <!ENTITY rfc5035     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5035.xml">
   <!ENTITY rfc5083     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5083.xml">
   <!ENTITY rfc5084     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5084.xml">
@@ -233,6 +234,19 @@
           <t hangText="S/MIME agent:">      User software that is a receiving agent, a sending
           agent, or both.
           </t>
+
+          <t hangText="Data Integrity Service:">
+            A security service that protects againist unauthorized changes to data by insuring that changes to the data are detectable. <xref target="RFC4949"/>
+          </t>
+
+          <t hangText="Data Confidentiality:">
+            The property that data is not discolsed to system entities unless they have been authorize to know the data. <xref target="RFC4949"/>
+          </t>
+
+          <t hangText="Data Origination:">
+            The corroboration that the source of the data received is as claimed. <xref target="RFC4949"/>.
+          </t>
+          
           </list>
         </t>
       </section>
@@ -2451,6 +2465,19 @@ Change Controller: S/MIME working group delegated from the IESG
           <seriesInfo name="ISO/IEC"  value="8825-1:2002"/>
         </reference>
 
+        <reference anchor="SMIMEv3.5">
+          <front>
+            <title>S/MIME version 3.5</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 3.5.
+            This set of documents are <xref target="RFC2634"/>, <xref target="RFC5750"/>, [[This Document]], <xref target="RFC5652"/>,  and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+        
+
       </references>
       
       <references title="Informative References">
@@ -2462,6 +2489,7 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc4270;
         &rfc3766;
         &rfc5750; &rfc5751;
+        &rfc4949;
         &rfc6278;
 
         <!--
@@ -2669,6 +2697,7 @@ END
         status.
       </t>
     </section>
+    
     <section title="Acknowledgments">
       <t>
         Many thanks go out to the other authors of the S/&wj;MIME version 2
