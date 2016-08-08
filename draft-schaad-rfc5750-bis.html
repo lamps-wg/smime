@@ -274,6 +274,7 @@ li, p {
 <link href="#rfc.section.1.3" rel="Chapter" title="1.3 Compatibility with Prior Practice S/MIME"/>
 <link href="#rfc.section.1.4" rel="Chapter" title="1.4 Changes from S/MIME v3 to S/MIME v3.1"/>
 <link href="#rfc.section.1.5" rel="Chapter" title="1.5 Changes since S/MIME v3.1"/>
+<link href="#rfc.section.1.6" rel="Chapter" title="1.6 Changes from 3.2 to 3.5"/>
 <link href="#rfc.section.2" rel="Chapter" title="2 CMS Options"/>
 <link href="#rfc.section.2.1" rel="Chapter" title="2.1 Certificate Revocation Lists"/>
 <link href="#rfc.section.2.2" rel="Chapter" title="2.2 Certificate Choices"/>
@@ -382,6 +383,7 @@ li, p {
 <li>1.3.   <a href="#rfc.section.1.3">Compatibility with Prior Practice S/MIME</a></li>
 <li>1.4.   <a href="#rfc.section.1.4">Changes from S/MIME v3 to S/MIME v3.1</a></li>
 <li>1.5.   <a href="#rfc.section.1.5">Changes since S/MIME v3.1</a></li>
+<li>1.6.   <a href="#rfc.section.1.6">Changes from 3.2 to 3.5</a></li>
 </ul><li>2.   <a href="#rfc.section.2">CMS Options</a></li>
 <ul><li>2.1.   <a href="#rfc.section.2.1">Certificate Revocation Lists</a></li>
 <li>2.2.   <a href="#rfc.section.2.2">Certificate Choices</a></li>
@@ -471,6 +473,14 @@ li, p {
 </dl>
 
 <p> </p>
+<h1 id="rfc.section.1.6"><a href="#rfc.section.1.6">1.6.</a> Changes from 3.2 to 3.5</h1>
+<p/>
+
+<ul class="empty">
+  <li/>
+</ul>
+
+<p> </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> CMS Options</h1>
 <p id="rfc.section.2.p.1">The CMS message format allows for a wide variety of options in content and algorithm support.  This section puts forth a number of support requirements and recommendations in order to achieve a base level of interoperability among all S/&#8288;MIME implementations.  Most of the CMS format for S/&#8288;MIME messages is defined in <a href="#RFC5751">[RFC5751]</a>.  </p>
 <h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> Certificate Revocation Lists</h1>
@@ -498,7 +508,7 @@ li, p {
 pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 1 }
       </pre>
-<p id="rfc.section.3.p.3">Note that this attribute MUST be encoded as IA5String and has an upper bound of 255 characters.  The right side of the email address SHOULD be treated as ASCII-case-insensitive.  </p>
+<p id="rfc.section.3.p.3">Note that this attribute MUST be encoded as IA5String and has an  upper bound of 255 characters.  The right side of the email address SHOULD be treated as ASCII-case-insensitive.  </p>
 <p id="rfc.section.3.p.4">Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.  Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address, if present, in the signer's certificate, if mail addresses are present in the certificate.  A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, which may be to display a message that shows the recipient the addresses in the certificate or other certificate details.  </p>
 <p id="rfc.section.3.p.5">A receiving agent SHOULD display a subject name or other certificate details when displaying an indication of successful or unsuccessful signature verification.  </p>
 <p id="rfc.section.3.p.6">All subject and issuer names MUST be populated (i.e., not an empty SEQUENCE) in S/&#8288;MIME-compliant X.509 certificates, except that the subject distinguished name (DN) in a user's (i.e., end-entity) certificate MAY be an empty SEQUENCE in which case the subjectAltName extension will include the subject's identifier and MUST be marked as critical.  </p>
