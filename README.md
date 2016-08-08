@@ -13,10 +13,10 @@ This is the working area for the Individual internet-draft, "Secure/Multipurpose
 
 This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message".
 
-* [Editor's copy](https://lamps-wg.github.io/smime/draft-schaad-rfc5751-bis.html)
+* [Editor's copy](https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.html)
 * [Working Group Draft] (https://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis)
-* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-ietf-lamps-rfc5751-bis&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5751-bis.txt)
-* [Compare Editor's and RFC5751] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5751.txt&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5751-bis.txt)
+* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-ietf-lamps-rfc5751-bis&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.txt)
+* [Compare Editor's and RFC5751] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5751.txt&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.txt)
 
 
 ## Building the Draft
