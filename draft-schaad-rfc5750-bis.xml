@@ -271,6 +271,14 @@
    </list>
 </t>
 </section>
+<section title="Changes from 3.2 to 3.5">
+  <t>
+    <list>
+      <t hangText="????">
+      </t>
+    </list>
+  </t>
+</section>
 </section>
 <section title="CMS Options">
 <t>
@@ -391,20 +399,15 @@
  </section>
  <section title="Using Distinguished Names for Internet Mail">
    <t>
-   End-entity certificates MAY contain an Internet mail address as
-   described in <xref target="RFC5280"/>, Section 4.2.1.6.  The email address SHOULD be in
-   the subjectAltName extension, and SHOULD NOT be in the subject
-   distinguished name.
-  </t>
+     End-entity certificates MAY contain an Internet mail address as described in <xref target="RFC5280"/>, Section 4.2.1.6.
+     The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.
+   </t>
+   
   <t>
-   Receiving agents MUST recognize and accept certificates that contain
-   no email address.  Agents are allowed to provide an alternative
-   mechanism for associating an email address with a certificate that
-   does not contain an email address, such as through the use of the
-   agent's address book, if available.  Receiving agents MUST recognize
-   email addresses in the subjectAltName field.  Receiving agents MUST
-   recognize email addresses in the Distinguished Name field in the PKCS
-   #9 <xref target="RFC2985"/> emailAddress attribute:
+    Receiving agents MUST recognize and accept certificates that contain no email address.
+    Agents are allowed to provide an alternative mechanism for associating an email address with a certificate that does not contain an email address, such as through the use of the agent's address book, if available.
+    Receiving agents MUST recognize email addresses in the subjectAltName field.
+    Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <xref target="RFC2985"/> emailAddress attribute:
   </t>
     <figure>
       <artwork>
@@ -414,33 +417,19 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
     </figure>
 
     <t>
-   Note that this attribute MUST be encoded as IA5String and has an
-   upper bound of 255 characters.  The right side of the email address
-   SHOULD be treated as ASCII-case-insensitive.
+      Note that this attribute MUST be encoded as IA5String and has an  upper bound of 255 characters.
+      The right side of the email address SHOULD be treated as ASCII-case-insensitive.
   </t>
   <t>
-   Sending agents SHOULD make the address in the From or Sender header
-   in a mail message match an Internet mail address in the signer's
-   certificate.  Receiving agents MUST check that the address in the
-   From or Sender header of a mail message matches an Internet mail
-   address, if present, in the signer's certificate, if mail addresses
-   are present in the certificate.  A receiving agent SHOULD provide
-   some explicit alternate processing of the message if this comparison
-   fails, which may be to display a message that shows the recipient the
-   addresses in the certificate or other certificate details.
+    Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.
+    Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address, if present, in the signer's certificate, if mail addresses are present in the certificate.
+    A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, which may be to display a message that shows the recipient the addresses in the certificate or other certificate details.
   </t>
   <t>
-   A receiving agent SHOULD display a subject name or other certificate
-   details when displaying an indication of successful or unsuccessful
-   signature verification.
+   A receiving agent SHOULD display a subject name or other certificate details when displaying an indication of successful or unsuccessful signature verification.
   </t>
   <t>
-   All subject and issuer names MUST be populated (i.e., not an empty
-   SEQUENCE) in S/&wj;MIME-compliant X.509 certificates, except that the
-   subject distinguished name (DN) in a user's (i.e., end-entity)
-   certificate MAY be an empty SEQUENCE in which case the subjectAltName
-   extension will include the subject's identifier and MUST be marked as
-   critical.
+   All subject and issuer names MUST be populated (i.e., not an empty SEQUENCE) in S/&wj;MIME-compliant X.509 certificates, except that the subject distinguished name (DN) in a user's (i.e., end-entity) certificate MAY be an empty SEQUENCE in which case the subjectAltName extension will include the subject's identifier and MUST be marked as critical.
   </t>
  </section>
 <section title="Certificate Processing">
