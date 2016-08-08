@@ -3,20 +3,20 @@
 ##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling
 This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling".
 
-* [Editor's copy](https://spasm-wg.github.io/smime/draft-schaad-rfc5750-bis.html)
+* [Editor's copy](https://lamps-wg.github.io/smime/draft-schaad-rfc5750-bis.html)
 * [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5750-bis)
-* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5750-bis&url2=https://spasm-wg.github.io/smime/draft-schaad-rfc5750-bis.txt)
-* [Compare Editor's and RFC5750] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750.txt&url2=https://spasm-wg.github.io/smime/draft-schaad-rfc5750-bis.txt)
+* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5750-bis&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5750-bis.txt)
+* [Compare Editor's and RFC5750] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750.txt&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5750-bis.txt)
 
 
 ##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message
 
 This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message".
 
-* [Editor's copy](https://spasm-wg.github.io/smime/draft-schaad-rfc5751-bis.html)
+* [Editor's copy](https://lamps-wg.github.io/smime/draft-schaad-rfc5751-bis.html)
 * [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5751-bis)
-* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5751-bis&url2=https://spasm-wg.github.io/smime/draft-schaad-rfc5751-bis.txt)
-* [Compare Editor's and RFC5751] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5751.txt&url2=https://spasm-wg.github.io/smime/draft-schaad-rfc5751-bis.txt)
+* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-rfc5751-bis&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5751-bis.txt)
+* [Compare Editor's and RFC5751] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5751.txt&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5751-bis.txt)
 
 
 ## Building the Draft
@@ -35,8 +35,8 @@ instructions](https://github.com/martinthomson/i-d-template/blob/master/doc/SETU
 
 Before submitting feedback, please familiarize yourself with our current issues
 list and review the [working group
-documents](https://datatracker.ietf.org/wg/rfc5750/documents/) and [mailing
-list discussion](https://mailarchive.ietf.org/arch/browse/rfc5750/). If you're
+documents](https://datatracker.ietf.org/wg/lamps/documents/) and [mailing
+list discussion](https://mailarchive.ietf.org/arch/search/?email_list=spasm/). If you're
 new to this, you may also want to read the [Tao of the
 IETF](https://www.ietf.org/tao.html).
 
