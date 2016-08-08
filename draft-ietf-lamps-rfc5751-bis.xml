@@ -54,7 +54,7 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='pre5378Trust200902' docName="draft-schaad-rfc5751-bis-latest" category='std' obsoletes="RFC5751">
+<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5751-bis-latest" category='std' obsoletes="RFC5751">
   <front>
     <title abbrev="S/MIME 3.5 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification </title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
