@@ -873,7 +873,7 @@
             Sending and receiving agents:
             <list style="symbols">
               <t>
-                MUST support encryption and decryption with AES-256 GCM <xref target="RFC5084"/>.
+                MUST support encryption and decryption with AES-128 GCM and AES-256 GCM <xref target="RFC5084"/>.
               </t>
               
               <t>
