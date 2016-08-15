@@ -330,8 +330,10 @@ li, p {
 <link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References"/>
 <link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
 <link href="#rfc.appendix.A" rel="Chapter" title="A ASN.1 Module"/>
-<link href="#rfc.appendix.B" rel="Chapter" title="B Moving S/MIME v2 Message Specification to Historic Status"/>
-<link href="#rfc.appendix.C" rel="Chapter" title="C Acknowledgments"/>
+<link href="#rfc.appendix.B" rel="Chapter" title="B Processing of Historic Mail"/>
+<link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 ContentEncryptionAlgorithmIdentifier"/>
+<link href="#rfc.appendix.C" rel="Chapter" title="C Moving S/MIME v2 Message Specification to Historic Status"/>
+<link href="#rfc.appendix.D" rel="Chapter" title="D Acknowledgments"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -340,7 +342,7 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-8-8" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-8-15" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -368,7 +370,7 @@ li, p {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: February 9, 2017</td>
+  <td class="left">Expires: February 16, 2017</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -377,7 +379,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">August 8, 2016</td>
+  <td class="right">August 15, 2016</td>
 </tr>
 
     	
@@ -394,14 +396,14 @@ li, p {
 <h1>
   <a>Contributing to this document</a>
 </h1>
-<p>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <span>&lt;</span><a href="https://github.com/spasm-wg/smime">https://github.com/spasm-wg/smime</a><span>&gt;</span>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the SPASM mailing list.  </p>
+<p>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <span>&lt;</span><a href="https://github.com/lamps-wg/smime">https://github.com/lamps-wg/smime</a><span>&gt;</span>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the LAMPS mailing list.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on February 9, 2017.</p>
+<p>This Internet-Draft will expire on February 16, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -476,8 +478,10 @@ li, p {
 <ul><li>7.1.   <a href="#rfc.references.1">Normative References</a></li>
 <li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
 </ul><li>Appendix A.   <a href="#rfc.appendix.A">ASN.1 Module</a></li>
-<li>Appendix B.   <a href="#rfc.appendix.B">Moving S/MIME v2 Message Specification to Historic Status</a></li>
-<li>Appendix C.   <a href="#rfc.appendix.C">Acknowledgments</a></li>
+<li>Appendix B.   <a href="#rfc.appendix.B">Processing of Historic Mail</a></li>
+<ul><li>B.1.   <a href="#rfc.appendix.B.1">ContentEncryptionAlgorithmIdentifier</a></li>
+</ul><li>Appendix C.   <a href="#rfc.appendix.C">Moving S/MIME v2 Message Specification to Historic Status</a></li>
+<li>Appendix D.   <a href="#rfc.appendix.D">Acknowledgments</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -577,13 +581,13 @@ li, p {
 <p><a href="#IANA">Section 5</a>: Added IANA registration templates to update media type registry to point to this document as opposed to RFC 2311.  </p>
 <p><a href="#SecurityConsiderations">Section 6</a>: Updated security considerations.  </p>
 <p id="rfc.section.1.6.p.22">Section 7 : Moved references from Appendix B to this section.  Updated references.  Added informational references to SMIMEv2, SMIMEv3, and SMIMEv3.1.  </p>
-<p><a href="#V2Historic">Appendix B</a>: Added Appendix B to move S/&#8288;MIME v2 to Historic status.  </p>
+<p><a href="#V2Historic">Appendix C</a>: Added Appendix B to move S/&#8288;MIME v2 to Historic status.  </p>
 <h1 id="rfc.section.1.7"><a href="#rfc.section.1.7">1.7.</a> Changes since S/MIME v3.2</h1>
 <p/>
 
 <ul>
   <li>Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<a href="#AuthEnvelopedData1">Section 2.4.4</a> and <a href="#AuthEnvelopedData2">Section 3.4</a>).  </li>
-  <li>Add the use of AES-GCM (<a href="#ContentEncryptionAlgorithmIdentifier">Section 2.7</a>).  </li>
+  <li>Update the content encryption algorithms (<a href="#ContentEncryptionAlgorithmIdentifier">Section 2.7</a>): Add AES-256 GCM , remove AES-192 CBC, mark tripleDES as historic.  </li>
 </ul>
 
 <p> </p>
@@ -701,9 +705,9 @@ li, p {
 <p id="rfc.section.2.7.p.1">Sending and receiving agents: </p>
 
 <ul>
-  <li>MUST support encryption and decryption with AES-128 CBC <a href="#RFC3565">[RFC3565]</a> and AES-128 GCM <a href="#RFC5084">[RFC5084]</a>.  </li>
-  <li>SHOULD+ support encryption and decryption with AES-192 CBC, AES-256 CBC <a href="#RFC3565">[RFC3565]</a>, AES-192 GCM and AES-256 GCM <a href="#RFC5084">[RFC5084]</a>.  </li>
-  <li>SHOULD- support encryption and decryption with DES EDE3 CBC, hereinafter called "tripleDES" <a href="#RFC3370">[RFC3370]</a>.  </li>
+  <li>MUST support encryption and decryption with AES-128 GCM and AES-256 GCM <a href="#RFC5084">[RFC5084]</a>.  </li>
+  <li>MUST- support encryption and decryption with AES-128 CBC <a href="#RFC3565">[RFC3565]</a>.  </li>
+  <li>SHOULD+ support encryption and decryption with ChaCha20-Poly1305 <a href="#RFC7905">[RFC7905]</a>.  </li>
 </ul>
 
 <p> </p>
@@ -723,16 +727,16 @@ li, p {
 <h1 id="rfc.section.2.7.1.1"><a href="#rfc.section.2.7.1.1">2.7.1.1.</a> <a href="#KnownCaps" id="KnownCaps">Rule 1: Known Capabilities</a></h1>
 <p id="rfc.section.2.7.1.1.p.1">If the sending agent has received a set of capabilities from the recipient for the message the agent is about to encrypt, then the sending agent SHOULD use that information by selecting the first capability in the list (that is, the capability most preferred by the intended recipient) that the sending agent knows how to encrypt.  The sending agent SHOULD use one of the capabilities in the list if the agent reasonably expects the recipient to be able to decrypt the message.  </p>
 <h1 id="rfc.section.2.7.1.2"><a href="#rfc.section.2.7.1.2">2.7.1.2.</a> <a href="#UnknownCaps" id="UnknownCaps">Rule 2: Unknown Capabilities, Unknown Version of S/MIME</a></h1>
-<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: <a id="CREF2" class="info">[CREF2]<span class="info">JLS: Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES? </span></a> </p>
+<p id="rfc.section.2.7.1.2.p.1">If the following two conditions are met: </p>
 
 <ul>
   <li>the sending agent has no knowledge of the encryption capabilities of the recipient, and </li>
   <li>the sending agent has no knowledge of the version of S/&#8288;MIME of the recipient, </li>
 </ul>
 
-<p> then the sending agent SHOULD use AES-128 CBC because it is a stronger algorithm and is required by S/&#8288;MIME v3.2.  If the sending agent chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.  </p>
+<p> then the sending agent SHOULD use AES-256 GCM because it is a stronger algorithm and is required by S/&#8288;MIME v3.5.  If the sending agent chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.  </p>
 <h1 id="rfc.section.2.7.2"><a href="#rfc.section.2.7.2">2.7.2.</a> <a href="#WeakEncryption" id="WeakEncryption">Choosing Weak Encryption</a></h1>
-<p id="rfc.section.2.7.2.p.1">All algorithms that use 40-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as tripleDES or AES.  <a id="CREF3" class="info">[CREF3]<span class="info">JLS: Does this become a MUST NOT now.</span></a> </p>
+<p id="rfc.section.2.7.2.p.1">All algorithms that use 112-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as AES GCM or AES CBC.  </p>
 <h1 id="rfc.section.2.7.3"><a href="#rfc.section.2.7.3">2.7.3.</a> Multiple Recipients</h1>
 <p id="rfc.section.2.7.3.p.1">If a sending agent is composing an encrypted message to a group of recipients where the encryption capabilities of some of the recipients do not overlap, the sending agent is forced to send more than one message.  Please note that if the sending agent chooses to send a message encrypted with a strong algorithm, and then send the same message encrypted with a weak algorithm, someone watching the communications channel could learn the contents of the strongly encrypted message simply by decrypting the weakly encrypted message.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Creating S/MIME Messages</h1>
@@ -1295,7 +1299,7 @@ Author: Sean Turner
 Change Controller: S/MIME working group delegated from the IESG
               </pre>
 <h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Register authEnvelopedData smime-type</h1>
-<p id="rfc.section.5.3.p.1">IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.  The values to be registered are: <a id="CREF4" class="info">[CREF4]<span class="info">JLS: This can be done by modifying the registration above instead.  </span></a> </p>
+<p id="rfc.section.5.3.p.1">IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.  The values to be registered are: <a id="CREF2" class="info">[CREF2]<span class="info">JLS: This can be done by modifying the registration above instead.  </span></a> </p>
 
 <ul class="empty">
   <li>smime-type value: authEnvelopedData</li>
@@ -1500,6 +1504,12 @@ Change Controller: S/MIME working group delegated from the IESG
   <tbody>
     <tr>
       <td class="reference">
+        <b id="RFC2268">[RFC2268]</b>
+      </td>
+      <td class="top"><a>Rivest, R.</a>, "<a href="http://tools.ietf.org/html/rfc2268">A Description of the RC2(r) Encryption Algorithm</a>", RFC 2268, DOI 10.17487/RFC2268, March 1998.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC2311">[RFC2311]</b>
       </td>
       <td class="top"><a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a>, <a>Lundblade, L.</a> and <a>L. Repka</a>, "<a href="http://tools.ietf.org/html/rfc2311">S/MIME Version 2 Message Specification</a>", RFC 2311, DOI 10.17487/RFC2311, March 1998.</td>
@@ -1616,7 +1626,13 @@ Change Controller: S/MIME working group delegated from the IESG
       <td class="reference">
         <b id="RFC6278">[RFC6278]</b>
       </td>
-      <td class="top"><a>Herzog, J.</a> and <a>R. Khazan</a>, <a href="http://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
+      <td class="top"><a>Herzog, J.</a> and <a>R. Khazan</a>, "<a href="http://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7905">[RFC7905]</b>
+      </td>
+      <td class="top"><a>Langley, A.</a>, <a>Chang, W.</a>, <a>Mavrogiannopoulos, N.</a>, <a>Strombergson, J.</a> and <a>S. Josefsson</a>, <a href="http://tools.ietf.org/html/rfc7905">ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)</a>", RFC 7905, DOI 10.17487/RFC7905, June 2016.</td>
     </tr>
     <tr><td class="reference"><b id="SMIMEv2">[SMIMEv2]</b></td><td class="top"><a>S/MIME version v2</a>"<p>This group of documents represents S/MIME version 2.  This set of documents are </p></td>, "</tr>
     <tr><td class="reference"><b id="SMIMEv3">[SMIMEv3]</b></td><td class="top"><a>S/MIME version 3</a>"<p>This group of documents represents S/MIME version 3.  This set of documents are </p></td>, "</tr>
@@ -1627,6 +1643,12 @@ Change Controller: S/MIME working group delegated from the IESG
         <b id="SP800-57">[SP800-57]</b>
       </td>
       <td class="top"><a>National Institute of Standards and Technology (NIST)</a>, "<a>Special Publication 800-57: Recommendation for Key Management</a>", August 2005.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="TripleDES">[TripleDES]</b>
+      </td>
+      <td class="top"><a>Tuchman, W.</a>, <a>Hellman Presents No Shortcut Solutions to DES"</a>", IEEE Spectrum v. 16, n. 7, pp 40-41, July 1979.</td>
     </tr>
   </tbody>
 </table>
@@ -1719,12 +1741,23 @@ SMIMECapabilitiesParametersForRC2CBC ::= INTEGER
 
 END
       </pre>
-<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> <a href="#V2Historic" id="V2Historic">Moving S/MIME v2 Message Specification to Historic Status</a></h1>
-<p id="rfc.section.B.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 <a href="#SMIMEv3.2">[SMIMEv3.2]</a> are backwards compatible with the S/&#8288;MIME v2 Message Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2311 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
-<h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> Acknowledgments</h1>
-<p id="rfc.section.C.p.1">Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v3.5.  </p>
-<p id="rfc.section.C.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to various versions of this document: </p>
-<p id="rfc.section.C.p.3">Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, and John Pawling.  </p>
+<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> Processing of Historic Mail</h1>
+<p id="rfc.section.B.p.1">Over the course of updating the S/MIME specifications, the set of recommended algorithms has been modified each time the document has been updated.  This means that if a user has historic emails and their user agent has been updated to only support the current set of recommended algorithms some of those old emails will no longer be accessible.  It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.  </p>
+<h1 id="rfc.appendix.B.1"><a href="#rfc.appendix.B.1">B.1.</a> ContentEncryptionAlgorithmIdentifier</h1>
+<p id="rfc.section.B.1.p.1">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
+
+<ul>
+  <li>RC2/40 <a href="#RFC2268">[RFC2268]</a> was dropped in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.  </li>
+  <li>DES EDE3 CBC <a href="#TripleDES">[TripleDES]</a>, also known as "tripleDES" is dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  This algorithms is removed from the supported list due to the fact that it has a 64-bit block size and the fact that it offers less that 128-bits of security.  This algorithm should be supported only to decrypt existing email, it should not be used to encrypt new emails.  </li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> <a href="#V2Historic" id="V2Historic">Moving S/MIME v2 Message Specification to Historic Status</a></h1>
+<p id="rfc.section.C.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 <a href="#SMIMEv3.2">[SMIMEv3.2]</a> are backwards compatible with the S/&#8288;MIME v2 Message Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2311 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
+<h1 id="rfc.appendix.D"><a href="#rfc.appendix.D">Appendix D.</a> Acknowledgments</h1>
+<p id="rfc.section.D.p.1">Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v3.5.  </p>
+<p id="rfc.section.D.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to various versions of this document: </p>
+<p id="rfc.section.D.p.3">Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, and John Pawling.  </p>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Authors' Addresses</a>
 </h1>
