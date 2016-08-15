@@ -41,6 +41,8 @@
   <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
+  <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
+  <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
 ]>
 
@@ -464,22 +466,19 @@
           Receiving agents:
           <list style="symbols">
             <t>
-              MUST support RSA with SHA-256.
+              MUST support RSASSA-PSS with SHA-256.
             </t>
             <t>
-              SHOULD+ support DSA with SHA-256.
+              MUST support ECDSA with curve P-256 and SHA-256.
             </t>
             <t>
-              SHOULD+ support RSASSA-PSS with SHA-256.
+              MUST support EdDSA with curve 25519 using PureEdDSA mode.
             </t>
             <t>
-              SHOULD- support RSA with SHA&nbhy;1.
+              MUST- support RSA with SHA-256.
             </t>
             <t>
-              SHOULD- support DSA with SHA&nbhy;1.
-            </t>
-            <t>
-              SHOULD- support RSA with MD5.
+              MUST NOT support EdDSA using the pre-hash mode.
             </t>
           </list>
         </t>
@@ -488,37 +487,31 @@
           Sending agents:
           <list style="symbols">
             <t>
-              MUST support RSA with SHA-256.
+              MUST support at least one of the following algorithms: RSASSA-PSS with SHA-256, ECDSA with curve P-256 and SHA-256 or EdDSA with curve 25519 using PureEdDSA mode.
             </t>
+            
             <t>
-              SHOULD+ support DSA with SHA-256.
+              MUST- support RSA with SHA-256.
             </t>
+            
             <t>
-              SHOULD+ support RSASSA-PSS with SHA-256.
-            </t>
-            <t>
-              SHOULD- support RSA with SHA&nbhy;1 or DSA with SHA&nbhy;1.
-            </t>
-            <t>
-              SHOULD- support RSA with MD5.
+              MUST NOT support EdDSA using the pre-hash mode.
             </t>
           </list>
         </t>
+          
+        <t>
+          Both ECDSA and EdDSA are included in the list of required algorithms for political reasons.
+          NIST is unable to provide the seeds that were used to create their standardized curves, this means that there is a section of the community which believes that there might be a backdoor to these curves.
+          The EdDSA curves were created in response to this feeling.
+          However, there are still significant sections of the industry which need to have NIST approved algorithms.
+          For this reason, both sets of curves are represented in the recieving agent list, but only a requirement for one is in the sending agent list.
+        </t>
+        
         <t>
           See <xref target="KeyPairs"/> for information on key size and algorithm references.
         </t>
-        <t>
-          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
-          rsaEncryption and might not implement sha256withRSAEncryption.  Note
-          that S/&wj;MIME v3 clients might only implement signing or signature
-          verification using id-dsa-with-sha1, and might also use id-dsa as an
-          AlgorithmIdentifier in this field.  Receiving clients SHOULD
-          recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
-          clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
-          that S/&wj;MIME v2 clients are only required to verify digital signatures
-          using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
-          implement id-dsa-with-sha1 or id-dsa at all.
-        </t>
+        
       </section>
       <section title="KeyEncryptionAlgorithmIdentifier" anchor="KeyEncryptionAlgorithmIdentifier">
         <t>
@@ -1905,8 +1898,8 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 protected in a secure fashion.
               </t>
               <t>
-                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 512
-                bits for use with the RSA or DSA signature algorithms.
+                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 1024
+                bits for use with the RSA signature algorithm.
               </t>
               <t>
                 For 512-bit RSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without
@@ -1935,27 +1928,27 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
             </section>
             <section title="Signature Generation">
               <t>
-                The following are the requirements for an S/&wj;MIME agent generated RSA,
-                RSASSA-PSS, and DSA signatures:
+                The following are the requirements for an S/&wj;MIME agent generated RSA and
+                RSASSA-PSS signatures:
               </t>
               <figure>
               <artwork>
-        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : SHOULD     (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
             </section>
             <section title="Signature Verification">
               <t>
                 The following are the requirements for S/&wj;MIME receiving agents during
-                signature verification of RSA, RSASSA-PSS, and DSA signatures:
+                signature verification of RSA and RSASSA-PSS signatures:
               </t>
               <figure>
               <artwork>
-        key size &lt;= 1023 : MAY        (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : MUST       (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
             </section>
@@ -2163,7 +2156,7 @@ Change Controller: S/MIME working group delegated from the IESG
               no cryptography.
             </t>
             <t>
-              RSA and DSA keys of less than 1024 bits are now considered by many
+              RSA and DSA keys of less than 2048 bits are now considered by many
               experts to be cryptographically insecure (due to advances in
               computing power), and should no longer be used to protect messages.
               Such keys were previously considered secure, so processing previously
@@ -2491,6 +2484,7 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc5750; &rfc5751;
         &rfc4949;
         &rfc6278;
+        &rfc6194; &rfc6151;
 
         <!--
         <referencegroup target="SMIMEv2">
@@ -2686,6 +2680,77 @@ END
               </figure>
     </section>
 
+    <section title="Historic Mail Consideration">
+
+      <t>
+      </t>
+      
+      <section title="Signature Algorithms">
+        <t>
+          There are a number of problems with validating signatures on sufficently historic messages.
+          For this reason it is strongly suggested that UAs treat these signatures differently from those on current messages.
+          These problems include:
+          <list style="symbols">
+            <t>
+              CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.
+              This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.
+              The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.
+            </t>
+            <t>
+              RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).
+              Such keys were previously considered secure, so processing of historic  signed messages  will often result in the use of weak keys.
+              Implementations that wish to support previous versions of S/&wj;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.
+              <vspace blankLines="1"/>
+              <xref target="SMIMEv3.1"/> set the lower limit on suggested key sizes for creating and validation at 1024 bits.
+              Prior to that the lower bound on key sizes was 512 bits.
+            </t>
+            <t>
+              Hash functions used to validate signatures on historic messages may longer be considered to be secure.
+              (See below.)
+              While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&nbhy;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.
+            </t>
+            <t>
+              The previous two issues apply to the certificates used to validate the binding of the public key to the identity that signed the message as well.
+            </t>
+          </list>
+        </t>
+              
+        <t>
+          The following algorithms have been called out for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              RSA with MD5 was dropped in <xref target="SMIMEv3.5"/>.
+              MD5 is no longer considered to be secure as it is no longer collision-resistant.
+              Details can be found in <xref target="RFC6151"/>.
+            </t>
+            <t>
+              RSA and DSA with SHA&nbhy;1 were dropped in <xref target="SMIMEv3.5"/>.
+              SHA-1 is no longer considered to be secure as it is no longer collision-resistant.
+              The IETF statment on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recent advances.
+            </t>
+            <t>
+              DSA with SHA-256 was dropped in <xref target="SMIMEv3.5"/>.
+              DSA has been replaced by elliptic curve versions.
+            </t>
+            
+          </list>
+        </t>
+        
+        <t>
+          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
+          rsaEncryption and might not implement sha256withRSAEncryption.  Note
+          that S/&wj;MIME v3 clients might only implement signing or signature
+          verification using id-dsa-with-sha1, and might also use id-dsa as an
+          AlgorithmIdentifier in this field.  Receiving clients SHOULD
+          recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
+          clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
+          that S/&wj;MIME v2 clients are only required to verify digital signatures
+          using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
+          implement id-dsa-with-sha1 or id-dsa at all.
+        </t>
+
+      </section>
+    </section>
 
     <section title="Moving S/MIME v2 Message Specification to Historic Status" anchor="V2Historic">
       <t>
@@ -2696,6 +2761,7 @@ END
         it is recommended that RFC 2311 <xref target="SMIMEv2"/> be moved to Historic
         status.
       </t>
+
     </section>
     
     <section title="Acknowledgments">
