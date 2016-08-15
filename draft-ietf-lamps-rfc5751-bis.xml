@@ -7,6 +7,7 @@
   <!ENTITY rfc2049     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2049.xml">
   <!ENTITY rfc2119     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
   <!ENTITY rfc2138     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2138.xml">
+  <!ENTITY rfc2268     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2268.xml">
   <!ENTITY rfc2311     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2311.xml">
   <!ENTITY rfc2312     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2312.xml">
   <!ENTITY rfc2313     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2313.xml">
@@ -42,6 +43,7 @@
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
   <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
+  <!ENTITY rfc7905     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7905.xml">
 ]>
 
 
@@ -91,9 +93,9 @@
       <!-- RFC EDITOR - Please remove this note before publishing -->
       <t>
         The source for this draft is being maintained in GitHub.
-        Suggested changes should be submitted as pull requests  at <eref target="https://github.com/spasm-wg/smime"/>.
+        Suggested changes should be submitted as pull requests  at <eref target="https://github.com/lamps-wg/smime"/>.
         Instructions are on that page as well.
-        Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the SPASM mailing list.
+        Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the LAMPS mailing list.
       </t>
     </note>
   </front>
@@ -430,7 +432,7 @@
               Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<xref target="AuthEnvelopedData1"/> and <xref target="AuthEnvelopedData2"/>).
             </t>
             <t>
-              Add the use of AES-GCM (<xref target="ContentEncryptionAlgorithmIdentifier"/>).
+              Update the content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>): Add AES-256 GCM , remove AES-192 CBC, mark tripleDES as historic. 
             </t>
           </list>
         </t>
@@ -871,16 +873,14 @@
             Sending and receiving agents:
             <list style="symbols">
               <t>
-                MUST support encryption and decryption with AES-128 CBC
-                <xref target="RFC3565"/> and AES-128 GCM <xref target="RFC5084"/>.
+                MUST support encryption and decryption with AES-128 GCM and AES-256 GCM <xref target="RFC5084"/>.
+              </t>
+              
+              <t>
+                MUST- support encryption and decryption with AES-128 CBC <xref target="RFC3565"/>.
               </t>
               <t>
-                SHOULD+ support encryption and decryption with AES-192 CBC,
-                AES-256 CBC <xref target="RFC3565"/>, AES-192 GCM and AES-256 GCM <xref target="RFC5084"/>.
-              </t>
-              <t>
-                SHOULD- support encryption and decryption with DES EDE3 CBC,
-                hereinafter called "tripleDES" <xref target="RFC3370"/>.
+                SHOULD+ support encryption and decryption with ChaCha20-Poly1305 <xref target="RFC7905"/>.
               </t>
             </list>
           </t>
@@ -969,23 +969,19 @@
                     the recipient,
                   </t>
                 </list>
-                then the sending agent SHOULD use AES-128 CBC because it is a stronger
-                algorithm and is required by S/&wj;MIME v3.2.  If the sending agent
-                chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.
-                <cref source="JLS">Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES?
-                </cref>
+                then the sending agent SHOULD use AES-256 GCM because it is a stronger
+                algorithm and is required by S/&wj;MIME v3.5.  If the sending agent
+                chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.
               </t>
             </section>
           </section>
             <section title="Choosing Weak Encryption" anchor="WeakEncryption">
               <t>
-                All algorithms that use 40-bit keys are considered by many to be weak
+                All algorithms that use 112-bit keys are considered by many to be weak
                 encryption.  A sending agent that is controlled by a human SHOULD
                 allow a human sender to determine the risks of sending data using a
                 weak encryption algorithm before sending the data, and possibly allow
-                the human to use a stronger encryption method such as tripleDES or
-                AES.
-                <cref source="JLS">Does this become a MUST NOT now.</cref>
+                the human to use a stronger encryption method such as AES GCM or AES CBC.
               </t>
             </section>
 
@@ -2491,6 +2487,8 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc5750; &rfc5751;
         &rfc4949;
         &rfc6278;
+        &rfc2268;
+        &rfc7905;
 
         <!--
         <referencegroup target="SMIMEv2">
@@ -2544,7 +2542,16 @@ Change Controller: S/MIME working group delegated from the IESG
           &rfc3852;
           &rfc5035;
           </referencegroup>
-          -->
+        -->
+
+        <reference anchor="TripleDES">
+          <front>
+            <title>Hellman Presents No Shortcut Solutions to DES"</title>
+            <author surname="Tuchman" initials="W."/>
+            <date month="July" year="1979"/>
+          </front>
+          <seriesInfo name="IEEE Spectrum" value="v. 16, n. 7, pp 40-41"/>
+        </reference>
 
         <reference anchor="SMIMEv3.1">
           <front>
@@ -2686,6 +2693,30 @@ END
               </figure>
     </section>
 
+    <section title="Processing of Historic Mail">
+      <t>
+        Over the course of updating the S/MIME specifications, the set of recommended algorithms has been modified each time the document has been updated.
+        This means that if a user has historic emails and their user agent has been updated to only support the current set of recommended algorithms some of those old emails will no longer be accessible.
+        It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.
+      </t>
+
+      <section title="ContentEncryptionAlgorithmIdentifier">
+        <t>
+          The following algorithms have been called out for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              RC2/40 <xref target="RFC2268"/> was dropped in <xref target="SMIMEv3.2"/>.
+              The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.
+            </t>
+            <t>
+              DES EDE3 CBC <xref target="TripleDES"/>, also known as "tripleDES" is dropped in <xref target="SMIMEv3.5"/>.
+              This algorithms is removed from the supported list due to the fact that it has a 64-bit block size and the fact that it offers less that 128-bits of security.
+              This algorithm should be supported only to decrypt existing email, it should not be used to encrypt new emails.
+            </t>
+          </list>
+        </t>
+      </section>
+    </section>
 
     <section title="Moving S/MIME v2 Message Specification to Historic Status" anchor="V2Historic">
       <t>
