@@ -2756,7 +2756,8 @@ END
           using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
           implement id-dsa-with-sha1 or id-dsa at all.
         </t>
-
+      </section>
+      
       <section title="ContentEncryptionAlgorithmIdentifier">
         <t>
           The following algorithms have been called out for some level of support by previous S/MIME specifications:
@@ -2784,8 +2785,8 @@ END
         it is recommended that RFC 2311 <xref target="SMIMEv2"/> be moved to Historic
         status.
       </t>
-
     </section>
+
     
     <section title="Acknowledgments">
       <t>
