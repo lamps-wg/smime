@@ -562,13 +562,14 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    Certificates and Certificate Revocation Lists (CRLs) are signed by
    the certificate issuer.  Receiving agents:
    <list style="symbols">
-     <t>MUST support RSASSA-PSS with SHA-256.</t>
 
      <t>MUST support ECDSA with curve P-256 with SHA-256.</t>
 
      <t>MUST support EdDSA with curve 25519 using PureEdDSA mode.</t>
 
      <t>MUST- support RSA with SHA-256.</t>
+
+     <t>SHOULD support RSASSA-PSS with SHA-256.</t>
 
      <t>MUST NOT support EdDSA using Pre-hash mode.</t>
 

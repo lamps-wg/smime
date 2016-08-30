@@ -468,9 +468,6 @@
           Receiving agents:
           <list style="symbols">
             <t>
-              MUST support RSASSA-PSS with SHA-256.
-            </t>
-            <t>
               MUST support ECDSA with curve P-256 and SHA-256.
             </t>
             <t>
@@ -478,6 +475,9 @@
             </t>
             <t>
               MUST- support RSA with SHA-256.
+            </t>
+            <t>
+              SHOULD support RSASSA-PSS with SHA-256.
             </t>
             <t>
               MUST NOT support EdDSA using the pre-hash mode.
