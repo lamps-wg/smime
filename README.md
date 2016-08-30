@@ -3,10 +3,10 @@
 ##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling
 This is the working area for the Individual internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling".
 
-* [Editor's copy](https://lamps-wg.github.io/smime/draft-schaad-rfc5750-bis.html)
-* [Individual Draft] (https://tools.ietf.org/html/draft-schaad-rfc5750-bis)
-* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-schaad-lamps-rfc5750-bis&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5750-bis.txt)
-* [Compare Editor's and RFC5750] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750.txt&url2=https://lamps-wg.github.io/smime/draft-schaad-rfc5750-bis.txt)
+* [Editor's copy](https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.html)
+* [Individual Draft] (https://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis)
+* [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-ietf-lamps-rfc5750-bis&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.txt)
+* [Compare Editor's and RFC5750] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750.txt&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.txt)
 
 
 ##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message

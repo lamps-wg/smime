@@ -38,7 +38,7 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='trust200902' docName="draft-schaad-rfc5750-bis-latest" category='std'>
+<rfc ipr='trust200902' docName="draft-ietf-lamps-rfc5750-bis-latest" category='std'>
   <front>
     <title abbrev="S/MIME 3.2 Certificate Handling">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.2 Certificate Handling</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
@@ -80,9 +80,9 @@
       <!-- RFC EDITOR - Please remove this note before publishing -->
       <t>
         The source for this draft is being maintained in GitHub.
-        Suggested changes should be submitted as pull requests  at <eref target="https://github.com/spasm-wg/smime"/>.
+        Suggested changes should be submitted as pull requests  at <eref target="https://github.com/lamps-wg/smime"/>.
         Instructions are on that page as well.
-        Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the SPASM mailing list.
+        Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the LAMPS mailing list.
       </t>
     </note>
   </front>
