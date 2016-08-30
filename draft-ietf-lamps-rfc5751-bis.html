@@ -331,7 +331,8 @@ li, p {
 <link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
 <link href="#rfc.appendix.A" rel="Chapter" title="A ASN.1 Module"/>
 <link href="#rfc.appendix.B" rel="Chapter" title="B Processing of Historic Mail"/>
-<link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 ContentEncryptionAlgorithmIdentifier"/>
+<link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 DigestAlgorithmIdentifier"/>
+<link href="#rfc.appendix.B.2" rel="Chapter" title="B.2 ContentEncryptionAlgorithmIdentifier"/>
 <link href="#rfc.appendix.C" rel="Chapter" title="C Moving S/MIME v2 Message Specification to Historic Status"/>
 <link href="#rfc.appendix.D" rel="Chapter" title="D Acknowledgments"/>
 <link href="#rfc.authors" rel="Chapter"/>
@@ -342,7 +343,7 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-8-15" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-8-30" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -370,7 +371,7 @@ li, p {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: February 16, 2017</td>
+  <td class="left">Expires: March 3, 2017</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -379,7 +380,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">August 15, 2016</td>
+  <td class="right">August 30, 2016</td>
 </tr>
 
     	
@@ -403,7 +404,7 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on February 16, 2017.</p>
+<p>This Internet-Draft will expire on March 3, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -479,7 +480,8 @@ li, p {
 <li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
 </ul><li>Appendix A.   <a href="#rfc.appendix.A">ASN.1 Module</a></li>
 <li>Appendix B.   <a href="#rfc.appendix.B">Processing of Historic Mail</a></li>
-<ul><li>B.1.   <a href="#rfc.appendix.B.1">ContentEncryptionAlgorithmIdentifier</a></li>
+<ul><li>B.1.   <a href="#rfc.appendix.B.1">DigestAlgorithmIdentifier</a></li>
+<li>B.2.   <a href="#rfc.appendix.B.2">ContentEncryptionAlgorithmIdentifier</a></li>
 </ul><li>Appendix C.   <a href="#rfc.appendix.C">Moving S/MIME v2 Message Specification to Historic Status</a></li>
 <li>Appendix D.   <a href="#rfc.appendix.D">Acknowledgments</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
@@ -594,7 +596,15 @@ li, p {
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> CMS Options</h1>
 <p id="rfc.section.2.p.1">CMS allows for a wide variety of options in content, attributes, and algorithm support.  This section puts forth a number of support requirements and recommendations in order to achieve a base level of interoperability among all S/&#8288;MIME implementations.  <a href="#RFC3370">[RFC3370]</a> and <a href="#RFC5754">[RFC5754]</a> provides additional details regarding the use of the cryptographic algorithms.  <a href="#ESS">[ESS]</a> provides additional details regarding the use of additional attributes.  </p>
 <h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> <a href="#DigestAlgorithmIdentifier" id="DigestAlgorithmIdentifier">DigestAlgorithmIdentifier</a></h1>
-<p id="rfc.section.2.1.p.1">Sending and receiving agents MUST support SHA-256 <a href="#RFC5754">[RFC5754]</a> and SHOULD- support SHA&#8209;1 <a href="#RFC3370">[RFC3370]</a>.  Receiving agents SHOULD- support MD5 <a href="#RFC3370">[RFC3370]</a> for the purpose of providing backward compatibility with MD5-digested S/&#8288;MIME v2 SignedData objects.  </p>
+<p id="rfc.section.2.1.p.1">The algorithms here are used for digesting the body of the message and are not the same as the digest algorithms used as part the signature algorithms.  The result of this is placed in the message-digest attribute of the signed attributes.  It is RECOMMENDED that the algorithm used for digesting the body of the message be of similar or greater strength than the signature algorithm.  </p>
+<p id="rfc.section.2.1.p.2">Sending and Receiving agents: </p>
+
+<ul>
+  <li>MUST support SHA-256 <a href="#RFC5754">[RFC5754]</a> </li>
+  <li>MUST support SHA-512.  </li>
+</ul>
+
+<p> </p>
 <h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#SignatureAlgorithmIdentifier" id="SignatureAlgorithmIdentifier">SignatureAlgorithmIdentifier</a></h1>
 <p id="rfc.section.2.2.p.1">Receiving agents: </p>
 
@@ -1624,6 +1634,18 @@ Change Controller: S/MIME working group delegated from the IESG
     </tr>
     <tr>
       <td class="reference">
+        <b id="RFC6151">[RFC6151]</b>
+      </td>
+      <td class="top"><a>Turner, S.</a> and <a>L. Chen</a>, "<a href="http://tools.ietf.org/html/rfc6151">Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a>", RFC 6151, DOI 10.17487/RFC6151, March 2011.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6194">[RFC6194]</b>
+      </td>
+      <td class="top"><a>Polk, T.</a>, <a>Chen, L.</a>, <a>Turner, S.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc6194">Security Considerations for the SHA-0 and SHA-1 Message-Digest Algorithms</a>", RFC 6194, DOI 10.17487/RFC6194, March 2011.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC6278">[RFC6278]</b>
       </td>
       <td class="top"><a>Herzog, J.</a> and <a>R. Khazan</a>, "<a href="http://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
@@ -1743,8 +1765,17 @@ END
       </pre>
 <h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> Processing of Historic Mail</h1>
 <p id="rfc.section.B.p.1">Over the course of updating the S/MIME specifications, the set of recommended algorithms has been modified each time the document has been updated.  This means that if a user has historic emails and their user agent has been updated to only support the current set of recommended algorithms some of those old emails will no longer be accessible.  It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.  </p>
-<h1 id="rfc.appendix.B.1"><a href="#rfc.appendix.B.1">B.1.</a> ContentEncryptionAlgorithmIdentifier</h1>
-<p id="rfc.section.B.1.p.1">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
+<h1 id="rfc.appendix.B.1"><a href="#rfc.appendix.B.1">B.1.</a> DigestAlgorithmIdentifier</h1>
+<p id="rfc.section.B.1.p.1">The following algorithms have been called our for some level of support by previous S/MIME specifications: </p>
+
+<ul>
+  <li>SHA&#8209;1 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recient advances.  </li>
+  <li>MD5 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.appendix.B.2"><a href="#rfc.appendix.B.2">B.2.</a> ContentEncryptionAlgorithmIdentifier</h1>
+<p id="rfc.section.B.2.p.1">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
 
 <ul>
   <li>RC2/40 <a href="#RFC2268">[RFC2268]</a> was dropped in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.  </li>
