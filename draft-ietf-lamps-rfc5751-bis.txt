@@ -160,8 +160,8 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    Appendix A.  ASN.1 Module . . . . . . . . . . . . . . . . . . . .  48
    Appendix B.  Processing of Historic Mail  . . . . . . . . . . . .  50
      B.1.  DigestAlgorithmIdentifier . . . . . . . . . . . . . . . .  51
-     B.2.  ContentEncryptionAlgorithmIdentifier  . . . . . . . . . .  51
-   Appendix C.  Moving S/MIME v2 Message Specification to Historic
+     B.2.  Signature Algorithms  . . . . . . . . . . . . . . . . . .  51
+     B.3.  ContentEncryptionAlgorithmIdentifier  . . . . . . . . . .  52
 
 
 
@@ -170,9 +170,10 @@ Schaad, et al.            Expires March 3, 2017                 [Page 3]
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
 
-                Status . . . . . . . . . . . . . . . . . . . . . . .  51
-   Appendix D.  Acknowledgments  . . . . . . . . . . . . . . . . . .  51
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  52
+   Appendix C.  Moving S/MIME v2 Message Specification to Historic
+                Status . . . . . . . . . . . . . . . . . . . . . . .  53
+   Appendix D.  Acknowledgments  . . . . . . . . . . . . . . . . . .  53
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  53
 
 1.  Introduction
 
@@ -217,7 +218,6 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    multipart/signed is used in conjunction with the
    application/pkcs7-signature media type, which is used to transport a
    detached S/MIME signature.
-
 
 
 
@@ -512,42 +512,37 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
    Receiving agents:
 
-   -  MUST support RSA with SHA-256.
+   -  MUST support ECDSA with curve P-256 and SHA-256.
 
-   -  SHOULD+ support DSA with SHA-256.
+   -  MUST support EdDSA with curve 25519 using PureEdDSA mode.
 
-   -  SHOULD+ support RSASSA-PSS with SHA-256.
+   -  MUST- support RSA with SHA-256.
 
-   -  SHOULD- support RSA with SHA-1.
+   -  SHOULD support RSASSA-PSS with SHA-256.
 
-   -  SHOULD- support DSA with SHA-1.
-
-   -  SHOULD- support RSA with MD5.
+   -  MUST NOT support EdDSA using the pre-hash mode.
 
    Sending agents:
 
-   -  MUST support RSA with SHA-256.
+   -  MUST support at least one of the following algorithms: RSASSA-PSS
+      with SHA-256, ECDSA with curve P-256 and SHA-256 or EdDSA with
+      curve 25519 using PureEdDSA mode.
 
-   -  SHOULD+ support DSA with SHA-256.
+   -  MUST- support RSA with SHA-256.
 
-   -  SHOULD+ support RSASSA-PSS with SHA-256.
+   -  MUST NOT support EdDSA using the pre-hash mode.
 
-   -  SHOULD- support RSA with SHA-1 or DSA with SHA-1.
-
-   -  SHOULD- support RSA with MD5.
+   Both ECDSA and EdDSA are included in the list of required algorithms
+   for political reasons.  NIST is unable to provide the seeds that were
+   used to create their standardized curves, this means that there is a
+   section of the community which believes that there might be a
+   backdoor to these curves.  The EdDSA curves were created in response
+   to this feeling.  However, there are still significant sections of
+   the industry which need to have NIST approved algorithms.  For this
+   reason, both sets of curves are represented in the recieving agent
+   list, but only a requirement for one is in the sending agent list.
 
    See Section 4.1 for information on key size and algorithm references.
-
-   Note that S/MIME v3.1 clients support verifying id-dsa-with-sha1 and
-   rsaEncryption and might not implement sha256withRSAEncryption.  Note
-   that S/MIME v3 clients might only implement signing or signature
-   verification using id-dsa-with-sha1, and might also use id-dsa as an
-   AlgorithmIdentifier in this field.  Receiving clients SHOULD
-   recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
-   clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
-   that S/MIME v2 clients are only required to verify digital signatures
-   using the rsaEncryption algorithm with SHA-1 or MD5, and might not
-   implement id-dsa-with-sha1 or id-dsa at all.
 
 2.3.  KeyEncryptionAlgorithmIdentifier
 
@@ -555,17 +550,17 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
    -  MUST support RSA Encryption, as specified in [RFC3370].
 
+   -  SHOULD+ support RSAES-OAEP, as specified in [RFC3560].
+
+   -  SHOULD- support DH ephemeral-static mode, as specified in
+      [RFC3370] and [SP800-57].
+
 
 
 Schaad, et al.            Expires March 3, 2017                [Page 10]
 
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
-
-   -  SHOULD+ support RSAES-OAEP, as specified in [RFC3560].
-
-   -  SHOULD- support DH ephemeral-static mode, as specified in
-      [RFC3370] and [SP800-57].
 
    When DH ephemeral-static is used, a key wrap algorithm is also
    specified in the KeyEncryptionAlgorithmIdentifier [RFC5652].  The
@@ -610,6 +605,11 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    Sending agents MUST use the SignedData content type to apply a
    digital signature to a message or, in a degenerate case where there
    is no signature information, to convey certificates.  Applying a
+   signature to a message provides authentication, message integrity,
+   and non-repudiation of origin.
+
+
+
 
 
 
@@ -617,9 +617,6 @@ Schaad, et al.            Expires March 3, 2017                [Page 11]
 
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
-
-   signature to a message provides authentication, message integrity,
-   and non-repudiation of origin.
 
 2.4.3.  EnvelopedData Content Type
 
@@ -666,6 +663,9 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
    Further, receiving agents SHOULD be able to handle zero or one
    instance of the signingCertificate and signingCertificatev2 signed
+   attributes, as defined in Section 5 of RFC 2634 [ESS] and Section 3
+   of RFC 5035 [ESS].
+
 
 
 
@@ -673,9 +673,6 @@ Schaad, et al.            Expires March 3, 2017                [Page 12]
 
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
-
-   attributes, as defined in Section 5 of RFC 2634 [ESS] and Section 3
-   of RFC 5035 [ESS].
 
    Sending agents SHOULD generate one instance of the signingCertificate
    or signingCertificatev2 signed attribute in each SignerInfo
@@ -722,6 +719,9 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
    If present, the SMIMECapabilities attribute MUST be a
    SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines
+   SignedAttributes as a SET OF Attribute.  The SignedAttributes in a
+   signerInfo MUST NOT include multiple instances of the
+   SMIMECapabilities attribute.  CMS defines the ASN.1 syntax for
 
 
 
@@ -730,9 +730,6 @@ Schaad, et al.            Expires March 3, 2017                [Page 13]
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
 
-   SignedAttributes as a SET OF Attribute.  The SignedAttributes in a
-   signerInfo MUST NOT include multiple instances of the
-   SMIMECapabilities attribute.  CMS defines the ASN.1 syntax for
    Attribute to include attrValues SET OF AttributeValue.  A
    SMIMECapabilities attribute MUST only include a single instance of
    AttributeValue.  There MUST NOT be zero or multiple instances of
@@ -777,7 +774,10 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    differentiating parameters for a particular OID, the parameters MUST
    be omitted, and MUST NOT be encoded as NULL.  Additional values for
    the SMIMECapabilities attribute might be defined in the future.
+   Receiving agents MUST handle a SMIMECapabilities object that has
+   values that it does not recognize in a graceful manner.
 
+   Section 2.7.1 explains a strategy for caching capabilities.
 
 
 
@@ -785,11 +785,6 @@ Schaad, et al.            Expires March 3, 2017                [Page 14]
 
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
-
-   Receiving agents MUST handle a SMIMECapabilities object that has
-   values that it does not recognize in a graceful manner.
-
-   Section 2.7.1 explains a strategy for caching capabilities.
 
 2.5.3.  Encryption Key Preference Attribute
 
@@ -832,6 +827,11 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
    Section 2.7.1 explains a strategy for caching preference data.
 
+2.5.3.1.  Selection of Recipient Key Management Certificate
+
+   In order to determine the key management certificate to be used when
+   sending a future CMS EnvelopedData message for a particular
+   recipient, the following steps SHOULD be followed:
 
 
 
@@ -841,12 +841,6 @@ Schaad, et al.            Expires March 3, 2017                [Page 15]
 
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
-
-2.5.3.1.  Selection of Recipient Key Management Certificate
-
-   In order to determine the key management certificate to be used when
-   sending a future CMS EnvelopedData message for a particular
-   recipient, the following steps SHOULD be followed:
 
    -  If an SMIMEEncryptionKeyPreference attribute is found in a
       SignedData object received from the desired recipient, this
@@ -889,6 +883,12 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    -  MUST- support encryption and decryption with AES-128 CBC
       [RFC3565].
 
+   -  SHOULD+ support encryption and decryption with ChaCha20-Poly1305
+      [RFC7905].
+
+
+
+
 
 
 
@@ -897,9 +897,6 @@ Schaad, et al.            Expires March 3, 2017                [Page 16]
 
 Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
-
-   -  SHOULD+ support encryption and decryption with ChaCha20-Poly1305
-      [RFC7905].
 
 2.7.1.  Deciding Which Encryption Method to Use
 
@@ -946,6 +943,9 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    agent SHOULD use in deciding which type of encryption will be applied
    to a message.  These rules are ordered, so the sending agent SHOULD
    make its decision in the order given.
+
+
+
 
 
 
@@ -1886,8 +1886,8 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    deterministic random input [RFC4086] and the private key MUST be
    protected in a secure fashion.
 
-   An S/MIME user agent MUST NOT generate asymmetric keys less than 512
-   bits for use with the RSA or DSA signature algorithms.
+   An S/MIME user agent MUST NOT generate asymmetric keys less than 1024
+   bits for use with the RSA signature algorithm.
 
    For 512-bit RSA with SHA-1 see [RFC3370] and [FIPS186-2] without
    Change Notice 1, for 512-bit RSA with SHA-256 see [RFC5754] and
@@ -1921,21 +1921,21 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
 
 4.2.  Signature Generation
 
-   The following are the requirements for an S/MIME agent generated RSA,
-   RSASSA-PSS, and DSA signatures:
+   The following are the requirements for an S/MIME agent generated RSA
+   and RSASSA-PSS signatures:
 
-           key size <= 1023 : SHOULD NOT (see Security Considerations)
-   1024 <= key size <= 2048 : SHOULD     (see Security Considerations)
-   2048 <  key size         : MAY        (see Security Considerations)
+        key size <= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 <= key size <= 4096 : SHOULD     (see Security Considerations)
+4096 <  key size         : MAY        (see Security Considerations)
 
 4.3.  Signature Verification
 
    The following are the requirements for S/MIME receiving agents during
-   signature verification of RSA, RSASSA-PSS, and DSA signatures:
+   signature verification of RSA and RSASSA-PSS signatures:
 
-           key size <= 1023 : MAY        (see Security Considerations)
-   1024 <= key size <= 2048 : MUST       (see Security Considerations)
-   2048 <  key size         : MAY        (see Security Considerations)
+        key size <= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 <= key size <= 4096 : MUST       (see Security Considerations)
+4096 <  key size         : MAY        (see Security Considerations)
 
 4.4.  Encryption
 
@@ -2190,7 +2190,7 @@ Internet-Draft      S/MIME 3.5 Message Specification         August 2016
    weak cryptography is never recommended unless the only alternative is
    no cryptography.
 
-   RSA and DSA keys of less than 1024 bits are now considered by many
+   RSA and DSA keys of less than 2048 bits are now considered by many
    experts to be cryptographically insecure (due to advances in
    computing power), and should no longer be used to protect messages.
    Such keys were previously considered secure, so processing previously
@@ -2816,7 +2816,79 @@ B.1.  DigestAlgorithmIdentifier
       secure as it is no longer collision-resistant.  Details can be
       found in [RFC6151].
 
-B.2.  ContentEncryptionAlgorithmIdentifier
+B.2.  Signature Algorithms
+
+   There are a number of problems with validating signatures on
+   sufficently historic messages.  For this reason it is strongly
+   suggested that UAs treat these signatures differently from those on
+   current messages.  These problems include:
+
+   -  CAs are not required to keep certificates on a CRL beyond one
+      update after a certificate has expired.  This means that unless
+      CRLs are cached as part of the message it is not always possible
+      to check if a certificate has been revoked.  The same problems
+      exist with OCSP responses as they may be based on a CRL rather
+      than on the certificate database.
+
+   -  RSA and DSA keys of less than 2048 bits are now considered by many
+      experts to be cryptographically insecure (due to advances in
+      computing power).  Such keys were previously considered secure, so
+      processing of historic signed messages will often result in the
+      use of weak keys.  Implementations that wish to support previous
+      versions of S/MIME or process old messages need to consider the
+      security risks that result from smaller key sizes (e.g., spoofed
+      messages) versus the costs of denial of service.
+
+      [SMIMEv3.1] set the lower limit on suggested key sizes for
+      creating and validation at 1024 bits.  Prior to that the lower
+      bound on key sizes was 512 bits.
+
+   -  Hash functions used to validate signatures on historic messages
+      may longer be considered to be secure.  (See below.)  While there
+      are not currently any known practical pre-image or second pre-
+      image attacks against MD5 or SHA-1, the fact they are no longer
+      considered to be collision resistent the security levels of the
+      signatures are generally considered suspect.
+
+
+
+
+Schaad, et al.            Expires March 3, 2017                [Page 51]
+
+Internet-Draft      S/MIME 3.5 Message Specification         August 2016
+
+
+   -  The previous two issues apply to the certificates used to validate
+      the binding of the public key to the identity that signed the
+      message as well.
+
+   The following algorithms have been called out for some level of
+   support by previous S/MIME specifications:
+
+   -  RSA with MD5 was dropped in [SMIMEv3.5].  MD5 is no longer
+      considered to be secure as it is no longer collision-resistant.
+      Details can be found in [RFC6151].
+
+   -  RSA and DSA with SHA-1 were dropped in [SMIMEv3.5].  SHA-1 is no
+      longer considered to be secure as it is no longer collision-
+      resistant.  The IETF statment on SHA-1 can be found in [RFC6194]
+      but it is out-of-date relative to the most recent advances.
+
+   -  DSA with SHA-256 was dropped in [SMIMEv3.5].  DSA has been
+      replaced by elliptic curve versions.
+
+   Note that S/MIME v3.1 clients support verifying id-dsa-with-sha1 and
+   rsaEncryption and might not implement sha256withRSAEncryption.  Note
+   that S/MIME v3 clients might only implement signing or signature
+   verification using id-dsa-with-sha1, and might also use id-dsa as an
+   AlgorithmIdentifier in this field.  Receiving clients SHOULD
+   recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
+   clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
+   that S/MIME v2 clients are only required to verify digital signatures
+   using the rsaEncryption algorithm with SHA-1 or MD5, and might not
+   implement id-dsa-with-sha1 or id-dsa at all.
+
+B.3.  ContentEncryptionAlgorithmIdentifier
 
    The following algorithms have been called out for some level of
    support by previous S/MIME specifications:
@@ -2831,6 +2903,16 @@ B.2.  ContentEncryptionAlgorithmIdentifier
       it offers less that 128-bits of security.  This algorithm should
       be supported only to decrypt existing email, it should not be used
       to encrypt new emails.
+
+
+
+
+
+
+Schaad, et al.            Expires March 3, 2017                [Page 52]
+
+Internet-Draft      S/MIME 3.5 Message Specification         August 2016
+
 
 Appendix C.  Moving S/MIME v2 Message Specification to Historic Status
 
@@ -2850,14 +2932,6 @@ Appendix D.  Acknowledgments
 
    A number of the members of the S/MIME Working Group have also worked
    very hard and contributed to this document.  Any list of people is
-
-
-
-Schaad, et al.            Expires March 3, 2017                [Page 51]
-
-Internet-Draft      S/MIME 3.5 Message Specification         August 2016
-
-
    doomed to omission, and for that I apologize.  In alphabetical order,
    the following people stand out in my mind because they made direct
    contributions to various versions of this document:
@@ -2891,22 +2965,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Schaad, et al.            Expires March 3, 2017                [Page 52]
+Schaad, et al.            Expires March 3, 2017                [Page 53]

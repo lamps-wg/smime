@@ -332,7 +332,8 @@ li, p {
 <link href="#rfc.appendix.A" rel="Chapter" title="A ASN.1 Module"/>
 <link href="#rfc.appendix.B" rel="Chapter" title="B Processing of Historic Mail"/>
 <link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 DigestAlgorithmIdentifier"/>
-<link href="#rfc.appendix.B.2" rel="Chapter" title="B.2 ContentEncryptionAlgorithmIdentifier"/>
+<link href="#rfc.appendix.B.2" rel="Chapter" title="B.2 Signature Algorithms"/>
+<link href="#rfc.appendix.B.3" rel="Chapter" title="B.3 ContentEncryptionAlgorithmIdentifier"/>
 <link href="#rfc.appendix.C" rel="Chapter" title="C Moving S/MIME v2 Message Specification to Historic Status"/>
 <link href="#rfc.appendix.D" rel="Chapter" title="D Acknowledgments"/>
 <link href="#rfc.authors" rel="Chapter"/>
@@ -481,7 +482,8 @@ li, p {
 </ul><li>Appendix A.   <a href="#rfc.appendix.A">ASN.1 Module</a></li>
 <li>Appendix B.   <a href="#rfc.appendix.B">Processing of Historic Mail</a></li>
 <ul><li>B.1.   <a href="#rfc.appendix.B.1">DigestAlgorithmIdentifier</a></li>
-<li>B.2.   <a href="#rfc.appendix.B.2">ContentEncryptionAlgorithmIdentifier</a></li>
+<li>B.2.   <a href="#rfc.appendix.B.2">Signature Algorithms</a></li>
+<li>B.3.   <a href="#rfc.appendix.B.3">ContentEncryptionAlgorithmIdentifier</a></li>
 </ul><li>Appendix C.   <a href="#rfc.appendix.C">Moving S/MIME v2 Message Specification to Historic Status</a></li>
 <li>Appendix D.   <a href="#rfc.appendix.D">Acknowledgments</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
@@ -609,28 +611,25 @@ li, p {
 <p id="rfc.section.2.2.p.1">Receiving agents: </p>
 
 <ul>
-  <li>MUST support RSA with SHA-256.  </li>
-  <li>SHOULD+ support DSA with SHA-256.  </li>
-  <li>SHOULD+ support RSASSA-PSS with SHA-256.  </li>
-  <li>SHOULD- support RSA with SHA&#8209;1.  </li>
-  <li>SHOULD- support DSA with SHA&#8209;1.  </li>
-  <li>SHOULD- support RSA with MD5.  </li>
+  <li>MUST support ECDSA with curve P-256 and SHA-256.  </li>
+  <li>MUST support EdDSA with curve 25519 using PureEdDSA mode.  </li>
+  <li>MUST- support RSA with SHA-256.  </li>
+  <li>SHOULD support RSASSA-PSS with SHA-256.  </li>
+  <li>MUST NOT support EdDSA using the pre-hash mode.  </li>
 </ul>
 
 <p> </p>
 <p id="rfc.section.2.2.p.2">Sending agents: </p>
 
 <ul>
-  <li>MUST support RSA with SHA-256.  </li>
-  <li>SHOULD+ support DSA with SHA-256.  </li>
-  <li>SHOULD+ support RSASSA-PSS with SHA-256.  </li>
-  <li>SHOULD- support RSA with SHA&#8209;1 or DSA with SHA&#8209;1.  </li>
-  <li>SHOULD- support RSA with MD5.  </li>
+  <li>MUST support at least one of the following algorithms: RSASSA-PSS with SHA-256, ECDSA with curve P-256 and SHA-256 or EdDSA with curve 25519 using PureEdDSA mode.  </li>
+  <li>MUST- support RSA with SHA-256.  </li>
+  <li>MUST NOT support EdDSA using the pre-hash mode.  </li>
 </ul>
 
 <p> </p>
-<p id="rfc.section.2.2.p.3">See <a href="#KeyPairs">Section 4.1</a> for information on key size and algorithm references.  </p>
-<p id="rfc.section.2.2.p.4">Note that S/&#8288;MIME v3.1 clients support verifying id-dsa-with-sha1 and rsaEncryption and might not implement sha256withRSAEncryption.  Note that S/&#8288;MIME v3 clients might only implement signing or signature verification using id-dsa-with-sha1, and might also use id-dsa as an AlgorithmIdentifier in this field.  Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note that S/&#8288;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&#8209;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.  </p>
+<p id="rfc.section.2.2.p.3">Both ECDSA and EdDSA are included in the list of required algorithms for political reasons.  NIST is unable to provide the seeds that were used to create their standardized curves, this means that there is a section of the community which believes that there might be a backdoor to these curves.  The EdDSA curves were created in response to this feeling.  However, there are still significant sections of the industry which need to have NIST approved algorithms.  For this reason, both sets of curves are represented in the recieving agent list, but only a requirement for one is in the sending agent list.  </p>
+<p id="rfc.section.2.2.p.4">See <a href="#KeyPairs">Section 4.1</a> for information on key size and algorithm references.  </p>
 <h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> <a href="#KeyEncryptionAlgorithmIdentifier" id="KeyEncryptionAlgorithmIdentifier">KeyEncryptionAlgorithmIdentifier</a></h1>
 <p id="rfc.section.2.3.p.1">Receiving and sending agents: </p>
 
@@ -1201,23 +1200,23 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 <p id="rfc.section.4.p.2">At a minimum, for initial S/&#8288;MIME deployment, a user agent could automatically generate a message to an intended recipient requesting that recipient's certificate in a signed return message.  Receiving and sending agents SHOULD also provide a mechanism to allow a user to "store and protect" certificates for correspondents in such a way so as to guarantee their later retrieval.  </p>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> <a href="#KeyPairs" id="KeyPairs">Key Pair Generation</a></h1>
 <p id="rfc.section.4.1.p.1">All generated key pairs MUST be generated from a good source of non- deterministic random input <a href="#RFC4086">[RFC4086]</a> and the private key MUST be protected in a secure fashion.  </p>
-<p id="rfc.section.4.1.p.2">An S/&#8288;MIME user agent MUST NOT generate asymmetric keys less than 512 bits for use with the RSA or DSA signature algorithms.  </p>
+<p id="rfc.section.4.1.p.2">An S/&#8288;MIME user agent MUST NOT generate asymmetric keys less than 1024 bits for use with the RSA signature algorithm.  </p>
 <p id="rfc.section.4.1.p.3">For 512-bit RSA with SHA&#8209;1 see <a href="#RFC3370">[RFC3370]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit RSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1.  The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.  </p>
 <p id="rfc.section.4.1.p.4">For 512-bit DSA with SHA&#8209;1 see <a href="#RFC3370">[RFC3370]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit DSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 1024-bit DSA with SHA&#8209;1 see <a href="#RFC3370">[RFC3370]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <a href="#RFC5754">[RFC5754]</a> and <a href="#FIPS186-3">[FIPS186-3]</a>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
 <p id="rfc.section.4.1.p.5">For RSASSA-PSS with SHA-256, see <a href="#RFC4056">[RFC4056]</a>.  For 1024-bit DH, see <a href="#RFC3370">[RFC3370]</a>.  For 1024-bit and larger DH, see <a href="#SP800-56A">[SP800-56A]</a>; regardless, use the KDF, which is from X9.42, specified in <a href="#RFC3370">[RFC3370]</a>.  For RSAES- OAEP, see <a href="#RFC3560">[RFC3560]</a>.  </p>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Signature Generation</h1>
-<p id="rfc.section.4.2.p.1">The following are the requirements for an S/&#8288;MIME agent generated RSA, RSASSA-PSS, and DSA signatures: </p>
+<p id="rfc.section.4.2.p.1">The following are the requirements for an S/&#8288;MIME agent generated RSA and RSASSA-PSS signatures: </p>
 <pre>
-        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : SHOULD     (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </pre>
 <h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Signature Verification</h1>
-<p id="rfc.section.4.3.p.1">The following are the requirements for S/&#8288;MIME receiving agents during signature verification of RSA, RSASSA-PSS, and DSA signatures: </p>
+<p id="rfc.section.4.3.p.1">The following are the requirements for S/&#8288;MIME receiving agents during signature verification of RSA and RSASSA-PSS signatures: </p>
 <pre>
-        key size &lt;= 1023 : MAY        (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : MUST       (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </pre>
 <h1 id="rfc.section.4.4"><a href="#rfc.section.4.4">4.4.</a> Encryption</h1>
 <p id="rfc.section.4.4.p.1">The following are the requirements for an S/&#8288;MIME agent when establishing keys for content encryption using the RSA, RSA-OAEP, and DH algorithms: </p>
@@ -1332,7 +1331,7 @@ Change Controller: S/MIME working group delegated from the IESG
 <p id="rfc.section.6.p.4">The choice of 2048 bits as the RSA asymmetric key size in this specification is based on the desire to provide at least 100 bits of security.  The key sizes that must be supported to conform to this specification seem appropriate for the Internet based on <a href="#RFC3766">[RFC3766]</a>.  Of course, there are environments, such as financial and medical systems, that may select different key sizes.  For this reason, an implementation MAY support key sizes beyond those recommended in this specification.  </p>
 <p id="rfc.section.6.p.5">Receiving agents that validate signatures and sending agents that encrypt messages need to be cautious of cryptographic processing usage when validating signatures and encrypting messages using keys larger than those mandated in this specification.  An attacker could send certificates with keys that would result in excessive cryptographic processing, for example, keys larger than those mandated in this specification, which could swamp the processing element.  Agents that use such keys without first validating the certificate to a trust anchor are advised to have some sort of cryptographic resource management system to prevent such attacks.  </p>
 <p id="rfc.section.6.p.6">Using weak cryptography in S/&#8288;MIME offers little actual security over sending plaintext.  However, other features of S/&#8288;MIME, such as the specification of AES and the ability to announce stronger cryptographic capabilities to parties with whom you communicate, allow senders to create messages that use strong encryption.  Using weak cryptography is never recommended unless the only alternative is no cryptography.  </p>
-<p id="rfc.section.6.p.7">RSA and DSA keys of less than 1024 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to protect messages.  Such keys were previously considered secure, so processing previously received signed and encrypted mail will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  If an implementation supports verification of digital signatures generated with RSA and DSA keys of less than 1024 bits, it MUST warn the user.  Implementers should consider providing different warnings for newly received messages and previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak signatures.  </p>
+<p id="rfc.section.6.p.7">RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to protect messages.  Such keys were previously considered secure, so processing previously received signed and encrypted mail will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  If an implementation supports verification of digital signatures generated with RSA and DSA keys of less than 1024 bits, it MUST warn the user.  Implementers should consider providing different warnings for newly received messages and previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak signatures.  </p>
 <p id="rfc.section.6.p.8">Implementers SHOULD be aware that multiple active key pairs can be associated with a single individual.  For example, one key pair can be used to support confidentiality, while a different key pair can be used for digital signatures.  </p>
 <p id="rfc.section.6.p.9">If a sending agent is sending the same message using different strengths of cryptography, an attacker watching the communications channel might be able to determine the contents of the strongly encrypted message by decrypting the weakly encrypted version.  In other words, a sender SHOULD NOT send a copy of a message using weaker cryptography than they would use for the original of the message.  </p>
 <p id="rfc.section.6.p.10">Modification of the ciphertext can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  </p>
@@ -1774,8 +1773,29 @@ END
 </ul>
 
 <p> </p>
-<h1 id="rfc.appendix.B.2"><a href="#rfc.appendix.B.2">B.2.</a> ContentEncryptionAlgorithmIdentifier</h1>
-<p id="rfc.section.B.2.p.1">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
+<h1 id="rfc.appendix.B.2"><a href="#rfc.appendix.B.2">B.2.</a> Signature Algorithms</h1>
+<p id="rfc.section.B.2.p.1">There are a number of problems with validating signatures on sufficently historic messages.  For this reason it is strongly suggested that UAs treat these signatures differently from those on current messages.  These problems include: </p>
+
+<ul>
+  <li>CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.  This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.  The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.  </li>
+  <li>RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).  Such keys were previously considered secure, so processing of historic  signed messages  will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  <br/><br/> <a href="#SMIMEv3.1">[SMIMEv3.1]</a> set the lower limit on suggested key sizes for creating and validation at 1024 bits.  Prior to that the lower bound on key sizes was 512 bits.  </li>
+  <li>Hash functions used to validate signatures on historic messages may longer be considered to be secure.  (See below.) While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&#8209;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.  </li>
+  <li>The previous two issues apply to the certificates used to validate the binding of the public key to the identity that signed the message as well.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.B.2.p.2">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
+
+<ul>
+  <li>RSA with MD5 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
+  <li>RSA and DSA with SHA&#8209;1 were dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  SHA-1 is no longer considered to be secure as it is no longer collision-resistant.  The IETF statment on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recent advances.  </li>
+  <li>DSA with SHA-256 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  DSA has been replaced by elliptic curve versions.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.B.2.p.3">Note that S/&#8288;MIME v3.1 clients support verifying id-dsa-with-sha1 and rsaEncryption and might not implement sha256withRSAEncryption.  Note that S/&#8288;MIME v3 clients might only implement signing or signature verification using id-dsa-with-sha1, and might also use id-dsa as an AlgorithmIdentifier in this field.  Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note that S/&#8288;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&#8209;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.  </p>
+<h1 id="rfc.appendix.B.3"><a href="#rfc.appendix.B.3">B.3.</a> ContentEncryptionAlgorithmIdentifier</h1>
+<p id="rfc.section.B.3.p.1">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
 
 <ul>
   <li>RC2/40 <a href="#RFC2268">[RFC2268]</a> was dropped in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.  </li>

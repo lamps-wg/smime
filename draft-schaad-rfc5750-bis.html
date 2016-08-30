@@ -294,8 +294,10 @@ li, p {
 <link href="#rfc.references" rel="Chapter" title="6 References"/>
 <link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References"/>
 <link href="#rfc.references.2" rel="Chapter" title="6.2 Informational References"/>
-<link href="#rfc.appendix.A" rel="Chapter" title="A Moving S/MIME v2 Certificate Handling to Historic Status"/>
-<link href="#rfc.appendix.B" rel="Chapter" title="B Acknowledgments"/>
+<link href="#rfc.appendix.A" rel="Chapter" title="A Historic Considerations"/>
+<link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Signature Algorithms and Key Sizes"/>
+<link href="#rfc.appendix.B" rel="Chapter" title="B Moving S/MIME v2 Certificate Handling to Historic Status"/>
+<link href="#rfc.appendix.C" rel="Chapter" title="C Acknowledgments"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -403,8 +405,10 @@ li, p {
 <li>6.   <a href="#rfc.references">References</a></li>
 <ul><li>6.1.   <a href="#rfc.references.1">Normative References</a></li>
 <li>6.2.   <a href="#rfc.references.2">Informational References</a></li>
-</ul><li>Appendix A.   <a href="#rfc.appendix.A">Moving S/MIME v2 Certificate Handling to Historic Status</a></li>
-<li>Appendix B.   <a href="#rfc.appendix.B">Acknowledgments</a></li>
+</ul><li>Appendix A.   <a href="#rfc.appendix.A">Historic Considerations</a></li>
+<ul><li>A.1.   <a href="#rfc.appendix.A.1">Signature Algorithms and Key Sizes</a></li>
+</ul><li>Appendix B.   <a href="#rfc.appendix.B">Moving S/MIME v2 Certificate Handling to Historic Status</a></li>
+<li>Appendix C.   <a href="#rfc.appendix.C">Acknowledgments</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -530,29 +534,23 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <p id="rfc.section.4.3.p.1">Certificates and Certificate Revocation Lists (CRLs) are signed by the certificate issuer.  Receiving agents: </p>
 
 <ul>
-  <li>MUST support RSA with SHA-256</li>
-  <li>SHOULD+ support DSA with SHA-256</li>
-  <li>SHOULD+ support RSASSA-PSS with SHA-256</li>
-  <li>SHOULD- support RSA with SHA-1</li>
-  <li>SHOULD- support DSA with SHA-1</li>
-  <li>SHOULD- support RSA with MD5</li>
+  <li>MUST support ECDSA with curve P-256 with SHA-256.</li>
+  <li>MUST support EdDSA with curve 25519 using PureEdDSA mode.</li>
+  <li>MUST- support RSA with SHA-256.</li>
+  <li>SHOULD support RSASSA-PSS with SHA-256.</li>
+  <li>MUST NOT support EdDSA using Pre-hash mode.</li>
 </ul>
 
 <p> </p>
 <p id="rfc.section.4.3.p.2">The following are the RSA and RSASSA-PSS key size requirements for S/&#8288;MIME receiving agents during certificate and CRL signature verification: </p>
 <pre>
-           key size &lt;= 1023 : MAY  (see Section 5)
-   1024 &lt;= key size &lt;= 4096 : MUST (see Section 5)
-   4096 &lt;  key size         : MAY  (see Section 5)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Considerations)
+2048 &lt;= key size &lt;= 4096 : MUST (see Security Considerations)
+4096 &lt;  key size         : MAY  (see Security Considerations)
     </pre>
-<p id="rfc.section.4.3.p.3">The following are the DSA key size requirements for S/&#8288;MIME receiving agents during certificate and CRL signature verification: </p>
-<pre>
-            key size &lt;= 1023 : MAY  (see Section 5)
-    1024 &lt;= key size &lt;= 3072 : MUST (see Section 5)
-    </pre>
-<p id="rfc.section.4.3.p.4">For 512-bit RSA with SHA-1 see <a href="#RFC3279">[RFC3279]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 1024-bit through 3072-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, and for 4096-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#RFC3447">[RFC3447]</a>.  In either case, the first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
-<p id="rfc.section.4.3.p.5">For 512-bit DSA with SHA-1 see <a href="#RFC3279">[RFC3279]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit DSA with SHA-256 see <a href="#RFC5758">[RFC5758]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 1024-bit DSA with SHA-1 see <a href="#RFC3279">[RFC3279]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, for 1024-bit through 3072 DSA with SHA-256 see <a href="#RFC5758">[RFC5758]</a> and <a href="#FIPS186-3">[FIPS186-3]</a>.  In either case, the first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
-<p id="rfc.section.4.3.p.6">For RSASSA-PSS with SHA-256 see <a href="#RFC4056">[RFC4056]</a>.  </p>
+<p id="rfc.section.4.3.p.3">For 512-bit RSA with SHA-1 see <a href="#RFC3279">[RFC3279]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 1024-bit through 3072-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, and for 4096-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#RFC3447">[RFC3447]</a>.  In either case, the first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
+<p id="rfc.section.4.3.p.4">For 512-bit DSA with SHA-1 see <a href="#RFC3279">[RFC3279]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 512-bit DSA with SHA-256 see <a href="#RFC5758">[RFC5758]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1, for 1024-bit DSA with SHA-1 see <a href="#RFC3279">[RFC3279]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, for 1024-bit through 3072 DSA with SHA-256 see <a href="#RFC5758">[RFC5758]</a> and <a href="#FIPS186-3">[FIPS186-3]</a>.  In either case, the first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
+<p id="rfc.section.4.3.p.5">For RSASSA-PSS with SHA-256 see <a href="#RFC4056">[RFC4056]</a>.  </p>
 <h1 id="rfc.section.4.4"><a href="#rfc.section.4.4">4.4.</a> PKIX Certificate Extensions</h1>
 <p id="rfc.section.4.4.p.1">PKIX describes an extensible framework in which the basic certificate information can be extended and describes how such extensions can be used to control the process of issuing and validating certificates.  The PKIX Working Group has ongoing efforts to identify and create extensions that have value in particular certification environments.  Further, there are active efforts underway to issue PKIX certificates for business purposes.  This document identifies the minimum required set of certificate extensions that have the greatest value in the S/&#8288;MIME environment.  The syntax and semantics of all the identified extensions are defined in <a href="#RFC5280">[RFC5280]</a>.  </p>
 <p id="rfc.section.4.4.p.2">Sending and receiving agents MUST correctly handle the basic constraints, key usage, authority key identifier, subject key identifier, and subject alternative names certificate extensions when they appear in end-entity and CA certificates.  Some mechanism SHOULD exist to gracefully handle other certificate extensions when they appear in end-entity or CA certificates.  </p>
@@ -595,7 +593,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <p id="rfc.section.5.p.6">When determining the time for a certificate validity check, agents have to be careful to use a reliable time.  Unless it is from a trusted agent, this time MUST NOT be the SigningTime attribute found in an S/&#8288;MIME message.  For most sending agents, the SigningTime attribute could be deliberately set to direct the receiving agent to check a CRL that could have out-of-date revocation status for a certificate, or cause an improper result when checking the Validity field of a certificate.  </p>
 <p id="rfc.section.5.p.7">In addition to the Security Considerations identified in <a href="#RFC5280">[RFC5280]</a>, caution should be taken when processing certificates that have not first been validated to a trust anchor.  Certificates could be manufactured by untrusted sources for the purpose of mounting denial of service or other attacks.  For example, keys selected to require excessive cryptographic processing, or extensive lists of CRL Distribution Point (CDP) and/or Authority Information Access (AIA) addresses in the certificate, could be used to mount denial-of- service attacks.  Similarly, attacker-specified CDP and/or AIA addresses could be included in fake certificates to allow the originator to detect receipt of the message even if signature verification fails.  </p>
 <p id="rfc.section.5.p.8">The 4096-bit RSA key size requirement for certificate and CRL verification is larger than the 2048-bit RSA key sizes for message signature generation/verification or message encryption/decryption in <a href="#RFC5751">[RFC5751]</a> because many root CAs included in certificate stores have already issued root certificates with the 4096-bit key.  The standard that defines comparable key sizes for DSA is not yet available.  In particular, <a href="#FIPS186-2">[FIPS186-2]</a> without Change Notice 1 allowed DSA key sizes between 512 and 1024 bits, <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1 only allowed DSA key sizes of 1024 bits, and <a href="#FIPS186-3">[FIPS186-3]</a> allowed DSA key sizes from 1024 to 3072 bits.  Further, 4096-bit keys are normally only used by Root certificates and not by subordinate CA certificates, thereby lengthening the root CA certificate's validity period.  </p>
-<p id="rfc.section.5.p.9">RSA and DSA keys of less than 1024 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to sign certificates or CRLs.  Such keys were previously considered secure, so processing previously received signed and encrypted mail may require processing certificates or CRLs signed with weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from accepting certificates and CRLs with smaller key sizes (e.g., spoofed certificates) versus the costs of denial of service.  If an implementation supports verification of certificates or CRLs generated with RSA and DSA keys of less than 1024 bits, it MUST warn the user.  Implementers should consider providing a stronger warning for weak signatures on certificates and CRLs associated with newly received messages than the one provided for certificates and CRLs associated with previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak cryptography.  </p>
+<p id="rfc.section.5.p.9">RSA and DSA keys of less than 2048  bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to sign certificates or CRLs.  Such keys were previously considered secure, so processing previously received signed and encrypted mail may require processing certificates or CRLs signed with weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from accepting certificates and CRLs with smaller key sizes (e.g., spoofed certificates) versus the costs of denial of service.  If an implementation supports verification of certificates or CRLs generated with RSA and DSA keys of less than 2048 bits, it MUST warn the user.  Implementers should consider providing a stronger warning for weak signatures on certificates and CRLs associated with newly received messages than the one provided for certificates and CRLs associated with previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak cryptography.  </p>
 <p id="rfc.section.5.p.10">If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <a href="#SP800-57">[SP800-57]</a>.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">6.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">6.1.</a> Normative References</h1>
@@ -675,6 +673,12 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
     </tr>
     <tr>
       <td class="reference">
+        <b id="RFC5750">[RFC5750]</b>
+      </td>
+      <td class="top"><a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Certificate Handling</a>", RFC 5750, DOI 10.17487/RFC5750, January 2010.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC5751">[RFC5751]</b>
       </td>
       <td class="top"><a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
@@ -691,6 +695,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       </td>
       <td class="top"><a>Dang, Q.</a>, <a>Santesson, S.</a>, <a>Moriarty, K.</a>, <a>Brown, D.</a> and <a>T. Polk</a>, "<a href="http://tools.ietf.org/html/rfc5758">Internet X.509 Public Key Infrastructure: Additional Algorithms and Identifiers for DSA and ECDSA</a>", RFC 5758, DOI 10.17487/RFC5758, January 2010.</td>
     </tr>
+    <tr><td class="reference"><b id="SMIMEv3.5">[SMIMEv3.5]</b></td><td class="top"><a>S/MIME version 3.5</a>"<p>This group of documents represents S/MIME version 3.5.  This set of documents are </p></td>, "</tr>
     <tr><td class="reference"><b id="X.680">[X.680]</b></td><td class="top"><a>Information Technology - Abstract Syntax Notation One (ASN.1):  Specification of basic notation.  ITU-T Recommendation X.680 (2002) | ISO/IEC 8824-1:2002.</a>"</td>, "</tr>
   </tbody>
 </table>
@@ -782,6 +787,18 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       </td>
       <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3852">Cryptographic Message Syntax (CMS)</a>", RFC 3852, DOI 10.17487/RFC3852, July 2004.</td>
     </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6151">[RFC6151]</b>
+      </td>
+      <td class="top"><a>Turner, S.</a> and <a>L. Chen</a>, "<a href="http://tools.ietf.org/html/rfc6151">Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a>", RFC 6151, DOI 10.17487/RFC6151, March 2011.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6194">[RFC6194]</b>
+      </td>
+      <td class="top"><a>Polk, T.</a>, <a>Chen, L.</a>, <a>Turner, S.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc6194">Security Considerations for the SHA-0 and SHA-1 Message-Digest Algorithms</a>", RFC 6194, DOI 10.17487/RFC6194, March 2011.</td>
+    </tr>
     <tr><td class="reference"><b id="SMIMEv2">[SMIMEv2]</b></td><td class="top"><a>S/MIME version v2</a>"<p>This group of documents represents S/MIME version 2.  This set of documents are </p></td>, "</tr>
     <tr><td class="reference"><b id="SMIMEv3">[SMIMEv3]</b></td><td class="top"><a>S/MIME version 3</a>"<p>This group of documents represents S/MIME version 3.  This set of documents are </p></td>, "</tr>
     <tr><td class="reference"><b id="SMIMEv3.1">[SMIMEv3.1]</b></td><td class="top"><a>S/MIME version 3.1</a>"<p>This group of documents represents S/MIME version 3.1.  This set of documents are </p></td>, "</tr>
@@ -794,12 +811,32 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
     <tr><td class="reference"><b id="X.500">[X.500]</b></td><td class="top"><a>ITU-T Recommendation X.500 (1997) | ISO/IEC 9594- 1:1997, Information technology - Open Systems Interconnection - The Directory:  Overview of concepts, models and services.</a>"</td>, "</tr>
   </tbody>
 </table>
-<h1 id="rfc.appendix.A"><a href="#rfc.appendix.A">Appendix A.</a> Moving S/MIME v2 Certificate Handling to Historic Status</h1>
-<p id="rfc.section.A.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 (this document) are backwards compatible with the S/&#8288;MIME v2 Certificate Handling Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2312 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
-<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> Acknowledgments</h1>
-<p id="rfc.section.B.p.1">Many thanks go out to the other authors of the S/&#8288;MIME v2 RFC: Steve Dusse, Paul Hoffman, and Jeff Weinstein.  Without v2, there wouldn't be a v3, v3.1, or v3.2.  </p>
-<p id="rfc.section.B.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to this document.  </p>
-<p id="rfc.section.B.p.3">Bill Flanigan, Trevor Freeman, Elliott Ginsburg, Alfred Hoenes, Paul Hoffman, Russ Housley, David P. Kemp, Michael Myers, John Pawling, Denis Pinkas, and Jim Schaad.  </p>
+<h1 id="rfc.appendix.A"><a href="#rfc.appendix.A">Appendix A.</a> Historic Considerations</h1>
+<h1 id="rfc.appendix.A.1"><a href="#rfc.appendix.A.1">A.1.</a> Signature Algorithms and Key Sizes</h1>
+<p id="rfc.section.A.1.p.1">There are a number of problems with validating certificates on sufficiently historic messages.  For this reason it is strongly suggested that UAs treat these certificates differently from those on current messages.  These problems include: </p>
+
+<ul>
+  <li>CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.  This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.  The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.  </li>
+  <li>RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).  Such keys were previously considered secure, so processing of historic  certificates  will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  <br/><br/> <a href="#SMIMEv3.1">[SMIMEv3.1]</a> set the lower limit on suggested key sizes for creating and validation at 1024 bits.  Prior to that the lower bound on key sizes was 512 bits.  </li>
+  <li>Hash functions used to validate signatures on historic messages may longer be considered to be secure (see below).  While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&#8209;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.A.1.p.2">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
+
+<ul>
+  <li>RSA with MD5 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
+  <li>RSA and DSA with SHA-1 were dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  SHA-1 is nolonger considered to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recent advances.  </li>
+  <li>SHOULD+ support DSA with SHA-256</li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> Moving S/MIME v2 Certificate Handling to Historic Status</h1>
+<p id="rfc.section.B.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 (this document) are backwards compatible with the S/&#8288;MIME v2 Certificate Handling Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2312 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
+<h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> Acknowledgments</h1>
+<p id="rfc.section.C.p.1">Many thanks go out to the other authors of the S/&#8288;MIME v2 RFC: Steve Dusse, Paul Hoffman, and Jeff Weinstein.  Without v2, there wouldn't be a v3, v3.1, or v3.2.  </p>
+<p id="rfc.section.C.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to this document.  </p>
+<p id="rfc.section.C.p.3">Bill Flanigan, Trevor Freeman, Elliott Ginsburg, Alfred Hoenes, Paul Hoffman, Russ Housley, David P. Kemp, Michael Myers, John Pawling, Denis Pinkas, and Jim Schaad.  </p>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Authors' Addresses</a>
 </h1>
