@@ -38,7 +38,6 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='trust200902' docName="draft-schaad-rfc5750-bis-latest" category='std'>
   <front>
     <title abbrev="S/MIME 3.2 Certificate Handling">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.2 Certificate Handling</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
