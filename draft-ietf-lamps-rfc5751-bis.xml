@@ -42,6 +42,8 @@
   <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
+  <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
+  <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
   <!ENTITY rfc7905     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7905.xml">
 ]>
@@ -454,11 +456,24 @@
       
       <section title="DigestAlgorithmIdentifier" anchor="DigestAlgorithmIdentifier">
         <t>
-          Sending and receiving agents MUST support SHA-256 <xref target="RFC5754"/> and
-          SHOULD- support SHA&nbhy;1 <xref target="RFC3370"/>.  Receiving agents SHOULD- support MD5
-          <xref target="RFC3370"/> for the purpose of providing backward compatibility with
-          MD5-digested S/&wj;MIME v2 SignedData objects.
+          The algorithms here are used for digesting the body of the message and are not the same as the digest algorithms used as part the signature algorithms.
+          The result of this is placed in the message-digest attribute of the signed attributes.
+          It is RECOMMENDED that the algorithm used for digesting the body of the message be of similar or greater strength than the signature algorithm.
         </t>
+        
+        <t>
+          Sending and Receiving agents:
+          <list style="symbols">
+            <t>
+              MUST support SHA-256 <xref target="RFC5754"/>
+            </t>
+            <t>
+              MUST support SHA-512.
+            </t>
+          </list>
+        </t>
+        
+            
       </section>
       
       <section title="SignatureAlgorithmIdentifier" anchor="SignatureAlgorithmIdentifier">
@@ -2591,6 +2606,9 @@ Change Controller: S/MIME working group delegated from the IESG
             <date               month="August" year="2005"/>
           </front>
         </reference>
+
+        &rfc6194;
+        &rfc6151;
       </references>
 
 
@@ -2699,6 +2717,25 @@ END
         This means that if a user has historic emails and their user agent has been updated to only support the current set of recommended algorithms some of those old emails will no longer be accessible.
         It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.
       </t>
+
+      <section title="DigestAlgorithmIdentifier">
+        <t>
+          The following algorithms have been called our for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              SHA&nbhy;1 was dropped in <xref target="SMIMEv3.5"/>.
+              SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.
+              The IETF statement on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recient advances.
+            </t>
+            <t>
+              MD5 was dropped in <xref target="SMIMEv3.5"/>.
+              MD5 is no longer considered to be secure as it is no longer collision-resistant.
+              Details can be found in <xref target="RFC6151"/>.
+            </t>
+          </list>
+        </t>
+              
+      </section>
 
       <section title="ContentEncryptionAlgorithmIdentifier">
         <t>
