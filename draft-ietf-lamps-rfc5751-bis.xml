@@ -468,7 +468,7 @@
               MUST support SHA-256 <xref target="RFC5754"/>
             </t>
             <t>
-              SHOULD support SHA-512.
+              MUST support SHA-512.
             </t>
           </list>
         </t>
