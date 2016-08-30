@@ -23,9 +23,12 @@
   <!ENTITY rfc5035     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5035.xml">
   <!ENTITY rfc5280     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml">
   <!ENTITY rfc5652     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5652.xml">
+  <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5755     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5755.xml">
   <!ENTITY rfc5758     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5758.xml">
+  <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
+  <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
 ]>
 
 <?rfc toc='yes'?>
@@ -559,42 +562,35 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    Certificates and Certificate Revocation Lists (CRLs) are signed by
    the certificate issuer.  Receiving agents:
    <list style="symbols">
-     <t>MUST support RSA with SHA-256</t>
 
-     <t>SHOULD+ support DSA with SHA-256</t>
+     <t>MUST support ECDSA with curve P-256 with SHA-256.</t>
 
+     <t>MUST support EdDSA with curve 25519 using PureEdDSA mode.</t>
 
-     <t>SHOULD+ support RSASSA-PSS with SHA-256</t>
+     <t>MUST- support RSA with SHA-256.</t>
 
-     <t>SHOULD- support RSA with SHA-1</t>
+     <t>SHOULD support RSASSA-PSS with SHA-256.</t>
 
-     <t>SHOULD- support DSA with SHA-1</t>
+     <t>MUST NOT support EdDSA using Pre-hash mode.</t>
 
-     <t>SHOULD- support RSA with MD5</t>
    </list>
+   
   </t>
+  
   <t>
    The following are the RSA and RSASSA-PSS key size requirements for
    S/&wj;MIME receiving agents during certificate and CRL signature
    verification:
   </t>
+  
   <figure>
     <artwork>
-           key size &lt;= 1023 : MAY  (see Section 5)
-   1024 &lt;= key size &lt;= 4096 : MUST (see Section 5)
-   4096 &lt;  key size         : MAY  (see Section 5)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Considerations)
+2048 &lt;= key size &lt;= 4096 : MUST (see Security Considerations)
+4096 &lt;  key size         : MAY  (see Security Considerations)
     </artwork>
   </figure>
-  <t>
-   The following are the DSA key size requirements for S/&wj;MIME receiving
-   agents during certificate and CRL signature verification:
-  </t>
-  <figure>
-    <artwork>
-            key size &lt;= 1023 : MAY  (see Section 5)
-    1024 &lt;= key size &lt;= 3072 : MUST (see Section 5)
-    </artwork>
-  </figure>
+
   <t>
    For 512-bit RSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
    Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC4055"/> and
@@ -605,6 +601,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    object identifier and the second provides the signature algorithm's
    definition.
   </t>
+
   <t>
    For 512-bit DSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
    Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5758"/> and
@@ -615,6 +612,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    identifier and the second provides the signature algorithm's
    definition.
   </t>
+
   <t>
     For RSASSA-PSS with SHA-256 see <xref target="RFC4056"/>.
   </t>
@@ -848,7 +846,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    period.
   </t>
   <t>
-   RSA and DSA keys of less than 1024 bits are now considered by many
+   RSA and DSA keys of less than 2048  bits are now considered by many
    experts to be cryptographically insecure (due to advances in
    computing power), and should no longer be used to sign certificates
    or CRLs.  Such keys were previously considered secure, so processing
@@ -859,7 +857,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    certificates and CRLs with smaller key sizes (e.g., spoofed
    certificates) versus the costs of denial of service.  If an
    implementation supports verification of certificates or CRLs
-   generated with RSA and DSA keys of less than 1024 bits, it MUST warn
+   generated with RSA and DSA keys of less than 2048 bits, it MUST warn
    the user.  Implementers should consider providing a stronger warning
    for weak signatures on certificates and CRLs associated with newly
    received messages than the one provided for certificates and CRLs
@@ -936,6 +934,20 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
           </front>
         </reference>
    
+        <reference anchor="SMIMEv3.5">
+          <front>
+            <title>S/MIME version 3.5</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 3.5.
+            This set of documents are <xref target="RFC2634"/>, <xref target="RFC5750"/>, [[This Document]], <xref target="RFC5652"/>,  and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+
+        &rfc5750;
+
    </references>
 
    <references title="Informational References">
@@ -1081,8 +1093,62 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
             This set of documents are <xref target="RFC2634"/>, <xref target="RFC3850"/>, <xref target="RFC3851"/>, <xref target="RFC3852"/>,  and <xref target="RFC5035"/>.
           </annotation>
         </reference>
+
+        &rfc6194;
+        &rfc6151;
         
-   </references>
+</references>
+
+<section title="Historic Considerations">
+  <section title="Signature Algorithms and Key Sizes">
+    <t>
+      There are a number of problems with validating certificates on sufficiently historic messages.
+      For this reason it is strongly suggested that UAs treat these certificates differently from those on current messages.
+      These problems include:
+      <list style="symbols">
+        <t>
+          CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.
+          This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.
+          The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.
+        </t>
+        
+        <t>
+          RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).
+          Such keys were previously considered secure, so processing of historic  certificates  will often result in the use of weak keys.
+          Implementations that wish to support previous versions of S/&wj;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.
+          <vspace blankLines="1"/>
+          <xref target="SMIMEv3.1"/> set the lower limit on suggested key sizes for creating and validation at 1024 bits.
+          Prior to that the lower bound on key sizes was 512 bits.
+        </t>
+        
+        <t>
+          Hash functions used to validate signatures on historic messages may longer be considered to be secure (see below).
+          While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&nbhy;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.
+        </t>
+        
+      </list>
+    </t>
+
+    <t>
+      The following algorithms have been called out for some level of support by previous S/MIME specifications:
+      <list style="symbols">
+        <t>
+          RSA with MD5 was dropped in <xref target="SMIMEv3.5"/>.
+          MD5 is no longer considered to be secure as it is no longer collision-resistant.
+          Details can be found in <xref target="RFC6151"/>.
+        </t>
+        <t>
+          RSA and DSA with SHA-1 were dropped in <xref target="SMIMEv3.5"/>.
+          SHA-1 is nolonger considered to be secure as it is no longer collision-resistant.
+          The IETF statement on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recent advances.
+        </t>
+        <t>SHOULD+ support DSA with SHA-256</t>
+
+      </list>
+    </t>
+
+  </section>
+</section>
 
 <section title="Moving S/MIME v2 Certificate Handling to Historic Status">
   <t>

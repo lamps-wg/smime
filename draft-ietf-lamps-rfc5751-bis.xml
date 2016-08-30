@@ -7,6 +7,7 @@
   <!ENTITY rfc2049     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2049.xml">
   <!ENTITY rfc2119     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
   <!ENTITY rfc2138     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2138.xml">
+  <!ENTITY rfc2268     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2268.xml">
   <!ENTITY rfc2311     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2311.xml">
   <!ENTITY rfc2312     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2312.xml">
   <!ENTITY rfc2313     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2313.xml">
@@ -41,7 +42,10 @@
   <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
+  <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
+  <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
+  <!ENTITY rfc7905     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7905.xml">
 ]>
 
 
@@ -430,7 +434,7 @@
               Add the use of AuthEnvelopedData, including defining and registering an smime-type value (<xref target="AuthEnvelopedData1"/> and <xref target="AuthEnvelopedData2"/>).
             </t>
             <t>
-              Add the use of AES-GCM (<xref target="ContentEncryptionAlgorithmIdentifier"/>).
+              Update the content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>): Add AES-256 GCM , remove AES-192 CBC, mark tripleDES as historic. 
             </t>
           </list>
         </t>
@@ -452,11 +456,24 @@
       
       <section title="DigestAlgorithmIdentifier" anchor="DigestAlgorithmIdentifier">
         <t>
-          Sending and receiving agents MUST support SHA-256 <xref target="RFC5754"/> and
-          SHOULD- support SHA&nbhy;1 <xref target="RFC3370"/>.  Receiving agents SHOULD- support MD5
-          <xref target="RFC3370"/> for the purpose of providing backward compatibility with
-          MD5-digested S/&wj;MIME v2 SignedData objects.
+          The algorithms here are used for digesting the body of the message and are not the same as the digest algorithms used as part the signature algorithms.
+          The result of this is placed in the message-digest attribute of the signed attributes.
+          It is RECOMMENDED that the algorithm used for digesting the body of the message be of similar or greater strength than the signature algorithm.
         </t>
+        
+        <t>
+          Sending and Receiving agents:
+          <list style="symbols">
+            <t>
+              MUST support SHA-256 <xref target="RFC5754"/>
+            </t>
+            <t>
+              MUST support SHA-512.
+            </t>
+          </list>
+        </t>
+        
+            
       </section>
       
       <section title="SignatureAlgorithmIdentifier" anchor="SignatureAlgorithmIdentifier">
@@ -464,22 +481,19 @@
           Receiving agents:
           <list style="symbols">
             <t>
-              MUST support RSA with SHA-256.
+              MUST support ECDSA with curve P-256 and SHA-256.
             </t>
             <t>
-              SHOULD+ support DSA with SHA-256.
+              MUST support EdDSA with curve 25519 using PureEdDSA mode.
             </t>
             <t>
-              SHOULD+ support RSASSA-PSS with SHA-256.
+              MUST- support RSA with SHA-256.
             </t>
             <t>
-              SHOULD- support RSA with SHA&nbhy;1.
+              SHOULD support RSASSA-PSS with SHA-256.
             </t>
             <t>
-              SHOULD- support DSA with SHA&nbhy;1.
-            </t>
-            <t>
-              SHOULD- support RSA with MD5.
+              MUST NOT support EdDSA using the pre-hash mode.
             </t>
           </list>
         </t>
@@ -488,37 +502,31 @@
           Sending agents:
           <list style="symbols">
             <t>
-              MUST support RSA with SHA-256.
+              MUST support at least one of the following algorithms: RSASSA-PSS with SHA-256, ECDSA with curve P-256 and SHA-256 or EdDSA with curve 25519 using PureEdDSA mode.
             </t>
+            
             <t>
-              SHOULD+ support DSA with SHA-256.
+              MUST- support RSA with SHA-256.
             </t>
+            
             <t>
-              SHOULD+ support RSASSA-PSS with SHA-256.
-            </t>
-            <t>
-              SHOULD- support RSA with SHA&nbhy;1 or DSA with SHA&nbhy;1.
-            </t>
-            <t>
-              SHOULD- support RSA with MD5.
+              MUST NOT support EdDSA using the pre-hash mode.
             </t>
           </list>
         </t>
+          
+        <t>
+          Both ECDSA and EdDSA are included in the list of required algorithms for political reasons.
+          NIST is unable to provide the seeds that were used to create their standardized curves, this means that there is a section of the community which believes that there might be a backdoor to these curves.
+          The EdDSA curves were created in response to this feeling.
+          However, there are still significant sections of the industry which need to have NIST approved algorithms.
+          For this reason, both sets of curves are represented in the recieving agent list, but only a requirement for one is in the sending agent list.
+        </t>
+        
         <t>
           See <xref target="KeyPairs"/> for information on key size and algorithm references.
         </t>
-        <t>
-          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
-          rsaEncryption and might not implement sha256withRSAEncryption.  Note
-          that S/&wj;MIME v3 clients might only implement signing or signature
-          verification using id-dsa-with-sha1, and might also use id-dsa as an
-          AlgorithmIdentifier in this field.  Receiving clients SHOULD
-          recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
-          clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
-          that S/&wj;MIME v2 clients are only required to verify digital signatures
-          using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
-          implement id-dsa-with-sha1 or id-dsa at all.
-        </t>
+        
       </section>
       <section title="KeyEncryptionAlgorithmIdentifier" anchor="KeyEncryptionAlgorithmIdentifier">
         <t>
@@ -871,16 +879,14 @@
             Sending and receiving agents:
             <list style="symbols">
               <t>
-                MUST support encryption and decryption with AES-128 CBC
-                <xref target="RFC3565"/> and AES-128 GCM <xref target="RFC5084"/>.
+                MUST support encryption and decryption with AES-128 GCM and AES-256 GCM <xref target="RFC5084"/>.
+              </t>
+              
+              <t>
+                MUST- support encryption and decryption with AES-128 CBC <xref target="RFC3565"/>.
               </t>
               <t>
-                SHOULD+ support encryption and decryption with AES-192 CBC,
-                AES-256 CBC <xref target="RFC3565"/>, AES-192 GCM and AES-256 GCM <xref target="RFC5084"/>.
-              </t>
-              <t>
-                SHOULD- support encryption and decryption with DES EDE3 CBC,
-                hereinafter called "tripleDES" <xref target="RFC3370"/>.
+                SHOULD+ support encryption and decryption with ChaCha20-Poly1305 <xref target="RFC7905"/>.
               </t>
             </list>
           </t>
@@ -969,23 +975,19 @@
                     the recipient,
                   </t>
                 </list>
-                then the sending agent SHOULD use AES-128 CBC because it is a stronger
-                algorithm and is required by S/&wj;MIME v3.2.  If the sending agent
-                chooses not to use AES-128 CBC in this step, it SHOULD use tripleDES.
-                <cref source="JLS">Should this be updated to say SHOULD AES-128 GCM (required by v3.5), then AES-128 CBC (required by v3.2) then SHOULD tripleDES?
-                </cref>
+                then the sending agent SHOULD use AES-256 GCM because it is a stronger
+                algorithm and is required by S/&wj;MIME v3.5.  If the sending agent
+                chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.
               </t>
             </section>
           </section>
             <section title="Choosing Weak Encryption" anchor="WeakEncryption">
               <t>
-                All algorithms that use 40-bit keys are considered by many to be weak
+                All algorithms that use 112-bit keys are considered by many to be weak
                 encryption.  A sending agent that is controlled by a human SHOULD
                 allow a human sender to determine the risks of sending data using a
                 weak encryption algorithm before sending the data, and possibly allow
-                the human to use a stronger encryption method such as tripleDES or
-                AES.
-                <cref source="JLS">Does this become a MUST NOT now.</cref>
+                the human to use a stronger encryption method such as AES GCM or AES CBC.
               </t>
             </section>
 
@@ -1905,8 +1907,8 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 protected in a secure fashion.
               </t>
               <t>
-                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 512
-                bits for use with the RSA or DSA signature algorithms.
+                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 1024
+                bits for use with the RSA signature algorithm.
               </t>
               <t>
                 For 512-bit RSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without
@@ -1935,27 +1937,27 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
             </section>
             <section title="Signature Generation">
               <t>
-                The following are the requirements for an S/&wj;MIME agent generated RSA,
-                RSASSA-PSS, and DSA signatures:
+                The following are the requirements for an S/&wj;MIME agent generated RSA and
+                RSASSA-PSS signatures:
               </t>
               <figure>
               <artwork>
-        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : SHOULD     (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
             </section>
             <section title="Signature Verification">
               <t>
                 The following are the requirements for S/&wj;MIME receiving agents during
-                signature verification of RSA, RSASSA-PSS, and DSA signatures:
+                signature verification of RSA and RSASSA-PSS signatures:
               </t>
               <figure>
               <artwork>
-        key size &lt;= 1023 : MAY        (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : MUST       (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
             </section>
@@ -2163,7 +2165,7 @@ Change Controller: S/MIME working group delegated from the IESG
               no cryptography.
             </t>
             <t>
-              RSA and DSA keys of less than 1024 bits are now considered by many
+              RSA and DSA keys of less than 2048 bits are now considered by many
               experts to be cryptographically insecure (due to advances in
               computing power), and should no longer be used to protect messages.
               Such keys were previously considered secure, so processing previously
@@ -2491,6 +2493,9 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc5750; &rfc5751;
         &rfc4949;
         &rfc6278;
+        &rfc6194; &rfc6151;
+        &rfc2268;
+        &rfc7905;
 
         <!--
         <referencegroup target="SMIMEv2">
@@ -2544,7 +2549,16 @@ Change Controller: S/MIME working group delegated from the IESG
           &rfc3852;
           &rfc5035;
           </referencegroup>
-          -->
+        -->
+
+        <reference anchor="TripleDES">
+          <front>
+            <title>Hellman Presents No Shortcut Solutions to DES"</title>
+            <author surname="Tuchman" initials="W."/>
+            <date month="July" year="1979"/>
+          </front>
+          <seriesInfo name="IEEE Spectrum" value="v. 16, n. 7, pp 40-41"/>
+        </reference>
 
         <reference anchor="SMIMEv3.1">
           <front>
@@ -2584,6 +2598,7 @@ Change Controller: S/MIME working group delegated from the IESG
             <date               month="August" year="2005"/>
           </front>
         </reference>
+
       </references>
 
 
@@ -2686,6 +2701,113 @@ END
               </figure>
     </section>
 
+    <section title="Processing of Historic Mail">
+      <t>
+        Over the course of updating the S/MIME specifications, the set of recommended algorithms has been modified each time the document has been updated.
+        This means that if a user has historic emails and their user agent has been updated to only support the current set of recommended algorithms some of those old emails will no longer be accessible.
+        It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.
+      </t>
+
+      <section title="DigestAlgorithmIdentifier">
+        <t>
+          The following algorithms have been called our for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              SHA&nbhy;1 was dropped in <xref target="SMIMEv3.5"/>.
+              SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.
+              The IETF statement on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recient advances.
+            </t>
+            <t>
+              MD5 was dropped in <xref target="SMIMEv3.5"/>.
+              MD5 is no longer considered to be secure as it is no longer collision-resistant.
+              Details can be found in <xref target="RFC6151"/>.
+            </t>
+          </list>
+        </t>
+              
+      </section>
+      
+      <section title="Signature Algorithms">
+        <t>
+          There are a number of problems with validating signatures on sufficently historic messages.
+          For this reason it is strongly suggested that UAs treat these signatures differently from those on current messages.
+          These problems include:
+          <list style="symbols">
+            <t>
+              CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.
+              This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.
+              The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.
+            </t>
+            <t>
+              RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).
+              Such keys were previously considered secure, so processing of historic  signed messages  will often result in the use of weak keys.
+              Implementations that wish to support previous versions of S/&wj;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.
+              <vspace blankLines="1"/>
+              <xref target="SMIMEv3.1"/> set the lower limit on suggested key sizes for creating and validation at 1024 bits.
+              Prior to that the lower bound on key sizes was 512 bits.
+            </t>
+            <t>
+              Hash functions used to validate signatures on historic messages may longer be considered to be secure.
+              (See below.)
+              While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&nbhy;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.
+            </t>
+            <t>
+              The previous two issues apply to the certificates used to validate the binding of the public key to the identity that signed the message as well.
+            </t>
+          </list>
+        </t>
+        <t>
+          The following algorithms have been called out for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              RSA with MD5 was dropped in <xref target="SMIMEv3.5"/>.
+              MD5 is no longer considered to be secure as it is no longer collision-resistant.
+              Details can be found in <xref target="RFC6151"/>.
+            </t>
+            <t>
+              RSA and DSA with SHA&nbhy;1 were dropped in <xref target="SMIMEv3.5"/>.
+              SHA-1 is no longer considered to be secure as it is no longer collision-resistant.
+              The IETF statment on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recent advances.
+            </t>
+            <t>
+              DSA with SHA-256 was dropped in <xref target="SMIMEv3.5"/>.
+              DSA has been replaced by elliptic curve versions.
+            </t>
+            
+          </list>
+        </t>
+        
+        <t>
+          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
+          rsaEncryption and might not implement sha256withRSAEncryption.  Note
+          that S/&wj;MIME v3 clients might only implement signing or signature
+          verification using id-dsa-with-sha1, and might also use id-dsa as an
+          AlgorithmIdentifier in this field.  Receiving clients SHOULD
+          recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
+          clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
+          that S/&wj;MIME v2 clients are only required to verify digital signatures
+          using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
+          implement id-dsa-with-sha1 or id-dsa at all.
+        </t>
+      </section>
+
+      <section title="ContentEncryptionAlgorithmIdentifier">
+        <t>
+          The following algorithms have been called out for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              RC2/40 <xref target="RFC2268"/> was dropped in <xref target="SMIMEv3.2"/>.
+              The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.
+            </t>
+            <t>
+              DES EDE3 CBC <xref target="TripleDES"/>, also known as "tripleDES" is dropped in <xref target="SMIMEv3.5"/>.
+              This algorithms is removed from the supported list due to the fact that it has a 64-bit block size and the fact that it offers less that 128-bits of security.
+              This algorithm should be supported only to decrypt existing email, it should not be used to encrypt new emails.
+            </t>
+          </list>
+        </t>
+      </section>
+    </section>
 
     <section title="Moving S/MIME v2 Message Specification to Historic Status" anchor="V2Historic">
       <t>
@@ -2697,6 +2819,7 @@ END
         status.
       </t>
     </section>
+
     
     <section title="Acknowledgments">
       <t>
