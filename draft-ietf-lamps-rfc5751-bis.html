@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification </title>
+  <title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification </title>
 
   <style type="text/css">/*<![CDATA[*/
 @viewport {
@@ -344,9 +344,9 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-8-30" />
-  <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
-  <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-9-14" />
+  <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
+  <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
 </head>
 
@@ -372,7 +372,7 @@ li, p {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: March 3, 2017</td>
+  <td class="left">Expires: March 18, 2017</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -381,20 +381,20 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">August 30, 2016</td>
+  <td class="right">September 14, 2016</td>
 </tr>
 
     	
     </tbody>
   </table>
 
-  <p class="title">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification <br />
+  <p class="title">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification <br />
   <span class="filename">draft-ietf-lamps-rfc5751-bis-latest</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 3.5.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  </p>
+<p>This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  </p>
 <h1>
   <a>Contributing to this document</a>
 </h1>
@@ -405,7 +405,7 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on March 3, 2017.</p>
+<p>This Internet-Draft will expire on March 18, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -553,7 +553,7 @@ li, p {
 
 <p> </p>
 <h1 id="rfc.section.1.4"><a href="#rfc.section.1.4">1.4.</a> <a href="#Compatability" id="Compatability">Compatibility with Prior Practice of S/MIME</a></h1>
-<p id="rfc.section.1.4.p.1">S/&#8288;MIME version 3.5 agents ought to attempt to have the greatest interoperability possible with agents for prior versions of S/&#8288;MIME.  S/&#8288;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive <a href="#SMIMEv2">[SMIMEv2]</a>, S/&#8288;MIME version 3 is described in RFC 2630 through RFC 2634 inclusive and RFC 5035 <a href="#SMIMEv3">[SMIMEv3]</a>, S/&#8288;MIME version 3.1 is described in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and S/&#8288;MIME version 3.2 is described in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  RFC 2311 also has historical information about the development of S/&#8288;MIME.  </p>
+<p id="rfc.section.1.4.p.1">S/&#8288;MIME version 4.0 agents ought to attempt to have the greatest interoperability possible with agents for prior versions of S/&#8288;MIME.  S/&#8288;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive <a href="#SMIMEv2">[SMIMEv2]</a>, S/&#8288;MIME version 3 is described in RFC 2630 through RFC 2634 inclusive and RFC 5035 <a href="#SMIMEv3">[SMIMEv3]</a>, S/&#8288;MIME version 3.1 is described in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and S/&#8288;MIME version 3.2 is described in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  RFC 2311 also has historical information about the development of S/&#8288;MIME.  </p>
 <h1 id="rfc.section.1.5"><a href="#rfc.section.1.5">1.5.</a> Changes from S/MIME v3 to S/MIME v3.1</h1>
 <p id="rfc.section.1.5.p.1">The RSA public key algorithm was changed to a MUST implement key wrapping algorithm, and the Diffie-Hellman (DH) algorithm changed to a SHOULD implement.  </p>
 <p id="rfc.section.1.5.p.2">The AES symmetric encryption algorithm has been included as a SHOULD implement.  </p>
@@ -708,7 +708,7 @@ li, p {
 
 <p> </p>
 <h1 id="rfc.section.2.6"><a href="#rfc.section.2.6">2.6.</a> SignerIdentifier SignerInfo Type</h1>
-<p id="rfc.section.2.6.p.1">S/&#8288;MIME v3.5 implementations MUST support both issuerAndSerialNumber and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier choice cannot be read by S/&#8288;MIME v2 clients.  </p>
+<p id="rfc.section.2.6.p.1">S/&#8288;MIME v4.0 implementations MUST support both issuerAndSerialNumber and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier choice cannot be read by S/&#8288;MIME v2 clients.  </p>
 <p id="rfc.section.2.6.p.2">It is important to understand that some certificates use a value for subjectKeyIdentifier that is not suitable for uniquely identifying a certificate.  Implementations MUST be prepared for multiple certificates for potentially different entities to have the same value for subjectKeyIdentifier, and MUST be prepared to try each matching certificate during signature verification before indicating an error condition.  </p>
 <h1 id="rfc.section.2.7"><a href="#rfc.section.2.7">2.7.</a> <a href="#ContentEncryptionAlgorithmIdentifier" id="ContentEncryptionAlgorithmIdentifier">ContentEncryptionAlgorithmIdentifier</a></h1>
 <p id="rfc.section.2.7.p.1">Sending and receiving agents: </p>
@@ -743,7 +743,7 @@ li, p {
   <li>the sending agent has no knowledge of the version of S/&#8288;MIME of the recipient, </li>
 </ul>
 
-<p> then the sending agent SHOULD use AES-256 GCM because it is a stronger algorithm and is required by S/&#8288;MIME v3.5.  If the sending agent chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.  </p>
+<p> then the sending agent SHOULD use AES-256 GCM because it is a stronger algorithm and is required by S/&#8288;MIME v4.0.  If the sending agent chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.  </p>
 <h1 id="rfc.section.2.7.2"><a href="#rfc.section.2.7.2">2.7.2.</a> <a href="#WeakEncryption" id="WeakEncryption">Choosing Weak Encryption</a></h1>
 <p id="rfc.section.2.7.2.p.1">All algorithms that use 112-bit keys are considered by many to be weak encryption.  A sending agent that is controlled by a human SHOULD allow a human sender to determine the risks of sending data using a weak encryption algorithm before sending the data, and possibly allow the human to use a stronger encryption method such as AES GCM or AES CBC.  </p>
 <h1 id="rfc.section.2.7.3"><a href="#rfc.section.2.7.3">2.7.3.</a> Multiple Recipients</h1>
@@ -1367,6 +1367,12 @@ Change Controller: S/MIME working group delegated from the IESG
       </td>
       <td class="top"><a>National Institute of Standards and Technology (NIST)</a>, "<a>Digital Signature Standard (DSS)</a>", Federal Information Processing Standards Publication 186-3, June 2009.</td>
     </tr>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-lamps-rfc5750-bis">[I-D.ietf-lamps-rfc5750-bis]</b>
+      </td>
+      <td class="top"><a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis-00">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.2 Certificate Handling</a>", Internet-Draft draft-ietf-lamps-rfc5750-bis-00, August 2016.</td>
+    </tr>
     <tr><td class="reference"><b id="MIME-SPEC">[MIME-SPEC]</b></td><td class="top"><a>MIME Message Specifications</a>"<p>This is the set of documents that define how to use MIME.  This set of documents is </p></td>, "</tr>
     <tr>
       <td class="reference">
@@ -1494,7 +1500,7 @@ Change Controller: S/MIME working group delegated from the IESG
       </td>
       <td class="top"><a>Turner, S.</a>, "<a href="http://tools.ietf.org/html/rfc5754">Using SHA2 Algorithms with Cryptographic Message Syntax</a>", RFC 5754, DOI 10.17487/RFC5754, January 2010.</td>
     </tr>
-    <tr><td class="reference"><b id="SMIMEv3.5">[SMIMEv3.5]</b></td><td class="top"><a>S/MIME version 3.5</a>"<p>This group of documents represents S/MIME version 3.5.  This set of documents are </p></td>, "</tr>
+    <tr><td class="reference"><b id="SMIMEv4.0">[SMIMEv4.0]</b></td><td class="top"><a>S/MIME version 4.0</a>"<p>This group of documents represents S/MIME version 4.0.  This set of documents are </p></td>, "</tr>
     <tr>
       <td class="reference">
         <b id="SP800-56A">[SP800-56A]</b>
@@ -1768,8 +1774,8 @@ END
 <p id="rfc.section.B.1.p.1">The following algorithms have been called our for some level of support by previous S/MIME specifications: </p>
 
 <ul>
-  <li>SHA&#8209;1 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recient advances.  </li>
-  <li>MD5 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
+  <li>SHA&#8209;1 was dropped in <a href="#SMIMEv4.0">[SMIMEv4.0]</a>.  SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recient advances.  </li>
+  <li>MD5 was dropped in <a href="#SMIMEv4.0">[SMIMEv4.0]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
 </ul>
 
 <p> </p>
@@ -1787,9 +1793,9 @@ END
 <p id="rfc.section.B.2.p.2">The following algorithms have been called out for some level of support by previous S/MIME specifications: </p>
 
 <ul>
-  <li>RSA with MD5 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
-  <li>RSA and DSA with SHA&#8209;1 were dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  SHA-1 is no longer considered to be secure as it is no longer collision-resistant.  The IETF statment on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recent advances.  </li>
-  <li>DSA with SHA-256 was dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  DSA has been replaced by elliptic curve versions.  </li>
+  <li>RSA with MD5 was dropped in <a href="#SMIMEv4.0">[SMIMEv4.0]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151">[RFC6151]</a>.  </li>
+  <li>RSA and DSA with SHA&#8209;1 were dropped in <a href="#SMIMEv4.0">[SMIMEv4.0]</a>.  SHA-1 is no longer considered to be secure as it is no longer collision-resistant.  The IETF statment on SHA-1 can be found in <a href="#RFC6194">[RFC6194]</a> but it is out-of-date relative to the most recent advances.  </li>
+  <li>DSA with SHA-256 was dropped in <a href="#SMIMEv4.0">[SMIMEv4.0]</a>.  DSA has been replaced by elliptic curve versions.  </li>
 </ul>
 
 <p> </p>
@@ -1799,14 +1805,14 @@ END
 
 <ul>
   <li>RC2/40 <a href="#RFC2268">[RFC2268]</a> was dropped in <a href="#SMIMEv3.2">[SMIMEv3.2]</a>.  The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.  </li>
-  <li>DES EDE3 CBC <a href="#TripleDES">[TripleDES]</a>, also known as "tripleDES" is dropped in <a href="#SMIMEv3.5">[SMIMEv3.5]</a>.  This algorithms is removed from the supported list due to the fact that it has a 64-bit block size and the fact that it offers less that 128-bits of security.  This algorithm should be supported only to decrypt existing email, it should not be used to encrypt new emails.  </li>
+  <li>DES EDE3 CBC <a href="#TripleDES">[TripleDES]</a>, also known as "tripleDES" is dropped in <a href="#SMIMEv4.0">[SMIMEv4.0]</a>.  This algorithms is removed from the supported list due to the fact that it has a 64-bit block size and the fact that it offers less that 128-bits of security.  This algorithm should be supported only to decrypt existing email, it should not be used to encrypt new emails.  </li>
 </ul>
 
 <p> </p>
 <h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> <a href="#V2Historic" id="V2Historic">Moving S/MIME v2 Message Specification to Historic Status</a></h1>
 <p id="rfc.section.C.p.1">The S/&#8288;MIME v3 <a href="#SMIMEv3">[SMIMEv3]</a>, v3.1 <a href="#SMIMEv3.1">[SMIMEv3.1]</a>, and v3.2 <a href="#SMIMEv3.2">[SMIMEv3.2]</a> are backwards compatible with the S/&#8288;MIME v2 Message Specification <a href="#SMIMEv2">[SMIMEv2]</a>, with the exception of the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-PSS requirements).  Therefore, it is recommended that RFC 2311 <a href="#SMIMEv2">[SMIMEv2]</a> be moved to Historic status.  </p>
 <h1 id="rfc.appendix.D"><a href="#rfc.appendix.D">Appendix D.</a> Acknowledgments</h1>
-<p id="rfc.section.D.p.1">Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v3.5.  </p>
+<p id="rfc.section.D.p.1">Many thanks go out to the other authors of the S/&#8288;MIME version 2 Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1, v3.2 or v4.0.  </p>
 <p id="rfc.section.D.p.2">A number of the members of the S/&#8288;MIME Working Group have also worked very hard and contributed to this document.  Any list of people is doomed to omission, and for that I apologize.  In alphabetical order, the following people stand out in my mind because they made direct contributions to various versions of this document: </p>
 <p id="rfc.section.D.p.3">Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway, and John Pawling.  </p>
 <h1 id="rfc.authors">
