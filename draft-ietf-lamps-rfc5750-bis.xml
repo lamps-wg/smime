@@ -41,7 +41,7 @@
 
 <rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5750-bis-latest" category='std'>
   <front>
-    <title abbrev="S/MIME 3.5 Certificate Handling">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling</title>
+    <title abbrev="S/MIME 4.0 Certificate Handling">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0 Certificate Handling</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
       <organization>August Cellars</organization>
       <address>
@@ -67,7 +67,7 @@
     <abstract>
       <t>
    This document specifies conventions for X.509 certificate usage by
-   Secure/Multipurpose Internet Mail Extensions (S/&wj;MIME) v3.5 agents.
+   Secure/Multipurpose Internet Mail Extensions (S/&wj;MIME) v4.0 agents.
    S/&wj;MIME provides a method to send and receive secure MIME messages,
    and certificates are an integral part of S/&wj;MIME agent processing.
    S/&wj;MIME agents validate certificates as described in RFC 5280, the
@@ -91,7 +91,7 @@
 
 <section title="Introduction">
   <t>
-   S/&wj;MIME (Secure/Multipurpose Internet Mail Extensions) v3.5, described
+   S/&wj;MIME (Secure/Multipurpose Internet Mail Extensions) v4.0, described
    in <xref target="I-D.ietf-lamps-rfc5751-bis"/>, provides a method to send and receive secure MIME
    messages.  Before using a public key to provide security services,
    the S/&wj;MIME agent MUST verify that the public key is valid.  S/&wj;MIME
@@ -184,7 +184,7 @@
 </section>
 <section title="Compatibility with Prior Practice S/MIME">
   <t>
-   S/&wj;MIME version 3.5 agents ought to attempt to have the greatest
+   S/&wj;MIME version 4.0 agents ought to attempt to have the greatest
    interoperability possible with agents for prior versions of S/&wj;MIME.
   </t>
   <t>
@@ -945,18 +945,30 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
           </front>
         </reference>
    
-        <reference anchor="SMIMEv3.5">
+        <reference anchor="SMIMEv3.2">
           <front>
-            <title>S/MIME version 3.5</title>
+            <title>S/MIME version 3.2</title>
             <author/>
             <date/>
           </front>
           <annotation>
-            This group of documents represents S/MIME version 3.5.
+            This group of documents represents S/MIME version 3.2.
             This set of documents are <xref target="RFC2634"/>, <xref target="RFC5750"/>, [[This Document]], <xref target="RFC5652"/>,  and <xref target="RFC5035"/>.
           </annotation>
         </reference>
 
+        <reference anchor="SMIMEv4.0">
+          <front>
+            <title>S/MIME version 4.0</title>
+            <author/>
+            <date/>
+          </front>
+          <annotation>
+            This group of documents represents S/MIME version 4.0.
+            This set of documents are <xref target="RFC2634"/>, <xref target="I-D.ietf-lamps-rfc5751-bis"/>, [[This Document]], <xref target="RFC5652"/>,  and <xref target="RFC5035"/>.
+          </annotation>
+        </reference>
+        
         &rfc5750;
 
         &rfc5751bis;
@@ -1146,12 +1158,12 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       The following algorithms have been called out for some level of support by previous S/MIME specifications:
       <list style="symbols">
         <t>
-          RSA with MD5 was dropped in <xref target="SMIMEv3.5"/>.
+          RSA with MD5 was dropped in <xref target="SMIMEv4.0"/>.
           MD5 is no longer considered to be secure as it is no longer collision-resistant.
           Details can be found in <xref target="RFC6151"/>.
         </t>
         <t>
-          RSA and DSA with SHA-1 were dropped in <xref target="SMIMEv3.5"/>.
+          RSA and DSA with SHA-1 were dropped in <xref target="SMIMEv4.0"/>.
           SHA-1 is nolonger considered to be secure as it is no longer collision-resistant.
           The IETF statement on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recent advances.
         </t>
@@ -1165,7 +1177,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 
 <section title="Moving S/MIME v2 Certificate Handling to Historic Status">
   <t>
-   The S/&wj;MIME v3 <xref target="SMIMEv3"/>, v3.1 <xref target="SMIMEv3.1"/>, v3.2 <xref target="SMIMEv3.2"/>, and v3.5 (this document)
+   The S/&wj;MIME v3 <xref target="SMIMEv3"/>, v3.1 <xref target="SMIMEv3.1"/>, v3.2 <xref target="SMIMEv3.2"/>, and v4.0 (this document)
    are backwards compatible with the S/&wj;MIME v2 Certificate Handling
    Specification <xref target="SMIMEv2"/>, with the exception of the algorithms
    (dropped RC2/40 requirement and added DSA and RSASSA-PSS

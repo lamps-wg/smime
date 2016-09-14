@@ -46,6 +46,7 @@
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
   <!ENTITY rfc7905     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7905.xml">
+  <!ENTITY rfc5750bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5750-bis.xml">
 ]>
 
 
@@ -58,7 +59,7 @@
 
 <rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5751-bis-latest" category='std' obsoletes="RFC5751">
   <front>
-    <title abbrev="S/MIME 3.5 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification </title>
+    <title abbrev="S/MIME 4.0 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification </title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
       <organization>August Cellars</organization>
       <address>
@@ -84,7 +85,7 @@
     <abstract>
       <t>
         This document defines Secure/Multipurpose Internet Mail Extensions
-        (S/&wj;MIME) version 3.5.  S/&wj;MIME provides a consistent way to send and
+        (S/&wj;MIME) version 4.0.  S/&wj;MIME provides a consistent way to send and
         receive secure MIME data.  Digital signatures provide authentication,
         message integrity, and non-repudiation with proof of origin.
         Encryption provides data confidentiality.  Compression can be used to
@@ -288,7 +289,7 @@
       
       <section title="Compatibility with Prior Practice of S/MIME" anchor="Compatability">
         <t>
-          S/&wj;MIME version 3.5 agents ought to attempt to have the greatest
+          S/&wj;MIME version 4.0 agents ought to attempt to have the greatest
           interoperability possible with agents for prior versions of S/&wj;MIME.
           S/&wj;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive
           <xref target="SMIMEv2"/>, S/&wj;MIME version 3 is described in RFC 2630 through RFC 2634
@@ -859,7 +860,7 @@
       </section>
         <section title="SignerIdentifier SignerInfo Type">
           <t>
-            S/&wj;MIME v3.5 implementations MUST support both issuerAndSerialNumber
+            S/&wj;MIME v4.0 implementations MUST support both issuerAndSerialNumber
             and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier
             choice cannot be read by S/&wj;MIME v2 clients.
           </t>
@@ -976,7 +977,7 @@
                   </t>
                 </list>
                 then the sending agent SHOULD use AES-256 GCM because it is a stronger
-                algorithm and is required by S/&wj;MIME v3.5.  If the sending agent
+                algorithm and is required by S/&wj;MIME v4.0.  If the sending agent
                 chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.
               </t>
             </section>
@@ -2467,18 +2468,19 @@ Change Controller: S/MIME working group delegated from the IESG
           <seriesInfo name="ISO/IEC"  value="8825-1:2002"/>
         </reference>
 
-        <reference anchor="SMIMEv3.5">
+        <reference anchor="SMIMEv4.0">
           <front>
-            <title>S/MIME version 3.5</title>
+            <title>S/MIME version 4.0</title>
             <author/>
             <date/>
           </front>
           <annotation>
-            This group of documents represents S/MIME version 3.5.
-            This set of documents are <xref target="RFC2634"/>, <xref target="RFC5750"/>, [[This Document]], <xref target="RFC5652"/>,  and <xref target="RFC5035"/>.
+            This group of documents represents S/MIME version 4.0.
+            This set of documents are <xref target="RFC2634"/>, <xref target="I-D.ietf-lamps-rfc5750-bis"/>, [[This Document]], <xref target="RFC5652"/>,  and <xref target="RFC5035"/>.
           </annotation>
         </reference>
-        
+
+        &rfc5750bis;
 
       </references>
       
@@ -2713,12 +2715,12 @@ END
           The following algorithms have been called our for some level of support by previous S/MIME specifications:
           <list style="symbols">
             <t>
-              SHA&nbhy;1 was dropped in <xref target="SMIMEv3.5"/>.
+              SHA&nbhy;1 was dropped in <xref target="SMIMEv4.0"/>.
               SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.
               The IETF statement on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recient advances.
             </t>
             <t>
-              MD5 was dropped in <xref target="SMIMEv3.5"/>.
+              MD5 was dropped in <xref target="SMIMEv4.0"/>.
               MD5 is no longer considered to be secure as it is no longer collision-resistant.
               Details can be found in <xref target="RFC6151"/>.
             </t>
@@ -2760,17 +2762,17 @@ END
           The following algorithms have been called out for some level of support by previous S/MIME specifications:
           <list style="symbols">
             <t>
-              RSA with MD5 was dropped in <xref target="SMIMEv3.5"/>.
+              RSA with MD5 was dropped in <xref target="SMIMEv4.0"/>.
               MD5 is no longer considered to be secure as it is no longer collision-resistant.
               Details can be found in <xref target="RFC6151"/>.
             </t>
             <t>
-              RSA and DSA with SHA&nbhy;1 were dropped in <xref target="SMIMEv3.5"/>.
+              RSA and DSA with SHA&nbhy;1 were dropped in <xref target="SMIMEv4.0"/>.
               SHA-1 is no longer considered to be secure as it is no longer collision-resistant.
               The IETF statment on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recent advances.
             </t>
             <t>
-              DSA with SHA-256 was dropped in <xref target="SMIMEv3.5"/>.
+              DSA with SHA-256 was dropped in <xref target="SMIMEv4.0"/>.
               DSA has been replaced by elliptic curve versions.
             </t>
             
@@ -2800,7 +2802,7 @@ END
               The algorithm is known to be insecure and, if supported, should only be used to decrypt existing email.
             </t>
             <t>
-              DES EDE3 CBC <xref target="TripleDES"/>, also known as "tripleDES" is dropped in <xref target="SMIMEv3.5"/>.
+              DES EDE3 CBC <xref target="TripleDES"/>, also known as "tripleDES" is dropped in <xref target="SMIMEv4.0"/>.
               This algorithms is removed from the supported list due to the fact that it has a 64-bit block size and the fact that it offers less that 128-bits of security.
               This algorithm should be supported only to decrypt existing email, it should not be used to encrypt new emails.
             </t>
@@ -2826,7 +2828,7 @@ END
         Many thanks go out to the other authors of the S/&wj;MIME version 2
         Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence
         Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1,
-        v3.2 or v3.5.
+        v3.2 or v4.0.
       </t>
       <t>
         A number of the members of the S/&wj;MIME Working Group have also worked
