@@ -195,6 +195,9 @@
    RFC 2311 also has historical information about the development of
    S/&wj;MIME.
   </t>
+  <t>
+    <xref target="historic"/> contains information about algorithms are were used for prior versions of S/MIME but are no longer considered to meet modern security standards.
+  </t>
 </section>
 <section title="Changes from S/MIME v3 to S/MIME v3.1">
   <t>
@@ -1109,7 +1112,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
         
 </references>
 
-<section title="Historic Considerations">
+<section title="Historic Considerations" anchor="historic">
   <section title="Signature Algorithms and Key Sizes">
     <t>
       There are a number of problems with validating certificates on sufficiently historic messages.
