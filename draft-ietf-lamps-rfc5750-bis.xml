@@ -30,6 +30,8 @@
   <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc5751bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5751-bis.xml">
+  <!ENTITY eaiAddress  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-eai-addresses.xml">
+
 ]>
 
 <?rfc toc='yes'?>
@@ -280,14 +282,17 @@
 </section>
 <section title="Changes since S/MIME 3.2">
   <t>
-    <list>
-      <t hangText="Section 4.3">
+   <list style="hanging" hangIndent="12">
+      <t hangText="Section 3:">
+        Require support for internationalized email addresses.
+      </t>
+      <t hangText="Section 4.3:">
         Mandated support for ECDSA for P-256 and Ed25519.
         Moved algorithms with SHA-1 and MD5 to historical status.
         Moved DSA support to historical status.
         Increased lower bounds on RSA key sizes.
       </t>
-      <t hangText="Appendix A">
+      <t hangText="Appendix A:">
         Add a new appendix for algorithms that are now considered to be historical.
       </t>
     </list>
@@ -413,7 +418,10 @@
  </section>
  <section title="Using Distinguished Names for Internet Mail">
    <t>
-     End-entity certificates MAY contain an Internet mail address as described in <xref target="RFC5280"/>, Section 4.2.1.6.
+     
+     End-entity certificates MAY contain an Internet mail address.
+     Email addresses retricted to US-ASCII characters are encoded as described in Section 4.2.1.6 of <xref target="RFC5280"/>.
+     Internationalized Email address names are encoded as described in <xref target="I-D.ietf-lamps-eai-addresses"/>.
      The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.
    </t>
    
@@ -423,20 +431,30 @@
     Receiving agents MUST recognize email addresses in the subjectAltName field.
     Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <xref target="RFC2985"/> emailAddress attribute:
   </t>
-    <figure>
+
+  <figure>
       <artwork>
 pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 1 }
       </artwork>
-    </figure>
+  </figure>
 
-    <t>
-      Note that this attribute MUST be encoded as IA5String and has an  upper bound of 255 characters.
-      The right side of the email address SHOULD be treated as ASCII-case-insensitive.
+  <t>
+    Note that this attribute MUST be encoded as IA5String and has an  upper bound of 255 characters.
+    The right side of the email address SHOULD be treated as ASCII-case-insensitive.
   </t>
+
+  <t>
+    Comparing of email addresses is fraught with peril.
+    <xref target="I-D.ietf-lamps-eai-addresses"/> defines the procedure for doing comparision of Internationalized email addresses.
+    US-ASCII email addresses treat the domain component (right-hand side of the '@') MUST be compared using a case-insentive function.
+    The method of doing the comparision of the local name component SHOULD be done case-insentitive.
+    Some localities may perform other transformations on the local name component before doing the comparision, however an S/MIME client cannot know what specific localities do.
+  </t>
+  
   <t>
     Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.
-    Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address, if present, in the signer's certificate, if mail addresses are present in the certificate.
+    Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address in the signer's certificate, if mail addresses are present in the certificate.
     A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, which may be to display a message that shows the recipient the addresses in the certificate or other certificate details.
   </t>
   <t>
@@ -972,7 +990,8 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
         &rfc5750;
 
         &rfc5751bis;
-
+        &eaiAddress;
+        
    </references>
 
    <references title="Informational References">
