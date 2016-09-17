@@ -27,10 +27,13 @@
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
   <!ENTITY rfc5755     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5755.xml">
   <!ENTITY rfc5758     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5758.xml">
+  <!ENTITY rfc6090     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6090.xml">
   <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc5751bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5751-bis.xml">
   <!ENTITY eaiAddress  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-eai-addresses.xml">
+  <!ENTITY curdlePkix  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-pkix.xml">
+  <!ENTITY eddsa  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.irtf-cfrg-eddsa.xml">
 
 ]>
 
@@ -621,30 +624,26 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   </figure>
 
   <t>
-   For 512-bit RSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
-   Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC4055"/> and
-   <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit through 3072-bit
-   RSA with SHA-256 see <xref target="RFC4055"/> and <xref target="FIPS186-2"/> with Change Notice 1,
-   and for 4096-bit RSA with SHA-256 see <xref target="RFC4055"/> and <xref target="RFC3447"/>.  In
-   either case, the first reference provides the signature algorithm's
-   object identifier and the second provides the signature algorithm's
-   definition.
+   For 1024-bit through 3072-bit RSA with SHA-256 see <xref target="RFC4055"/> and <xref target="FIPS186-2"/> with Change Notice 1,
+   and for 4096-bit RSA with SHA-256 see <xref target="RFC4055"/> and <xref target="RFC3447"/>.
+   In either case, the first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
   </t>
 
-  <t>
-   For 512-bit DSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
-   Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5758"/> and
-   <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA-1 see
-   <xref target="RFC3279"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit through
-   3072 DSA with SHA-256 see <xref target="RFC5758"/> and <xref target="FIPS186-3"/>.  In either
-   case, the first reference provides the signature algorithm's object
-   identifier and the second provides the signature algorithm's
-   definition.
-  </t>
 
   <t>
     For RSASSA-PSS with SHA-256 see <xref target="RFC4056"/>.
   </t>
+
+  <t>
+    For ECDSA see <xref target="RFC5758"/> and <xref target="RFC6090"/>.
+    The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
+  </t>
+
+  <t>
+    For EdDSA see <xref target="I-D.ietf-curdle-pkix"/> and <xref target="I-D.irtf-cfrg-eddsa"/>.
+    The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
+  </t>
+  
 </section>
 <section title="PKIX Certificate Extensions">
   <t>
@@ -1140,6 +1139,9 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 
         &rfc6194;
         &rfc6151;
+        &rfc6090;
+        &eddsa;
+        &curdlePkix;
         
 </references>
 
@@ -1191,6 +1193,22 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       </list>
     </t>
 
+    <t>
+   For 512-bit RSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
+   Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC4055"/> and
+   <xref target="FIPS186-2"/> without Change Notice 1.
+    </t>
+
+    <t>
+      For 512-bit DSA with SHA-1 see <xref target="RFC3279"/> and <xref target="FIPS186-2"/> without
+      Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5758"/> and
+      <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA-1 see
+      <xref target="RFC3279"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit through
+      3072 DSA with SHA-256 see <xref target="RFC5758"/> and <xref target="FIPS186-3"/>.  In either
+      case, the first reference provides the signature algorithm's object
+      identifier and the second provides the signature algorithm's
+      definition.
+    </t>
   </section>
 </section>
 
