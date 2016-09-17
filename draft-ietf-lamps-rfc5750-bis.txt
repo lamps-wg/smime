@@ -5,10 +5,10 @@
 LAMPS                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Intended status: Standards Track                             B. Ramsdell
-Expires: March 19, 2017                           Brute Squad Labs, Inc.
+Expires: March 21, 2017                           Brute Squad Labs, Inc.
                                                                S. Turner
                                                                    sn3rd
-                                                      September 15, 2016
+                                                      September 17, 2016
 
 
    Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 1]
+Schaad, et al.           Expires March 21, 2017                 [Page 1]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
-   This Internet-Draft will expire on March 19, 2017.
+   This Internet-Draft will expire on March 21, 2017.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 2]
+Schaad, et al.           Expires March 21, 2017                 [Page 2]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -123,12 +123,12 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  18
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .  18
      6.2.  Informational References  . . . . . . . . . . . . . . . .  20
-   Appendix A.  Historic Considerations  . . . . . . . . . . . . . .  22
-     A.1.  Signature Algorithms and Key Sizes  . . . . . . . . . . .  22
+   Appendix A.  Historic Considerations  . . . . . . . . . . . . . .  23
+     A.1.  Signature Algorithms and Key Sizes  . . . . . . . . . . .  23
    Appendix B.  Moving S/MIME v2 Certificate Handling to Historic
-                Status . . . . . . . . . . . . . . . . . . . . . . .  23
+                Status . . . . . . . . . . . . . . . . . . . . . . .  24
    Appendix C.  Acknowledgments  . . . . . . . . . . . . . . . . . .  24
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  25
 
 1.  Introduction
 
@@ -165,7 +165,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 3]
+Schaad, et al.           Expires March 21, 2017                 [Page 3]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -221,7 +221,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 4]
+Schaad, et al.           Expires March 21, 2017                 [Page 4]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -277,7 +277,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 5]
+Schaad, et al.           Expires March 21, 2017                 [Page 5]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -333,7 +333,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 6]
+Schaad, et al.           Expires March 21, 2017                 [Page 6]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -389,7 +389,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 7]
+Schaad, et al.           Expires March 21, 2017                 [Page 7]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -445,7 +445,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 8]
+Schaad, et al.           Expires March 21, 2017                 [Page 8]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -501,7 +501,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                 [Page 9]
+Schaad, et al.           Expires March 21, 2017                 [Page 9]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -557,7 +557,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 10]
+Schaad, et al.           Expires March 21, 2017                [Page 10]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -613,7 +613,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 11]
+Schaad, et al.           Expires March 21, 2017                [Page 11]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -669,30 +669,26 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 12]
+Schaad, et al.           Expires March 21, 2017                [Page 12]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
-   For 512-bit RSA with SHA-1 see [RFC3279] and [FIPS186-2] without
-   Change Notice 1, for 512-bit RSA with SHA-256 see [RFC4055] and
-   [FIPS186-2] without Change Notice 1, for 1024-bit through 3072-bit
-   RSA with SHA-256 see [RFC4055] and [FIPS186-2] with Change Notice 1,
-   and for 4096-bit RSA with SHA-256 see [RFC4055] and [RFC3447].  In
-   either case, the first reference provides the signature algorithm's
-   object identifier and the second provides the signature algorithm's
-   definition.
-
-   For 512-bit DSA with SHA-1 see [RFC3279] and [FIPS186-2] without
-   Change Notice 1, for 512-bit DSA with SHA-256 see [RFC5758] and
-   [FIPS186-2] without Change Notice 1, for 1024-bit DSA with SHA-1 see
-   [RFC3279] and [FIPS186-2] with Change Notice 1, for 1024-bit through
-   3072 DSA with SHA-256 see [RFC5758] and [FIPS186-3].  In either case,
-   the first reference provides the signature algorithm's object
-   identifier and the second provides the signature algorithm's
-   definition.
+   For 1024-bit through 3072-bit RSA with SHA-256 see [RFC4055] and
+   [FIPS186-2] with Change Notice 1, and for 4096-bit RSA with SHA-256
+   see [RFC4055] and [RFC3447].  In either case, the first reference
+   provides the signature algorithm's object identifier and the second
+   provides the signature algorithm's definition.
 
    For RSASSA-PSS with SHA-256 see [RFC4056].
+
+   For ECDSA see [RFC5758] and [RFC6090].  The first reference provides
+   the signature algorithm's object identifier and the second provides
+   the signature algorithm's definition.
+
+   For EdDSA see [I-D.ietf-curdle-pkix] and [I-D.irtf-cfrg-eddsa].  The
+   first reference provides the signature algorithm's object identifier
+   and the second provides the signature algorithm's definition.
 
 4.4.  PKIX Certificate Extensions
 
@@ -722,16 +718,17 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
    certificate.  Other extensions may be included, but those extensions
    SHOULD NOT be marked as critical.
 
+   Interpretation and syntax for all extensions MUST follow [RFC5280],
+   unless otherwise specified here.
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 13]
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 13]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
-
-   Interpretation and syntax for all extensions MUST follow [RFC5280],
-   unless otherwise specified here.
 
 4.4.1.  Basic Constraints
 
@@ -781,7 +778,10 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 14]
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 14]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -837,7 +837,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 15]
+Schaad, et al.           Expires March 21, 2017                [Page 15]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -893,7 +893,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 16]
+Schaad, et al.           Expires March 21, 2017                [Page 16]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -949,7 +949,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 17]
+Schaad, et al.           Expires March 21, 2017                [Page 17]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -1005,7 +1005,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 18]
+Schaad, et al.           Expires March 21, 2017                [Page 18]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -1061,7 +1061,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 19]
+Schaad, et al.           Expires March 21, 2017                [Page 19]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
 
@@ -1098,8 +1098,29 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
               This is the set of documents dealing with enhanged
               security services and refers to [RFC2634] and [RFC5035].
 
+   [I-D.ietf-curdle-pkix]
+              Josefsson, S. and J. Schaad, "Algorithm Identifiers for
+              Ed25519, Ed25519ph, Ed448, Ed448ph, X25519 and X448 for
+              use in the Internet X.509 Public Key Infrastructure",
+              draft-ietf-curdle-pkix-01 (work in progress), August 2016.
+
+   [I-D.irtf-cfrg-eddsa]
+              Josefsson, S. and I. Liusvaara, "Edwards-curve Digital
+              Signature Algorithm (EdDSA)", draft-irtf-cfrg-eddsa-08
+              (work in progress), August 2016.
+
    [PKCS6]    RSA Laboratories, "PKCS #6: Extended-Certificate Syntax
               Standard", November 1993.
+
+
+
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 20]
+
+Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
+
 
    [RFC2311]  Dusse, S., Hoffman, P., Ramsdell, B., Lundblade, L., and
               L. Repka, "S/MIME Version 2 Message Specification",
@@ -1114,13 +1135,6 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
    [RFC2313]  Kaliski, B., "PKCS #1: RSA Encryption Version 1.5",
               RFC 2313, DOI 10.17487/RFC2313, March 1998,
               <http://www.rfc-editor.org/info/rfc2313>.
-
-
-
-Schaad, et al.           Expires March 19, 2017                [Page 20]
-
-Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
-
 
    [RFC2314]  Kaliski, B., "PKCS #10: Certification Request Syntax
               Version 1.5", RFC 2314, DOI 10.17487/RFC2314, March 1998,
@@ -1156,6 +1170,14 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
               RFC 3850, DOI 10.17487/RFC3850, July 2004,
               <http://www.rfc-editor.org/info/rfc3850>.
 
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 21]
+
+Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
+
+
    [RFC3851]  Ramsdell, B., Ed., "Secure/Multipurpose Internet Mail
               Extensions (S/MIME) Version 3.1 Message Specification",
               RFC 3851, DOI 10.17487/RFC3851, July 2004,
@@ -1165,18 +1187,15 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
               RFC 3852, DOI 10.17487/RFC3852, July 2004,
               <http://www.rfc-editor.org/info/rfc3852>.
 
+   [RFC6090]  McGrew, D., Igoe, K., and M. Salter, "Fundamental Elliptic
+              Curve Cryptography Algorithms", RFC 6090,
+              DOI 10.17487/RFC6090, February 2011,
+              <http://www.rfc-editor.org/info/rfc6090>.
+
    [RFC6151]  Turner, S. and L. Chen, "Updated Security Considerations
               for the MD5 Message-Digest and the HMAC-MD5 Algorithms",
               RFC 6151, DOI 10.17487/RFC6151, March 2011,
               <http://www.rfc-editor.org/info/rfc6151>.
-
-
-
-
-Schaad, et al.           Expires March 19, 2017                [Page 21]
-
-Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
-
 
    [RFC6194]  Polk, T., Chen, L., Turner, S., and P. Hoffman, "Security
               Considerations for the SHA-0 and SHA-1 Message-Digest
@@ -1207,6 +1226,14 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
               "Special Publication 800-57: Recommendation for Key
               Management", August 2005.
 
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 22]
+
+Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
+
+
    [X.500]    "ITU-T Recommendation X.500 (1997) | ISO/IEC 9594- 1:1997,
               Information technology - Open Systems Interconnection -
               The Directory: Overview of concepts, models and
@@ -1225,15 +1252,6 @@ A.1.  Signature Algorithms and Key Sizes
       update after a certificate has expired.  This means that unless
       CRLs are cached as part of the message it is not always possible
       to check if a certificate has been revoked.  The same problems
-
-
-
-
-Schaad, et al.           Expires March 19, 2017                [Page 22]
-
-Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
-
-
       exist with OCSP responses as they may be based on a CRL rather
       than on the certificate database.
 
@@ -1264,12 +1282,33 @@ Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
       considered to be secure as it is no longer collision-resistant.
       Details can be found in [RFC6151].
 
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 23]
+
+Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
+
+
    -  RSA and DSA with SHA-1 were dropped in [SMIMEv4.0].  SHA-1 is
       nolonger considered to be secure as it is no longer collision-
       resistant.  The IETF statement on SHA-1 can be found in [RFC6194]
       but it is out-of-date relative to the most recent advances.
 
    -  SHOULD+ support DSA with SHA-256
+
+   For 512-bit RSA with SHA-1 see [RFC3279] and [FIPS186-2] without
+   Change Notice 1, for 512-bit RSA with SHA-256 see [RFC4055] and
+   [FIPS186-2] without Change Notice 1.
+
+   For 512-bit DSA with SHA-1 see [RFC3279] and [FIPS186-2] without
+   Change Notice 1, for 512-bit DSA with SHA-256 see [RFC5758] and
+   [FIPS186-2] without Change Notice 1, for 1024-bit DSA with SHA-1 see
+   [RFC3279] and [FIPS186-2] with Change Notice 1, for 1024-bit through
+   3072 DSA with SHA-256 see [RFC5758] and [FIPS186-3].  In either case,
+   the first reference provides the signature algorithm's object
+   identifier and the second provides the signature algorithm's
+   definition.
 
 Appendix B.  Moving S/MIME v2 Certificate Handling to Historic Status
 
@@ -1279,16 +1318,6 @@ Appendix B.  Moving S/MIME v2 Certificate Handling to Historic Status
    the algorithms (dropped RC2/40 requirement and added DSA and RSASSA-
    PSS requirements).  Therefore, it is recommended that RFC 2312
    [SMIMEv2] be moved to Historic status.
-
-
-
-
-
-
-Schaad, et al.           Expires March 19, 2017                [Page 23]
-
-Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
-
 
 Appendix C.  Acknowledgments
 
@@ -1305,6 +1334,17 @@ Appendix C.  Acknowledgments
    Bill Flanigan, Trevor Freeman, Elliott Ginsburg, Alfred Hoenes, Paul
    Hoffman, Russ Housley, David P.  Kemp, Michael Myers, John Pawling,
    and Denis Pinkas.
+
+
+
+
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 24]
+
+Internet-Draft       S/MIME 4.0 Certificate Handling      September 2016
+
 
 Authors' Addresses
 
@@ -1341,4 +1381,20 @@ Authors' Addresses
 
 
 
-Schaad, et al.           Expires March 19, 2017                [Page 24]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Schaad, et al.           Expires March 21, 2017                [Page 25]
