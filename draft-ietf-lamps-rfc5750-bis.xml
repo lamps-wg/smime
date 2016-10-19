@@ -30,6 +30,7 @@
   <!ENTITY rfc6090     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6090.xml">
   <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
+  <!ENTITY rfc6979     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6979.xml">
   <!ENTITY rfc5751bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5751-bis.xml">
   <!ENTITY eaiAddress  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-eai-addresses.xml">
   <!ENTITY curdlePkix  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-pkix.xml">
@@ -202,6 +203,7 @@
   </t>
   <t>
     <xref target="historic"/> contains information about algorithms are were used for prior versions of S/MIME but are no longer considered to meet modern security standards.
+    Support of these algorithms may be needed to support historic S/MIME messages but SHOULD NOT be used for new mail.
   </t>
 </section>
 <section title="Changes from S/MIME v3 to S/MIME v3.1">
@@ -431,7 +433,7 @@
   <t>
     Receiving agents MUST recognize and accept certificates that contain no email address.
     Agents are allowed to provide an alternative mechanism for associating an email address with a certificate that does not contain an email address, such as through the use of the agent's address book, if available.
-    Receiving agents MUST recognize email addresses in the subjectAltName field.
+    Receiving agents MUST recognize both US-ASCII and internationalized email addresses in the subjectAltName field.
     Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <xref target="RFC2985"/> emailAddress attribute:
   </t>
 
@@ -449,10 +451,10 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 
   <t>
     Comparing of email addresses is fraught with peril.
-    <xref target="I-D.ietf-lamps-eai-addresses"/> defines the procedure for doing comparision of Internationalized email addresses.
-    US-ASCII email addresses treat the domain component (right-hand side of the '@') MUST be compared using a case-insentive function.
-    The method of doing the comparision of the local name component SHOULD be done case-insentitive.
-    Some localities may perform other transformations on the local name component before doing the comparision, however an S/MIME client cannot know what specific localities do.
+    <xref target="I-D.ietf-lamps-eai-addresses"/> defines the procedure for doing comparison of Internationalized email addresses.
+    For US-ASCII email addresses the domain component (right-hand side of the '@') MUST be compared using a case-insensitive function.
+    The local name component (left-hand side of the '@') SHOULD be compared using a case-insensitive function.
+    Some localities may perform other transformations on the local name component before doing the comparison, however an S/MIME client cannot know what specific localities do.
   </t>
   
   <t>
@@ -608,6 +610,11 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    </list>
    
   </t>
+
+  <t>
+    Implementations SHOULD use deterministic generation for the parameter 'k' for ECDSA as outlined in <xref target="RFC6979"/>.
+    EdDSA is defined to generate this parameter deterministically.
+  </t>
   
   <t>
    The following are the RSA and RSASSA-PSS key size requirements for
@@ -637,11 +644,13 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
     For ECDSA see <xref target="RFC5758"/> and <xref target="RFC6090"/>.
     The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
+    Other curves than durve P-256 MAY be used as well.
   </t>
 
   <t>
     For EdDSA see <xref target="I-D.ietf-curdle-pkix"/> and <xref target="I-D.irtf-cfrg-eddsa"/>.
     The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
+    Other curves than curve 25519 MAY be used as well.
   </t>
   
 </section>
@@ -735,11 +744,10 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
    The subject alternative name extension is used in S/&wj;MIME as the
    preferred means to convey the email address(es) that correspond(s) to
-   the entity for this certificate.  Any email addresses present MUST be
-   encoded using the rfc822Name CHOICE of the GeneralName type as
-   described in <xref target="RFC5280"/>, Section 4.2.1.6.  Since the SubjectAltName type
-   is a SEQUENCE OF GeneralName, multiple email addresses MAY be
-   present.
+   the entity for this certificate.
+   Any US-ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <xref target="RFC5280"/>, Section 4.2.1.6.
+   Any internationalized email addresses present MUST be encoded using the otherName CHOICE of the GeneralName type as described in <xref target="I-D.ietf-lamps-eai-addresses"/>, Section 3.
+   Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.
   </t>
 </section>
 <section title="Extended Key Usage Extension">
@@ -858,23 +866,30 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    originator to detect receipt of the message even if signature
    verification fails.
   </t>
+  <!--
+      The start of this paragraph is no longer true.
+
   <t>
    The 4096-bit RSA key size requirement for certificate and CRL
    verification is larger than the 2048-bit RSA key sizes for message
    signature generation/verification or message encryption/decryption in
    <xref target="RFC5751"/> because many root CAs included in certificate stores have
-   already issued root certificates with the 4096-bit key.  The standard
-   that defines comparable key sizes for DSA is not yet available.  In
+   already issued root certificates with the 4096-bit key.
+   The standard
+   that defines comparable key sizes for DSA is not yet available.
+   In
    particular, <xref target="FIPS186-2"/> without Change Notice 1 allowed DSA key sizes
    between 512 and 1024 bits, <xref target="FIPS186-2"/> with Change Notice 1 only
    allowed DSA key sizes of 1024 bits, and <xref target="FIPS186-3"/> allowed DSA key
-   sizes from 1024 to 3072 bits.  Further, 4096-bit keys are normally
+   sizes from 1024 to 3072 bits.
+   Further, 4096-bit keys are normally
    only used by Root certificates and not by subordinate CA
    certificates, thereby lengthening the root CA certificate's validity
    period.
-  </t>
+   </t>
+   -->
   <t>
-   RSA and DSA keys of less than 2048  bits are now considered by many
+   RSA keys of less than 2048  bits are now considered by many
    experts to be cryptographically insecure (due to advances in
    computing power), and should no longer be used to sign certificates
    or CRLs.  Such keys were previously considered secure, so processing
@@ -893,6 +908,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    (e.g., secure mail list servers) where user warnings are not
    appropriate SHOULD reject messages with weak cryptography.
   </t>
+
   <t>
    If an implementation is concerned about compliance with National
    Institute of Standards and Technology (NIST) key size
@@ -990,6 +1006,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 
         &rfc5751bis;
         &eaiAddress;
+        &rfc6979;
         
    </references>
 
@@ -1188,7 +1205,11 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
           SHA-1 is nolonger considered to be secure as it is no longer collision-resistant.
           The IETF statement on SHA-1 can be found in <xref target="RFC6194"/> but it is out-of-date relative to the most recent advances.
         </t>
-        <t>SHOULD+ support DSA with SHA-256</t>
+        <t>
+          DSA with SHA-256 support was dropped in <xref target="SMIMEv4.0"/>.
+          DSA was dropped as part of a general movement from discrete logarithms to elliptic curves.
+          Issues have come up dealing with small group attacks and with non-deterministic generation of the parameter 'k' (see <xref target="RFC6979"/>).
+        </t>
 
       </list>
     </t>
