@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding='US-ASCII'?>
 <!DOCTYPE rfc SYSTEM "../xml2rfc-1.36/rfc2629.dtd" [
-  <!ENTITY rfc18647     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1847.xml">
+  <!ENTITY rfc1847     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1847.xml">
   <!ENTITY rfc2045     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2045.xml">
   <!ENTITY rfc2046     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2046.xml">
   <!ENTITY rfc2047     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2047.xml">
