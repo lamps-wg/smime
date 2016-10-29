@@ -41,12 +41,15 @@
   <!ENTITY rfc5652     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5652.xml">
   <!ENTITY rfc5750     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5750.xml">
   <!ENTITY rfc5751     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5751.xml">
+  <!ENTITY rfc5753     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5753.xml">
   <!ENTITY rfc5754     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5754.xml">
   <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6278     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6278.xml">
   <!ENTITY rfc7905     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7905.xml">
   <!ENTITY rfc5750bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5750-bis.xml">
+  <!ENTITY ECDH_25519  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-cms-ecdh-new-curves.xml">
+  <!ENTITY EDDSA       SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-cms-eddsa-signatures.xml">
 ]>
 
 
@@ -420,7 +423,7 @@
         </t>
         <t>
           <!-- <xref target="references"/> -->
-          Section 7 : Moved references from Appendix B to this section.  Updated
+          Section 7 : Moved references from <xref target="HistoricMail"/> to this section.  Updated
           references.  Added informational references to SMIMEv2, SMIMEv3, and
           SMIMEv3.1.
         </t>
@@ -436,6 +439,9 @@
             </t>
             <t>
               Update the content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>): Add AES-256 GCM , remove AES-192 CBC, mark tripleDES as historic. 
+            </t>
+            <t>
+              Create Appendix B which deals with considerations for dealing with historic email messages.
             </t>
           </list>
         </t>
@@ -466,14 +472,17 @@
           Sending and Receiving agents:
           <list style="symbols">
             <t>
-              MUST support SHA-256 <xref target="RFC5754"/>
+              MUST support SHA-256.
             </t>
             <t>
               MUST support SHA-512.
             </t>
           </list>
         </t>
-        
+
+        <t>
+          <xref target="RFC5754"/> provides the details for using these algorithms with S/MIME.
+        </t>
             
       </section>
       
@@ -503,11 +512,14 @@
           Sending agents:
           <list style="symbols">
             <t>
-              MUST support at least one of the following algorithms: RSASSA-PSS with SHA-256, ECDSA with curve P-256 and SHA-256 or EdDSA with curve 25519 using PureEdDSA mode.
+              MUST support at least one of the following algorithms: ECDSA with curve P-256 and SHA-256, or EdDSA with curve 25519 using PureEdDSA mode.
             </t>
             
             <t>
               MUST- support RSA with SHA-256.
+            </t>
+            <t>
+              SHOULD support RSASSA-PSS with SHA-256.
             </t>
             
             <t>
@@ -521,7 +533,7 @@
           NIST is unable to provide the seeds that were used to create their standardized curves, this means that there is a section of the community which believes that there might be a backdoor to these curves.
           The EdDSA curves were created in response to this feeling.
           However, there are still significant sections of the industry which need to have NIST approved algorithms.
-          For this reason, both sets of curves are represented in the recieving agent list, but only a requirement for one is in the sending agent list.
+          For this reason, both sets of curves are represented in the recieving agent list, but there is only a requirement for curve in the sending agent list.
         </t>
         
         <t>
@@ -534,36 +546,37 @@
           Receiving and sending agents:
           <list style="symbols">
             <t>
-              MUST support RSA Encryption, as specified in <xref target="RFC3370"/>.
+              MUST support ECDH ephemeral-static mode for P-256, as specified in <xref target="RFC5753"/>.
+            </t>
+            
+            <t>
+              MUST support ECDH ephemeral-static mode for X25519 using HKDF-256 for the KDF, as specified in <xref target="I-D.ietf-curdle-cms-ecdh-new-curves"/>.
+            </t>
+            
+            <t>
+              MUST- support RSA Encryption, as specified in <xref target="RFC3370"/>.
             </t>
             <t>
               SHOULD+ support RSAES-OAEP, as specified in <xref target="RFC3560"/>.
             </t>
-            <t>
-              SHOULD- support DH ephemeral-static mode, as specified in
-              <xref target="RFC3370"/> and <xref target="SP800-57"/>.
-            </t>
+            
           </list>
         </t>
+        
         <t>
-          When DH ephemeral-static is used, a key wrap algorithm is also
+          When ECDH ephemeral-static is used, a key wrap algorithm is also
           specified in the KeyEncryptionAlgorithmIdentifier <xref target="RFC5652"/>.  The
           underlying encryption functions for the key wrap and content
           encryption algorithm (<xref target="RFC3370"/> and <xref target="RFC3565"/>) and the key sizes for
           the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm
-          with AES-128 content encryption algorithm).  As AES-128 CBC is the
-          mandatory-to-implement content encryption algorithm, the AES-128 key
-          wrap algorithm MUST also be supported when DH ephemeral-static is
-          used.
+          with AES-128 content encryption algorithm).
+          As both 128 and 256 bit AES modes are mandatory-to-implment as content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>), both the AES-128 and AES-256 key wrap algorithms MUST be supported when ECDH ephemeral-static is used.
         </t>
+
         <t>
-          Note that S/&wj;MIME v3.1 clients might only implement key encryption and
-          decryption using the rsaEncryption algorithm.  Note that S/&wj;MIME v3
-          clients might only implement key encryption and decryption using the
-          Diffie-Hellman algorithm.  Also note that S/&wj;MIME v2 clients are only
-          capable of decrypting content-encryption keys using the rsaEncryption
-          algorithm.
+          <xref target="HistoricMail"/> provides information on algorithms support in older versions of S/MIME.
         </t>
+        
       </section>
       <section title="General Syntax">
         <t>
@@ -711,7 +724,7 @@
           <t>
             The SMIMECapabilities attribute includes signature algorithms (such
             as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128
-            CBC"), authenticated symmetric algorithms (such as "AES-GCM") and key encipherment algorithms (such as "rsaEncryption").
+            CBC"), authenticated symmetric algorithms (such as "AES-128 GCM") and key encipherment algorithms (such as "rsaEncryption").
             There are also several identifiers that indicate support for other
             optional features such as binary encoding and compression.  The
             SMIMECapabilities were designed to be flexible and extensible so
@@ -979,6 +992,7 @@
                 then the sending agent SHOULD use AES-256 GCM because it is a stronger
                 algorithm and is required by S/&wj;MIME v4.0.  If the sending agent
                 chooses not to use AES-256 GCM in this step, it SHOULD use AES-128 CBC.
+                <cref source="JLS">Should this be AES-128 GCM instead?</cref>
               </t>
             </section>
           </section>
@@ -1230,7 +1244,7 @@
             <section title="Sample Canonical MIME Entity">
               <t>
                 This example shows a multipart/&wj;mixed message with full transfer
-                encoding.  This message contains a text part and an attachment.  The
+                encoding.  This message contains a text part and an attachment.  The
                 sample message text includes characters that are not US-ASCII and
                 thus need to be transfer encoded.  Though not shown here, the end of
                 each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the
@@ -1380,7 +1394,7 @@
                   <list style="numbers">
                     <t>
                       If both signing and encryption can be applied to the content,
-                      then two values for smime-type SHOULD be assigned "signed-*"
+                      then three values for smime-type SHOULD be assigned "signed-*", "authEnv-*",
                       and "enveloped-*".  If one operation can be assigned, then this
                       can be omitted.  Thus, since "certs-only" can only be signed,
                       "signed-" is omitted.
@@ -1399,7 +1413,7 @@
                 </t>
                 <t>
                   It is explicitly intended that this field be a suitable hint for mail
-                  client applications to indicate whether a message is "signed" or
+                  client applications to indicate whether a message is "signed", "authEnveloped" or
                   "enveloped" without having to tunnel into the CMS payload.
                 </t>
               </section>
@@ -1856,7 +1870,7 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
                 S/&wj;MIME v2 <xref target="SMIMEv2"/> specified a method for "registering" public keys
                 with certificate authorities using an application/&wj;pkcs10 body part.
                 Since that time, the IETF PKIX Working Group has developed other
-                methods for requesting certificates.  However, S/&wj;MIME v3.2 does not
+                methods for requesting certificates.  However, S/&wj;MIME v4.0 does not
                 require a particular certificate request mechanism.
               </t>
             </section>
@@ -1877,9 +1891,9 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
               </t>
               <texttable style="none">
                 <ttcol>Media type</ttcol><ttcol>parameters</ttcol><ttcol>file suffix</ttcol>
-                <c>application/pkcs7-mime</c><c>any</c><c>any</c>
-                <c>multipart/signed</c><c>protocol="application/pkcs7-signature"</c><c>any</c>
-                <c>application/octet-stream</c><c>any</c><c>p7m, p7s, p7c, p7z</c>
+                <c>application/pkcs7-mime</c><c>n/a</c><c>n/a</c>
+                <c>multipart/signed</c><c>protocol="application/pkcs7-signature"</c><c>n/a</c>
+                <c>application/octet-stream</c><c>n/a</c><c>p7m, p7s, p7c, p7z</c>
               </texttable>
             </section>
           </section>
@@ -1903,39 +1917,25 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
             
             <section title="Key Pair Generation" anchor="KeyPairs">
               <t>
-                All generated key pairs MUST be generated from a good source of non-
-                deterministic random input <xref target="RFC4086"/> and the private key MUST be
+                All generated key pairs MUST be generated from a good source of non-deterministic random input <xref target="RFC4086"/> and the private key MUST be
                 protected in a secure fashion.
               </t>
+              
               <t>
-                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 1024
-                bits for use with the RSA signature algorithm.
+                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 2048 bits for use with the RSA signature algorithm.
               </t>
+
               <t>
-                For 512-bit RSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without
-                Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC5754"/> and
-                <xref target="FIPS186-2"/> without Change Notice 1, and for 1024-bit through
-                2048-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> with Change
-                Notice 1.  The first reference provides the signature algorithm's
-                object identifier, and the second provides the signature algorithm's
-                definition.
+                For 2048-bit through 4096-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-4"/>.
+                The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.
               </t>
+              
               <t>
-                For 512-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without
-                Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5754"/> and
-                <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA&nbhy;1 see
-                <xref target="RFC3370"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit and above
-                DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-3"/>.  The first reference
-                provides the signature algorithm's object identifier and the second
-                provides the signature algorithm's definition.
-              </t>
-              <t>
-                For RSASSA-PSS with SHA-256, see <xref target="RFC4056"/>.  For 1024-bit DH, see
-                <xref target="RFC3370"/>.  For 1024-bit and larger DH, see <xref target="SP800-56A"/>; regardless,
-                use the KDF, which is from X9.42, specified in <xref target="RFC3370"/>.  For RSAES-
-                OAEP, see <xref target="RFC3560"/>.
+                For RSASSA-PSS with SHA-256, see <xref target="RFC4056"/>.
+                For RSAES-OAEP, see <xref target="RFC3560"/>.
               </t>
             </section>
+            
             <section title="Signature Generation">
               <t>
                 The following are the requirements for an S/&wj;MIME agent generated RSA and
@@ -1948,7 +1948,13 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
+
+              <t>
+                Key sizes for ECDSA and EdDSA are fixed by the curve.
+              </t>
+              
             </section>
+            
             <section title="Signature Verification">
               <t>
                 The following are the requirements for S/&wj;MIME receiving agents during
@@ -1961,34 +1967,47 @@ f8HHGTrfvhJhjH776tbB9HG4VQbnj7567GhIGfHfYT6ghyHhHUujpfyF4
 4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
+
+              <t>
+                Key sizes for ECDSA and EdDSA are fixed by the curve.
+              </t>
             </section>
+            
             <section title="Encryption">
               <t>
-                The following are the requirements for an S/&wj;MIME agent when
-                establishing keys for content encryption using the RSA, RSA-OAEP, and
-                DH algorithms:
+                The following are the requirements for an S/&wj;MIME agent when establishing keys for content encryption using the RSA, and RSA-OAEP algorithms:
               </t>
               <figure>
               <artwork>
-        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : SHOULD NOT (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : SHOULD     (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
+              
+              <t>
+                Key sizes for ECDH are fixed by the curve.
+              </t>
             </section>
+            
             <section title="Decryption">
+              <!-- FIX ME -->
               <t>
                 The following are the requirements for an S/&wj;MIME agent when
-                establishing keys for content decryption using the RSA, RSAES-OAEP,
-                and DH algorithms:
+                establishing keys for content decryption using the RSA and RSAES-OAEP algorithms:
               </t>
               <figure>
               <artwork>
-        key size &lt;= 1023 : MAY        (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
+        key size &lt;= 2047 : MAY        (see Historic Mail Considerations)
+2048 &lt;= key size &lt;= 4096 : MUST       (see Security Considerations)
+4096 &lt;  key size         : MAY        (see Security Considerations)
               </artwork>
               </figure>
+
+              <t>
+                Key sizes for ECDH are fixed by the curve.
+              </t>
+              
             </section>
           </section>
           
@@ -2294,6 +2313,9 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc5754;
         &rfc4086;
         &rfc5084;
+        &EDDSA;
+        &ECDH_25519;
+        &rfc5753;
         
         <!--
         -->
@@ -2364,35 +2386,16 @@ Change Controller: S/MIME working group delegated from the IESG
           
         </reference>
 
-        <reference anchor="FIPS186-2">
-          <front>
-            <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
-            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
-            <date month="January" year="2000"/>
-          </front>
-          <seriesInfo name="Federal Information Processing Standards Publication"
-                      value="186-2"/>
-        </reference>
-
-        <!-- FIPS 186-4 is not the current version -->
-        <reference anchor="FIPS186-3">
+        <reference anchor="FIPS186-4">
           <front>
             <title>Digital Signature Standard (DSS)</title>
             <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
-            <date month="June" year="2009"/>
+            <date month="July" year="2013"/>
           </front>
           <seriesInfo name="Federal Information Processing Standards Publication"
-                      value="186-3"/>
+                      value="186-4"/>
         </reference>
-
-        <reference anchor="SP800-56A">
-          <front>
-            <title>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</title>
-            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
-            <date month="May" year="2013"/>
-          </front>
-        </reference>
-
+        
         <reference anchor="ASN.1">
           <front>
             <title>Information Technology - Abstract Syntax Notation (ASN.1)</title>
@@ -2601,6 +2604,26 @@ Change Controller: S/MIME working group delegated from the IESG
           </front>
         </reference>
 
+        <reference anchor="FIPS186-2">
+          <front>
+            <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="January" year="2000"/>
+          </front>
+          <seriesInfo name="Federal Information Processing Standards Publication"
+                      value="186-2"/>
+        </reference>
+
+        
+        <reference anchor="SP800-56A">
+          <front>
+            <title>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="May" year="2013"/>
+          </front>
+        </reference>
+
+
       </references>
 
 
@@ -2703,11 +2726,15 @@ END
               </figure>
     </section>
 
-    <section title="Processing of Historic Mail">
+    <section title="Historic Mail Considerations" anchor="HistoricMail">
       <t>
         Over the course of updating the S/MIME specifications, the set of recommended algorithms has been modified each time the document has been updated.
         This means that if a user has historic emails and their user agent has been updated to only support the current set of recommended algorithms some of those old emails will no longer be accessible.
         It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.
+      </t>
+
+      <t>
+        This appendix contains a number of references to documents that have been obsoleted or replaced, this is intentional as frequently the updated documents do not have the same information in them.
       </t>
 
       <section title="DigestAlgorithmIdentifier">
@@ -2775,22 +2802,38 @@ END
               DSA with SHA-256 was dropped in <xref target="SMIMEv4.0"/>.
               DSA has been replaced by elliptic curve versions.
             </t>
-            
           </list>
         </t>
-        
+
         <t>
-          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
-          rsaEncryption and might not implement sha256withRSAEncryption.  Note
-          that S/&wj;MIME v3 clients might only implement signing or signature
-          verification using id-dsa-with-sha1, and might also use id-dsa as an
-          AlgorithmIdentifier in this field.  Receiving clients SHOULD
-          recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
-          clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
-          that S/&wj;MIME v2 clients are only required to verify digital signatures
-          using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
-          implement id-dsa-with-sha1 or id-dsa at all.
+          As requirements for manditory to implement has changed over time, some issues have been created that can cause interopatability problems:
+          <list style="symbols">
+            <t>
+              S/&wj;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.
+            </t>
+            <t>
+              S/&wj;MIME v3 clients might only implement signing or signature verification using id-dsa-with-sha1, and might also use id-dsa as an AlgorithmIdentifier in this field.
+            </t>
+            <t>
+              Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and rsaEncryption and might not implement sha256withRSAEncryption.
+            </t>
+          </list>
         </t>
+
+        <t>
+          NOTE: Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.
+        </t>
+
+        <t>
+          For 512-bit RSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> with Change Notice 1.
+          The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.
+        </t>
+
+        <t>
+          For 512-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-4"/>.
+          The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
+        </t>
+        
       </section>
 
       <section title="ContentEncryptionAlgorithmIdentifier">
@@ -2808,6 +2851,29 @@ END
             </t>
           </list>
         </t>
+      </section>
+
+      <section title="KeyEncryptionAlgorithmIdentifier">
+        <t>
+          The following algorithms have been called out for some level of support by previous S/MIME specifications:
+          <list style="symbols">
+            <t>
+              DH ephemeral-static mode, as specified in
+              <xref target="RFC3370"/> and <xref target="SP800-57"/>, was dropped in <xref target="SMIMEv4.0"/>.
+              
+            </t>
+            <t>
+              RSA key sizes have been increased over time.
+              Decrypting old mail with smaller key sizes is reasonable, however new mail should use the updated key sizes.
+            </t>
+          </list>
+        </t>
+
+        <t>
+          For 1024-bit DH, see <xref target="RFC3370"/>.
+          For 1024-bit and larger DH, see <xref target="SP800-56A"/>; regardless, use the KDF, which is from X9.42, specified in <xref target="RFC3370"/>.
+        </t>
+              
       </section>
     </section>
 
