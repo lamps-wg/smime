@@ -2386,16 +2386,6 @@ Change Controller: S/MIME working group delegated from the IESG
           
         </reference>
 
-        <reference anchor="FIPS186-2">
-          <front>
-            <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
-            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
-            <date month="January" year="2000"/>
-          </front>
-          <seriesInfo name="Federal Information Processing Standards Publication"
-                      value="186-2"/>
-        </reference>
-
         <reference anchor="FIPS186-4">
           <front>
             <title>Digital Signature Standard (DSS)</title>
@@ -2406,14 +2396,6 @@ Change Controller: S/MIME working group delegated from the IESG
                       value="186-4"/>
         </reference>
         
-        <reference anchor="SP800-56A">
-          <front>
-            <title>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</title>
-            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
-            <date month="May" year="2013"/>
-          </front>
-        </reference>
-
         <reference anchor="ASN.1">
           <front>
             <title>Information Technology - Abstract Syntax Notation (ASN.1)</title>
@@ -2622,6 +2604,26 @@ Change Controller: S/MIME working group delegated from the IESG
           </front>
         </reference>
 
+        <reference anchor="FIPS186-2">
+          <front>
+            <title>Digital Signature Standard (DSS) [With Change Notice 1]</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="January" year="2000"/>
+          </front>
+          <seriesInfo name="Federal Information Processing Standards Publication"
+                      value="186-2"/>
+        </reference>
+
+        
+        <reference anchor="SP800-56A">
+          <front>
+            <title>Special Publication 800-56A Revision 2: Recommendation Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography</title>
+            <author><organization>National Institute of Standards and Technology (NIST)</organization></author>
+            <date month="May" year="2013"/>
+          </front>
+        </reference>
+
+
       </references>
 
 
@@ -2731,6 +2733,10 @@ END
         It is strongly suggested that user agents implement some of the following algorithms for dealing with historic emails.
       </t>
 
+      <t>
+        This appendix contains a number of references to documents that have been obsoleted or replaced, this is intentional as frequently the updated documents do not have the same information in them.
+      </t>
+
       <section title="DigestAlgorithmIdentifier">
         <t>
           The following algorithms have been called our for some level of support by previous S/MIME specifications:
@@ -2796,22 +2802,38 @@ END
               DSA with SHA-256 was dropped in <xref target="SMIMEv4.0"/>.
               DSA has been replaced by elliptic curve versions.
             </t>
-            
           </list>
         </t>
-        
+
         <t>
-          Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and
-          rsaEncryption and might not implement sha256withRSAEncryption.  Note
-          that S/&wj;MIME v3 clients might only implement signing or signature
-          verification using id-dsa-with-sha1, and might also use id-dsa as an
-          AlgorithmIdentifier in this field.  Receiving clients SHOULD
-          recognize id-dsa as equivalent to id-dsa-with-sha1, and sending
-          clients MUST use id-dsa-with-sha1 if using that algorithm.  Also note
-          that S/&wj;MIME v2 clients are only required to verify digital signatures
-          using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not
-          implement id-dsa-with-sha1 or id-dsa at all.
+          As requirements for manditory to implement has changed over time, some issues have been created that can cause interopatability problems:
+          <list style="symbols">
+            <t>
+              S/&wj;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&nbhy;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.
+            </t>
+            <t>
+              S/&wj;MIME v3 clients might only implement signing or signature verification using id-dsa-with-sha1, and might also use id-dsa as an AlgorithmIdentifier in this field.
+            </t>
+            <t>
+              Note that S/&wj;MIME v3.1 clients support verifying id-dsa-with-sha1 and rsaEncryption and might not implement sha256withRSAEncryption.
+            </t>
+          </list>
         </t>
+
+        <t>
+          NOTE: Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.
+        </t>
+
+        <t>
+          For 512-bit RSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> with Change Notice 1.
+          The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.
+        </t>
+
+        <t>
+          For 512-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-4"/>.
+          The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
+        </t>
+        
       </section>
 
       <section title="ContentEncryptionAlgorithmIdentifier">
@@ -2840,52 +2862,11 @@ END
               <xref target="RFC3370"/> and <xref target="SP800-57"/>, was dropped in <xref target="SMIMEv4.0"/>.
               
             </t>
+            <t>
+              RSA key sizes have been increased over time.
+              Decrypting old mail with smaller key sizes is reasonable, however new mail should use the updated key sizes.
+            </t>
           </list>
-        </t>
-
-        <t>
-          The following are the requirements for an S/&wj;MIME agent when
-          establishing keys for content encryption using the RSA, RSA-OAEP, and
-          DH algorithms:
-        </t>
-        <figure>
-          <artwork>
-        key size &lt;= 1023 : SHOULD NOT (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : SHOULD     (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
-          </artwork>
-        </figure>
-
-        <t>
-                The following are the requirements for an S/&wj;MIME agent when
-                establishing keys for content decryption using the RSA, RSAES-OAEP,
-                and DH algorithms:
-        </t>
-        <figure>
-          <artwork>
-        key size &lt;= 1023 : MAY        (see Security Considerations)
-1024 &lt;= key size &lt;= 2048 : MUST       (see Security Considerations)
-2048 &lt;  key size         : MAY        (see Security Considerations)
-          </artwork>
-        </figure>
-
-        <t>
-          Note that S/&wj;MIME v3.1 clients might only implement key encryption and
-          decryption using the rsaEncryption algorithm.  Note that S/&wj;MIME v3
-          clients might only implement key encryption and decryption using the
-          Diffie-Hellman algorithm.  Also note that S/&wj;MIME v2 clients are only
-          capable of decrypting content-encryption keys using the rsaEncryption
-          algorithm.
-        </t>
-
-        <t>
-          For 512-bit RSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 512-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> with Change Notice 1.
-          The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.
-        </t>
-
-        <t>
-          For 512-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 512-bit DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-2"/> without Change Notice 1, for 1024-bit DSA with SHA&nbhy;1 see <xref target="RFC3370"/> and <xref target="FIPS186-2"/> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <xref target="RFC5754"/> and <xref target="FIPS186-4"/>.
-          The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
         </t>
 
         <t>
