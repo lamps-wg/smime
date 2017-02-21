@@ -31,6 +31,7 @@
   <!ENTITY rfc3852     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3852.xml">
   <!ENTITY rfc4056     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4056.xml">
   <!ENTITY rfc4086     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4086.xml">
+  <!ENTITY rfc4134     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4134.xml">
   <!ENTITY rfc4270     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4270.xml">
   <!ENTITY rfc4288     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4288.xml">
   <!ENTITY rfc4289     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4289.xml">
@@ -51,9 +52,6 @@
   <!ENTITY rfc5750bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5750-bis.xml">
   <!ENTITY ECDH_25519  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-cms-ecdh-new-curves.xml">
   <!ENTITY EDDSA       SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-cms-eddsa-signatures.xml">
-
-  <!ENTITY example1 SYSTEM "http://">
-
 
 ]>
 
@@ -1530,7 +1528,7 @@ LrY4OxUk660cu1lXeCSFOSOpOJ7FuVyU=
               <figure>
                 <artwork>
 Content-Type: application/pkcs7-mime; smime-type=authEnvelopedData;
-	name=smime.p7m
+      name=smime.p7m
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename=smime.p7m
 
@@ -2689,7 +2687,8 @@ Change Controller: S/MIME working group delegated from the IESG
           </front>
         </reference>
 
-        &RFC7114;
+        &rfc7114;
+        &rfc4134;
 
       </references>
 
@@ -2962,6 +2961,10 @@ END
         Message Specification RFC: Steve Dusse, Paul Hoffman, Laurence
         Lundblade, and Lisa Repka.  Without v2, there wouldn't be a v3, v3.1,
         v3.2 or v4.0.
+      </t>
+      <t>
+        Some of the examples in this document were stolen from <xref target="RFC4134"/>.
+        Thanks go the the people who wrote and verified the examples in that document.
       </t>
       <t>
         A number of the members of the S/&wj;MIME Working Group have also worked
