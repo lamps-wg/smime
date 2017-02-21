@@ -2220,6 +2220,7 @@ Change Controller: S/MIME working group delegated from the IESG
               Modification of the ciphertext can go undetected if authentication is
               not also used, which is the case when sending EnvelopedData without
               wrapping it in SignedData or enclosing SignedData within it.
+              This is one of the reasons for moving from EnvelopedData to AuthEnvelopedData as the authenticated encryption algorithms provide the authentication without needing the SignedData layer.
             </t>
             <t>
               If an implementation is concerned about compliance with National
@@ -2265,6 +2266,12 @@ Change Controller: S/MIME working group delegated from the IESG
               Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.
               This is because either of the parties can successfully create the message (or just alter the content) based on the fact that the CEK is going to be known to both parties.
               Thus the origination is always built on a presumption that "I did not send this message to myself."
+            </t>
+            <t>
+              All of the authenticated encryption algorithms in this document use counter mode for the encryption portion of the algorithm.
+              This means that the length of the plain text will always be known as the cipher text length and the plain text length are always the same.
+              This information can enable passive observers to infer information based solely on the length of the message.
+              Applications for which this is a significant problem need to provide some type of padding algorithm so that the length of the message does not provide this information.
             </t>
           </section>
   </middle>
