@@ -7,7 +7,8 @@
 
   <title>Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification </title>
 
-  <style type="text/css">/*<![CDATA[*/
+  
+<style type="text/css">/*<![CDATA[*/
 @viewport {
   zoom: 1.0;
   width: extend-to-zoom;
@@ -73,7 +74,11 @@ ul.toc li {
   padding-bottom: 5px;
   margin: 0;
 }
-ul.toc, ul.toc ul {
+ul.toc ul {
+  margin: 0;
+}
+/* xml2rfc nests ul directly inside ul which messes with the style badly */
+ul.toc, ul.toc>ul, ul.toc ul>ul {
   margin: 0 0 0 1.5em;
 }
 
@@ -208,6 +213,9 @@ ol, ul, li, p {
 li, p {
   margin-left: 0;
 }
+address {
+  font-style: normal;
+}
 
 .github-fork-ribbon-wrapper {
   display: none;
@@ -266,6 +274,7 @@ li, p {
     position: fixed;
   }
   /*]]>*/</style>
+
 
   <link href="#rfc.toc" rel="Contents"/>
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
@@ -345,7 +354,7 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-10-29" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-2-21" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -373,7 +382,7 @@ li, p {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 2, 2017</td>
+  <td class="left">Expires: August 25, 2017</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -382,7 +391,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">October 29, 2016</td>
+  <td class="right">February 21, 2017</td>
 </tr>
 
     	
@@ -406,11 +415,11 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 2, 2017.</p>
+<p>This Internet-Draft will expire on August 25, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
-<p>Copyright (c) 2016 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 <p>This document may contain material from IETF Documents or IETF Contributions published or made publicly available before November 10, 2008.  The person(s) controlling the copyright in some of this material may not have granted the IETF Trust the right to allow modifications of such material outside the IETF Standards Process. Without obtaining an adequate license from the person(s) controlling the copyright in such materials, this document may not be modified outside the IETF Standards Process, and derivative works of it may not be created outside the IETF Standards Process, except to format it for publication as an RFC or to translate it into languages other than English.</p>
 
@@ -1343,7 +1352,7 @@ Change Controller: S/MIME working group delegated from the IESG
 <p id="rfc.section.6.p.7">RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to protect messages.  Such keys were previously considered secure, so processing previously received signed and encrypted mail will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  If an implementation supports verification of digital signatures generated with RSA and DSA keys of less than 1024 bits, it MUST warn the user.  Implementers should consider providing different warnings for newly received messages and previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak signatures.  </p>
 <p id="rfc.section.6.p.8">Implementers SHOULD be aware that multiple active key pairs can be associated with a single individual.  For example, one key pair can be used to support confidentiality, while a different key pair can be used for digital signatures.  </p>
 <p id="rfc.section.6.p.9">If a sending agent is sending the same message using different strengths of cryptography, an attacker watching the communications channel might be able to determine the contents of the strongly encrypted message by decrypting the weakly encrypted version.  In other words, a sender SHOULD NOT send a copy of a message using weaker cryptography than they would use for the original of the message.  </p>
-<p id="rfc.section.6.p.10">Modification of the ciphertext can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  </p>
+<p id="rfc.section.6.p.10">Modification of the ciphertext can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  This is one of the reasons for moving from EnvelopedData to AuthEnvelopedData as the authenticated encryption algorithms provide the authentication without needing the SignedData layer.  </p>
 <p id="rfc.section.6.p.11">If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <a href="#SP800-57">[SP800-57]</a>.  </p>
 <p id="rfc.section.6.p.12">If messaging environments make use of the fact that a message is signed to change the behavior of message processing (examples would be running rules or UI display hints), without first verifying that the message is actually signed and knowing the state of the signature, this can lead to incorrect handling of the message.  Visual indicators on messages may need to have the signature validation code checked periodically if the indicator is supposed to give information on the current status of a message.  </p>
 <p id="rfc.section.6.p.13">Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situtation where the sender of the message will be authenticated.  In almost all cases this is not a correct statement.  There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service: <a href="#RFC6278">[RFC6278]</a> which defined how to use static-static key agreement with CMS so that is readably doable.  Currently, all S/MIME key agreement methods derive a KEK and wrap a CEK.  This violates the third precondition above.  New key key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.  </p>
@@ -1356,6 +1365,7 @@ Change Controller: S/MIME working group delegated from the IESG
 
 <p> S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a pre-existing shared secret when doing encryption, this means that the first precondition is not met.  There is a document </p>
 <p id="rfc.section.6.p.14">Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.  This is because either of the parties can successfully create the message (or just alter the content) based on the fact that the CEK is going to be known to both parties.  Thus the origination is always built on a presumption that "I did not send this message to myself." </p>
+<p id="rfc.section.6.p.15">All of the authenticated encryption algorithms in this document use counter mode for the encryption portion of the algorithm.  This means that the length of the plain text will always be known as the cipher text length and the plain text length are always the same.  This information can enable passive observers to infer information based solely on the length of the message.  Applications for which this is a significant problem need to provide some type of padding algorithm so that the length of the message does not provide this information.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
 <table>
@@ -1380,13 +1390,13 @@ Change Controller: S/MIME working group delegated from the IESG
       <td class="reference">
         <b id="I-D.ietf-curdle-cms-eddsa-signatures">[I-D.ietf-curdle-cms-eddsa-signatures]</b>
       </td>
-      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-cms-eddsa-signatures-00">Use of EdDSA Signatures in the Cryptographic Message Syntax (CMS)</a>", Internet-Draft draft-ietf-curdle-cms-eddsa-signatures-00, September 2016.</td>
+      <td class="top"><a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-cms-eddsa-signatures-03">Use of EdDSA Signatures in the Cryptographic Message Syntax (CMS)</a>", Internet-Draft draft-ietf-curdle-cms-eddsa-signatures-03, January 2017.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-lamps-rfc5750-bis">[I-D.ietf-lamps-rfc5750-bis]</b>
       </td>
-      <td class="top"><a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis-00">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.2 Certificate Handling</a>", Internet-Draft draft-ietf-lamps-rfc5750-bis-00, August 2016.</td>
+      <td class="top"><a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis-01">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0 Certificate Handling</a>", Internet-Draft draft-ietf-lamps-rfc5750-bis-01, October 2016.</td>
     </tr>
     <tr><td class="reference"><b id="MIME-SPEC">[MIME-SPEC]</b></td><td class="top"><a>MIME Message Specifications</a>"<p>This is the set of documents that define how to use MIME.  This set of documents is </p></td>, "</tr>
     <tr>

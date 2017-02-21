@@ -7,7 +7,8 @@
 
   <title>Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0 Certificate Handling</title>
 
-  <style type="text/css">/*<![CDATA[*/
+  
+<style type="text/css">/*<![CDATA[*/
 @viewport {
   zoom: 1.0;
   width: extend-to-zoom;
@@ -73,7 +74,11 @@ ul.toc li {
   padding-bottom: 5px;
   margin: 0;
 }
-ul.toc, ul.toc ul {
+ul.toc ul {
+  margin: 0;
+}
+/* xml2rfc nests ul directly inside ul which messes with the style badly */
+ul.toc, ul.toc>ul, ul.toc ul>ul {
   margin: 0 0 0 1.5em;
 }
 
@@ -208,6 +213,9 @@ ol, ul, li, p {
 li, p {
   margin-left: 0;
 }
+address {
+  font-style: normal;
+}
 
 .github-fork-ribbon-wrapper {
   display: none;
@@ -267,6 +275,7 @@ li, p {
   }
   /*]]>*/</style>
 
+
   <link href="#rfc.toc" rel="Contents"/>
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 Definitions"/>
@@ -306,7 +315,7 @@ li, p {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5750-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-10-29" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-2-21" />
   <meta name="dct.abstract" content="This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) v4.0 agents.  S/&#8288;MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/&#8288;MIME agent processing.  S/&#8288;MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/&#8288;MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 3850.  " />
   <meta name="description" content="This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) v4.0 agents.  S/&#8288;MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/&#8288;MIME agent processing.  S/&#8288;MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/&#8288;MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 3850.  " />
 
@@ -330,7 +339,7 @@ li, p {
   <td class="right">B. Ramsdell</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 2, 2017</td>
+  <td class="left">Expires: August 25, 2017</td>
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
@@ -343,7 +352,7 @@ li, p {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">October 29, 2016</td>
+  <td class="right">February 21, 2017</td>
 </tr>
 
     	
@@ -367,11 +376,11 @@ li, p {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 2, 2017.</p>
+<p>This Internet-Draft will expire on August 25, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
-<p>Copyright (c) 2016 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 <p>This document may contain material from IETF Documents or IETF Contributions published or made publicly available before November 10, 2008.  The person(s) controlling the copyright in some of this material may not have granted the IETF Trust the right to allow modifications of such material outside the IETF Standards Process. Without obtaining an adequate license from the person(s) controlling the copyright in such materials, this document may not be modified outside the IETF Standards Process, and derivative works of it may not be created outside the IETF Standards Process, except to format it for publication as an RFC or to translate it into languages other than English.</p>
 
@@ -624,13 +633,13 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       <td class="reference">
         <b id="I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</b>
       </td>
-      <td class="top"><a>Melnikov, A.</a> and <a>W. Chuang</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-eai-addresses-00">Internationalized Email Addresses in X.509 certificates</a>", Internet-Draft draft-ietf-lamps-eai-addresses-00, July 2016.</td>
+      <td class="top"><a>Melnikov, A.</a> and <a>W. Chuang</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-eai-addresses-06">Internationalized Email Addresses in X.509 certificates</a>", Internet-Draft draft-ietf-lamps-eai-addresses-06, February 2017.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-lamps-rfc5751-bis">[I-D.ietf-lamps-rfc5751-bis]</b>
       </td>
-      <td class="top"><a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis-01">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.5 Message Specification</a>", Internet-Draft draft-ietf-lamps-rfc5751-bis-01, August 2016.</td>
+      <td class="top"><a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis-02">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification</a>", Internet-Draft draft-ietf-lamps-rfc5751-bis-02, October 2016.</td>
     </tr>
     <tr>
       <td class="reference">
@@ -735,7 +744,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       <td class="reference">
         <b id="I-D.ietf-curdle-pkix">[I-D.ietf-curdle-pkix]</b>
       </td>
-      <td class="top"><a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-pkix-01">Algorithm Identifiers for Ed25519, Ed25519ph, Ed448, Ed448ph, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-01, August 2016.</td>
+      <td class="top"><a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-pkix-03">Algorithm Identifiers for Ed25519, Ed25519ph, Ed448, Ed448ph, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-03, November 2016.</td>
     </tr>
     <tr>
       <td class="reference">
