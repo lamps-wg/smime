@@ -5,10 +5,10 @@
 LAMPS                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Intended status: Standards Track                             B. Ramsdell
-Expires: August 25, 2017                          Brute Squad Labs, Inc.
+Expires: August 27, 2017                          Brute Squad Labs, Inc.
                                                                S. Turner
                                                                    sn3rd
-                                                       February 21, 2017
+                                                       February 23, 2017
 
 
    Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 1]
+Schaad, et al.           Expires August 27, 2017                [Page 1]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
-   This Internet-Draft will expire on August 25, 2017.
+   This Internet-Draft will expire on August 27, 2017.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 2]
+Schaad, et al.           Expires August 27, 2017                [Page 2]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -121,7 +121,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
        4.4.4.  Extended Key Usage Extension  . . . . . . . . . . . .  15
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  17
-     6.1.  Normative References  . . . . . . . . . . . . . . . . . .  18
+     6.1.  Normative References  . . . . . . . . . . . . . . . . . .  17
      6.2.  Informational References  . . . . . . . . . . . . . . . .  20
    Appendix A.  Historic Considerations  . . . . . . . . . . . . . .  23
      A.1.  Signature Algorithms and Key Sizes  . . . . . . . . . . .  23
@@ -165,7 +165,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 3]
+Schaad, et al.           Expires August 27, 2017                [Page 3]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -221,7 +221,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 4]
+Schaad, et al.           Expires August 27, 2017                [Page 4]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -277,7 +277,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 5]
+Schaad, et al.           Expires August 27, 2017                [Page 5]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -321,7 +321,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
    Section 3:  Require support for internationalized email addresses.
 
-   Section 4.3:  Mandated support for ECDSA for P-256 and Ed25519.
+   Section 4.3:  Mandated support for ECDSA with P-256 and Ed25519.
                Moved algorithms with SHA-1 and MD5 to historical status.
                Moved DSA support to historical status.  Increased lower
                bounds on RSA key sizes.
@@ -333,7 +333,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 6]
+Schaad, et al.           Expires August 27, 2017                [Page 6]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -389,7 +389,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 7]
+Schaad, et al.           Expires August 27, 2017                [Page 7]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -445,7 +445,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 8]
+Schaad, et al.           Expires August 27, 2017                [Page 8]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -457,18 +457,19 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 3.  Using Distinguished Names for Internet Mail
 
    End-entity certificates MAY contain an Internet mail address.  Email
-   addresses retricted to US-ASCII characters are encoded as described
-   in Section 4.2.1.6 of [RFC5280].  Internationalized Email address
-   names are encoded as described in [I-D.ietf-lamps-eai-addresses].
-   The email address SHOULD be in the subjectAltName extension, and
-   SHOULD NOT be in the subject distinguished name.
+   addresses retricted to 7-bit ASCII characters are encoded as
+   described in Section 4.2.1.6 of [RFC5280].  Internationalized Email
+   address names are encoded as described in
+   [I-D.ietf-lamps-eai-addresses].  The email address SHOULD be in the
+   subjectAltName extension, and SHOULD NOT be in the subject
+   distinguished name.
 
    Receiving agents MUST recognize and accept certificates that contain
    no email address.  Agents are allowed to provide an alternative
    mechanism for associating an email address with a certificate that
    does not contain an email address, such as through the use of the
    agent's address book, if available.  Receiving agents MUST recognize
-   both US-ASCII and internationalized email addresses in the
+   both ASCII and internationalized email addresses in the
    subjectAltName field.  Receiving agents MUST recognize email
    addresses in the Distinguished Name field in the PKCS #9 [RFC2985]
    emailAddress attribute:
@@ -482,7 +483,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
    Comparing of email addresses is fraught with peril.
    [I-D.ietf-lamps-eai-addresses] defines the procedure for doing
-   comparison of Internationalized email addresses.  For US-ASCII email
+   comparison of Internationalized email addresses.  For ASCII email
    addresses the domain component (right-hand side of the '@') MUST be
    compared using a case-insensitive function.  The local name component
    (left-hand side of the '@') SHOULD be compared using a case-
@@ -497,15 +498,15 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
    From or Sender header of a mail message matches an Internet mail
    address in the signer's certificate, if mail addresses are present in
    the certificate.  A receiving agent SHOULD provide some explicit
-   alternate processing of the message if this comparison fails, which
 
 
 
-Schaad, et al.           Expires August 25, 2017                [Page 9]
+Schaad, et al.           Expires August 27, 2017                [Page 9]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
+   alternate processing of the message if this comparison fails, which
    may be to display a message that shows the recipient the addresses in
    the certificate or other certificate details.
 
@@ -556,8 +557,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-
-Schaad, et al.           Expires August 25, 2017               [Page 10]
+Schaad, et al.           Expires August 27, 2017               [Page 10]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -613,7 +613,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 11]
+Schaad, et al.           Expires August 27, 2017               [Page 11]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -669,7 +669,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 12]
+Schaad, et al.           Expires August 27, 2017               [Page 12]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -692,7 +692,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
    For ECDSA see [RFC5758] and [RFC6090].  The first reference provides
    the signature algorithm's object identifier and the second provides
-   the signature algorithm's definition.  Other curves than durve P-256
+   the signature algorithm's definition.  Curves other than curve P-256
    MAY be used as well.
 
    For EdDSA see [I-D.ietf-curdle-pkix] and [I-D.irtf-cfrg-eddsa].  The
@@ -725,7 +725,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 13]
+Schaad, et al.           Expires August 27, 2017               [Page 13]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -781,7 +781,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 14]
+Schaad, et al.           Expires August 27, 2017               [Page 14]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -796,14 +796,13 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
    The subject alternative name extension is used in S/MIME as the
    preferred means to convey the email address(es) that correspond(s) to
-   the entity for this certificate.  Any US-ASCII email addresses
-   present MUST be encoded using the rfc822Name CHOICE of the
-   GeneralName type as described in [RFC5280], Section 4.2.1.6.  Any
-   internationalized email addresses present MUST be encoded using the
-   otherName CHOICE of the GeneralName type as described in
-   [I-D.ietf-lamps-eai-addresses], Section 3.  Since the SubjectAltName
-   type is a SEQUENCE OF GeneralName, multiple email addresses MAY be
-   present.
+   the entity for this certificate.  Any ASCII email addresses present
+   MUST be encoded using the rfc822Name CHOICE of the GeneralName type
+   as described in [RFC5280], Section 4.2.1.6.  Any internationalized
+   email addresses present MUST be encoded using the otherName CHOICE of
+   the GeneralName type as described in [I-D.ietf-lamps-eai-addresses],
+   Section 3.  Since the SubjectAltName type is a SEQUENCE OF
+   GeneralName, multiple email addresses MAY be present.
 
 4.4.4.  Extended Key Usage Extension
 
@@ -834,15 +833,15 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
    must be faced by a S/MIME agent.  Among these issues are protecting
    the user's private key, preventing various attacks, and helping the
    user avoid mistakes such as inadvertently encrypting a message for
+   the wrong recipient.  The entire list of security considerations is
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 15]
+Schaad, et al.           Expires August 27, 2017               [Page 15]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
-   the wrong recipient.  The entire list of security considerations is
    beyond the scope of this document, but some significant concerns are
    listed here.
 
@@ -890,15 +889,15 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
    When determining the time for a certificate validity check, agents
    have to be careful to use a reliable time.  Unless it is from a
    trusted agent, this time MUST NOT be the SigningTime attribute found
+   in an S/MIME message.  For most sending agents, the SigningTime
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 16]
+Schaad, et al.           Expires August 27, 2017               [Page 16]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
-   in an S/MIME message.  For most sending agents, the SigningTime
    attribute could be deliberately set to direct the receiving agent to
    check a CRL that could have out-of-date revocation status for a
    certificate, or cause an improper result when checking the Validity
@@ -942,6 +941,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 6.  References
 
+6.1.  Normative References
 
 
 
@@ -949,12 +949,10 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 17]
+Schaad, et al.           Expires August 27, 2017               [Page 17]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
-
-6.1.  Normative References
 
    [FIPS186-2]
               National Institute of Standards and Technology (NIST),
@@ -1005,7 +1003,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 18]
+
+
+Schaad, et al.           Expires August 27, 2017               [Page 18]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1061,7 +1061,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 19]
+Schaad, et al.           Expires August 27, 2017               [Page 19]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1117,7 +1117,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 20]
+Schaad, et al.           Expires August 27, 2017               [Page 20]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1173,7 +1173,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 21]
+Schaad, et al.           Expires August 27, 2017               [Page 21]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1229,7 +1229,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 22]
+Schaad, et al.           Expires August 27, 2017               [Page 22]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1285,7 +1285,7 @@ A.1.  Signature Algorithms and Key Sizes
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 23]
+Schaad, et al.           Expires August 27, 2017               [Page 23]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1341,7 +1341,7 @@ Appendix C.  Acknowledgments
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 24]
+Schaad, et al.           Expires August 27, 2017               [Page 24]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling       February 2017
 
@@ -1397,4 +1397,4 @@ Authors' Addresses
 
 
 
-Schaad, et al.           Expires August 25, 2017               [Page 25]
+Schaad, et al.           Expires August 27, 2017               [Page 25]

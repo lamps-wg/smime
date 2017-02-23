@@ -354,7 +354,7 @@ address {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-2-21" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-2-23" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -382,7 +382,7 @@ address {
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 25, 2017</td>
+  <td class="left">Expires: August 27, 2017</td>
   <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -391,7 +391,7 @@ address {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">February 21, 2017</td>
+  <td class="right">February 23, 2017</td>
 </tr>
 
     	
@@ -415,7 +415,7 @@ address {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 25, 2017.</p>
+<p>This Internet-Draft will expire on August 27, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -813,7 +813,7 @@ address {
 <p> </p>
 <p><a href="#RFC1847">[RFC1847]</a> prohibits an agent from changing the transfer encoding of the first part of a multipart/&#8288;signed message.  If a compliant agent that cannot transmit 8-bit or binary data encounters a multipart/&#8288;signed message with 8-bit or binary data in the first part, it would have to return the message to the sender as undeliverable.  </p>
 <h1 id="rfc.section.3.1.4"><a href="#rfc.section.3.1.4">3.1.4.</a> Sample Canonical MIME Entity</h1>
-<p id="rfc.section.3.1.4.p.1">This example shows a multipart/&#8288;mixed message with full transfer encoding.  This message contains a text part and an attachment.  The sample message text includes characters that are not US-ASCII and thus need to be transfer encoded.  Though not shown here, the end of each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.  </p>
+<p id="rfc.section.3.1.4.p.1">This example shows a multipart/&#8288;mixed message with full transfer encoding.  This message contains a text part and an attachment.  The sample message text includes characters that are not ASCII and thus need to be transfer encoded.  Though not shown here, the end of each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.  </p>
 <p id="rfc.section.3.1.4.p.2">Note that this example is not of an S/&#8288;MIME message.  </p>
 <pre>
 Content-Type: multipart/mixed; boundary=bar

@@ -315,7 +315,7 @@ address {
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5750-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-2-21" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-2-23" />
   <meta name="dct.abstract" content="This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) v4.0 agents.  S/&#8288;MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/&#8288;MIME agent processing.  S/&#8288;MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/&#8288;MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 3850.  " />
   <meta name="description" content="This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) v4.0 agents.  S/&#8288;MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/&#8288;MIME agent processing.  S/&#8288;MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/&#8288;MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 3850.  " />
 
@@ -339,7 +339,7 @@ address {
   <td class="right">B. Ramsdell</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 25, 2017</td>
+  <td class="left">Expires: August 27, 2017</td>
   <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
@@ -352,7 +352,7 @@ address {
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">February 21, 2017</td>
+  <td class="right">February 23, 2017</td>
 </tr>
 
     	
@@ -376,7 +376,7 @@ address {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 25, 2017.</p>
+<p>This Internet-Draft will expire on August 27, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -495,7 +495,7 @@ address {
   <dt>Section 3:</dt>
   <dd style="margin-left: 12">Require support for internationalized email addresses.  </dd>
   <dt>Section 4.3:</dt>
-  <dd style="margin-left: 12">Mandated support for ECDSA for P-256 and Ed25519.  Moved algorithms with SHA-1 and MD5 to historical status.  Moved DSA support to historical status.  Increased lower bounds on RSA key sizes.  </dd>
+  <dd style="margin-left: 12">Mandated support for ECDSA with P-256 and Ed25519.  Moved algorithms with SHA-1 and MD5 to historical status.  Moved DSA support to historical status.  Increased lower bounds on RSA key sizes.  </dd>
   <dt>Appendix A:</dt>
   <dd style="margin-left: 12">Add a new appendix for algorithms that are now considered to be historical.  </dd>
 </dl>
@@ -522,14 +522,14 @@ address {
 <p id="rfc.section.2.3.p.5">Receiving agents MUST support chaining based on the distinguished name fields.  Other methods of building certificate chains MAY be supported.  </p>
 <p id="rfc.section.2.3.p.6">Receiving agents SHOULD support the decoding of X.509 attribute certificates included in CMS objects.  All other issues regarding the generation and use of X.509 attribute certificates are outside of the scope of this specification.  One specification that addresses attribute certificate use is defined in <a href="#RFC3114">[RFC3114]</a>.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Using Distinguished Names for Internet Mail</h1>
-<p id="rfc.section.3.p.1">End-entity certificates MAY contain an Internet mail address.  Email addresses retricted to US-ASCII characters are encoded as described in Section 4.2.1.6 of <a href="#RFC5280">[RFC5280]</a>.  Internationalized Email address names are encoded as described in <a href="#I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</a>.  The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.  </p>
-<p id="rfc.section.3.p.2">Receiving agents MUST recognize and accept certificates that contain no email address.  Agents are allowed to provide an alternative mechanism for associating an email address with a certificate that does not contain an email address, such as through the use of the agent's address book, if available.  Receiving agents MUST recognize both US-ASCII and internationalized email addresses in the subjectAltName field.  Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <a href="#RFC2985">[RFC2985]</a> emailAddress attribute: </p>
+<p id="rfc.section.3.p.1">End-entity certificates MAY contain an Internet mail address.  Email addresses retricted to 7-bit ASCII characters are encoded as described in Section 4.2.1.6 of <a href="#RFC5280">[RFC5280]</a>.  Internationalized Email address names are encoded as described in <a href="#I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</a>.  The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.  </p>
+<p id="rfc.section.3.p.2">Receiving agents MUST recognize and accept certificates that contain no email address.  Agents are allowed to provide an alternative mechanism for associating an email address with a certificate that does not contain an email address, such as through the use of the agent's address book, if available.  Receiving agents MUST recognize both ASCII and internationalized email addresses in the subjectAltName field.  Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <a href="#RFC2985">[RFC2985]</a> emailAddress attribute: </p>
 <pre>
 pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1) pkcs-9(9) 1 }
       </pre>
 <p id="rfc.section.3.p.3">Note that this attribute MUST be encoded as IA5String and has an  upper bound of 255 characters.  The right side of the email address SHOULD be treated as ASCII-case-insensitive.  </p>
-<p id="rfc.section.3.p.4">Comparing of email addresses is fraught with peril.  <a href="#I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</a> defines the procedure for doing comparison of Internationalized email addresses.  For US-ASCII email addresses the domain component (right-hand side of the '@') MUST be compared using a case-insensitive function.  The local name component (left-hand side of the '@') SHOULD be compared using a case-insensitive function.  Some localities may perform other transformations on the local name component before doing the comparison, however an S/MIME client cannot know what specific localities do.  </p>
+<p id="rfc.section.3.p.4">Comparing of email addresses is fraught with peril.  <a href="#I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</a> defines the procedure for doing comparison of Internationalized email addresses.  For ASCII email addresses the domain component (right-hand side of the '@') MUST be compared using a case-insensitive function.  The local name component (left-hand side of the '@') SHOULD be compared using a case-insensitive function.  Some localities may perform other transformations on the local name component before doing the comparison, however an S/MIME client cannot know what specific localities do.  </p>
 <p id="rfc.section.3.p.5">Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.  Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address in the signer's certificate, if mail addresses are present in the certificate.  A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, which may be to display a message that shows the recipient the addresses in the certificate or other certificate details.  </p>
 <p id="rfc.section.3.p.6">A receiving agent SHOULD display a subject name or other certificate details when displaying an indication of successful or unsuccessful signature verification.  </p>
 <p id="rfc.section.3.p.7">All subject and issuer names MUST be populated (i.e., not an empty SEQUENCE) in S/&#8288;MIME-compliant X.509 certificates, except that the subject distinguished name (DN) in a user's (i.e., end-entity) certificate MAY be an empty SEQUENCE in which case the subjectAltName extension will include the subject's identifier and MUST be marked as critical.  </p>
@@ -568,7 +568,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
     </pre>
 <p id="rfc.section.4.3.p.4">For 1024-bit through 3072-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#FIPS186-2">[FIPS186-2]</a> with Change Notice 1, and for 4096-bit RSA with SHA-256 see <a href="#RFC4055">[RFC4055]</a> and <a href="#RFC3447">[RFC3447]</a>.  In either case, the first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
 <p id="rfc.section.4.3.p.5">For RSASSA-PSS with SHA-256 see <a href="#RFC4056">[RFC4056]</a>.  </p>
-<p id="rfc.section.4.3.p.6">For ECDSA see <a href="#RFC5758">[RFC5758]</a> and <a href="#RFC6090">[RFC6090]</a>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  Other curves than durve P-256 MAY be used as well.  </p>
+<p id="rfc.section.4.3.p.6">For ECDSA see <a href="#RFC5758">[RFC5758]</a> and <a href="#RFC6090">[RFC6090]</a>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  Curves other than curve P-256 MAY be used as well.  </p>
 <p id="rfc.section.4.3.p.7">For EdDSA see <a href="#I-D.ietf-curdle-pkix">[I-D.ietf-curdle-pkix]</a> and <a href="#I-D.irtf-cfrg-eddsa">[I-D.irtf-cfrg-eddsa]</a>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  Other curves than curve 25519 MAY be used as well.  </p>
 <h1 id="rfc.section.4.4"><a href="#rfc.section.4.4">4.4.</a> PKIX Certificate Extensions</h1>
 <p id="rfc.section.4.4.p.1">PKIX describes an extensible framework in which the basic certificate information can be extended and describes how such extensions can be used to control the process of issuing and validating certificates.  The PKIX Working Group has ongoing efforts to identify and create extensions that have value in particular certification environments.  Further, there are active efforts underway to issue PKIX certificates for business purposes.  This document identifies the minimum required set of certificate extensions that have the greatest value in the S/&#8288;MIME environment.  The syntax and semantics of all the identified extensions are defined in <a href="#RFC5280">[RFC5280]</a>.  </p>
@@ -586,7 +586,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <p id="rfc.section.4.4.2.p.4">S/&#8288;MIME receiving agents MUST NOT accept the signature of a message if it was verified using a certificate that contains the key usage extension without either the digitalSignature or nonRepudiation bit set.  Sometimes S/&#8288;MIME is used as a secure message transport for applications beyond interpersonal messaging.  In such cases, the S/&#8288;MIME-enabled application can specify additional requirements concerning the digitalSignature or nonRepudiation bits within this extension.  </p>
 <p id="rfc.section.4.4.2.p.5">If the key usage extension is not specified, receiving clients MUST presume that the digitalSignature and nonRepudiation bits are set.  </p>
 <h1 id="rfc.section.4.4.3"><a href="#rfc.section.4.4.3">4.4.3.</a> Subject Alternative Name</h1>
-<p id="rfc.section.4.4.3.p.1">The subject alternative name extension is used in S/&#8288;MIME as the preferred means to convey the email address(es) that correspond(s) to the entity for this certificate.  Any US-ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <a href="#RFC5280">[RFC5280]</a>, Section 4.2.1.6.  Any internationalized email addresses present MUST be encoded using the otherName CHOICE of the GeneralName type as described in <a href="#I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</a>, Section 3.  Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.  </p>
+<p id="rfc.section.4.4.3.p.1">The subject alternative name extension is used in S/&#8288;MIME as the preferred means to convey the email address(es) that correspond(s) to the entity for this certificate.  Any ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <a href="#RFC5280">[RFC5280]</a>, Section 4.2.1.6.  Any internationalized email addresses present MUST be encoded using the otherName CHOICE of the GeneralName type as described in <a href="#I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</a>, Section 3.  Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.  </p>
 <h1 id="rfc.section.4.4.4"><a href="#rfc.section.4.4.4">4.4.4.</a> Extended Key Usage Extension</h1>
 <p id="rfc.section.4.4.4.p.1">The extended key usage extension also serves to limit the technical purposes for which a public key listed in a valid certificate may be used.  The set of technical purposes for the certificate therefore are the intersection of the uses indicated in the key usage and extended key usage extensions.  </p>
 <p id="rfc.section.4.4.4.p.2">For example, if the certificate contains a key usage extension indicating digital signature and an extended key usage extension that includes the email protection OID, then the certificate may be used for signing but not encrypting S/&#8288;MIME messages.  If the certificate contains a key usage extension indicating digital signature but no extended key usage extension, then the certificate may also be used to sign but not encrypt S/&#8288;MIME messages.  </p>
