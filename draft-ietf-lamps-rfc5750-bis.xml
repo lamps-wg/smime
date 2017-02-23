@@ -292,7 +292,7 @@
         Require support for internationalized email addresses.
       </t>
       <t hangText="Section 4.3:">
-        Mandated support for ECDSA for P-256 and Ed25519.
+        Mandated support for ECDSA with P-256 and Ed25519.
         Moved algorithms with SHA-1 and MD5 to historical status.
         Moved DSA support to historical status.
         Increased lower bounds on RSA key sizes.
@@ -425,7 +425,7 @@
    <t>
      
      End-entity certificates MAY contain an Internet mail address.
-     Email addresses retricted to US-ASCII characters are encoded as described in Section 4.2.1.6 of <xref target="RFC5280"/>.
+     Email addresses retricted to 7-bit ASCII characters are encoded as described in Section 4.2.1.6 of <xref target="RFC5280"/>.
      Internationalized Email address names are encoded as described in <xref target="I-D.ietf-lamps-eai-addresses"/>.
      The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.
    </t>
@@ -433,7 +433,7 @@
   <t>
     Receiving agents MUST recognize and accept certificates that contain no email address.
     Agents are allowed to provide an alternative mechanism for associating an email address with a certificate that does not contain an email address, such as through the use of the agent's address book, if available.
-    Receiving agents MUST recognize both US-ASCII and internationalized email addresses in the subjectAltName field.
+    Receiving agents MUST recognize both ASCII and internationalized email addresses in the subjectAltName field.
     Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <xref target="RFC2985"/> emailAddress attribute:
   </t>
 
@@ -452,7 +452,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
     Comparing of email addresses is fraught with peril.
     <xref target="I-D.ietf-lamps-eai-addresses"/> defines the procedure for doing comparison of Internationalized email addresses.
-    For US-ASCII email addresses the domain component (right-hand side of the '@') MUST be compared using a case-insensitive function.
+    For ASCII email addresses the domain component (right-hand side of the '@') MUST be compared using a case-insensitive function.
     The local name component (left-hand side of the '@') SHOULD be compared using a case-insensitive function.
     Some localities may perform other transformations on the local name component before doing the comparison, however an S/MIME client cannot know what specific localities do.
   </t>
@@ -644,7 +644,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
     For ECDSA see <xref target="RFC5758"/> and <xref target="RFC6090"/>.
     The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
-    Other curves than durve P-256 MAY be used as well.
+    Curves other than curve P-256 MAY be used as well.
   </t>
 
   <t>
@@ -745,7 +745,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    The subject alternative name extension is used in S/&wj;MIME as the
    preferred means to convey the email address(es) that correspond(s) to
    the entity for this certificate.
-   Any US-ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <xref target="RFC5280"/>, Section 4.2.1.6.
+   Any ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <xref target="RFC5280"/>, Section 4.2.1.6.
    Any internationalized email addresses present MUST be encoded using the otherName CHOICE of the GeneralName type as described in <xref target="I-D.ietf-lamps-eai-addresses"/>, Section 3.
    Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.
   </t>
