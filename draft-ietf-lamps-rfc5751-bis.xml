@@ -1257,7 +1257,7 @@
               <t>
                 This example shows a multipart/&wj;mixed message with full transfer
                 encoding.  This message contains a text part and an attachment.  The
-                sample message text includes characters that are not US-ASCII and
+                sample message text includes characters that are not ASCII and
                 thus need to be transfer encoded.  Though not shown here, the end of
                 each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the
                 text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.
