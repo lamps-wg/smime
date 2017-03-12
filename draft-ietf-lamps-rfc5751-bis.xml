@@ -247,11 +247,11 @@
           </t>
 
           <t hangText="Data Integrity Service:">
-            A security service that protects againist unauthorized changes to data by insuring that changes to the data are detectable. <xref target="RFC4949"/>
+            A security service that protects againist unauthorized changes to data by ensuring that changes to the data are detectable. <xref target="RFC4949"/>
           </t>
 
           <t hangText="Data Confidentiality:">
-            The property that data is not discolsed to system entities unless they have been authorize to know the data. <xref target="RFC4949"/>
+            The property that data is not discolsed to system entities unless they have been authorized to know the data. <xref target="RFC4949"/>
           </t>
 
           <t hangText="Data Origination:">
@@ -444,10 +444,10 @@
               Update the content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/> and <xref target="UnknownCaps"/>): Add AES-256 GCM, add ChaCha200-Poly1305, remove AES-192 CBC, mark tripleDES as historic. 
             </t>
             <t>
-              Update the set of signature algorithms (<xref target="SignatureAlgorithmIdentifier"/>: Add EdDSA and ECDSA, mark DSA as historic
+              Update the set of signature algorithms (<xref target="SignatureAlgorithmIdentifier"/>): Add EdDSA and ECDSA, mark DSA as historic
             </t>
             <t>
-              Update the set of digest algorithms (<xref target="DigestAlgorithmIdentifier"/>: Add SHA-512, mark SHA-1 as historic.
+              Update the set of digest algorithms (<xref target="DigestAlgorithmIdentifier"/>): Add SHA-512, mark SHA-1 as historic.
             </t>
             <t>
               Update the size of keys to be used for RSA encryption and RSA signing (<xref target="CertProcessing"/>).
@@ -907,7 +907,8 @@
               <t>
                 MUST support encryption and decryption with AES-128 GCM and AES-256 GCM <xref target="RFC5084"/>.
               </t>
-              
+
+              <!-- RUSS ** M00QUEST - what is the status of AES-256 CBC -->
               <t>
                 MUST- support encryption and decryption with AES-128 CBC <xref target="RFC3565"/>.
               </t>
@@ -1397,7 +1398,7 @@ HOxEa44b+EI=
                   <c>signed-data</c><c>SignedData</c><c>id-data</c>
                   <c>certs-only</c><c>SignedData</c><c>id-data</c>
                   <c>compressed-data</c><c>CompressedData</c><c>id-data</c>
-                  <c>authEnvelopedData</c><c>AuthEnvelopedData</c><c>id-data</c>
+                  <c>authEnveloped-data</c><c>AuthEnvelopedData</c><c>id-data</c>
                 </texttable>
                 <t>
                   In order for consistency to be obtained with future specifications,
@@ -1489,7 +1490,7 @@ gtaMXpRwZRNYAgDsiSf8Z9P43LrY4OxUk660cu1lXeCSFOSOpOJ7FuVyU=
             <section title="Creating an Authenticated Enveloped-Only Message" anchor="AuthEnvelopedData2">
               <t>
                 This section describes the format for enveloping a MIME entity without signing it.
-                Authenticated enveloped messages provide confidentiality and integrity.
+                Authenticated enveloped messages provide confidentiality and data integrity.
                 It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.
                 It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
                 However this is substantially more difficult than it is for an enveloped-only message as the 
@@ -1518,7 +1519,7 @@ gtaMXpRwZRNYAgDsiSf8Z9P43LrY4OxUk660cu1lXeCSFOSOpOJ7FuVyU=
               </t>
               
               <t>
-                The smime-type parameter for authenticated enveloped-only messages is "authEnvelopedData".
+                The smime-type parameter for authenticated enveloped-only messages is "authEnveloped-data".
                 The file extension for this type of message is ".p7m".
               </t>
               <t>
@@ -1527,7 +1528,7 @@ gtaMXpRwZRNYAgDsiSf8Z9P43LrY4OxUk660cu1lXeCSFOSOpOJ7FuVyU=
               </t>
               <figure>
                 <artwork>
-Content-Type: application/pkcs7-mime; smime-type=authEnvelopedData;
+Content-Type: application/pkcs7-mime; smime-type=authEnveloped-data;
       name=smime.p7m
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename=smime.p7m
@@ -1981,7 +1982,7 @@ eNoLycgsVgCi4vzcVIXixNyCnFSF5Py8ktS8Ej0AlCkKVA==
               </t>
               
               <t>
-                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 2048 bits for use with the RSA signature algorithm.
+                An S/&wj;MIME user agent MUST NOT generate asymmetric keys less than 2048 bits for use with an RSA signature algorithm.
               </t>
 
               <t>
@@ -2121,8 +2122,7 @@ Applications that use this media type: Security applications
 
 Additional information: NONE
 
-Person &amp; email to contact for further information:
-   S/MIME working group chairs smime-chairs@ietf.org
+Person &amp; email to contact for further information: iesg@ietf.org
 
 Intended usage: COMMON
 
@@ -2158,8 +2158,7 @@ Applications that use this media type: Security applications
 
 Additional information: NONE
 
-Person &amp; email to contact for further information:
-   S/MIME working group chairs smime-chairs@ietf.org
+Person &amp; email to contact for further information: iesg@ietf.org
 
 Intended usage: COMMON
 
@@ -2172,7 +2171,7 @@ Change Controller: S/MIME working group delegated from the IESG
               </figure>
             </section>
 
-            <section title="Register authEnvelopedData smime-type">
+            <section title="Register authEnveloped-data smime-type">
               <t>
                 IANA is required to register the following value in the "Parameter Values for the smime-type Parameter" registry.
                 The values to be registered are:
@@ -2180,7 +2179,7 @@ Change Controller: S/MIME working group delegated from the IESG
                   This can be done by modifying the registration above instead.
                 </cref>
                 <list style="none">
-                  <t>smime-type value: authEnvelopedData</t>
+                  <t>smime-type value: authEnveloped-data</t>
                   <t>Reference: [[This Document, <xref target="smime-type"/>]]</t>
                 </list>
               </t>
@@ -2225,7 +2224,7 @@ Change Controller: S/MIME working group delegated from the IESG
               estimates in choosing algorithms.
             </t>
             <t>
-              The choice of 2048 bits as the RSA asymmetric key size in this
+              The choice of 2048 bits as an RSA asymmetric key size in this
               specification is based on the desire to provide at least 100 bits of
               security.  The key sizes that must be supported to conform to this
               specification seem appropriate for the Internet based on <xref target="RFC3766"/>.
@@ -2327,11 +2326,11 @@ Change Controller: S/MIME working group delegated from the IESG
                   This means that the starting key is used directly as the CEK key, or that the starting key is used to create a secret which then is transformed into the CEK via a KDF step.
                 </t>
               </list>
-              S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a pre-existing shared secret when doing encryption, this means that the first precondition is not met.
+              S/MIME implementations almost universally use ephemeral-static rather than static-static key agreement and do not use a shared secret for encryption, this means that the first precondition is not met.
               There is a document <xref target="RFC6278"/> which defined how to use static-static key agreement with CMS so that is readably doable.
               Currently, all S/MIME key agreement methods derive a KEK and wrap a CEK.
               This violates the third precondition above.
-              New key key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.
+              New key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.
             </t>
             <t>
               Even when all of the preconditions are met and origination of a message is established by the use of an authenticated encryption algorithm, users need to be aware that there is no way to prove this to a third party.
@@ -2992,6 +2991,10 @@ END
         Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway,
         and John Pawling.
       </t>
+  <t>
+    The version 4 update to the S/&wj;MIME documents was done under the auspices of the LAMPS Working Group.
+  </t>
+
     </section>
   </back>
 </rfc>
