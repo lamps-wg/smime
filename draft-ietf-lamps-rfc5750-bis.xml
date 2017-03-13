@@ -167,7 +167,7 @@
    document are to be interpreted as described in <xref target="RFC2119"/>.
   </t>
   <t>
-   We define some additional terms here:
+   We define the additional requirement levels:
    <list style="hanging" hangIndent="8">
      <t hangText="SHOULD+">    This term means the same as SHOULD.  However, the authors
               expect that a requirement marked as SHOULD+ will be
@@ -185,12 +185,13 @@
               requirement, it will remain at least a SHOULD or a
               SHOULD-.
    </t>
-   <t hangText="RSA">
+   </list>
+  </t>
+
+  <t hangText="RSA">
      The term RSA in this document almost always refers to the PKCS#1 v1.5 RSA signature algorithm even when not qualified as such.
      There are a couple of places where it refers to the general RSA cryptographic operation, these can be determined from the context where it is used.
    </t>
-   </list>
-  </t>
 
 </section>
 <section title="Compatibility with Prior Practice S/MIME">

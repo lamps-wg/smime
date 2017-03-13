@@ -270,7 +270,7 @@
         </t>
 
         <t>
-          We define some additional terms here:
+          We define the additional requirement levels:
 
           <list style="hanging" hangIndent="10">
           <t hangText="SHOULD+">   This term means the same as SHOULD.  However, the authors
@@ -291,6 +291,11 @@
           </t>
           </list>
         </t>
+
+  <t hangText="RSA">
+     The term RSA in this document almost always refers to the PKCS#1 v1.5 RSA signature or encryption algorithms even when not qualified as such.
+     There are a couple of places where it refers to the general RSA cryptographic operation, these can be determined from the context where it is used.
+   </t>
       </section>
       
       <section title="Compatibility with Prior Practice of S/MIME" anchor="Compatability">
