@@ -742,6 +742,7 @@
             The SMIMECapabilities attribute includes signature algorithms (such
             as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128
             CBC"), authenticated symmetric algorithms (such as "AES-128 GCM") and key encipherment algorithms (such as "rsaEncryption").
+            The presence of an algorthm based SMIME Capability attribute in this sequence implies that the sender can deal with the algorithm as well as undertanding the ASN.1 structures associated with that algorithm.
             There are also several identifiers that indicate support for other
             optional features such as binary encoding and compression.  The
             SMIMECapabilities were designed to be flexible and extensible so
