@@ -6,9 +6,9 @@ LAMPS                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Obsoletes: RFC5751 (if approved)                             B. Ramsdell
 Intended status: Standards Track                  Brute Squad Labs, Inc.
-Expires: September 2, 2017                                     S. Turner
+Expires: September 14, 2017                                    S. Turner
                                                                    sn3rd
-                                                           March 1, 2017
+                                                          March 13, 2017
 
 
    Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0
@@ -47,13 +47,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 2, 2017.
+   This Internet-Draft will expire on September 14, 2017.
 
 
 
 
 
-Schaad, et al.          Expires September 2, 2017               [Page 1]
+Schaad, et al.         Expires September 14, 2017               [Page 1]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -95,11 +95,11 @@ Table of Contents
      1.5.  Changes from S/MIME v3 to S/MIME v3.1 . . . . . . . . . .   7
      1.6.  Changes from S/MIME v3.1 to S/MIME v3.2 . . . . . . . . .   8
      1.7.  Changes for S/MIME v4.0 . . . . . . . . . . . . . . . . .   9
-   2.  CMS Options . . . . . . . . . . . . . . . . . . . . . . . . .   9
+   2.  CMS Options . . . . . . . . . . . . . . . . . . . . . . . . .  10
      2.1.  DigestAlgorithmIdentifier . . . . . . . . . . . . . . . .  10
      2.2.  SignatureAlgorithmIdentifier  . . . . . . . . . . . . . .  10
      2.3.  KeyEncryptionAlgorithmIdentifier  . . . . . . . . . . . .  11
-     2.4.  General Syntax  . . . . . . . . . . . . . . . . . . . . .  11
+     2.4.  General Syntax  . . . . . . . . . . . . . . . . . . . . .  12
        2.4.1.  Data Content Type . . . . . . . . . . . . . . . . . .  12
        2.4.2.  SignedData Content Type . . . . . . . . . . . . . . .  12
        2.4.3.  EnvelopedData Content Type  . . . . . . . . . . . . .  12
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Schaad, et al.          Expires September 2, 2017               [Page 2]
+Schaad, et al.         Expires September 14, 2017               [Page 2]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -117,7 +117,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
        2.5.1.  Signing Time Attribute  . . . . . . . . . . . . . . .  13
        2.5.2.  SMIME Capabilities Attribute  . . . . . . . . . . . .  14
        2.5.3.  Encryption Key Preference Attribute . . . . . . . . .  15
-     2.6.  SignerIdentifier SignerInfo Type  . . . . . . . . . . . .  16
+     2.6.  SignerIdentifier SignerInfo Type  . . . . . . . . . . . .  17
      2.7.  ContentEncryptionAlgorithmIdentifier  . . . . . . . . . .  17
        2.7.1.  Deciding Which Encryption Method to Use . . . . . . .  17
        2.7.2.  Choosing Weak Encryption  . . . . . . . . . . . . . .  19
@@ -152,7 +152,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  38
      5.1.  Media Type for application/pkcs7-mime . . . . . . . . . .  38
      5.2.  Media Type for application/pkcs7-signature  . . . . . . .  39
-     5.3.  Register authEnvelopedData smime-type . . . . . . . . . .  40
+     5.3.  Register authEnveloped-data smime-type  . . . . . . . . .  40
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  40
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  44
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  44
@@ -165,7 +165,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017               [Page 3]
+Schaad, et al.         Expires September 14, 2017               [Page 3]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -221,7 +221,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017               [Page 4]
+Schaad, et al.         Expires September 14, 2017               [Page 4]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -277,7 +277,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017               [Page 5]
+Schaad, et al.         Expires September 14, 2017               [Page 5]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -308,12 +308,12 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
                       agent, or both.
 
    Data Integrity Service:  A security service that protects againist
-                      unauthorized changes to data by insuring that
+                      unauthorized changes to data by ensuring that
                       changes to the data are detectable.  [RFC4949]
 
    Data Confidentiality:  The property that data is not discolsed to
-                      system entities unless they have been authorize to
-                      know the data.  [RFC4949]
+                      system entities unless they have been authorized
+                      to know the data.  [RFC4949]
 
    Data Origination:  The corroboration that the source of the data
                       received is as claimed.  [RFC4949].
@@ -324,7 +324,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
 
-   We define some additional terms here:
+   We define the additional requirement levels:
 
    SHOULD+   This term means the same as SHOULD.  However, the authors
              expect that a requirement marked as SHOULD+ will be
@@ -333,7 +333,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017               [Page 6]
+Schaad, et al.         Expires September 14, 2017               [Page 6]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -348,6 +348,12 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
              a later time, it is reasonable to expect that if a future
              revision of a document alters the status of a MUST-
              requirement, it will remain at least a SHOULD or a SHOULD-.
+
+   The term RSA in this document almost always refers to the PKCS#1 v1.5
+   RSA signature or encryption algorithms even when not qualified as
+   such.  There are a couple of places where it refers to the general
+   RSA cryptographic operation, these can be determined from the context
+   where it is used.
 
 1.4.  Compatibility with Prior Practice of S/MIME
 
@@ -379,20 +385,20 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    The use of binary encoding for some MIME entities is now explicitly
    discussed.
 
+
+
+
+
+Schaad, et al.         Expires September 14, 2017               [Page 7]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    Header protection through the use of the message/rfc822 media type
    has been added.
 
    Use of the CompressedData CMS type is allowed, along with required
    media type and file extension additions.
-
-
-
-
-
-Schaad, et al.          Expires September 2, 2017               [Page 7]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
 1.6.  Changes from S/MIME v3.1 to S/MIME v3.2
 
@@ -437,18 +443,17 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    Section 2.7 (content encryption): AES-128 CBC added as MUST, AES-192
    and AES-256 CBC SHOULD+, tripleDES now SHOULD-.
 
+
+
+Schaad, et al.         Expires September 14, 2017               [Page 8]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    Section 2.7.1: Updated pointers from 2.7.2.1 through 2.7.2.4 to
    2.7.1.1 to 2.7.1.2.
 
    Section 3.1.1: Removed text about MIME character sets.
-
-
-
-
-Schaad, et al.          Expires September 2, 2017               [Page 8]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
    Section 3.2.2 and 3.6: Replaced "encrypted" with "enveloped".  Update
    OID example to use AES-128 CBC oid.
@@ -481,10 +486,10 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
       Section 2.7.1.2): Add AES-256 GCM, add ChaCha200-Poly1305, remove
       AES-192 CBC, mark tripleDES as historic.
 
-   -  Update the set of signature algorithms (Section 2.2: Add EdDSA and
-      ECDSA, mark DSA as historic
+   -  Update the set of signature algorithms (Section 2.2): Add EdDSA
+      and ECDSA, mark DSA as historic
 
-   -  Update the set of digest algorithms (Section 2.1: Add SHA-512,
+   -  Update the set of digest algorithms (Section 2.1): Add SHA-512,
       mark SHA-1 as historic.
 
    -  Update the size of keys to be used for RSA encryption and RSA
@@ -493,19 +498,19 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    -  Create Appendix B which deals with considerations for dealing with
       historic email messages.
 
+
+
+
+Schaad, et al.         Expires September 14, 2017               [Page 9]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
 2.  CMS Options
 
    CMS allows for a wide variety of options in content, attributes, and
    algorithm support.  This section puts forth a number of support
    requirements and recommendations in order to achieve a base level of
-
-
-
-Schaad, et al.          Expires September 2, 2017               [Page 9]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
-
    interoperability among all S/MIME implementations.  [RFC3370] and
    [RFC5754] provides additional details regarding the use of the
    cryptographic algorithms.  [ESS] provides additional details
@@ -549,18 +554,19 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
       curve P-256 and SHA-256, or EdDSA with curve 25519 using PureEdDSA
       mode.
 
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 10]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    -  MUST- support RSA with SHA-256.
 
    -  SHOULD support RSASSA-PSS with SHA-256.
 
    -  MUST NOT support EdDSA using the pre-hash mode.
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 10]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
    Both ECDSA and EdDSA are included in the list of required algorithms
    for political reasons.  NIST is unable to provide the seeds that were
@@ -603,20 +609,20 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    Appendix B provides information on algorithms support in older
    versions of S/MIME.
 
+
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 11]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
 2.4.  General Syntax
 
    There are several CMS content types.  Of these, only the Data,
    SignedData, EnvelopedData, AuthEnvelopedData, and CompressedData
    content types are currently used for S/MIME.
-
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 11]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
 2.4.1.  Data Content Type
 
@@ -661,18 +667,15 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    non-repudiation, or data confidentiality, and is only used to reduce
    the message's size.
 
-   See Section 3.7 for further guidance on the use of this type in
-   conjunction with other CMS types.
 
 
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 12]
+Schaad, et al.         Expires September 14, 2017              [Page 12]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
+
+   See Section 3.7 for further guidance on the use of this type in
+   conjunction with other CMS types.
 
 2.5.  Attributes and the SignerInfo Type
 
@@ -718,17 +721,19 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    message originator and therefore is only as trustworthy as the
    originator.
 
+
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 13]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    Sending agents MUST encode signing time through the year 2049 as
    UTCTime; signing times in 2050 or later MUST be encoded as
    GeneralizedTime.  When the UTCTime CHOICE is used, S/MIME agents MUST
    interpret the year field (YY) as follows:
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 13]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
       If YY is greater than or equal to 50, the year is interpreted as
       19YY; if YY is less than 50, the year is interpreted as 20YY.
@@ -741,9 +746,12 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    The SMIMECapabilities attribute includes signature algorithms (such
    as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128
    CBC"), authenticated symmetric algorithms (such as "AES-128 GCM") and
-   key encipherment algorithms (such as "rsaEncryption").  There are
-   also several identifiers that indicate support for other optional
-   features such as binary encoding and compression.  The
+   key encipherment algorithms (such as "rsaEncryption").  The presence
+   of an algorthm based SMIME Capability attribute in this sequence
+   implies that the sender can deal with the algorithm as well as
+   undertanding the ASN.1 structures associated with that algorithm.
+   There are also several identifiers that indicate support for other
+   optional features such as binary encoding and compression.  The
    SMIMECapabilities were designed to be flexible and extensible so
    that, in the future, a means of identifying other capabilities and
    preferences such as certificates can be added in a way that will not
@@ -769,6 +777,15 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    their categories (signature algorithms, symmetric algorithms, key
    encipherment algorithms, etc.).
 
+
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 14]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    The structure of the SMIMECapabilities attribute is to facilitate
    simple table lookups and binary comparisons in order to determine
    matches.  For instance, the DER-encoding for the SMIMECapability for
@@ -777,14 +794,6 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    individuals documenting algorithms to be used in the
    SMIMECapabilities attribute SHOULD explicitly document the correct
    byte sequence for the common cases.
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 14]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
    For any capability, the associated parameters for the OID MUST
    specify all of the parameters necessary to differentiate between two
@@ -825,6 +834,14 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    If present, the SMIMEEncryptionKeyPreference attribute MUST be a
    SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines
    SignedAttributes as a SET OF Attribute.  The SignedAttributes in a
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 15]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    signerInfo MUST NOT include multiple instances of the
    SMIMEEncryptionKeyPreference attribute.  CMS defines the ASN.1 syntax
    for Attribute to include attrValues SET OF AttributeValue.  A
@@ -832,15 +849,6 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    instance of AttributeValue.  There MUST NOT be zero or multiple
    instances of AttributeValue present in the attrValues SET OF
    AttributeValue.
-
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 15]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
    The sending agent SHOULD include the referenced certificate in the
    set of certificates included in the signed message if this attribute
@@ -881,6 +889,15 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    -  Or use some other method of determining the user's key management
       key.  If a X.509 key management certificate is not found, then
       encryption cannot be done with the signer of the message.  If
+
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 16]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
       multiple X.509 key management certificates are found, the S/MIME
       agent can make an arbitrary choice between them.
 
@@ -889,14 +906,6 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    S/MIME v4.0 implementations MUST support both issuerAndSerialNumber
    and subjectKeyIdentifier.  Messages that use the subjectKeyIdentifier
    choice cannot be read by S/MIME v2 clients.
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 16]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
    It is important to understand that some certificates use a value for
    subjectKeyIdentifier that is not suitable for uniquely identifying a
@@ -937,6 +946,14 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    -  If the receiving agent has not yet created a list of capabilities
       for the sender's public key, then, after verifying the signature
       on the incoming message and checking the timestamp, the receiving
+
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 17]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
       agent SHOULD create a new list containing at least the signing
       time and the symmetric capabilities.
 
@@ -946,14 +963,6 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
       If so, the receiving agent SHOULD update both the signing time and
       capabilities in the list.  Values of the signing time that lie far
       in the future (that is, a greater discrepancy than any reasonable
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 17]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
-
       clock skew), or a capabilities list in messages whose signature
       could not be verified, MUST NOT be accepted.
 
@@ -994,21 +1003,17 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    -  the sending agent has no knowledge of the version of S/MIME of the
       recipient,
 
+
+
+Schaad, et al.         Expires September 14, 2017              [Page 18]
+
+Internet-Draft      S/MIME 4.0 Message Specification          March 2017
+
+
    then the sending agent SHOULD use AES-256 GCM because it is a
    stronger algorithm and is required by S/MIME v4.0.  If the sending
    agent chooses not to use AES-256 GCM in this step, it SHOULD use
    AES-128 CBC.
-
-
-
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 18]
-
-Internet-Draft      S/MIME 4.0 Message Specification          March 2017
-
 
 2.7.2.  Choosing Weak Encryption
 
@@ -1056,12 +1061,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-
-
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 19]
+Schaad, et al.         Expires September 14, 2017              [Page 19]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1117,7 +1117,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 20]
+Schaad, et al.         Expires September 14, 2017              [Page 20]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1173,7 +1173,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 21]
+Schaad, et al.         Expires September 14, 2017              [Page 21]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1229,7 +1229,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 22]
+Schaad, et al.         Expires September 14, 2017              [Page 22]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1285,7 +1285,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 23]
+Schaad, et al.         Expires September 14, 2017              [Page 23]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1341,7 +1341,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 24]
+Schaad, et al.         Expires September 14, 2017              [Page 24]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1397,7 +1397,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 25]
+Schaad, et al.         Expires September 14, 2017              [Page 25]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1413,12 +1413,12 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    information about the contained content.  This specification defines
    the following smime-types.
 
-             Name              CMS Type          Inner Content
-             enveloped-data    EnvelopedData     id-data
-             signed-data       SignedData        id-data
-             certs-only        SignedData        id-data
-             compressed-data   CompressedData    id-data
-             authEnvelopedData AuthEnvelopedData id-data
+            Name               CMS Type          Inner Content
+            enveloped-data     EnvelopedData     id-data
+            signed-data        SignedData        id-data
+            certs-only         SignedData        id-data
+            compressed-data    CompressedData    id-data
+            authEnveloped-data AuthEnvelopedData id-data
 
    In order for consistency to be obtained with future specifications,
    the following guidelines SHOULD be followed when assigning a new
@@ -1453,7 +1453,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 26]
+Schaad, et al.         Expires September 14, 2017              [Page 26]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1503,20 +1503,20 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
    This section describes the format for enveloping a MIME entity
    without signing it.  Authenticated enveloped messages provide
-   confidentiality and integrity.  It is important to note that sending
-   authenticated enveloped messages does not provide for authentication
-   when using S/MIME.  It is possible to replace ciphertext in such a
+   confidentiality and data integrity.  It is important to note that
+   sending authenticated enveloped messages does not provide for
+   authentication when using S/MIME.  It is possible to replace
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 27]
+Schaad, et al.         Expires September 14, 2017              [Page 27]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
-   way that the processed message will still be valid, but the meaning
-   can be altered.  However this is substantially more difficult than it
-   is for an enveloped-only message as the
+   ciphertext in such a way that the processed message will still be
+   valid, but the meaning can be altered.  However this is substantially
+   more difficult than it is for an enveloped-only message as the
 
    Step 1.  The MIME entity to be enveloped is prepared according to
             Section 3.1.
@@ -1535,7 +1535,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
             application/pkcs7-mime MIME entity.
 
    The smime-type parameter for authenticated enveloped-only messages is
-   "authEnvelopedData".  The file extension for this type of message is
+   "authEnveloped-data".  The file extension for this type of message is
    ".p7m".
 
    A sample message would be:
@@ -1565,12 +1565,12 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 28]
+Schaad, et al.         Expires September 14, 2017              [Page 28]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
-   Content-Type: application/pkcs7-mime; smime-type=authEnvelopedData;
+   Content-Type: application/pkcs7-mime; smime-type=authEnveloped-data;
          name=smime.p7m
    Content-Transfer-Encoding: base64
    Content-Disposition: attachment; filename=smime.p7m
@@ -1621,7 +1621,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 29]
+Schaad, et al.         Expires September 14, 2017              [Page 29]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1677,7 +1677,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 30]
+Schaad, et al.         Expires September 14, 2017              [Page 30]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1733,7 +1733,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 31]
+Schaad, et al.         Expires September 14, 2017              [Page 31]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1789,7 +1789,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 32]
+Schaad, et al.         Expires September 14, 2017              [Page 32]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1845,7 +1845,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 33]
+Schaad, et al.         Expires September 14, 2017              [Page 33]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1901,7 +1901,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 34]
+Schaad, et al.         Expires September 14, 2017              [Page 34]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -1957,7 +1957,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 35]
+Schaad, et al.         Expires September 14, 2017              [Page 35]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2013,7 +2013,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 36]
+Schaad, et al.         Expires September 14, 2017              [Page 36]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2028,7 +2028,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    protected in a secure fashion.
 
    An S/MIME user agent MUST NOT generate asymmetric keys less than 2048
-   bits for use with the RSA signature algorithm.
+   bits for use with an RSA signature algorithm.
 
    For 2048-bit through 4096-bit RSA with SHA-256 see [RFC5754] and
    [FIPS186-4].  The first reference provides the signature algorithm's
@@ -2069,7 +2069,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 37]
+Schaad, et al.         Expires September 14, 2017              [Page 37]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2125,7 +2125,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 38]
+Schaad, et al.         Expires September 14, 2017              [Page 38]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2154,8 +2154,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
    Additional information: NONE
 
-   Person & email to contact for further information:
-      S/MIME working group chairs smime-chairs@ietf.org
+   Person & email to contact for further information: iesg@ietf.org
 
    Intended usage: COMMON
 
@@ -2181,7 +2180,8 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 39]
+
+Schaad, et al.         Expires September 14, 2017              [Page 39]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2206,8 +2206,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
    Additional information: NONE
 
-   Person & email to contact for further information:
-      S/MIME working group chairs smime-chairs@ietf.org
+   Person & email to contact for further information: iesg@ietf.org
 
    Intended usage: COMMON
 
@@ -2217,13 +2216,13 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
    Change Controller: S/MIME working group delegated from the IESG
 
-5.3.  Register authEnvelopedData smime-type
+5.3.  Register authEnveloped-data smime-type
 
    IANA is required to register the following value in the "Parameter
    Values for the smime-type Parameter" registry.  The values to be
    registered are:
 
-      smime-type value: authEnvelopedData
+      smime-type value: authEnveloped-data
 
       Reference: [[This Document, Section 3.2.2]]
 
@@ -2237,7 +2236,8 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 40]
+
+Schaad, et al.         Expires September 14, 2017              [Page 40]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2266,7 +2266,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
    therefore this specification gives a framework for using those
    estimates in choosing algorithms.
 
-   The choice of 2048 bits as the RSA asymmetric key size in this
+   The choice of 2048 bits as an RSA asymmetric key size in this
    specification is based on the desire to provide at least 100 bits of
    security.  The key sizes that must be supported to conform to this
    specification seem appropriate for the Internet based on [RFC3766].
@@ -2293,7 +2293,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 41]
+Schaad, et al.         Expires September 14, 2017              [Page 41]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2349,7 +2349,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 42]
+Schaad, et al.         Expires September 14, 2017              [Page 42]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2388,14 +2388,14 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
       which then is transformed into the CEK via a KDF step.
 
    S/MIME implementations almost universally use ephemeral-static rather
-   than static-static key agreement and do not use a pre-existing shared
-   secret when doing encryption, this means that the first precondition
-   is not met.  There is a document [RFC6278] which defined how to use
-   static-static key agreement with CMS so that is readably doable.
-   Currently, all S/MIME key agreement methods derive a KEK and wrap a
-   CEK.  This violates the third precondition above.  New key key
-   agreement algorithms that directly created the CEK without creating
-   an intervening KEK would need to be defined.
+   than static-static key agreement and do not use a shared secret for
+   encryption, this means that the first precondition is not met.  There
+   is a document [RFC6278] which defined how to use static-static key
+   agreement with CMS so that is readably doable.  Currently, all S/MIME
+   key agreement methods derive a KEK and wrap a CEK.  This violates the
+   third precondition above.  New key agreement algorithms that directly
+   created the CEK without creating an intervening KEK would need to be
+   defined.
 
    Even when all of the preconditions are met and origination of a
    message is established by the use of an authenticated encryption
@@ -2405,7 +2405,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 43]
+Schaad, et al.         Expires September 14, 2017              [Page 43]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2461,7 +2461,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 44]
+Schaad, et al.         Expires September 14, 2017              [Page 44]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2517,7 +2517,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 45]
+Schaad, et al.         Expires September 14, 2017              [Page 45]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2573,7 +2573,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 46]
+Schaad, et al.         Expires September 14, 2017              [Page 46]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2629,7 +2629,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 47]
+Schaad, et al.         Expires September 14, 2017              [Page 47]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2685,7 +2685,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 48]
+Schaad, et al.         Expires September 14, 2017              [Page 48]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2741,7 +2741,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 49]
+Schaad, et al.         Expires September 14, 2017              [Page 49]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2797,7 +2797,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 50]
+Schaad, et al.         Expires September 14, 2017              [Page 50]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2853,7 +2853,7 @@ Appendix A.  ASN.1 Module
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 51]
+Schaad, et al.         Expires September 14, 2017              [Page 51]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2909,7 +2909,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 52]
+Schaad, et al.         Expires September 14, 2017              [Page 52]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -2965,7 +2965,7 @@ Appendix B.  Historic Mail Considerations
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 53]
+Schaad, et al.         Expires September 14, 2017              [Page 53]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -3021,7 +3021,7 @@ B.2.  Signature Algorithms
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 54]
+Schaad, et al.         Expires September 14, 2017              [Page 54]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -3077,7 +3077,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 55]
+Schaad, et al.         Expires September 14, 2017              [Page 55]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -3133,7 +3133,7 @@ Appendix C.  Moving S/MIME v2 Message Specification to Historic Status
 
 
 
-Schaad, et al.          Expires September 2, 2017              [Page 56]
+Schaad, et al.         Expires September 14, 2017              [Page 56]
 
 Internet-Draft      S/MIME 4.0 Message Specification          March 2017
 
@@ -3158,6 +3158,9 @@ Appendix D.  Acknowledgments
    Tony Capel, Piers Chivers, Dave Crocker, Bill Flanigan, Peter
    Gutmann, Alfred Hoenes, Paul Hoffman, Russ Housley, William Ottaway,
    and John Pawling.
+
+   The version 4 update to the S/MIME documents was done under the
+   auspices of the LAMPS Working Group.
 
 Authors' Addresses
 
@@ -3186,7 +3189,4 @@ Authors' Addresses
 
 
 
-
-
-
-Schaad, et al.          Expires September 2, 2017              [Page 57]
+Schaad, et al.         Expires September 14, 2017              [Page 57]
