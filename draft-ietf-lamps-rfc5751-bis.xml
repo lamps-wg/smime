@@ -63,7 +63,7 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5751-bis-latest" category='std' obsoletes="RFC5751">
+<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5751-bis-latest" category='std' obsoletes="5751">
   <front>
     <title abbrev="S/MIME 4.0 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification </title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
@@ -1729,8 +1729,8 @@ eXle3YI5SKSBer/sAhQmCq7s/CTFHOEjgASeUjbMpx5g6A==
                   signature is being verified.  The value of the micalg parameter is
                   dependent on the message digest algorithm(s) used in the calculation
                   of the Message Integrity Check.  If multiple message digest
-                  algorithms are used, they MUST be separated by commas per [MIME-
-                  SECURE].  The values to be placed in the micalg parameter SHOULD be
+                  algorithms are used, they MUST be separated by commas per <xref target="RFC1847"/>.
+                    The values to be placed in the micalg parameter SHOULD be
                   from the following:
                 </t>
 
@@ -2191,6 +2191,10 @@ Change Controller: S/MIME working group delegated from the IESG
               </t>
             </section>
           </section>
+<section title="IANA Considertions">
+  <t>This document has no new IANA considerations.
+  </t>
+</section>
           <section title="Security Considerations" anchor="SecurityConsiderations">
             <t>
               Cryptographic algorithms will be broken or weakened over time.
@@ -2396,7 +2400,6 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc5754;
         &rfc4086;
         &rfc5084;
-        &EDDSA;
         &ECDH_25519;
         &rfc5753;
         
@@ -2717,7 +2720,7 @@ Change Controller: S/MIME working group delegated from the IESG
       <section title="ASN.1 Module" anchor="ASN1Module">
         <t>
 Note: The ASN.1 module contained herein is unchanged from RFC 3851
-[SMIMEv3.1] with the exception of a change to the prefersBinaryInside
+<xref target="SMIMEv3.1"/> with the exception of a change to the prefersBinaryInside
 ASN.1 comment.  This module uses the 1988 version of ASN.1.
         </t>
               <figure>
@@ -2786,8 +2789,8 @@ id-cap-preferBinaryInside  OBJECT IDENTIFIER ::= { id-cap 1 }
 
 --  The following list OIDs to be used with S/MIME V3
 
--- Signature Algorithms Not Found in [CMSALG], [CMS-SHA2], [RSAPSS],
--- and [RSAOAEP]
+-- Signature Algorithms Not Found in [RFC3370], [RFC5754], [RFC4056],
+-- and [RFC3560]
 
 --
 -- md2WithRSAEncryption OBJECT IDENTIFIER ::=
