@@ -31,10 +31,10 @@
   <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6979     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6979.xml">
+  <!ENTITY eddsa       SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
   <!ENTITY rfc5751bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5751-bis.xml">
   <!ENTITY eaiAddress  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-eai-addresses.xml">
   <!ENTITY curdlePkix  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-pkix.xml">
-  <!ENTITY eddsa  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.RFC.8032.xml">
 
 ]>
 
