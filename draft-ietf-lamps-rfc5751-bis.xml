@@ -63,7 +63,7 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5751-bis-latest" category='std' obsoletes="RFC5751">
+<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5751-bis-latest" category='std' obsoletes="5751">
   <front>
     <title abbrev="S/MIME 4.0 Message Specification">Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification </title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
@@ -247,11 +247,11 @@
           </t>
 
           <t hangText="Data Integrity Service:">
-            A security service that protects againist unauthorized changes to data by ensuring that changes to the data are detectable. <xref target="RFC4949"/>
+            A security service that protects against unauthorized changes to data by ensuring that changes to the data are detectable. <xref target="RFC4949"/>
           </t>
 
           <t hangText="Data Confidentiality:">
-            The property that data is not discolsed to system entities unless they have been authorized to know the data. <xref target="RFC4949"/>
+            The property that data is not disclosed to system entities unless they have been authorized to know the data. <xref target="RFC4949"/>
           </t>
 
           <t hangText="Data Origination:">
@@ -587,7 +587,7 @@
           encryption algorithm (<xref target="RFC3370"/> and <xref target="RFC3565"/>) and the key sizes for
           the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm
           with AES-128 content encryption algorithm).
-          As both 128 and 256 bit AES modes are mandatory-to-implment as content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>), both the AES-128 and AES-256 key wrap algorithms MUST be supported when ECDH ephemeral-static is used.
+          As both 128 and 256 bit AES modes are mandatory-to-implement as content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>), both the AES-128 and AES-256 key wrap algorithms MUST be supported when ECDH ephemeral-static is used.
         </t>
 
         <t>
@@ -1359,7 +1359,7 @@ HOxEa44b+EI=
                 
                   <texttable style="none">
                     <ttcol>Media Type</ttcol><ttcol align="center">File Extension</ttcol>
-                    <c>application/pkcs7-mime (SignedData, EnvelopedData)</c><c>.p7m</c>
+                    <c>application/pkcs7-mime (SignedData, EnvelopedData, AuthEnvelopedData)</c><c>.p7m</c>
                     <c>application/pkcs7-mime (degenerate SignedData certificate management message)</c><c>.p7c</c>
                     <c>application/pkcs7-mime (CompressedData)</c><c>.p7z</c>
                     <c>application/pkcs7-signature (SignedData)</c><c>.p7s</c>
@@ -1497,9 +1497,10 @@ gtaMXpRwZRNYAgDsiSf8Z9P43LrY4OxUk660cu1lXeCSFOSOpOJ7FuVyU=
               <t>
                 This section describes the format for enveloping a MIME entity without signing it.
                 Authenticated enveloped messages provide confidentiality and data integrity.
-                It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.
-                It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
-                However this is substantially more difficult than it is for an enveloped-only message as the 
+                It is important to note that sending authenticated enveloped  messages does not provide for origination when using S/MIME.
+                It is possible for a third party to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
+                However this is substantially more difficult than it is for an enveloped-only message as the algorithm does provide a level of authentication.
+                Any recipient for whom the message is encrypted can replace it without detection.
               </t>
               <t>
               <list style="format Step %d.">
@@ -1729,8 +1730,8 @@ eXle3YI5SKSBer/sAhQmCq7s/CTFHOEjgASeUjbMpx5g6A==
                   signature is being verified.  The value of the micalg parameter is
                   dependent on the message digest algorithm(s) used in the calculation
                   of the Message Integrity Check.  If multiple message digest
-                  algorithms are used, they MUST be separated by commas per [MIME-
-                  SECURE].  The values to be placed in the micalg parameter SHOULD be
+                  algorithms are used, they MUST be separated by commas per <xref target="RFC1847"/>.
+                    The values to be placed in the micalg parameter SHOULD be
                   from the following:
                 </t>
 
@@ -1758,7 +1759,7 @@ eXle3YI5SKSBer/sAhQmCq7s/CTFHOEjgASeUjbMpx5g6A==
                 <figure>
                   <artwork>
 Content-Type: multipart/signed;
-    micalg=SHA1;
+    micalg=sha-1;
     boundary="----=_NextBoundry____Fri,_06_Sep_2002_00:25:21";
     protocol="application/pkcs7-signature"
 
@@ -2396,7 +2397,6 @@ Change Controller: S/MIME working group delegated from the IESG
         &rfc5754;
         &rfc4086;
         &rfc5084;
-        &EDDSA;
         &ECDH_25519;
         &rfc5753;
         
@@ -2717,7 +2717,7 @@ Change Controller: S/MIME working group delegated from the IESG
       <section title="ASN.1 Module" anchor="ASN1Module">
         <t>
 Note: The ASN.1 module contained herein is unchanged from RFC 3851
-[SMIMEv3.1] with the exception of a change to the prefersBinaryInside
+<xref target="SMIMEv3.1"/> with the exception of a change to the prefersBinaryInside
 ASN.1 comment.  This module uses the 1988 version of ASN.1.
         </t>
               <figure>
@@ -2786,8 +2786,8 @@ id-cap-preferBinaryInside  OBJECT IDENTIFIER ::= { id-cap 1 }
 
 --  The following list OIDs to be used with S/MIME V3
 
--- Signature Algorithms Not Found in [CMSALG], [CMS-SHA2], [RSAPSS],
--- and [RSAOAEP]
+-- Signature Algorithms Not Found in [RFC3370], [RFC5754], [RFC4056],
+-- and [RFC3560]
 
 --
 -- md2WithRSAEncryption OBJECT IDENTIFIER ::=

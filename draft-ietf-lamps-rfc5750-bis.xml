@@ -31,10 +31,10 @@
   <!ENTITY rfc6151     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6151.xml">
   <!ENTITY rfc6194     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6194.xml">
   <!ENTITY rfc6979     SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6979.xml">
+  <!ENTITY eddsa       SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
   <!ENTITY rfc5751bis  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-rfc5751-bis.xml">
   <!ENTITY eaiAddress  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-lamps-eai-addresses.xml">
   <!ENTITY curdlePkix  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-pkix.xml">
-  <!ENTITY eddsa  SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.irtf-cfrg-eddsa.xml">
 
 ]>
 
@@ -45,7 +45,7 @@
 <?rfc subcompact='no' ?>
 <?rfc text-list-symbols='-*o" ?>
 
-<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5750-bis-latest" category='std'>
+<rfc ipr='pre5378Trust200902' docName="draft-ietf-lamps-rfc5750-bis-latest" category='std' obsoletes="5750">
   <front>
     <title abbrev="S/MIME 4.0 Certificate Handling">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0 Certificate Handling</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
@@ -80,7 +80,7 @@
    Internet X.509 Public Key Infrastructure Certificate and CRL Profile.
    S/&wj;MIME agents must meet the certificate processing requirements in
    this document as well as those in RFC 5280.  This document obsoletes
-   RFC 3850.
+   RFC 5750.
       </t>
     </abstract>
     <note title="Contributing to this document">
@@ -645,11 +645,11 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    -->
   <!-- With the following two paragraphs -->
        <t>
-         The signature algorithm object identifiers for RSA PKCS#1 v1.5 and RSASSA-PSS with SHA-256 using 1024-bit through 3072-bit public keys are specified in [RFC4055] and the signature algorithm definition is found in [FIPS186-2] with Change Notice 1.
+         The signature algorithm object identifiers for RSA PKCS#1 v1.5 and RSASSA-PSS with SHA-256 using 1024-bit through 3072-bit public keys are specified in <xref target="RFC4055"/> and the signature algorithm definition is found in <xref target="FIPS186-2"/> with Change Notice 1.
        </t>
 
       <t>
-        The signature algorithm object identifiers for RSA PKCS#1 v1.5 and RSASSA-PSS with SHA-256 using 4096-bit public keys are specified in [RFC4055] and the signature algorithm definition is found in [RFC3447].
+        The signature algorithm object identifiers for RSA PKCS#1 v1.5 and RSASSA-PSS with SHA-256 using 4096-bit public keys are specified in <xref target="RFC4055"/> and the signature algorithm definition is found in <xref target="RFC3447"/>.
       </t>
        
 
@@ -665,7 +665,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   </t>
 
   <t>
-    For EdDSA see <xref target="I-D.ietf-curdle-pkix"/> and <xref target="I-D.irtf-cfrg-eddsa"/>.
+    For EdDSA see <xref target="I-D.ietf-curdle-pkix"/> and <xref target="RFC8032"/>.
     The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.
     Other curves than curve 25519 MAY be used as well.
   </t>
@@ -799,7 +799,11 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   </t>
 </section>
 </section>
- </section>
+</section>
+<section title="IANA Considertions">
+  <t>This document has no new IANA considerations.
+  </t>
+</section>
  <section title="Security Considerations">
    <t>
    All of the security issues faced by any cryptographic application
