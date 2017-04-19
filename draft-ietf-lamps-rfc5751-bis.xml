@@ -247,11 +247,11 @@
           </t>
 
           <t hangText="Data Integrity Service:">
-            A security service that protects againist unauthorized changes to data by ensuring that changes to the data are detectable. <xref target="RFC4949"/>
+            A security service that protects against unauthorized changes to data by ensuring that changes to the data are detectable. <xref target="RFC4949"/>
           </t>
 
           <t hangText="Data Confidentiality:">
-            The property that data is not discolsed to system entities unless they have been authorized to know the data. <xref target="RFC4949"/>
+            The property that data is not disclosed to system entities unless they have been authorized to know the data. <xref target="RFC4949"/>
           </t>
 
           <t hangText="Data Origination:">
@@ -587,7 +587,7 @@
           encryption algorithm (<xref target="RFC3370"/> and <xref target="RFC3565"/>) and the key sizes for
           the two algorithms MUST be the same (e.g., AES-128 key wrap algorithm
           with AES-128 content encryption algorithm).
-          As both 128 and 256 bit AES modes are mandatory-to-implment as content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>), both the AES-128 and AES-256 key wrap algorithms MUST be supported when ECDH ephemeral-static is used.
+          As both 128 and 256 bit AES modes are mandatory-to-implement as content encryption algorithms (<xref target="ContentEncryptionAlgorithmIdentifier"/>), both the AES-128 and AES-256 key wrap algorithms MUST be supported when ECDH ephemeral-static is used.
         </t>
 
         <t>
@@ -1359,7 +1359,7 @@ HOxEa44b+EI=
                 
                   <texttable style="none">
                     <ttcol>Media Type</ttcol><ttcol align="center">File Extension</ttcol>
-                    <c>application/pkcs7-mime (SignedData, EnvelopedData)</c><c>.p7m</c>
+                    <c>application/pkcs7-mime (SignedData, EnvelopedData, AuthEnvelopedData)</c><c>.p7m</c>
                     <c>application/pkcs7-mime (degenerate SignedData certificate management message)</c><c>.p7c</c>
                     <c>application/pkcs7-mime (CompressedData)</c><c>.p7z</c>
                     <c>application/pkcs7-signature (SignedData)</c><c>.p7s</c>
@@ -1497,9 +1497,10 @@ gtaMXpRwZRNYAgDsiSf8Z9P43LrY4OxUk660cu1lXeCSFOSOpOJ7FuVyU=
               <t>
                 This section describes the format for enveloping a MIME entity without signing it.
                 Authenticated enveloped messages provide confidentiality and data integrity.
-                It is important to note that sending authenticated enveloped  messages does not provide for authentication when using S/MIME.
-                It is possible to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
-                However this is substantially more difficult than it is for an enveloped-only message as the 
+                It is important to note that sending authenticated enveloped  messages does not provide for origination when using S/MIME.
+                It is possible for a third party to replace ciphertext in such a way that the processed message will still be valid, but the meaning can be altered.
+                However this is substantially more difficult than it is for an enveloped-only message as the algorithm does provide a level of authentication.
+                Any recipient for whom the message is encrypted can replace it without detection.
               </t>
               <t>
               <list style="format Step %d.">
@@ -1758,7 +1759,7 @@ eXle3YI5SKSBer/sAhQmCq7s/CTFHOEjgASeUjbMpx5g6A==
                 <figure>
                   <artwork>
 Content-Type: multipart/signed;
-    micalg=SHA1;
+    micalg=sha-1;
     boundary="----=_NextBoundry____Fri,_06_Sep_2002_00:25:21";
     protocol="application/pkcs7-signature"
 
@@ -2191,10 +2192,6 @@ Change Controller: S/MIME working group delegated from the IESG
               </t>
             </section>
           </section>
-<section title="IANA Considertions">
-  <t>This document has no new IANA considerations.
-  </t>
-</section>
           <section title="Security Considerations" anchor="SecurityConsiderations">
             <t>
               Cryptographic algorithms will be broken or weakened over time.
