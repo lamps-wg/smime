@@ -14,11 +14,11 @@ Expires: October 27, 2017
 Abstract
 
    When the Curdle Security Working Group was chartered, a range of
-   object identifiers was donated by Symantec Security for use by that
-   working group.  This document describes the range of identifiers that
-   were assigned in that donated range, transfers control of that range
-   to IANA, and establishes IANA allocation policies for any future
-   assignments within that range.
+   object identifiers was donated by Symantec Website Security for use
+   by that working group.  This document describes the range of
+   identifiers that were assigned in that donated range, transfers
+   control of that range to IANA, and establishes IANA allocation
+   policies for any future assignments within that range.
 
 Contributing to this document
 
@@ -71,11 +71,11 @@ Internet-Draft                OID Registry                    April 2017
 1.  Introduction
 
    When the Curdle Security Working Group was chartered, a range of
-   object identifiers was donated by Symantec Security for use by that
-   working group.  These object identifiers are primarily used with
-   Abstract Syntax Notation (ASN.1) [ASN.1].  The ASN.1 specifications
-   continue to evolve, but object identifiers can be used with any and
-   all versions of ASN.1.
+   object identifiers was donated by Symantec Website Security for use
+   by that working group.  These object identifiers are primarily used
+   with Abstract Syntax Notation (ASN.1) [ASN.1].  The ASN.1
+   specifications continue to evolve, but object identifiers can be used
+   with any and all versions of ASN.1.
 
    The Curdle object identifier range is:
 
@@ -180,7 +180,7 @@ Internet-Draft                OID Registry                    April 2017
 
 Appendix A.  Acknowledgments
 
-   Our thanks go out to Semantic for donating the range of OIDs covered
+   Our thanks go out to Symantec for donating the range of OIDs covered
    in this document.
 
    This document stole text heavily from a previous document doing
