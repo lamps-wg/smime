@@ -4,9 +4,9 @@
 This is the working area for the Working Group internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Certificate Handling".
 
 * [Editor's copy](https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.html)
-* [Working Group Draft] (https://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis)
+* [Working Group Draft](https://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis)
 * [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-ietf-lamps-rfc5750-bis&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.txt)
-* [Compare Editor's and RFC5750] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750.txt&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.txt)
+* [Compare Editor's and RFC5750](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5750.txt&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5750-bis.txt)
 
 
 ##  Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message
@@ -14,9 +14,9 @@ This is the working area for the Working Group internet-draft, "Secure/Multipurp
 This is the working area for the Working Group internet-draft, "Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 3.5 Message".
 
 * [Editor's copy](https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.html)
-* [Working Group Draft] (https://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis)
+* [Working Group Draft](https://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis)
 * [Compare Editor's and WG versions](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/id/draft-ietf-lamps-rfc5751-bis&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.txt)
-* [Compare Editor's and RFC5751] (https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5751.txt&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.txt)
+* [Compare Editor's and RFC5751](https://tools.ietf.org/rfcdiff?url1=https://www.ietf.org/rfc/rfc5751.txt&url2=https://lamps-wg.github.io/smime/draft-ietf-lamps-rfc5751-bis.txt)
 
 
 ## Building the Draft
