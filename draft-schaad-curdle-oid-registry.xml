@@ -78,7 +78,8 @@
           <!-- The next two items are in -03 of the draft and not in the final version -->
           <c>114</c><c>id-EdDSA25519-ph</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>115</c><c>id-EdDS448=ph</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
-          <c>120</c><c>Safecurves-pkix-0<c/><c><xref target="I-D.ietf-curdle-pkix"/></c>
+          <c>120</c><c>Safecurves-pkix-0</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
+
         </texttable>
 
         <t>
