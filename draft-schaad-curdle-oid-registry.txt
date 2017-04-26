@@ -178,7 +178,7 @@ Internet-Draft                OID Registry                    April 2017
               X.509 Public Key Infrastructure", draft-ietf-curdle-
               pkix-04 (work in progress), March 2017.
 
-Appendix A.  Acknowledgments
+Acknowledgments
 
    Our thanks go out to Symantec for donating the range of OIDs covered
    in this document.
