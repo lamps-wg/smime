@@ -52,6 +52,8 @@
       
       <t>
         The Curdle object identifier range is:
+      </t>
+      
         <figure>
 <artwork>        
   { iso (1) identified-organization (3) thawte (101) 100 }
@@ -59,7 +61,6 @@
   { iso (1) identified-organization (3) thawte (101) 127 }
 </artwork>
         </figure>
-      </t>
 
       <t>
         This document describes the object identifiers that were assigned in that donated range, transfers control of the range to IANA, and establishes IANA allocation policies for any future assignments within that range.
@@ -128,7 +129,7 @@
 <!--      &CURDLE-V3; -->
     </references>
 
-    <section title="Acknowledgments">
+    <section title="Acknowledgments" numbered="no">
       <t>
         Our thanks go out to Semantic for donating the range of OIDs covered in this document.
       </t>
