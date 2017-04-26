@@ -4,8 +4,9 @@
 
 Curdle                                                         J. Schaad
 Internet-Draft                                            August Cellars
-Intended status: Informational                            April 25, 2017
-Expires: October 27, 2017
+Intended status: Informational                                r. Andrews
+Expires: October 28, 2017                      Symantec Website Security
+                                                          April 26, 2017
 
 
         Object Identifier Registry for the Curdle Working Group
@@ -43,20 +44,24 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 27, 2017.
+   This Internet-Draft will expire on October 28, 2017.
+
+
+
+
+
+
+
+
+Schaad & Andrews        Expires October 28, 2017                [Page 1]
+
+Internet-Draft                OID Registry                    April 2017
+
 
 Copyright Notice
 
    Copyright (c) 2017 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
-
-
-
-
-Schaad                  Expires October 27, 2017                [Page 1]
-
-Internet-Draft                OID Registry                    April 2017
-
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
@@ -104,12 +109,7 @@ Internet-Draft                OID Registry                    April 2017
 
 
 
-
-
-
-
-
-Schaad                  Expires October 27, 2017                [Page 2]
+Schaad & Andrews        Expires October 28, 2017                [Page 2]
 
 Internet-Draft                OID Registry                    April 2017
 
@@ -165,7 +165,7 @@ Internet-Draft                OID Registry                    April 2017
 
 
 
-Schaad                  Expires October 27, 2017                [Page 3]
+Schaad & Andrews        Expires October 28, 2017                [Page 3]
 
 Internet-Draft                OID Registry                    April 2017
 
@@ -187,7 +187,7 @@ Appendix A.  Acknowledgments
    similar thing by Russ Housely.  Copying always makes things easier
    and less error prone.
 
-Author's Address
+Authors' Addresses
 
    Jim Schaad
    August Cellars
@@ -195,6 +195,10 @@ Author's Address
    Email: ietf@augustcellars.com
 
 
+   Rick Andrews
+   Symantec Website Security
+
+   Email: Rick_Andrews@symantec.com
 
 
 
@@ -217,8 +221,4 @@ Author's Address
 
 
 
-
-
-
-
-Schaad                  Expires October 27, 2017                [Page 4]
+Schaad & Andrews        Expires October 28, 2017                [Page 4]

@@ -6,9 +6,9 @@ LAMPS                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Obsoletes: 5751 (if approved)                                B. Ramsdell
 Intended status: Standards Track                  Brute Squad Labs, Inc.
-Expires: October 27, 2017                                      S. Turner
+Expires: October 28, 2017                                      S. Turner
                                                                    sn3rd
-                                                          April 25, 2017
+                                                          April 26, 2017
 
 
    Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0
@@ -47,13 +47,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 27, 2017.
+   This Internet-Draft will expire on October 28, 2017.
 
 
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 1]
+Schaad, et al.          Expires October 28, 2017                [Page 1]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 2]
+Schaad, et al.          Expires October 28, 2017                [Page 2]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -165,7 +165,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 3]
+Schaad, et al.          Expires October 28, 2017                [Page 3]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -221,7 +221,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 4]
+Schaad, et al.          Expires October 28, 2017                [Page 4]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -277,7 +277,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 5]
+Schaad, et al.          Expires October 28, 2017                [Page 5]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -333,7 +333,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 6]
+Schaad, et al.          Expires October 28, 2017                [Page 6]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -389,7 +389,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 7]
+Schaad, et al.          Expires October 28, 2017                [Page 7]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -445,7 +445,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 8]
+Schaad, et al.          Expires October 28, 2017                [Page 8]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -501,7 +501,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017                [Page 9]
+Schaad, et al.          Expires October 28, 2017                [Page 9]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -557,7 +557,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 10]
+Schaad, et al.          Expires October 28, 2017               [Page 10]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -613,7 +613,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 11]
+Schaad, et al.          Expires October 28, 2017               [Page 11]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -669,7 +669,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 12]
+Schaad, et al.          Expires October 28, 2017               [Page 12]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -725,7 +725,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 13]
+Schaad, et al.          Expires October 28, 2017               [Page 13]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -781,7 +781,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 14]
+Schaad, et al.          Expires October 28, 2017               [Page 14]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -837,7 +837,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 15]
+Schaad, et al.          Expires October 28, 2017               [Page 15]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -893,7 +893,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 16]
+Schaad, et al.          Expires October 28, 2017               [Page 16]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -949,7 +949,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 17]
+Schaad, et al.          Expires October 28, 2017               [Page 17]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1005,7 +1005,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 18]
+Schaad, et al.          Expires October 28, 2017               [Page 18]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1061,7 +1061,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 19]
+Schaad, et al.          Expires October 28, 2017               [Page 19]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1117,7 +1117,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 20]
+Schaad, et al.          Expires October 28, 2017               [Page 20]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1173,7 +1173,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 21]
+Schaad, et al.          Expires October 28, 2017               [Page 21]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1229,7 +1229,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 22]
+Schaad, et al.          Expires October 28, 2017               [Page 22]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1285,7 +1285,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 23]
+Schaad, et al.          Expires October 28, 2017               [Page 23]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1341,7 +1341,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 24]
+Schaad, et al.          Expires October 28, 2017               [Page 24]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1397,7 +1397,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 25]
+Schaad, et al.          Expires October 28, 2017               [Page 25]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1453,7 +1453,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 26]
+Schaad, et al.          Expires October 28, 2017               [Page 26]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1509,7 +1509,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 27]
+Schaad, et al.          Expires October 28, 2017               [Page 27]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1565,7 +1565,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 28]
+Schaad, et al.          Expires October 28, 2017               [Page 28]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1621,7 +1621,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 29]
+Schaad, et al.          Expires October 28, 2017               [Page 29]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1677,7 +1677,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 30]
+Schaad, et al.          Expires October 28, 2017               [Page 30]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1733,7 +1733,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 31]
+Schaad, et al.          Expires October 28, 2017               [Page 31]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1789,7 +1789,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 32]
+Schaad, et al.          Expires October 28, 2017               [Page 32]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1845,7 +1845,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 33]
+Schaad, et al.          Expires October 28, 2017               [Page 33]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1901,7 +1901,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 34]
+Schaad, et al.          Expires October 28, 2017               [Page 34]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -1957,7 +1957,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 35]
+Schaad, et al.          Expires October 28, 2017               [Page 35]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2013,7 +2013,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 36]
+Schaad, et al.          Expires October 28, 2017               [Page 36]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2069,7 +2069,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 37]
+Schaad, et al.          Expires October 28, 2017               [Page 37]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2125,7 +2125,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 38]
+Schaad, et al.          Expires October 28, 2017               [Page 38]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2181,7 +2181,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 39]
+Schaad, et al.          Expires October 28, 2017               [Page 39]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2237,7 +2237,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 40]
+Schaad, et al.          Expires October 28, 2017               [Page 40]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2293,7 +2293,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 41]
+Schaad, et al.          Expires October 28, 2017               [Page 41]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2349,7 +2349,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 42]
+Schaad, et al.          Expires October 28, 2017               [Page 42]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2405,7 +2405,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 43]
+Schaad, et al.          Expires October 28, 2017               [Page 43]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2461,7 +2461,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 44]
+Schaad, et al.          Expires October 28, 2017               [Page 44]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2517,7 +2517,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 45]
+Schaad, et al.          Expires October 28, 2017               [Page 45]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2573,7 +2573,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 46]
+Schaad, et al.          Expires October 28, 2017               [Page 46]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2629,7 +2629,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 47]
+Schaad, et al.          Expires October 28, 2017               [Page 47]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2685,7 +2685,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 48]
+Schaad, et al.          Expires October 28, 2017               [Page 48]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2741,7 +2741,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 49]
+Schaad, et al.          Expires October 28, 2017               [Page 49]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2797,7 +2797,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 50]
+Schaad, et al.          Expires October 28, 2017               [Page 50]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2853,7 +2853,7 @@ Appendix A.  ASN.1 Module
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 51]
+Schaad, et al.          Expires October 28, 2017               [Page 51]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2909,7 +2909,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 52]
+Schaad, et al.          Expires October 28, 2017               [Page 52]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -2965,7 +2965,7 @@ B.1.  DigestAlgorithmIdentifier
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 53]
+Schaad, et al.          Expires October 28, 2017               [Page 53]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -3021,7 +3021,7 @@ B.2.  Signature Algorithms
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 54]
+Schaad, et al.          Expires October 28, 2017               [Page 54]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -3077,7 +3077,7 @@ Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 55]
+Schaad, et al.          Expires October 28, 2017               [Page 55]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -3133,7 +3133,7 @@ Appendix C.  Moving S/MIME v2 Message Specification to Historic Status
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 56]
+Schaad, et al.          Expires October 28, 2017               [Page 56]
 
 Internet-Draft      S/MIME 4.0 Message Specification          April 2017
 
@@ -3189,4 +3189,4 @@ Authors' Addresses
 
 
 
-Schaad, et al.          Expires October 27, 2017               [Page 57]
+Schaad, et al.          Expires October 28, 2017               [Page 57]
