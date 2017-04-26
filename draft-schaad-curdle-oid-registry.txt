@@ -4,7 +4,7 @@
 
 Curdle                                                         J. Schaad
 Internet-Draft                                            August Cellars
-Intended status: Informational                                r. Andrews
+Intended status: Informational                                R. Andrews
 Expires: October 28, 2017                      Symantec Website Security
                                                           April 26, 2017
 
