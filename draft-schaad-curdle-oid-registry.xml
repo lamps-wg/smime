@@ -16,6 +16,12 @@
         <email>ietf@augustcellars.com</email>
       </address>
     </author>
+    <author fullname="Rick Andrews" initials="r." surname="Andrews">
+      <organization>Symantec Website Security</organization>
+      <address>
+        <email>Rick_Andrews@symantec.com</email>
+      </address>
+    </author>
     <date/>
     <area>Security Area</area>
     <workgroup>Curdle</workgroup>
