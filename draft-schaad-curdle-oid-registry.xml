@@ -27,7 +27,7 @@
     <workgroup>Curdle</workgroup>
     <abstract>
       <t>
-        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Security for use by that working group.
+        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for use by that working group.
         This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.
       </t>
     </abstract>
@@ -44,7 +44,7 @@
   <middle>
     <section title="Introduction">
       <t>
-        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Security for use by that working group.
+        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for use by that working group.
         These object identifiers are primarily used with Abstract Syntax Notation (ASN.1) <xref target="ASN.1"/>.
         The ASN.1 specifications continue to evolve, but object identifiers can be used with any and all versions of ASN.1.
       </t>
@@ -131,7 +131,7 @@
 
     <section title="Acknowledgments" numbered="no">
       <t>
-        Our thanks go out to Semantic for donating the range of OIDs covered in this document.
+        Our thanks go out to Symantec for donating the range of OIDs covered in this document.
       </t>
       <t>
         This document stole text heavily from a previous document doing similar thing by Russ Housely.
