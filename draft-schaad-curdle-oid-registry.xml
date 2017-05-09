@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='US-ASCII'?>
 <!DOCTYPE rfc SYSTEM "../xml2rc-1.36/rfc2629.dtd" [
+<!ENTITY RFC7748 SYSTEM  "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7748.xml">
+<!ENTITY RFC8032 SYSTEM  "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
 <!ENTITY RFC5226 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml">
 <!ENTITY CURDLE SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-pkix.xml">
 ]>
@@ -9,7 +11,7 @@
 
 <rfc docName="draft-schaad-curdle-oid-registry-latest" category="info">
 <front>
-<title abbrev="OID Registry">Object Identifier Registry for the Curdle Working Group</title>
+<title abbrev="OID Registry">IANA Registration for Donated Symantec Website Security Object Identifier Range</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
       <organization>August Cellars</organization>
       <address>
@@ -27,7 +29,8 @@
     <workgroup>Curdle</workgroup>
     <abstract>
       <t>
-        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for use by that working group.
+        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.
+        This donated set of OIDs allowed for shorter values than would be possible using the existing S/MIME or PKIX arcs.
         This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.
       </t>
     </abstract>
@@ -45,26 +48,30 @@
     <section title="Introduction">
       <t>
         When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for use by that working group.
-        These object identifiers are primarily used with Abstract Syntax Notation (ASN.1) <xref target="ASN.1"/>.
+        The use of these object identifiers  allowed for the Edwards Ellitptic Curve key agreement <xref target="RFC7748"/> and signature <xref target="RFC8032"/> algorithms to be defined with encodings that are smaller than similar ones would be if assigned from the  existing S/MIME or PKIX arcs.
+        These initial registrations from this arc were done while developing <xref target="I-D.ietf-curdle-pkix"/>.
+        After those registrations were done, there were still some unused values that can be used for other security groups, there were still some unused values.
+      </t>
+      
+      <t>
+        Object identifiers are primarily used with Abstract Syntax Notation (ASN.1) <xref target="ASN.1"/>.
         The ASN.1 specifications continue to evolve, but object identifiers can be used with any and all versions of ASN.1.
       </t>
 
-      
       <t>
-        The Curdle object identifier range is:
+        This document describes the object identifiers that were assigned in that donated range, transfers control of the range to IANA, and establishes IANA allocation policies for any future assignments.
       </t>
       
+      <t>
+        The donated range from Symantec Website Security is:
         <figure>
-<artwork>        
-  { iso (1) identified-organization (3) thawte (101) 100 }
-  to
-  { iso (1) identified-organization (3) thawte (101) 127 }
-</artwork>
+          <artwork>
+first: { iso (1) identified-organization (3) thawte (101) 100 }
+last: { iso (1) identified-organization (3) thawte (101) 127 }
+          </artwork>
         </figure>
-
-      <t>
-        This document describes the object identifiers that were assigned in that donated range, transfers control of the range to IANA, and establishes IANA allocation policies for any future assignments within that range.
       </t>
+
     </section>
 
     <section title="IANA Considerations">
@@ -72,19 +79,23 @@
         IANA is asked to create one new registry table.
       </t>
 
-      <section title='"SMI Security for Curdle" Registry'>
+      <section title='"SMI Security for Cryptographic Algorithms" Registry'>
         <t>
-          Within the SMI-numbers registry, add an "SMI Security for Curdle" table with the three columns:
+          Within the SMI-numbers registry, add an "SMI Security for Cryptographic Algorithms" table with the three columns:
         </t>
+
+        <!-- FOR IANA - Please place on the SMI Numbers page under the SMI Security Codes section -->
+        
         <texttable>
           <ttcol>Decimal</ttcol><ttcol>Description</ttcol><ttcol>References</ttcol>
+          <c>100</c><c>Reserved for child reg</c><c/>
           <c>110</c><c>id-X25519</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>111</c><c>id-X448</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>112</c><c>id-EdDSA25519</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
-          <c>113</c><c>id-EdDS448</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
-          <!-- The next two items are in -03 of the draft and not in the final version -->
-          <c>114</c><c>id-EdDSA25519-ph</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
-          <c>115</c><c>id-EdDS448=ph</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
+          <c>113</c><c>id-EdDSA448</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
+          <!-- rfc-editor The next two items are in -03 of the draft and not in the final version, please adjust the reference accordingly. -->
+          <c>114</c><c>id-EdDSA25519-ph</c><c><xref target="I-D.ietf-curdle-pkix"/>-03</c>
+          <c>115</c><c>id-EdDSA448-ph</c><c><xref target="I-D.ietf-curdle-pkix"/>-03</c>
           <c>120</c><c>Safecurves-pkix-0</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
 
         </texttable>
@@ -94,7 +105,14 @@
         </t>
 
         <t>
-          Future updates to this table require both 'Specification Required' and 'Expert Review' as defiened in <xref target="RFC5226"/>.
+          The value of 100 has been reserved so that a new arc below that point can be established in the future.
+          (I.e. starting at 1.3.101.100.1)
+          If the new child registry is established, a name for this value is to be assigned at that point.
+          The experts can, at their discretion, assign an algorithm OID instead.
+        </t>
+
+        <t>
+          Future updates to this table require both 'Specification Required' and 'Expert Review' as defineed in <xref target="RFC5226"/>.
         </t>
       </section>
     </section>
@@ -125,6 +143,8 @@
     </references>
 
     <references title="Informational References">
+        &RFC7748;
+        &RFC8032;
       &CURDLE;
 <!--      &CURDLE-V3; -->
     </references>
