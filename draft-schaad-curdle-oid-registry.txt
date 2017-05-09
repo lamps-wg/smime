@@ -5,21 +5,25 @@
 Curdle                                                         J. Schaad
 Internet-Draft                                            August Cellars
 Intended status: Informational                                R. Andrews
-Expires: October 28, 2017                      Symantec Website Security
-                                                          April 26, 2017
+Expires: November 10, 2017                     Symantec Website Security
+                                                             May 9, 2017
 
 
-        Object Identifier Registry for the Curdle Working Group
+     IANA Registration for Donated Symantec Website Security Object
+                            Identifier Range
                 draft-schaad-curdle-oid-registry-latest
 
 Abstract
 
    When the Curdle Security Working Group was chartered, a range of
-   object identifiers was donated by Symantec Website Security for use
-   by that working group.  This document describes the range of
-   identifiers that were assigned in that donated range, transfers
-   control of that range to IANA, and establishes IANA allocation
-   policies for any future assignments within that range.
+   object identifiers was donated by Symantec Website Security for the
+   purpose of registering the Edwards Elliptic Curve key agreement and
+   signature algorithms.  This donated set of OIDs allowed for shorter
+   values than would be possible using the existing S/MIME or PKIX arcs.
+   This document describes the range of identifiers that were assigned
+   in that donated range, transfers control of that range to IANA, and
+   establishes IANA allocation policies for any future assignments
+   within that range.
 
 Contributing to this document
 
@@ -44,18 +48,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 28, 2017.
+   This Internet-Draft will expire on November 10, 2017.
 
 
 
 
-
-
-
-
-Schaad & Andrews        Expires October 28, 2017                [Page 1]
+Schaad & Andrews        Expires November 10, 2017               [Page 1]
 
-Internet-Draft                OID Registry                    April 2017
+Internet-Draft                OID Registry                      May 2017
 
 
 Copyright Notice
@@ -77,66 +77,79 @@ Copyright Notice
 
    When the Curdle Security Working Group was chartered, a range of
    object identifiers was donated by Symantec Website Security for use
-   by that working group.  These object identifiers are primarily used
-   with Abstract Syntax Notation (ASN.1) [ASN.1].  The ASN.1
-   specifications continue to evolve, but object identifiers can be used
-   with any and all versions of ASN.1.
+   by that working group.  The use of these object identifiers allowed
+   for the Edwards Ellitptic Curve key agreement [RFC7748] and signature
+   [RFC8032] algorithms to be defined with encodings that are smaller
+   than similar ones would be if assigned from the existing S/MIME or
+   PKIX arcs.  These initial registrations from this arc were done while
+   developing [I-D.ietf-curdle-pkix].  After those registrations were
+   done, there were still some unused values that can be used for other
+   security groups, there were still some unused values.
 
-   The Curdle object identifier range is:
-
-     { iso (1) identified-organization (3) thawte (101) 100 }
-     to
-     { iso (1) identified-organization (3) thawte (101) 127 }
+   Object identifiers are primarily used with Abstract Syntax Notation
+   (ASN.1) [ASN.1].  The ASN.1 specifications continue to evolve, but
+   object identifiers can be used with any and all versions of ASN.1.
 
    This document describes the object identifiers that were assigned in
    that donated range, transfers control of the range to IANA, and
-   establishes IANA allocation policies for any future assignments
-   within that range.
+   establishes IANA allocation policies for any future assignments.
+
+   The donated range from Symantec Website Security is:
+
+   first: { iso (1) identified-organization (3) thawte (101) 100 }
+   last: { iso (1) identified-organization (3) thawte (101) 127 }
 
 2.  IANA Considerations
 
    IANA is asked to create one new registry table.
 
-2.1.  "SMI Security for Curdle" Registry
-
-   Within the SMI-numbers registry, add an "SMI Security for Curdle"
-   table with the three columns:
 
 
 
 
 
 
-
-
-Schaad & Andrews        Expires October 28, 2017                [Page 2]
+Schaad & Andrews        Expires November 10, 2017               [Page 2]
 
-Internet-Draft                OID Registry                    April 2017
+Internet-Draft                OID Registry                      May 2017
 
 
-         +---------+-------------------+------------------------+
-         | Decimal | Description       | References             |
-         +---------+-------------------+------------------------+
-         | 110     | id-X25519         | [I-D.ietf-curdle-pkix] |
-         |         |                   |                        |
-         | 111     | id-X448           | [I-D.ietf-curdle-pkix] |
-         |         |                   |                        |
-         | 112     | id-EdDSA25519     | [I-D.ietf-curdle-pkix] |
-         |         |                   |                        |
-         | 113     | id-EdDS448        | [I-D.ietf-curdle-pkix] |
-         |         |                   |                        |
-         | 114     | id-EdDSA25519-ph  | [I-D.ietf-curdle-pkix] |
-         |         |                   |                        |
-         | 115     | id-EdDS448=ph     | [I-D.ietf-curdle-pkix] |
-         |         |                   |                        |
-         | 120     | Safecurves-pkix-0 | [I-D.ietf-curdle-pkix] |
-         +---------+-------------------+------------------------+
+2.1.  "SMI Security for Cryptographic Algorithms" Registry
+
+   Within the SMI-numbers registry, add an "SMI Security for
+   Cryptographic Algorithms" table with the three columns:
+
+     +---------+------------------------+---------------------------+
+     | Decimal | Description            | References                |
+     +---------+------------------------+---------------------------+
+     | 100     | Reserved for child reg |                           |
+     |         |                        |                           |
+     | 110     | id-X25519              | [I-D.ietf-curdle-pkix]    |
+     |         |                        |                           |
+     | 111     | id-X448                | [I-D.ietf-curdle-pkix]    |
+     |         |                        |                           |
+     | 112     | id-EdDSA25519          | [I-D.ietf-curdle-pkix]    |
+     |         |                        |                           |
+     | 113     | id-EdDSA448            | [I-D.ietf-curdle-pkix]    |
+     |         |                        |                           |
+     | 114     | id-EdDSA25519-ph       | [I-D.ietf-curdle-pkix]-03 |
+     |         |                        |                           |
+     | 115     | id-EdDSA448-ph         | [I-D.ietf-curdle-pkix]-03 |
+     |         |                        |                           |
+     | 120     | Safecurves-pkix-0      | [I-D.ietf-curdle-pkix]    |
+     +---------+------------------------+---------------------------+
 
    The column 'Decimal' is required to be a number between 100 and 127
    inclusive.
 
+   The value of 100 has been reserved so that a new arc below that point
+   can be established in the future.  (I.e. starting at 1.3.101.100.1)
+   If the new child registry is established, a name for this value is to
+   be assigned at that point.  The experts can, at their discretion,
+   assign an algorithm OID instead.
+
    Future updates to this table require both 'Specification Required'
-   and 'Expert Review' as defiened in [RFC5226].
+   and 'Expert Review' as defineed in [RFC5226].
 
 3.  Security Considerations
 
@@ -145,6 +158,17 @@ Internet-Draft                OID Registry                    April 2017
    include the security considerations associated with their usage.
 
 4.  References
+
+
+
+
+
+
+
+Schaad & Andrews        Expires November 10, 2017               [Page 3]
+
+Internet-Draft                OID Registry                      May 2017
+
 
 4.1.  Normative References
 
@@ -158,18 +182,6 @@ Internet-Draft                OID Registry                    April 2017
               DOI 10.17487/RFC5226, May 2008,
               <http://www.rfc-editor.org/info/rfc5226>.
 
-
-
-
-
-
-
-
-Schaad & Andrews        Expires October 28, 2017                [Page 3]
-
-Internet-Draft                OID Registry                    April 2017
-
-
 4.2.  Informational References
 
    [I-D.ietf-curdle-pkix]
@@ -177,6 +189,15 @@ Internet-Draft                OID Registry                    April 2017
               Ed25519, Ed448, X25519 and X448 for use in the Internet
               X.509 Public Key Infrastructure", draft-ietf-curdle-
               pkix-04 (work in progress), March 2017.
+
+   [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
+              for Security", RFC 7748, DOI 10.17487/RFC7748, January
+              2016, <http://www.rfc-editor.org/info/rfc7748>.
+
+   [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
+              Signature Algorithm (EdDSA)", RFC 8032,
+              DOI 10.17487/RFC8032, January 2017,
+              <http://www.rfc-editor.org/info/rfc8032>.
 
 Acknowledgments
 
@@ -193,6 +214,16 @@ Authors' Addresses
    August Cellars
 
    Email: ietf@augustcellars.com
+
+
+
+
+
+
+
+Schaad & Andrews        Expires November 10, 2017               [Page 4]
+
+Internet-Draft                OID Registry                      May 2017
 
 
    Rick Andrews
@@ -221,4 +252,29 @@ Authors' Addresses
 
 
 
-Schaad & Andrews        Expires October 28, 2017                [Page 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Schaad & Andrews        Expires November 10, 2017               [Page 5]
