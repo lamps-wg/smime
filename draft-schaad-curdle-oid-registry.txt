@@ -5,8 +5,8 @@
 Curdle                                                         J. Schaad
 Internet-Draft                                            August Cellars
 Intended status: Informational                                R. Andrews
-Expires: November 10, 2017                     Symantec Website Security
-                                                             May 9, 2017
+Expires: November 17, 2017                     Symantec Website Security
+                                                            May 16, 2017
 
 
      IANA Registration for Donated Symantec Website Security Object
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 10, 2017.
+   This Internet-Draft will expire on November 17, 2017.
 
 
 
 
-Schaad & Andrews        Expires November 10, 2017               [Page 1]
+Schaad & Andrews        Expires November 17, 2017               [Page 1]
 
 Internet-Draft                OID Registry                      May 2017
 
@@ -109,7 +109,7 @@ Copyright Notice
 
 
 
-Schaad & Andrews        Expires November 10, 2017               [Page 2]
+Schaad & Andrews        Expires November 17, 2017               [Page 2]
 
 Internet-Draft                OID Registry                      May 2017
 
@@ -119,25 +119,24 @@ Internet-Draft                OID Registry                      May 2017
    Within the SMI-numbers registry, add an "SMI Security for
    Cryptographic Algorithms" table with the three columns:
 
-     +---------+------------------------+---------------------------+
-     | Decimal | Description            | References                |
-     +---------+------------------------+---------------------------+
-     | 100     | Reserved for child reg |                           |
-     |         |                        |                           |
-     | 110     | id-X25519              | [I-D.ietf-curdle-pkix]    |
-     |         |                        |                           |
-     | 111     | id-X448                | [I-D.ietf-curdle-pkix]    |
-     |         |                        |                           |
-     | 112     | id-EdDSA25519          | [I-D.ietf-curdle-pkix]    |
-     |         |                        |                           |
-     | 113     | id-EdDSA448            | [I-D.ietf-curdle-pkix]    |
-     |         |                        |                           |
-     | 114     | id-EdDSA25519-ph       | [I-D.ietf-curdle-pkix]-03 |
-     |         |                        |                           |
-     | 115     | id-EdDSA448-ph         | [I-D.ietf-curdle-pkix]-03 |
-     |         |                        |                           |
-     | 120     | Safecurves-pkix-0      | [I-D.ietf-curdle-pkix]    |
-     +---------+------------------------+---------------------------+
+   +---------+-----------------------------+---------------------------+
+   | Decimal | Description                 | References                |
+   +---------+-----------------------------+---------------------------+
+   | 100     | Reserved for child reg      |                           |
+   |         |                             |                           |
+   | 110     | id-X25519                   | [I-D.ietf-curdle-pkix]    |
+   |         |                             |                           |
+   | 111     | id-X448                     | [I-D.ietf-curdle-pkix]    |
+   |         |                             |                           |
+   | 112     | id-EdDSA25519               | [I-D.ietf-curdle-pkix]    |
+   |         |                             |                           |
+   | 113     | id-EdDSA448                 | [I-D.ietf-curdle-pkix]    |
+   |         |                             |                           |
+   | 114     | Reserved for id-            | [I-D.ietf-curdle-pkix]-03 |
+   |         | EdDSA25519-ph               |                           |
+   |         |                             |                           |
+   | 115     | Reserved for id-EdDSA448-ph | [I-D.ietf-curdle-pkix]-03 |
+   +---------+-----------------------------+---------------------------+
 
    The column 'Decimal' is required to be a number between 100 and 127
    inclusive.
@@ -165,7 +164,8 @@ Internet-Draft                OID Registry                      May 2017
 
 
 
-Schaad & Andrews        Expires November 10, 2017               [Page 3]
+
+Schaad & Andrews        Expires November 17, 2017               [Page 3]
 
 Internet-Draft                OID Registry                      May 2017
 
@@ -221,7 +221,7 @@ Authors' Addresses
 
 
 
-Schaad & Andrews        Expires November 10, 2017               [Page 4]
+Schaad & Andrews        Expires November 17, 2017               [Page 4]
 
 Internet-Draft                OID Registry                      May 2017
 
@@ -277,4 +277,4 @@ Internet-Draft                OID Registry                      May 2017
 
 
 
-Schaad & Andrews        Expires November 10, 2017               [Page 5]
+Schaad & Andrews        Expires November 17, 2017               [Page 5]

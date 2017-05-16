@@ -6,9 +6,9 @@ LAMPS                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Obsoletes: 5750 (if approved)                                B. Ramsdell
 Intended status: Standards Track                  Brute Squad Labs, Inc.
-Expires: November 10, 2017                                     S. Turner
+Expires: November 17, 2017                                     S. Turner
                                                                    sn3rd
-                                                             May 9, 2017
+                                                            May 16, 2017
 
 
    Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 1]
+Schaad, et al.          Expires November 17, 2017               [Page 1]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
-   This Internet-Draft will expire on November 10, 2017.
+   This Internet-Draft will expire on November 17, 2017.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 2]
+Schaad, et al.          Expires November 17, 2017               [Page 2]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -165,7 +165,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 3]
+Schaad, et al.          Expires November 17, 2017               [Page 3]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -221,7 +221,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 4]
+Schaad, et al.          Expires November 17, 2017               [Page 4]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -277,7 +277,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 5]
+Schaad, et al.          Expires November 17, 2017               [Page 5]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -333,7 +333,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 6]
+Schaad, et al.          Expires November 17, 2017               [Page 6]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -389,7 +389,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 7]
+Schaad, et al.          Expires November 17, 2017               [Page 7]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -445,7 +445,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 8]
+Schaad, et al.          Expires November 17, 2017               [Page 8]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -501,7 +501,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017               [Page 9]
+Schaad, et al.          Expires November 17, 2017               [Page 9]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -557,7 +557,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 10]
+Schaad, et al.          Expires November 17, 2017              [Page 10]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -613,7 +613,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 11]
+Schaad, et al.          Expires November 17, 2017              [Page 11]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -669,7 +669,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 12]
+Schaad, et al.          Expires November 17, 2017              [Page 12]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -725,7 +725,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 13]
+Schaad, et al.          Expires November 17, 2017              [Page 13]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -781,7 +781,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 14]
+Schaad, et al.          Expires November 17, 2017              [Page 14]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -837,7 +837,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 15]
+Schaad, et al.          Expires November 17, 2017              [Page 15]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -893,7 +893,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 16]
+Schaad, et al.          Expires November 17, 2017              [Page 16]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -949,7 +949,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 17]
+Schaad, et al.          Expires November 17, 2017              [Page 17]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1005,7 +1005,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 18]
+Schaad, et al.          Expires November 17, 2017              [Page 18]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1061,7 +1061,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 19]
+Schaad, et al.          Expires November 17, 2017              [Page 19]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1117,7 +1117,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 20]
+Schaad, et al.          Expires November 17, 2017              [Page 20]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1173,7 +1173,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 21]
+Schaad, et al.          Expires November 17, 2017              [Page 21]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1229,7 +1229,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 22]
+Schaad, et al.          Expires November 17, 2017              [Page 22]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1285,7 +1285,7 @@ A.1.  Signature Algorithms and Key Sizes
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 23]
+Schaad, et al.          Expires November 17, 2017              [Page 23]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1341,7 +1341,7 @@ Appendix C.  Acknowledgments
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 24]
+Schaad, et al.          Expires November 17, 2017              [Page 24]
 
 Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
@@ -1397,4 +1397,4 @@ Authors' Addresses
 
 
 
-Schaad, et al.          Expires November 10, 2017              [Page 25]
+Schaad, et al.          Expires November 17, 2017              [Page 25]
