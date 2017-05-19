@@ -111,7 +111,7 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
         </t>
 
         <t>
-          Future updates to this table require both 'Specification Required' and 'Expert Review' as defineed in <xref target="RFC5226"/>.
+          Future updates to this table require both 'Specification Required' and 'Expert Review' as defined in <xref target="RFC5226"/>.
         </t>
       </section>
     </section>
