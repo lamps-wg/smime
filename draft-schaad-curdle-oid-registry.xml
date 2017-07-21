@@ -111,6 +111,7 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
         </t>
 
         <t>
+          The registry is to be created using the "Specification Required" policy as defined in <xref target="RFC8126"/>.
         </t>
       </section>
     </section>
