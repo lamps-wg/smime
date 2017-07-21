@@ -2,14 +2,14 @@
 <!DOCTYPE rfc SYSTEM "../xml2rc-1.36/rfc2629.dtd" [
 <!ENTITY RFC7748 SYSTEM  "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7748.xml">
 <!ENTITY RFC8032 SYSTEM  "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
-<!ENTITY RFC5226 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml">
+<!ENTITY RFC8126 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY CURDLE SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-curdle-pkix.xml">
 ]>
 
 <?rfc symrefs="yes"?>
 <?rfc sortrefs='yes'?>
 
-<rfc docName="draft-schaad-curdle-oid-registry-latest" category="info">
+<rfc docName="draft-schaad-curdle-oid-registry-01" category="info">
 <front>
 <title abbrev="OID Registry">IANA Registration for Donated Symantec Website Security Object Identifier Range</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
@@ -111,7 +111,6 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
         </t>
 
         <t>
-          Future updates to this table require both 'Specification Required' and 'Expert Review' as defined in <xref target="RFC5226"/>.
         </t>
       </section>
     </section>
@@ -126,7 +125,6 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
   </middle>
   <back>
     <references title="Normative References">
-      &RFC5226;
         <reference anchor="ASN.1">
           <front>
             <title>Information Technology - Abstract Syntax
@@ -144,6 +142,7 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
     <references title="Informational References">
         &RFC7748;
         &RFC8032;
+        &RFC8126;
       &CURDLE;
 <!--      &CURDLE-V3; -->
     </references>
