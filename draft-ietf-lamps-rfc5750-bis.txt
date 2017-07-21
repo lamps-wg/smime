@@ -6,9 +6,9 @@ LAMPS                                                          J. Schaad
 Internet-Draft                                            August Cellars
 Obsoletes: 5750 (if approved)                                B. Ramsdell
 Intended status: Standards Track                  Brute Squad Labs, Inc.
-Expires: November 17, 2017                                     S. Turner
+Expires: January 22, 2018                                      S. Turner
                                                                    sn3rd
-                                                            May 16, 2017
+                                                           July 21, 2017
 
 
    Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0
@@ -53,12 +53,12 @@ Status of This Memo
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 1]
+Schaad, et al.          Expires January 22, 2018                [Page 1]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
-   This Internet-Draft will expire on November 17, 2017.
+   This Internet-Draft will expire on January 22, 2018.
 
 Copyright Notice
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 2]
+Schaad, et al.          Expires January 22, 2018                [Page 2]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
      4.4.  PKIX Certificate Extensions . . . . . . . . . . . . . . .  13
@@ -165,9 +165,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 3]
+Schaad, et al.          Expires January 22, 2018                [Page 3]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    Certificate: A type that binds an entity's name to a public key with
@@ -221,9 +221,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 4]
+Schaad, et al.          Expires January 22, 2018                [Page 4]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    The term RSA in this document almost always refers to the PKCS#1 v1.5
@@ -277,9 +277,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 5]
+Schaad, et al.          Expires January 22, 2018                [Page 5]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
 1.5.  Changes from S/MIME v3.1 to S/MIME v3.2
@@ -333,9 +333,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 6]
+Schaad, et al.          Expires January 22, 2018                [Page 6]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
 2.  CMS Options
@@ -389,9 +389,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 7]
+Schaad, et al.          Expires January 22, 2018                [Page 7]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
 2.3.  CertificateSet
@@ -445,9 +445,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 8]
+Schaad, et al.          Expires January 22, 2018                [Page 8]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    generation and use of X.509 attribute certificates are outside of the
@@ -501,9 +501,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017               [Page 9]
+Schaad, et al.          Expires January 22, 2018                [Page 9]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    alternate processing of the message if this comparison fails, which
@@ -557,9 +557,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 10]
+Schaad, et al.          Expires January 22, 2018               [Page 10]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    Receiving and sending agents SHOULD provide a mechanism for the
@@ -613,9 +613,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 11]
+Schaad, et al.          Expires January 22, 2018               [Page 11]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    Certificates and CRLs are made available to the path validation
@@ -669,9 +669,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 12]
+Schaad, et al.          Expires January 22, 2018               [Page 12]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    The following are the RSA and RSASSA-PSS key size requirements for
@@ -725,9 +725,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 13]
+Schaad, et al.          Expires January 22, 2018               [Page 13]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    exist to gracefully handle other certificate extensions when they
@@ -781,9 +781,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 14]
+Schaad, et al.          Expires January 22, 2018               [Page 14]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    extension without either the digitalSignature or nonRepudiation bit
@@ -837,9 +837,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 15]
+Schaad, et al.          Expires January 22, 2018               [Page 15]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
 5.  IANA Considertions
@@ -893,9 +893,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 16]
+Schaad, et al.          Expires January 22, 2018               [Page 16]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    It is possible for there to be multiple unexpired CRLs for a CA.  If
@@ -949,9 +949,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 17]
+Schaad, et al.          Expires January 22, 2018               [Page 17]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    If an implementation is concerned about compliance with National
@@ -976,7 +976,7 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
    [I-D.ietf-lamps-eai-addresses]
               Melnikov, A. and W. Chuang, "Internationalized Email
               Addresses in X.509 certificates", draft-ietf-lamps-eai-
-              addresses-09 (work in progress), April 2017.
+              addresses-12 (work in progress), June 2017.
 
    [I-D.ietf-lamps-rfc5751-bis]
               Schaad, J., Ramsdell, B., and S. Turner, "Secure/
@@ -1005,9 +1005,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 18]
+Schaad, et al.          Expires January 22, 2018               [Page 18]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    [RFC3279]  Bassham, L., Polk, W., and R. Housley, "Algorithms and
@@ -1061,9 +1061,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 19]
+Schaad, et al.          Expires January 22, 2018               [Page 19]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    [RFC5755]  Farrell, S., Housley, R., and S. Turner, "An Internet
@@ -1112,14 +1112,14 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
               Josefsson, S. and J. Schaad, "Algorithm Identifiers for
               Ed25519, Ed448, X25519 and X448 for use in the Internet
               X.509 Public Key Infrastructure", draft-ietf-curdle-
-              pkix-04 (work in progress), March 2017.
+              pkix-05 (work in progress), July 2017.
 
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 20]
+Schaad, et al.          Expires January 22, 2018               [Page 20]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    [PKCS6]    RSA Laboratories, "PKCS #6: Extended-Certificate Syntax
@@ -1173,9 +1173,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 21]
+Schaad, et al.          Expires January 22, 2018               [Page 21]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    [RFC3850]  Ramsdell, B., Ed., "Secure/Multipurpose Internet Mail
@@ -1229,9 +1229,9 @@ Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 22]
+Schaad, et al.          Expires January 22, 2018               [Page 22]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
               This group of documents represents S/MIME version 3.1.
@@ -1285,9 +1285,9 @@ A.1.  Signature Algorithms and Key Sizes
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 23]
+Schaad, et al.          Expires January 22, 2018               [Page 23]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
       considered to be collision resistent the security levels of the
@@ -1341,9 +1341,9 @@ Appendix C.  Acknowledgments
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 24]
+Schaad, et al.          Expires January 22, 2018               [Page 24]
 
-Internet-Draft       S/MIME 4.0 Certificate Handling            May 2017
+Internet-Draft       S/MIME 4.0 Certificate Handling           July 2017
 
 
    A number of the members of the S/MIME Working Group have also worked
@@ -1397,4 +1397,4 @@ Authors' Addresses
 
 
 
-Schaad, et al.          Expires November 17, 2017              [Page 25]
+Schaad, et al.          Expires January 22, 2018               [Page 25]
