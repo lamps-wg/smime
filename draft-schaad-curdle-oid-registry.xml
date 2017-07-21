@@ -9,7 +9,7 @@
 <?rfc symrefs="yes"?>
 <?rfc sortrefs='yes'?>
 
-<rfc docName="draft-schaad-curdle-oid-registry-01" category="info">
+<rfc docName="draft-schaad-curdle-oid-registry-latest" category="info">
 <front>
 <title abbrev="OID Registry">IANA Registration for Donated Symantec Website Security Object Identifier Range</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
