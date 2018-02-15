@@ -208,7 +208,7 @@
    S/&wj;MIME.
   </t>
   <t>
-    <xref target="historic"/> contains information about algorithms are were used for prior versions of S/MIME but are no longer considered to meet modern security standards.
+    <xref target="historic"/> contains information about algorithms that were used for prior versions of S/MIME but are no longer considered to meet modern security standards.
     Support of these algorithms may be needed to support historic S/MIME messages but SHOULD NOT be used for new mail.
   </t>
 </section>
@@ -240,7 +240,7 @@
   </t>
   <t>
    Receiving agents MUST NOT accept a signature made with a certificate
-   that does not have the digitalSignature or nonRepudiation bit set.
+   that does not have at least one of the the digitalSignature or nonRepudiation bits set.
   </t>
   <t>
    Clarifications for the interpretation of the key usage and extended
@@ -322,8 +322,8 @@
 <t>
    Receiving agents MUST support the Certificate Revocation List (CRL)
    format defined in <xref target="RFC5280"/>.  If sending agents include CRLs in outgoing
-   messages, the CRL format defined in <xref target="RFC5280"/> MUST be used.  In all
-   cases, both v1 and v2 CRLs MUST be supported.
+   messages, the CRL format defined in <xref target="RFC5280"/> MUST be used.
+   Receiving agents MUST support both v1 and v2 CRLs.
   </t>
   <t>
    All agents MUST be capable of performing revocation checks using CRLs
@@ -431,8 +431,8 @@
    <t>
      
      End-entity certificates MAY contain an Internet mail address.
-     Email addresses retricted to 7-bit ASCII characters are encoded as described in Section 4.2.1.6 of <xref target="RFC5280"/>.
-     Internationalized Email address names are encoded as described in <xref target="I-D.ietf-lamps-eai-addresses"/>.
+     Email addresses retricted to 7-bit ASCII characters use the pkcs-9-at-emailAddress OID and are encoded as described in Section 4.2.1.6 of <xref target="RFC5280"/>.
+     Internationalized Email address names use the OID defined in <xref target="I-D.ietf-lamps-eai-addresses"/> and are encoded as described there.
      The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.
    </t>
    
@@ -466,7 +466,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
     Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.
     Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address in the signer's certificate, if mail addresses are present in the certificate.
-    A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, which may be to display a message that shows the recipient the addresses in the certificate or other certificate details.
+    A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, an example of this would be to display or log a message that shows the recipient the addresses in the certificate or other certificate details.
   </t>
   <t>
    A receiving agent SHOULD display a subject name or other certificate details when displaying an indication of successful or unsuccessful signature verification.
@@ -505,7 +505,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    messages).  A comprehensive certificate retrieval/storage solution
    may combine two or more mechanisms to allow the greatest flexibility
    and utility to the user.  For instance, a secure Internet mail agent
-   may resort to checking a centralized certificate retrieval mechanism
+   might resort to checking a centralized certificate retrieval mechanism
    for a certificate if it cannot be found in a user's local certificate
    storage/retrieval database.
   </t>
@@ -607,7 +607,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 
      <t>MUST support EdDSA with curve 25519 using PureEdDSA mode.</t>
 
-     <t>MUST- support RSA with SHA-256.</t>
+     <t>MUST- support RSA with SHA-256 (PKCS#1 v1.5).</t>
 
      <t>SHOULD support RSASSA-PSS with SHA-256.</t>
 
@@ -713,15 +713,14 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   </t>
   <t>
    For example, certificates issued to CAs and subordinate CAs contain a
-   basic constraint extension that identifies them as issuing authority
+   basic constraints extension that identifies them as issuing authority
    certificates.  End-entity certificates contain the key usage
    extension that restrains end entities from using the key when
    performing issuing authority operations (see Section 4.4.2).
   </t>
   <t>
    As per <xref target="RFC5280"/>, certificates MUST contain a basicConstraints extension
-   in CA certificates, and SHOULD NOT contain that extension in end-
-   entity certificates.
+   in CA certificates, and SHOULD NOT contain that extension in end-entity certificates.
   </t>
 </section>
 <section title="Key Usage Certificate Extension">
@@ -745,16 +744,16 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
    S/&wj;MIME receiving agents MUST NOT accept the signature of a message if
    it was verified using a certificate that contains the key usage
-   extension without either the digitalSignature or nonRepudiation bit
+   extension without at least one of the digitalSignature or nonRepudiation bits
    set.  Sometimes S/&wj;MIME is used as a secure message transport for
-   applications beyond interpersonal messaging.  In such cases, the
+   applications beyond interpersonal messaging;  in such cases, the
    S/&wj;MIME-enabled application can specify additional requirements
    concerning the digitalSignature or nonRepudiation bits within this
    extension.
   </t>
   <t>
    If the key usage extension is not specified, receiving clients MUST
-   presume that the digitalSignature and nonRepudiation bits are set.
+   presume that both the digitalSignature and nonRepudiation bits are set.
   </t>
 </section>
 <section title="Subject Alternative Name">
@@ -762,8 +761,8 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
    The subject alternative name extension is used in S/&wj;MIME as the
    preferred means to convey the email address(es) that correspond(s) to
    the entity for this certificate.
-   Any ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <xref target="RFC5280"/>, Section 4.2.1.6.
-   Any internationalized email addresses present MUST be encoded using the otherName CHOICE of the GeneralName type as described in <xref target="I-D.ietf-lamps-eai-addresses"/>, Section 3.
+   If the local portion of the email address is ASCII, it MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <xref target="RFC5280"/>, Section 4.2.1.6.
+   If the local portion of the email address is not ASCII, it MUST be encoded using the otherName CHOICE of the GeneralName type as described in <xref target="I-D.ietf-lamps-eai-addresses"/>, Section 3.
    Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.
   </t>
 </section>
@@ -912,7 +911,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   <t>
    RSA keys of less than 2048  bits are now considered by many
    experts to be cryptographically insecure (due to advances in
-   computing power), and should no longer be used to sign certificates
+   computing power), and SHOULD no longer be used to sign certificates
    or CRLs.  Such keys were previously considered secure, so processing
    previously received signed and encrypted mail may require processing
    certificates or CRLs signed with weak keys.  Implementations that
@@ -1207,7 +1206,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
         
         <t>
           Hash functions used to validate signatures on historic messages may longer be considered to be secure (see below).
-          While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&nbhy;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.
+          While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&nbhy;1, the fact they are no longer considered to be collision resistant the security levels of the signatures are generally considered suspect.
         </t>
         
       </list>
@@ -1228,8 +1227,8 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
         </t>
         <t>
           DSA with SHA-256 support was dropped in <xref target="SMIMEv4.0"/>.
-          DSA was dropped as part of a general movement from discrete logarithms to elliptic curves.
-          Issues have come up dealing with small group attacks and with non-deterministic generation of the parameter 'k' (see <xref target="RFC6979"/>).
+          DSA was dropped as part of a general movement from finite fields to elliptic curves.
+          Issues have come up dealing with non-deterministic generation of the parameter 'k' (see <xref target="RFC6979"/>).
         </t>
 
       </list>
