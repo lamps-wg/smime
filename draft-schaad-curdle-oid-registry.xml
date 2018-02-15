@@ -8,10 +8,11 @@
 
 <?rfc symrefs="yes"?>
 <?rfc sortrefs='yes'?>
+<?rfc toc='yes'?>
 
-<rfc docName="draft-schaad-curdle-oid-registry-latest" category="info">
+<rfc docName="draft-schaad-curdle-oid-registry-03" category="info">
 <front>
-<title abbrev="OID Registry">IANA Registration for Donated Symantec Website Security Object Identifier Range</title>
+<title abbrev="OID Registry">IANA Registration for new Cryptographic Algorithm Object Identifier Range</title>
     <author fullname="Jim Schaad" initials="J." surname="Schaad">
       <organization>August Cellars</organization>
       <address>
@@ -19,9 +20,9 @@
       </address>
     </author>
     <author fullname="Rick Andrews" initials="R." surname="Andrews">
-      <organization>Symantec Website Security</organization>
+      <organization>DigiCert, Inc.</organization>
       <address>
-        <email>Rick_Andrews@symantec.com</email>
+        <email>rick.andrews@digicert.com</email>
       </address>
     </author>
     <date/>
@@ -29,7 +30,7 @@
     <workgroup>Curdle</workgroup>
     <abstract>
       <t>
-        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.
+        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by DigiCert, Inc. for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.
         This donated set of OIDs allowed for shorter values than would be possible using the existing S/MIME or PKIX arcs.
         This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.
       </t>
@@ -47,10 +48,10 @@
   <middle>
     <section title="Introduction">
       <t>
-        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for use by that working group.
+        When the Curdle Security Working Group was chartered, a range of object identifiers was donated by DigiCert, Inc. for use by that working group.
         The use of these object identifiers  allowed for the Edwards Ellitptic Curve key agreement <xref target="RFC7748"/> and signature <xref target="RFC8032"/> algorithms to be defined with encodings that are smaller than similar ones would be if assigned from the  existing S/MIME or PKIX arcs.
         These initial registrations from this arc were done while developing <xref target="I-D.ietf-curdle-pkix"/>.
-        After those registrations were done, there were still some unused values that can be used for other security groups, there were still some unused values.
+        After those registrations were done, there were still some unused values that can be used for other security groups.
       </t>
       
       <t>
@@ -63,7 +64,7 @@
       </t>
       
       <t>
-        The donated range from Symantec Website Security is:
+        The donated range from DigiCert, Inc. is:
         <figure>
           <artwork>
 first: { iso (1) identified-organization (3) thawte (101) 100 }
@@ -88,14 +89,16 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
         
         <texttable>
           <ttcol>Decimal</ttcol><ttcol>Description</ttcol><ttcol>References</ttcol>
+	  <c>0 - 99</c><c>Retained by Digicert</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>100</c><c>Reserved for child reg</c><c/>
           <c>110</c><c>id-X25519</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>111</c><c>id-X448</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>112</c><c>id-EdDSA25519</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <c>113</c><c>id-EdDSA448</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
           <!-- rfc-editor The next two items are in -03 of the draft and not in the final version, please adjust the reference accordingly. -->
-          <c>114</c><c>Reserved for id-EdDSA25519-ph</c><c><xref target="I-D.ietf-curdle-pkix"/>-03</c>
-          <c>115</c><c>Reserved for id-EdDSA448-ph</c><c><xref target="I-D.ietf-curdle-pkix"/>-03</c>
+          <c>114</c><c>Reserved for id-EdDSA25519-ph</c><c><xref target="I-D.ietf-curdle-pkix-03"/></c>
+          <c>115</c><c>Reserved for id-EdDSA448-ph</c><c><xref target="I-D.ietf-curdle-pkix-03"/></c>
+	  <c>128 and up</c><c>Retained by Digicert</c><c><xref target="I-D.ietf-curdle-pkix"/></c>
 
         </texttable>
 
@@ -145,15 +148,38 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
         &RFC8032;
         &RFC8126;
       &CURDLE;
-<!--      &CURDLE-V3; -->
+<reference anchor='I-D.ietf-curdle-pkix-03'>
+<front>
+<title>Algorithm Identifiers for Ed25519, Ed448, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</title>
+
+<author initials='S' surname='Josefsson' fullname='Simon Josefsson'>
+    <organization />
+</author>
+
+<author initials='J' surname='Schaad' fullname='Jim Schaad'>
+    <organization />
+</author>
+
+<date month='November' day='23' year='2016' />
+
+<abstract><t>This document specifies algorithm identifiers and ASN.1 encoding formats for Elliptic Curve constructs using the curve25519 and curve448 curves.  The signature algorithms covered are Ed25519 and Ed448.  The key agreement algorithm covered are X25519 and X448.  The encoding for Public Key, Private Key and EdDSA digital signature structures is provided.</t></abstract>
+
+</front>
+
+<seriesInfo name='Internet-Draft' value='draft-ietf-curdle-pkix-07' />
+<format type='TXT'
+        target='http://www.ietf.org/internet-drafts/draft-ietf-curdle-pkix-07.txt' />
+</reference>
+
     </references>
 
     <section title="Acknowledgments" numbered="no">
       <t>
-        Our thanks go out to Symantec for donating the range of OIDs covered in this document.
+        Our thanks go out to DigiCert for donating the range of OIDs covered in this document.
+	At the time of the donation, the root of the range was assigned to Symantec but has sense been transfered DigiCert.
       </t>
       <t>
-        This document stole text heavily from a previous document doing similar thing by Russ Housely.
+        This document uses a lot of text from a similar document by Russ Housley.
         Copying always makes things easier and less error prone.
       </t>
     </section>
