@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>IANA Registration for Donated Symantec Website Security Object Identifier Range</title>
+  <title>IANA Registration for new Cryptographic Algorithm Object Identifier Range</title>
 
   
 <style type="text/css">/*<![CDATA[*/
@@ -19,20 +19,25 @@
 }
 
 @media screen and (min-width: 1024px) {
-  ul.toc, #rfc\.toc {
+  body>ul.toc, body>#rfc\.toc {
     position: fixed;
     bottom: 0;
     right: 0;
-    right: calc(50vw - 525px);
+    right: calc(50vw - 550px);
     width: 300px;
     z-index: 1;
   }
   #rfc\.toc {
-    top: 15px;
-  }
-  ul.toc {
-    top: 80px;
+    top: 55px;
     overflow: auto;
+    overscroll-behavior: contain;
+  }
+  ul.toc, #rfc\.toc {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>ul.toc {
+    top: 140px;
   }
 
   body {
@@ -41,11 +46,11 @@
 }
 
 body {
-  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 16px "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #333;
   font-size-adjust: 0.5;
-  line-height: 130%;
-  margin: 25px auto;
+  line-height: 24px;
+  margin: 75px auto;
   max-width: 724px;
 }
 
@@ -58,7 +63,7 @@ body {
   margin: 0.8em 0 0.3em;
 }
 .title { font-size: 36px; }
-h1 { font-size: 30px; }
+h1 { font-size: 36px; }
 h2 { font-size: 24px; }
 h3, h4 { font-size: 18px; }
 h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
@@ -121,10 +126,9 @@ table.header td {
   height: auto;
   line-height: 100%;
 }
-#rfc\.abstract+p {
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 130%;
+#rfc\.abstract+p, #rfc\.abstract p {
+  font-size: 18px;
+  line-height: 27px%;
 }
 
 samp, tt, code, pre {
@@ -192,6 +196,9 @@ ul.empty li {
 hr {
   border: 0;
   border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
 }
 
 a {
@@ -286,14 +293,14 @@ address {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.7.0 - http://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.9.3 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Schaad, J. and R. Andrews" />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-schaad-curdle-oid-registry-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-7-21" />
-  <meta name="dct.abstract" content="When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.  This donated set of OIDs allowed for shorter values than would be possible using the existing S&#8203;/&#8203;MIME or PKIX arcs.  This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.  " />
-  <meta name="description" content="When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.  This donated set of OIDs allowed for shorter values than would be possible using the existing S&#8203;/&#8203;MIME or PKIX arcs.  This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.  " />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-schaad-curdle-oid-registry-03" />
+  <meta name="dct.issued" scheme="ISO8601" content="-15" />
+  <meta name="dct.abstract" content="When the Curdle Security Working Group was chartered, a range of object identifiers was donated by DigiCert, Inc. for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.  This donated set of OIDs allowed for shorter values than would be possible using the existing S&#8203;/&#8203;MIME or PKIX arcs.  This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.  " />
+  <meta name="description" content="When the Curdle Security Working Group was chartered, a range of object identifiers was donated by DigiCert, Inc. for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.  This donated set of OIDs allowed for shorter values than would be possible using the existing S&#8203;/&#8203;MIME or PKIX arcs.  This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.  " />
 
 </head>
 
@@ -315,43 +322,71 @@ address {
 <td class="right">R. Andrews</td>
 </tr>
 <tr>
-<td class="left">Expires: January 22, 2018</td>
-<td class="right">Symantec Website Security</td>
+<td class="left">Expires: August 19, 2018</td>
+<td class="right">DigiCert, Inc.</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">July 21, 2017</td>
+<td class="right">2 15,</td>
 </tr>
 
     	
     </tbody>
   </table>
 
-  <p class="title">IANA Registration for Donated Symantec Website Security Object Identifier Range<br />
-  <span class="filename">draft-schaad-curdle-oid-registry-latest</span></p>
+  <p class="title">IANA Registration for new Cryptographic Algorithm Object Identifier Range<br />
+  <span class="filename">draft-schaad-curdle-oid-registry-03</span></p>
   
   <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
-<p>When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.  This donated set of OIDs allowed for shorter values than would be possible using the existing S&#8203;/&#8203;MIME or PKIX arcs.  This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.  </p>
+<p>When the Curdle Security Working Group was chartered, a range of object identifiers was donated by DigiCert, Inc. for the purpose of registering the Edwards Elliptic Curve key agreement and signature algorithms.  This donated set of OIDs allowed for shorter values than would be possible using the existing S&#8203;/&#8203;MIME or PKIX arcs.  This document describes the range of identifiers that were assigned in that donated range, transfers control of that range to IANA, and establishes IANA allocation policies for any future assignments within that range.  </p>
 <h1><a>Contributing to this document</a></h1>
 <p>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <span>&lt;</span><a href="https://github.com/lamps-wg/smime">https://github.com/lamps-wg/smime</a><span>&gt;</span>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the LAMPS mailing list.  </p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
-<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 22, 2018.</p>
+<p>This Internet-Draft will expire on August 19, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
-<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
-<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
-<h1 id="rfc.section.1">
+<p>Copyright (c)  IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">IANA Considerations</a>
+</li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">"SMI Security for Cryptographic Algorithms" Registry</a>
+</li>
+</ul><li>3.   <a href="#rfc.section.3">Security Considerations</a>
+</li>
+<li>4.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>4.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>4.2.   <a href="#rfc.references.2">Informational References</a>
+</li>
+</ul><li><a href="#rfc.acknowledgments">Acknowledgments</a>
+</li>
+<li><a href="#rfc.authors">Authors' Addresses</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
 <a href="#rfc.section.1">1.</a> Introduction</h1>
-<p id="rfc.section.1.p.1">When the Curdle Security Working Group was chartered, a range of object identifiers was donated by Symantec Website Security for use by that working group.  The use of these object identifiers  allowed for the Edwards Ellitptic Curve key agreement <a href="#RFC7748" class="xref">[RFC7748]</a> and signature <a href="#RFC8032" class="xref">[RFC8032]</a> algorithms to be defined with encodings that are smaller than similar ones would be if assigned from the  existing S&#8203;/&#8203;MIME or PKIX arcs.  These initial registrations from this arc were done while developing <a href="#I-D.ietf-curdle-pkix" class="xref">[I-D.ietf-curdle-pkix]</a>.  After those registrations were done, there were still some unused values that can be used for other security groups, there were still some unused values.  </p>
+<p id="rfc.section.1.p.1">When the Curdle Security Working Group was chartered, a range of object identifiers was donated by DigiCert, Inc. for use by that working group.  The use of these object identifiers  allowed for the Edwards Ellitptic Curve key agreement <a href="#RFC7748" class="xref">[RFC7748]</a> and signature <a href="#RFC8032" class="xref">[RFC8032]</a> algorithms to be defined with encodings that are smaller than similar ones would be if assigned from the  existing S&#8203;/&#8203;MIME or PKIX arcs.  These initial registrations from this arc were done while developing <a href="#I-D.ietf-curdle-pkix" class="xref">[I-D.ietf-curdle-pkix]</a>.  After those registrations were done, there were still some unused values that can be used for other security groups.  </p>
 <p id="rfc.section.1.p.2">Object identifiers are primarily used with Abstract Syntax Notation (ASN.1) <a href="#ASN.1" class="xref">[ASN.1]</a>.  The ASN.1 specifications continue to evolve, but object identifiers can be used with any and all versions of ASN.1.  </p>
 <p id="rfc.section.1.p.3">This document describes the object identifiers that were assigned in that donated range, transfers control of the range to IANA, and establishes IANA allocation policies for any future assignments.  </p>
 <pre>
 first: { iso (1) identified-organization (3) thawte (101) 100 }
 last: { iso (1) identified-organization (3) thawte (101) 127 }
           </pre>
-<p id="rfc.section.1.p.4">The donated range from Symantec Website Security is: </p>
+<p id="rfc.section.1.p.4">The donated range from DigiCert, Inc. is: </p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> IANA Considerations</h1>
 <p id="rfc.section.2.p.1">IANA is asked to create one new registry table.  </p>
@@ -365,6 +400,11 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
 <th class="left">References</th>
 </tr></thead>
 <tbody>
+<tr>
+<td class="left">0 - 99</td>
+<td class="left">Retained by Digicert</td>
+<td class="left"><a href="#I-D.ietf-curdle-pkix" class="xref">[I-D.ietf-curdle-pkix]</a></td>
+</tr>
 <tr>
 <td class="left">100</td>
 <td class="left">Reserved for child reg</td>
@@ -393,14 +433,17 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
 <tr>
 <td class="left">114</td>
 <td class="left">Reserved for id-EdDSA25519-ph</td>
-<td class="left">
-<a href="#I-D.ietf-curdle-pkix" class="xref">[I-D.ietf-curdle-pkix]</a>-03</td>
+<td class="left"><a href="#I-D.ietf-curdle-pkix-03" class="xref">[I-D.ietf-curdle-pkix-03]</a></td>
 </tr>
 <tr>
 <td class="left">115</td>
 <td class="left">Reserved for id-EdDSA448-ph</td>
-<td class="left">
-<a href="#I-D.ietf-curdle-pkix" class="xref">[I-D.ietf-curdle-pkix]</a>-03</td>
+<td class="left"><a href="#I-D.ietf-curdle-pkix-03" class="xref">[I-D.ietf-curdle-pkix-03]</a></td>
+</tr>
+<tr>
+<td class="left">128 and up</td>
+<td class="left">Retained by Digicert</td>
+<td class="left"><a href="#I-D.ietf-curdle-pkix" class="xref">[I-D.ietf-curdle-pkix]</a></td>
 </tr>
 </tbody>
 </table>
@@ -424,27 +467,32 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
 <tr>
 <td class="reference"><b id="I-D.ietf-curdle-pkix">[I-D.ietf-curdle-pkix]</b></td>
 <td class="top">
-<a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-pkix-05">Algorithm Identifiers for Ed25519, Ed448, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-05, July 2017.</td>
+<a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="https://tools.ietf.org/html/draft-ietf-curdle-pkix-07">Algorithm Identifiers for Ed25519, Ed448, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-07, November 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="I-D.ietf-curdle-pkix-03">[I-D.ietf-curdle-pkix-03]</b></td>
+<td class="top">
+<a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="https://tools.ietf.org/html/draft-ietf-curdle-pkix-07">Algorithm Identifiers for Ed25519, Ed448, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-07, November 2016.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC7748">[RFC7748]</b></td>
 <td class="top">
-<a>Langley, A.</a>, <a>Hamburg, M.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc7748">Elliptic Curves for Security</a>", RFC 7748, DOI 10.17487/RFC7748, January 2016.</td>
+<a>Langley, A.</a>, <a>Hamburg, M.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc7748">Elliptic Curves for Security</a>", RFC 7748, DOI 10.17487/RFC7748, January 2016.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC8032">[RFC8032]</b></td>
 <td class="top">
-<a>Josefsson, S.</a> and <a>I. Liusvaara</a>, "<a href="http://tools.ietf.org/html/rfc8032">Edwards-Curve Digital Signature Algorithm (EdDSA)</a>", RFC 8032, DOI 10.17487/RFC8032, January 2017.</td>
+<a>Josefsson, S.</a> and <a>I. Liusvaara</a>, "<a href="https://tools.ietf.org/html/rfc8032">Edwards-Curve Digital Signature Algorithm (EdDSA)</a>", RFC 8032, DOI 10.17487/RFC8032, January 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC8126">[RFC8126]</b></td>
 <td class="top">
-<a>Cotton, M.</a>, <a>Leiba, B.</a> and <a>T. Narten</a>, "<a href="http://tools.ietf.org/html/rfc8126">Guidelines for Writing an IANA Considerations Section in RFCs</a>", BCP 26, RFC 8126, DOI 10.17487/RFC8126, June 2017.</td>
+<a>Cotton, M.</a>, <a>Leiba, B.</a> and <a>T. Narten</a>, "<a href="https://tools.ietf.org/html/rfc8126">Guidelines for Writing an IANA Considerations Section in RFCs</a>", BCP 26, RFC 8126, DOI 10.17487/RFC8126, June 2017.</td>
 </tr>
 </tbody></table>
 <h1 id="rfc.acknowledgments"><a href="#rfc.acknowledgments">Acknowledgments</a></h1>
-<p id="rfc.section.A.p.1">Our thanks go out to Symantec for donating the range of OIDs covered in this document.  </p>
-<p id="rfc.section.A.p.2">This document stole text heavily from a previous document doing similar thing by Russ Housely.  Copying always makes things easier and less error prone.  </p>
+<p id="rfc.section.A.p.1">Our thanks go out to DigiCert for donating the range of OIDs covered in this document.  At the time of the donation, the root of the range was assigned to Symantec but has sense been transfered DigiCert.  </p>
+<p id="rfc.section.A.p.2">This document uses a lot of text from a similar document by Russ Housley.  Copying always makes things easier and less error prone.  </p>
 <h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
 <div class="avoidbreak">
   <address class="vcard">
@@ -475,7 +523,7 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
 		<span class="family-name">Andrews</span>
 	  </span>
 	</span>
-	<span class="org vcardline">Symantec Website Security</span>
+	<span class="org vcardline">DigiCert, Inc.</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">
@@ -485,39 +533,10 @@ last: { iso (1) identified-organization (3) thawte (101) 127 }
 	  </span>
 	  <span class="country-name vcardline"></span>
 	</span>
-	<span class="vcardline">EMail: <a href="mailto:Rick_Andrews@symantec.com">Rick_Andrews@symantec.com</a></span>
+	<span class="vcardline">EMail: <a href="mailto:rick.andrews@digicert.com">rick.andrews@digicert.com</a></span>
 
   </address>
 </div>
-  
-  <hr class="noprint" />
-  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
-  <ul class="toc">
 
-  	<li>1.   <a href="#rfc.section.1">Introduction</a>
-</li>
-<li>2.   <a href="#rfc.section.2">IANA Considerations</a>
-</li>
-<ul><li>2.1.   <a href="#rfc.section.2.1">"SMI Security for Cryptographic Algorithms" Registry</a>
-</li>
-</ul><li>3.   <a href="#rfc.section.3">Security Considerations</a>
-</li>
-<li>4.   <a href="#rfc.references">References</a>
-</li>
-<ul><li>4.1.   <a href="#rfc.references.1">Normative References</a>
-</li>
-<li>4.2.   <a href="#rfc.references.2">Informational References</a>
-</li>
-</ul><li><a href="#rfc.acknowledgments">Acknowledgments</a>
-</li>
-<li><a href="#rfc.authors">Authors' Addresses</a>
-</li>
-
-
-  </ul>
-
-  
-
-  <div class="github-fork-ribbon-wrapper"><div class="github-fork-ribbon"><a href="https://github.com/lamps-wg/smime">Fork me on GitHub</a></div></div>
 </body>
 </html>

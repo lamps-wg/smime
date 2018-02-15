@@ -19,20 +19,25 @@
 }
 
 @media screen and (min-width: 1024px) {
-  ul.toc, #rfc\.toc {
+  body>ul.toc, body>#rfc\.toc {
     position: fixed;
     bottom: 0;
     right: 0;
-    right: calc(50vw - 525px);
+    right: calc(50vw - 550px);
     width: 300px;
     z-index: 1;
   }
   #rfc\.toc {
-    top: 15px;
-  }
-  ul.toc {
-    top: 80px;
+    top: 55px;
     overflow: auto;
+    overscroll-behavior: contain;
+  }
+  ul.toc, #rfc\.toc {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>ul.toc {
+    top: 140px;
   }
 
   body {
@@ -41,11 +46,11 @@
 }
 
 body {
-  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 16px "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #333;
   font-size-adjust: 0.5;
-  line-height: 130%;
-  margin: 25px auto;
+  line-height: 24px;
+  margin: 75px auto;
   max-width: 724px;
 }
 
@@ -58,7 +63,7 @@ body {
   margin: 0.8em 0 0.3em;
 }
 .title { font-size: 36px; }
-h1 { font-size: 30px; }
+h1 { font-size: 36px; }
 h2 { font-size: 24px; }
 h3, h4 { font-size: 18px; }
 h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
@@ -121,10 +126,9 @@ table.header td {
   height: auto;
   line-height: 100%;
 }
-#rfc\.abstract+p {
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 130%;
+#rfc\.abstract+p, #rfc\.abstract p {
+  font-size: 18px;
+  line-height: 27px%;
 }
 
 samp, tt, code, pre {
@@ -192,6 +196,9 @@ ul.empty li {
 hr {
   border: 0;
   border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
 }
 
 a {
@@ -309,12 +316,12 @@ address {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.7.0 - http://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.9.3 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5750-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-7-21" />
+  <meta name="dct.issued" scheme="ISO8601" content="-15" />
   <meta name="dct.abstract" content="This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) v4.0 agents.  S/&#8288;MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/&#8288;MIME agent processing.  S/&#8288;MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/&#8288;MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 5750.  " />
   <meta name="description" content="This document specifies conventions for X.509 certificate usage by Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) v4.0 agents.  S/&#8288;MIME provides a method to send and receive secure MIME messages, and certificates are an integral part of S/&#8288;MIME agent processing.  S/&#8288;MIME agents validate certificates as described in RFC 5280, the Internet X.509 Public Key Infrastructure Certificate and CRL Profile.  S/&#8288;MIME agents must meet the certificate processing requirements in this document as well as those in RFC 5280.  This document obsoletes RFC 5750.  " />
 
@@ -342,7 +349,7 @@ address {
 <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-<td class="left">Expires: January 22, 2018</td>
+<td class="left">Expires: August 19, 2018</td>
 <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -351,7 +358,7 @@ address {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">July 21, 2017</td>
+<td class="right">2 15,</td>
 </tr>
 
     	
@@ -367,12 +374,12 @@ address {
 <p>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <span>&lt;</span><a href="https://github.com/lamps-wg/smime">https://github.com/lamps-wg/smime</a><span>&gt;</span>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the LAMPS mailing list.  </p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
-<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 22, 2018.</p>
+<p>This Internet-Draft will expire on August 19, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
-<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
-<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+<p>Copyright (c)  IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 <p>This document may contain material from IETF Documents or IETF Contributions published or made publicly available before November 10, 2008.  The person(s) controlling the copyright in some of this material may not have granted the IETF Trust the right to allow modifications of such material outside the IETF Standards Process. Without obtaining an adequate license from the person(s) controlling the copyright in such materials, this document may not be modified outside the IETF Standards Process, and derivative works of it may not be created outside the IETF Standards Process, except to format it for publication as an RFC or to translate it into languages other than English.</p>
 
   
@@ -482,7 +489,7 @@ address {
 <a href="#rfc.section.1.3">1.3.</a> Compatibility with Prior Practice S/MIME</h1>
 <p id="rfc.section.1.3.p.1">S/&#8288;MIME version 4.0 agents ought to attempt to have the greatest interoperability possible with agents for prior versions of S/&#8288;MIME.  </p>
 <p id="rfc.section.1.3.p.2">S/&#8288;MIME version 2 is described in RFC 2311 through RFC 2315 inclusive <a href="#SMIMEv2" class="xref">[SMIMEv2]</a>, S/&#8288;MIME version 3 is described in RFC 2630 through RFC 2634 inclusive and RFC 5035 <a href="#SMIMEv3" class="xref">[SMIMEv3]</a>, and S/&#8288;MIME version 3.1 is described in RFC 3850, RFC 3851, RFC 3852, RFC 2634, and RFC 5035 <a href="#SMIMEv3.1" class="xref">[SMIMEv3.1]</a>.  RFC 2311 also has historical information about the development of S/&#8288;MIME.  </p>
-<p><a href="#historic" class="xref">Appendix A</a> contains information about algorithms are were used for prior versions of S&#8203;/&#8203;MIME but are no longer considered to meet modern security standards.  Support of these algorithms may be needed to support historic S&#8203;/&#8203;MIME messages but SHOULD NOT be used for new mail.  </p>
+<p><a href="#historic" class="xref">Appendix A</a> contains information about algorithms that were used for prior versions of S&#8203;/&#8203;MIME but are no longer considered to meet modern security standards.  Support of these algorithms may be needed to support historic S&#8203;/&#8203;MIME messages but SHOULD NOT be used for new mail.  </p>
 <h1 id="rfc.section.1.4">
 <a href="#rfc.section.1.4">1.4.</a> Changes from S/MIME v3 to S/MIME v3.1</h1>
 <p id="rfc.section.1.4.p.1">Version 1 and version 2 CRLs MUST be supported.  </p>
@@ -491,7 +498,7 @@ address {
 <p id="rfc.section.1.4.p.4">The use of the MD2 digest algorithm for certificate signatures is discouraged, and security language was added.  </p>
 <p id="rfc.section.1.4.p.5">Clarified use of email address use in certificates.  Certificates that do not contain an email address have no requirements for verifying the email address associated with the certificate.  </p>
 <p id="rfc.section.1.4.p.6">Receiving agents SHOULD display certificate information when displaying the results of signature verification.  </p>
-<p id="rfc.section.1.4.p.7">Receiving agents MUST NOT accept a signature made with a certificate that does not have the digitalSignature or nonRepudiation bit set.  </p>
+<p id="rfc.section.1.4.p.7">Receiving agents MUST NOT accept a signature made with a certificate that does not have at least one of the the digitalSignature or nonRepudiation bits set.  </p>
 <p id="rfc.section.1.4.p.8">Clarifications for the interpretation of the key usage and extended key usage extensions.  </p>
 <h1 id="rfc.section.1.5">
 <a href="#rfc.section.1.5">1.5.</a> Changes from S/MIME v3.1 to S/MIME v3.2</h1>
@@ -538,7 +545,7 @@ address {
 <p id="rfc.section.2.p.1">The CMS message format allows for a wide variety of options in content and algorithm support.  This section puts forth a number of support requirements and recommendations in order to achieve a base level of interoperability among all S/&#8288;MIME implementations.  Most of the CMS format for S/&#8288;MIME messages is defined in <a href="#RFC5751" class="xref">[RFC5751]</a>.  </p>
 <h1 id="rfc.section.2.1">
 <a href="#rfc.section.2.1">2.1.</a> Certificate Revocation Lists</h1>
-<p id="rfc.section.2.1.p.1">Receiving agents MUST support the Certificate Revocation List (CRL) format defined in <a href="#RFC5280" class="xref">[RFC5280]</a>.  If sending agents include CRLs in outgoing messages, the CRL format defined in <a href="#RFC5280" class="xref">[RFC5280]</a> MUST be used.  In all cases, both v1 and v2 CRLs MUST be supported.  </p>
+<p id="rfc.section.2.1.p.1">Receiving agents MUST support the Certificate Revocation List (CRL) format defined in <a href="#RFC5280" class="xref">[RFC5280]</a>.  If sending agents include CRLs in outgoing messages, the CRL format defined in <a href="#RFC5280" class="xref">[RFC5280]</a> MUST be used.  Receiving agents MUST support both v1 and v2 CRLs.  </p>
 <p id="rfc.section.2.1.p.2">All agents MUST be capable of performing revocation checks using CRLs as specified in <a href="#RFC5280" class="xref">[RFC5280]</a>.  All agents MUST perform revocation status checking in accordance with <a href="#RFC5280" class="xref">[RFC5280]</a>.  Receiving agents MUST recognize CRLs in received S/&#8288;MIME messages.  </p>
 <p id="rfc.section.2.1.p.3">Agents SHOULD store CRLs received in messages for use in processing later messages.  </p>
 <h1 id="rfc.section.2.2">
@@ -560,7 +567,7 @@ address {
 <p id="rfc.section.2.3.p.6">Receiving agents SHOULD support the decoding of X.509 attribute certificates included in CMS objects.  All other issues regarding the generation and use of X.509 attribute certificates are outside of the scope of this specification.  One specification that addresses attribute certificate use is defined in <a href="#RFC3114" class="xref">[RFC3114]</a>.  </p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> Using Distinguished Names for Internet Mail</h1>
-<p id="rfc.section.3.p.1">End-entity certificates MAY contain an Internet mail address.  Email addresses retricted to 7-bit ASCII characters are encoded as described in Section 4.2.1.6 of <a href="#RFC5280" class="xref">[RFC5280]</a>.  Internationalized Email address names are encoded as described in <a href="#I-D.ietf-lamps-eai-addresses" class="xref">[I-D.ietf-lamps-eai-addresses]</a>.  The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.  </p>
+<p id="rfc.section.3.p.1">End-entity certificates MAY contain an Internet mail address.  Email addresses retricted to 7-bit ASCII characters use the pkcs-9-at-emailAddress OID and are encoded as described in Section 4.2.1.6 of <a href="#RFC5280" class="xref">[RFC5280]</a>.  Internationalized Email address names use the OID defined in <a href="#I-D.ietf-lamps-eai-addresses" class="xref">[I-D.ietf-lamps-eai-addresses]</a> and are encoded as described there.  The email address SHOULD be in the subjectAltName extension, and SHOULD NOT be in the subject distinguished name.  </p>
 <p id="rfc.section.3.p.2">Receiving agents MUST recognize and accept certificates that contain no email address.  Agents are allowed to provide an alternative mechanism for associating an email address with a certificate that does not contain an email address, such as through the use of the agent's address book, if available.  Receiving agents MUST recognize both ASCII and internationalized email addresses in the subjectAltName field.  Receiving agents MUST recognize email addresses in the Distinguished Name field in the PKCS #9 <a href="#RFC2985" class="xref">[RFC2985]</a> emailAddress attribute: </p>
 <pre>
 pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
@@ -568,13 +575,13 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
       </pre>
 <p id="rfc.section.3.p.3">Note that this attribute MUST be encoded as IA5String and has an  upper bound of 255 characters.  The right side of the email address SHOULD be treated as ASCII-case-insensitive.  </p>
 <p id="rfc.section.3.p.4">Comparing of email addresses is fraught with peril.  <a href="#I-D.ietf-lamps-eai-addresses" class="xref">[I-D.ietf-lamps-eai-addresses]</a> defines the procedure for doing comparison of Internationalized email addresses.  For ASCII email addresses the domain component (right-hand side of the '@') MUST be compared using a case-insensitive function.  The local name component (left-hand side of the '@') SHOULD be compared using a case-insensitive function.  Some localities may perform other transformations on the local name component before doing the comparison, however an S&#8203;/&#8203;MIME client cannot know what specific localities do.  </p>
-<p id="rfc.section.3.p.5">Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.  Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address in the signer's certificate, if mail addresses are present in the certificate.  A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, which may be to display a message that shows the recipient the addresses in the certificate or other certificate details.  </p>
+<p id="rfc.section.3.p.5">Sending agents SHOULD make the address in the From or Sender header in a mail message match an Internet mail address in the signer's certificate.  Receiving agents MUST check that the address in the From or Sender header of a mail message matches an Internet mail address in the signer's certificate, if mail addresses are present in the certificate.  A receiving agent SHOULD provide some explicit alternate processing of the message if this comparison fails, an example of this would be to display or log a message that shows the recipient the addresses in the certificate or other certificate details.  </p>
 <p id="rfc.section.3.p.6">A receiving agent SHOULD display a subject name or other certificate details when displaying an indication of successful or unsuccessful signature verification.  </p>
 <p id="rfc.section.3.p.7">All subject and issuer names MUST be populated (i.e., not an empty SEQUENCE) in S/&#8288;MIME-compliant X.509 certificates, except that the subject distinguished name (DN) in a user's (i.e., end-entity) certificate MAY be an empty SEQUENCE in which case the subjectAltName extension will include the subject's identifier and MUST be marked as critical.  </p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> Certificate Processing</h1>
 <p id="rfc.section.4.p.1">S/&#8288;MIME agents need to provide some certificate retrieval mechanism in order to gain access to certificates for recipients of digital envelopes.  There are many ways to implement certificate retrieval mechanisms.  <a href="#X.500" class="xref">[X.500]</a> directory service is an excellent example of a certificate retrieval-only mechanism that is compatible with classic X.500 Distinguished Names.  Another method under consideration by the IETF is to provide certificate retrieval services as part of the existing Domain Name System (DNS).  Until such mechanisms are widely used, their utility may be limited by the small number of the correspondent's certificates that can be retrieved.  At a minimum, for initial S/&#8288;MIME deployment, a user agent could automatically generate a message to an intended recipient requesting the recipient's certificate in a signed return message.  </p>
-<p id="rfc.section.4.p.2">Receiving and sending agents SHOULD also provide a mechanism to allow a user to "store and protect" certificates for correspondents in such a way so as to guarantee their later retrieval.  In many environments, it may be desirable to link the certificate retrieval/storage mechanisms together in some sort of certificate database.  In its simplest form, a certificate database would be local to a particular user and would function in a similar way as an "address book" that stores a user's frequent correspondents.  In this way, the certificate retrieval mechanism would be limited to the certificates that a user has stored (presumably from incoming messages).  A comprehensive certificate retrieval/storage solution may combine two or more mechanisms to allow the greatest flexibility and utility to the user.  For instance, a secure Internet mail agent may resort to checking a centralized certificate retrieval mechanism for a certificate if it cannot be found in a user's local certificate storage/retrieval database.  </p>
+<p id="rfc.section.4.p.2">Receiving and sending agents SHOULD also provide a mechanism to allow a user to "store and protect" certificates for correspondents in such a way so as to guarantee their later retrieval.  In many environments, it may be desirable to link the certificate retrieval/storage mechanisms together in some sort of certificate database.  In its simplest form, a certificate database would be local to a particular user and would function in a similar way as an "address book" that stores a user's frequent correspondents.  In this way, the certificate retrieval mechanism would be limited to the certificates that a user has stored (presumably from incoming messages).  A comprehensive certificate retrieval/storage solution may combine two or more mechanisms to allow the greatest flexibility and utility to the user.  For instance, a secure Internet mail agent might resort to checking a centralized certificate retrieval mechanism for a certificate if it cannot be found in a user's local certificate storage/retrieval database.  </p>
 <p id="rfc.section.4.p.3">Receiving and sending agents SHOULD provide a mechanism for the import and export of certificates, using a CMS certs-only message.  This allows for import and export of full certificate chains as opposed to just a single certificate.  This is described in <a href="#RFC5751" class="xref">[RFC5751]</a>.  </p>
 <p id="rfc.section.4.p.4">Agents MUST handle multiple valid certification authority (CA) certificates containing the same subject name and the same public keys but with overlapping validity intervals.  </p>
 <h1 id="rfc.section.4.1">
@@ -595,7 +602,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <ul>
 <li>MUST support ECDSA with curve P-256 with SHA-256.</li>
 <li>MUST support EdDSA with curve 25519 using PureEdDSA mode.</li>
-<li>MUST- support RSA with SHA-256.</li>
+<li>MUST- support RSA with SHA-256 (PKCS#1 v1.5).</li>
 <li>SHOULD support RSASSA-PSS with SHA-256.</li>
 <li>MUST NOT support EdDSA using Pre-hash mode.</li>
 </ul>
@@ -622,18 +629,18 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <h1 id="rfc.section.4.4.1">
 <a href="#rfc.section.4.4.1">4.4.1.</a> Basic Constraints</h1>
 <p id="rfc.section.4.4.1.p.1">The basic constraints extension serves to delimit the role and position that an issuing authority or end-entity certificate plays in a certification path.  </p>
-<p id="rfc.section.4.4.1.p.2">For example, certificates issued to CAs and subordinate CAs contain a basic constraint extension that identifies them as issuing authority certificates.  End-entity certificates contain the key usage extension that restrains end entities from using the key when performing issuing authority operations (see Section 4.4.2).  </p>
-<p id="rfc.section.4.4.1.p.3">As per <a href="#RFC5280" class="xref">[RFC5280]</a>, certificates MUST contain a basicConstraints extension in CA certificates, and SHOULD NOT contain that extension in end- entity certificates.  </p>
+<p id="rfc.section.4.4.1.p.2">For example, certificates issued to CAs and subordinate CAs contain a basic constraints extension that identifies them as issuing authority certificates.  End-entity certificates contain the key usage extension that restrains end entities from using the key when performing issuing authority operations (see Section 4.4.2).  </p>
+<p id="rfc.section.4.4.1.p.3">As per <a href="#RFC5280" class="xref">[RFC5280]</a>, certificates MUST contain a basicConstraints extension in CA certificates, and SHOULD NOT contain that extension in end-entity certificates.  </p>
 <h1 id="rfc.section.4.4.2">
 <a href="#rfc.section.4.4.2">4.4.2.</a> Key Usage Certificate Extension</h1>
 <p id="rfc.section.4.4.2.p.1">The key usage extension serves to limit the technical purposes for which a public key listed in a valid certificate may be used.  Issuing authority certificates may contain a key usage extension that restricts the key to signing certificates, certificate revocation lists, and other data.  </p>
 <p id="rfc.section.4.4.2.p.2">For example, a certification authority may create subordinate issuer certificates that contain a key usage extension that specifies that the corresponding public key can be used to sign end user certificates and sign CRLs.  </p>
 <p id="rfc.section.4.4.2.p.3">If a key usage extension is included in a PKIX certificate, then it MUST be marked as critical.  </p>
-<p id="rfc.section.4.4.2.p.4">S/&#8288;MIME receiving agents MUST NOT accept the signature of a message if it was verified using a certificate that contains the key usage extension without either the digitalSignature or nonRepudiation bit set.  Sometimes S/&#8288;MIME is used as a secure message transport for applications beyond interpersonal messaging.  In such cases, the S/&#8288;MIME-enabled application can specify additional requirements concerning the digitalSignature or nonRepudiation bits within this extension.  </p>
-<p id="rfc.section.4.4.2.p.5">If the key usage extension is not specified, receiving clients MUST presume that the digitalSignature and nonRepudiation bits are set.  </p>
+<p id="rfc.section.4.4.2.p.4">S/&#8288;MIME receiving agents MUST NOT accept the signature of a message if it was verified using a certificate that contains the key usage extension without at least one of the digitalSignature or nonRepudiation bits set.  Sometimes S/&#8288;MIME is used as a secure message transport for applications beyond interpersonal messaging;  in such cases, the S/&#8288;MIME-enabled application can specify additional requirements concerning the digitalSignature or nonRepudiation bits within this extension.  </p>
+<p id="rfc.section.4.4.2.p.5">If the key usage extension is not specified, receiving clients MUST presume that both the digitalSignature and nonRepudiation bits are set.  </p>
 <h1 id="rfc.section.4.4.3">
 <a href="#rfc.section.4.4.3">4.4.3.</a> Subject Alternative Name</h1>
-<p id="rfc.section.4.4.3.p.1">The subject alternative name extension is used in S/&#8288;MIME as the preferred means to convey the email address(es) that correspond(s) to the entity for this certificate.  Any ASCII email addresses present MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <a href="#RFC5280" class="xref">[RFC5280]</a>, Section 4.2.1.6.  Any internationalized email addresses present MUST be encoded using the otherName CHOICE of the GeneralName type as described in <a href="#I-D.ietf-lamps-eai-addresses" class="xref">[I-D.ietf-lamps-eai-addresses]</a>, Section 3.  Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.  </p>
+<p id="rfc.section.4.4.3.p.1">The subject alternative name extension is used in S/&#8288;MIME as the preferred means to convey the email address(es) that correspond(s) to the entity for this certificate.  If the local portion of the email address is ASCII, it MUST be encoded using the rfc822Name CHOICE of the GeneralName type as described in <a href="#RFC5280" class="xref">[RFC5280]</a>, Section 4.2.1.6.  If the local portion of the email address is not ASCII, it MUST be encoded using the otherName CHOICE of the GeneralName type as described in <a href="#I-D.ietf-lamps-eai-addresses" class="xref">[I-D.ietf-lamps-eai-addresses]</a>, Section 3.  Since the SubjectAltName type is a SEQUENCE OF GeneralName, multiple email addresses MAY be present.  </p>
 <h1 id="rfc.section.4.4.4">
 <a href="#rfc.section.4.4.4">4.4.4.</a> Extended Key Usage Extension</h1>
 <p id="rfc.section.4.4.4.p.1">The extended key usage extension also serves to limit the technical purposes for which a public key listed in a valid certificate may be used.  The set of technical purposes for the certificate therefore are the intersection of the uses indicated in the key usage and extended key usage extensions.  </p>
@@ -663,7 +670,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <p id="rfc.section.6.p.5">It is possible for there to be multiple unexpired CRLs for a CA.  If an agent is consulting CRLs for certificate validation, it SHOULD make sure that the most recently issued CRL for that CA is consulted, since an S/&#8288;MIME message sender could deliberately include an older unexpired CRL in an S/&#8288;MIME message.  This older CRL might not include recently revoked certificates, which might lead an agent to accept a certificate that has been revoked in a subsequent CRL.  </p>
 <p id="rfc.section.6.p.6">When determining the time for a certificate validity check, agents have to be careful to use a reliable time.  Unless it is from a trusted agent, this time MUST NOT be the SigningTime attribute found in an S/&#8288;MIME message.  For most sending agents, the SigningTime attribute could be deliberately set to direct the receiving agent to check a CRL that could have out-of-date revocation status for a certificate, or cause an improper result when checking the Validity field of a certificate.  </p>
 <p id="rfc.section.6.p.7">In addition to the Security Considerations identified in <a href="#RFC5280" class="xref">[RFC5280]</a>, caution should be taken when processing certificates that have not first been validated to a trust anchor.  Certificates could be manufactured by untrusted sources for the purpose of mounting denial of service or other attacks.  For example, keys selected to require excessive cryptographic processing, or extensive lists of CRL Distribution Point (CDP) and/or Authority Information Access (AIA) addresses in the certificate, could be used to mount denial-of- service attacks.  Similarly, attacker-specified CDP and/or AIA addresses could be included in fake certificates to allow the originator to detect receipt of the message even if signature verification fails.  </p>
-<p id="rfc.section.6.p.8">RSA keys of less than 2048  bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and should no longer be used to sign certificates or CRLs.  Such keys were previously considered secure, so processing previously received signed and encrypted mail may require processing certificates or CRLs signed with weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from accepting certificates and CRLs with smaller key sizes (e.g., spoofed certificates) versus the costs of denial of service.  If an implementation supports verification of certificates or CRLs generated with RSA and DSA keys of less than 2048 bits, it MUST warn the user.  Implementers should consider providing a stronger warning for weak signatures on certificates and CRLs associated with newly received messages than the one provided for certificates and CRLs associated with previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak cryptography.  </p>
+<p id="rfc.section.6.p.8">RSA keys of less than 2048  bits are now considered by many experts to be cryptographically insecure (due to advances in computing power), and SHOULD no longer be used to sign certificates or CRLs.  Such keys were previously considered secure, so processing previously received signed and encrypted mail may require processing certificates or CRLs signed with weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from accepting certificates and CRLs with smaller key sizes (e.g., spoofed certificates) versus the costs of denial of service.  If an implementation supports verification of certificates or CRLs generated with RSA and DSA keys of less than 2048 bits, it MUST warn the user.  Implementers should consider providing a stronger warning for weak signatures on certificates and CRLs associated with newly received messages than the one provided for certificates and CRLs associated with previously stored messages.  Server implementations (e.g., secure mail list servers) where user warnings are not appropriate SHOULD reject messages with weak cryptography.  </p>
 <p id="rfc.section.6.p.9">If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <a href="#SP800-57" class="xref">[SP800-57]</a>.  </p>
 <h1 id="rfc.references">
 <a href="#rfc.references">7.</a> References</h1>
@@ -683,87 +690,87 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <tr>
 <td class="reference"><b id="I-D.ietf-lamps-eai-addresses">[I-D.ietf-lamps-eai-addresses]</b></td>
 <td class="top">
-<a>Melnikov, A.</a> and <a>W. Chuang</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-eai-addresses-12">Internationalized Email Addresses in X.509 certificates</a>", Internet-Draft draft-ietf-lamps-eai-addresses-12, June 2017.</td>
+<a>Melnikov, A.</a> and <a>W. Chuang</a>, "<a href="https://tools.ietf.org/html/draft-ietf-lamps-eai-addresses-17">Internationalized Email Addresses in X.509 certificates</a>", Internet-Draft draft-ietf-lamps-eai-addresses-17, February 2018.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.ietf-lamps-rfc5751-bis">[I-D.ietf-lamps-rfc5751-bis]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis-06">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 4.0 Message Specification</a>", Internet-Draft draft-ietf-lamps-rfc5751-bis-06, April 2017.</td>
+<a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/draft-ietf-lamps-rfc5751-bis-06">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 4.0 Message Specification</a>", Internet-Draft draft-ietf-lamps-rfc5751-bis-06, April 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
 <td class="top">
-<a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2634">[RFC2634]</b></td>
 <td class="top">
-<a>Hoffman, P.</a>, "<a href="http://tools.ietf.org/html/rfc2634">Enhanced Security Services for S&#8203;/&#8203;MIME</a>", RFC 2634, DOI 10.17487/RFC2634, June 1999.</td>
+<a>Hoffman, P.</a>, "<a href="https://tools.ietf.org/html/rfc2634">Enhanced Security Services for S&#8203;/&#8203;MIME</a>", RFC 2634, DOI 10.17487/RFC2634, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2985">[RFC2985]</b></td>
 <td class="top">
-<a>Nystrom, M.</a> and <a>B. Kaliski</a>, "<a href="http://tools.ietf.org/html/rfc2985">PKCS #9: Selected Object Classes and Attribute Types Version 2.0</a>", RFC 2985, DOI 10.17487/RFC2985, November 2000.</td>
+<a>Nystrom, M.</a> and <a>B. Kaliski</a>, "<a href="https://tools.ietf.org/html/rfc2985">PKCS #9: Selected Object Classes and Attribute Types Version 2.0</a>", RFC 2985, DOI 10.17487/RFC2985, November 2000.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3279">[RFC3279]</b></td>
 <td class="top">
-<a>Bassham, L.</a>, <a>Polk, W.</a> and <a>R. Housley</a>, "<a href="http://tools.ietf.org/html/rfc3279">Algorithms and Identifiers for the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 3279, DOI 10.17487/RFC3279, April 2002.</td>
+<a>Bassham, L.</a>, <a>Polk, W.</a> and <a>R. Housley</a>, "<a href="https://tools.ietf.org/html/rfc3279">Algorithms and Identifiers for the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 3279, DOI 10.17487/RFC3279, April 2002.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3447">[RFC3447]</b></td>
 <td class="top">
-<a>Jonsson, J.</a> and <a>B. Kaliski</a>, "<a href="http://tools.ietf.org/html/rfc3447">Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.1</a>", RFC 3447, DOI 10.17487/RFC3447, February 2003.</td>
+<a>Jonsson, J.</a> and <a>B. Kaliski</a>, "<a href="https://tools.ietf.org/html/rfc3447">Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.1</a>", RFC 3447, DOI 10.17487/RFC3447, February 2003.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4055">[RFC4055]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, <a>Kaliski, B.</a> and <a>R. Housley</a>, "<a href="http://tools.ietf.org/html/rfc4055">Additional Algorithms and Identifiers for RSA Cryptography for use in the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 4055, DOI 10.17487/RFC4055, June 2005.</td>
+<a>Schaad, J.</a>, <a>Kaliski, B.</a> and <a>R. Housley</a>, "<a href="https://tools.ietf.org/html/rfc4055">Additional Algorithms and Identifiers for RSA Cryptography for use in the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 4055, DOI 10.17487/RFC4055, June 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4056">[RFC4056]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc4056">Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 4056, DOI 10.17487/RFC4056, June 2005.</td>
+<a>Schaad, J.</a>, "<a href="https://tools.ietf.org/html/rfc4056">Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 4056, DOI 10.17487/RFC4056, June 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5035">[RFC5035]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc5035">Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility</a>", RFC 5035, DOI 10.17487/RFC5035, August 2007.</td>
+<a>Schaad, J.</a>, "<a href="https://tools.ietf.org/html/rfc5035">Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility</a>", RFC 5035, DOI 10.17487/RFC5035, August 2007.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5280">[RFC5280]</b></td>
 <td class="top">
-<a>Cooper, D.</a>, <a>Santesson, S.</a>, <a>Farrell, S.</a>, <a>Boeyen, S.</a>, <a>Housley, R.</a> and <a>W. Polk</a>, "<a href="http://tools.ietf.org/html/rfc5280">Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 5280, DOI 10.17487/RFC5280, May 2008.</td>
+<a>Cooper, D.</a>, <a>Santesson, S.</a>, <a>Farrell, S.</a>, <a>Boeyen, S.</a>, <a>Housley, R.</a> and <a>W. Polk</a>, "<a href="https://tools.ietf.org/html/rfc5280">Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</a>", RFC 5280, DOI 10.17487/RFC5280, May 2008.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5652">[RFC5652]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc5652">Cryptographic Message Syntax (CMS)</a>", STD 70, RFC 5652, DOI 10.17487/RFC5652, September 2009.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc5652">Cryptographic Message Syntax (CMS)</a>", STD 70, RFC 5652, DOI 10.17487/RFC5652, September 2009.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5750">[RFC5750]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Certificate Handling</a>", RFC 5750, DOI 10.17487/RFC5750, January 2010.</td>
+<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Certificate Handling</a>", RFC 5750, DOI 10.17487/RFC5750, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5751">[RFC5751]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
+<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5755">[RFC5755]</b></td>
 <td class="top">
-<a>Farrell, S.</a>, <a>Housley, R.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5755">An Internet Attribute Certificate Profile for Authorization</a>", RFC 5755, DOI 10.17487/RFC5755, January 2010.</td>
+<a>Farrell, S.</a>, <a>Housley, R.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc5755">An Internet Attribute Certificate Profile for Authorization</a>", RFC 5755, DOI 10.17487/RFC5755, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5758">[RFC5758]</b></td>
 <td class="top">
-<a>Dang, Q.</a>, <a>Santesson, S.</a>, <a>Moriarty, K.</a>, <a>Brown, D.</a> and <a>T. Polk</a>, "<a href="http://tools.ietf.org/html/rfc5758">Internet X.509 Public Key Infrastructure: Additional Algorithms and Identifiers for DSA and ECDSA</a>", RFC 5758, DOI 10.17487/RFC5758, January 2010.</td>
+<a>Dang, Q.</a>, <a>Santesson, S.</a>, <a>Moriarty, K.</a>, <a>Brown, D.</a> and <a>T. Polk</a>, "<a href="https://tools.ietf.org/html/rfc5758">Internet X.509 Public Key Infrastructure: Additional Algorithms and Identifiers for DSA and ECDSA</a>", RFC 5758, DOI 10.17487/RFC5758, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6979">[RFC6979]</b></td>
 <td class="top">
-<a>Pornin, T.</a>, "<a href="http://tools.ietf.org/html/rfc6979">Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA)</a>", RFC 6979, DOI 10.17487/RFC6979, August 2013.</td>
+<a>Pornin, T.</a>, "<a href="https://tools.ietf.org/html/rfc6979">Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA)</a>", RFC 6979, DOI 10.17487/RFC6979, August 2013.</td>
 </tr>
 <tr>
 <td class="reference"><b id="SMIMEv3.2">[SMIMEv3.2]</b></td>
@@ -791,7 +798,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <tr>
 <td class="reference"><b id="I-D.ietf-curdle-pkix">[I-D.ietf-curdle-pkix]</b></td>
 <td class="top">
-<a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-pkix-05">Algorithm Identifiers for Ed25519, Ed448, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-05, July 2017.</td>
+<a>Josefsson, S.</a> and <a>J. Schaad</a>, "<a href="https://tools.ietf.org/html/draft-ietf-curdle-pkix-07">Algorithm Identifiers for Ed25519, Ed448, X25519 and X448 for use in the Internet X.509 Public Key Infrastructure</a>", Internet-Draft draft-ietf-curdle-pkix-07, November 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="PKCS6">[PKCS6]</b></td>
@@ -801,87 +808,87 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <tr>
 <td class="reference"><b id="RFC2311">[RFC2311]</b></td>
 <td class="top">
-<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a>, <a>Lundblade, L.</a> and <a>L. Repka</a>, "<a href="http://tools.ietf.org/html/rfc2311">S&#8203;/&#8203;MIME Version 2 Message Specification</a>", RFC 2311, DOI 10.17487/RFC2311, March 1998.</td>
+<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a>, <a>Lundblade, L.</a> and <a>L. Repka</a>, "<a href="https://tools.ietf.org/html/rfc2311">S&#8203;/&#8203;MIME Version 2 Message Specification</a>", RFC 2311, DOI 10.17487/RFC2311, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2312">[RFC2312]</b></td>
 <td class="top">
-<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a> and <a>J. Weinstein</a>, "<a href="http://tools.ietf.org/html/rfc2312">S&#8203;/&#8203;MIME Version 2 Certificate Handling</a>", RFC 2312, DOI 10.17487/RFC2312, March 1998.</td>
+<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a> and <a>J. Weinstein</a>, "<a href="https://tools.ietf.org/html/rfc2312">S&#8203;/&#8203;MIME Version 2 Certificate Handling</a>", RFC 2312, DOI 10.17487/RFC2312, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2313">[RFC2313]</b></td>
 <td class="top">
-<a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2313">PKCS #1: RSA Encryption Version 1.5</a>", RFC 2313, DOI 10.17487/RFC2313, March 1998.</td>
+<a>Kaliski, B.</a>, "<a href="https://tools.ietf.org/html/rfc2313">PKCS #1: RSA Encryption Version 1.5</a>", RFC 2313, DOI 10.17487/RFC2313, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2314">[RFC2314]</b></td>
 <td class="top">
-<a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2314">PKCS #10: Certification Request Syntax Version 1.5</a>", RFC 2314, DOI 10.17487/RFC2314, March 1998.</td>
+<a>Kaliski, B.</a>, "<a href="https://tools.ietf.org/html/rfc2314">PKCS #10: Certification Request Syntax Version 1.5</a>", RFC 2314, DOI 10.17487/RFC2314, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2315">[RFC2315]</b></td>
 <td class="top">
-<a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2315">PKCS #7: Cryptographic Message Syntax Version 1.5</a>", RFC 2315, DOI 10.17487/RFC2315, March 1998.</td>
+<a>Kaliski, B.</a>, "<a href="https://tools.ietf.org/html/rfc2315">PKCS #7: Cryptographic Message Syntax Version 1.5</a>", RFC 2315, DOI 10.17487/RFC2315, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2630">[RFC2630]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc2630">Cryptographic Message Syntax</a>", RFC 2630, DOI 10.17487/RFC2630, June 1999.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc2630">Cryptographic Message Syntax</a>", RFC 2630, DOI 10.17487/RFC2630, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2631">[RFC2631]</b></td>
 <td class="top">
-<a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc2631">Diffie-Hellman Key Agreement Method</a>", RFC 2631, DOI 10.17487/RFC2631, June 1999.</td>
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc2631">Diffie-Hellman Key Agreement Method</a>", RFC 2631, DOI 10.17487/RFC2631, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2632">[RFC2632]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc2632">S&#8203;/&#8203;MIME Version 3 Certificate Handling</a>", RFC 2632, DOI 10.17487/RFC2632, June 1999.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc2632">S&#8203;/&#8203;MIME Version 3 Certificate Handling</a>", RFC 2632, DOI 10.17487/RFC2632, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2633">[RFC2633]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc2633">S&#8203;/&#8203;MIME Version 3 Message Specification</a>", RFC 2633, DOI 10.17487/RFC2633, June 1999.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc2633">S&#8203;/&#8203;MIME Version 3 Message Specification</a>", RFC 2633, DOI 10.17487/RFC2633, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3114">[RFC3114]</b></td>
 <td class="top">
-<a>Nicolls, W.</a>, "<a href="http://tools.ietf.org/html/rfc3114">Implementing Company Classification Policy with the S&#8203;/&#8203;MIME Security Label</a>", RFC 3114, DOI 10.17487/RFC3114, May 2002.</td>
+<a>Nicolls, W.</a>, "<a href="https://tools.ietf.org/html/rfc3114">Implementing Company Classification Policy with the S&#8203;/&#8203;MIME Security Label</a>", RFC 3114, DOI 10.17487/RFC3114, May 2002.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3850">[RFC3850]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc3850">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Certificate Handling</a>", RFC 3850, DOI 10.17487/RFC3850, July 2004.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc3850">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Certificate Handling</a>", RFC 3850, DOI 10.17487/RFC3850, July 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3851">[RFC3851]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc3851">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Message Specification</a>", RFC 3851, DOI 10.17487/RFC3851, July 2004.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc3851">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Message Specification</a>", RFC 3851, DOI 10.17487/RFC3851, July 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3852">[RFC3852]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3852">Cryptographic Message Syntax (CMS)</a>", RFC 3852, DOI 10.17487/RFC3852, July 2004.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc3852">Cryptographic Message Syntax (CMS)</a>", RFC 3852, DOI 10.17487/RFC3852, July 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6090">[RFC6090]</b></td>
 <td class="top">
-<a>McGrew, D.</a>, <a>Igoe, K.</a> and <a>M. Salter</a>, "<a href="http://tools.ietf.org/html/rfc6090">Fundamental Elliptic Curve Cryptography Algorithms</a>", RFC 6090, DOI 10.17487/RFC6090, February 2011.</td>
+<a>McGrew, D.</a>, <a>Igoe, K.</a> and <a>M. Salter</a>, "<a href="https://tools.ietf.org/html/rfc6090">Fundamental Elliptic Curve Cryptography Algorithms</a>", RFC 6090, DOI 10.17487/RFC6090, February 2011.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6151">[RFC6151]</b></td>
 <td class="top">
-<a>Turner, S.</a> and <a>L. Chen</a>, "<a href="http://tools.ietf.org/html/rfc6151">Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a>", RFC 6151, DOI 10.17487/RFC6151, March 2011.</td>
+<a>Turner, S.</a> and <a>L. Chen</a>, "<a href="https://tools.ietf.org/html/rfc6151">Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a>", RFC 6151, DOI 10.17487/RFC6151, March 2011.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6194">[RFC6194]</b></td>
 <td class="top">
-<a>Polk, T.</a>, <a>Chen, L.</a>, <a>Turner, S.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc6194">Security Considerations for the SHA-0 and SHA-1 Message-Digest Algorithms</a>", RFC 6194, DOI 10.17487/RFC6194, March 2011.</td>
+<a>Polk, T.</a>, <a>Chen, L.</a>, <a>Turner, S.</a> and <a>P. Hoffman</a>, "<a href="https://tools.ietf.org/html/rfc6194">Security Considerations for the SHA-0 and SHA-1 Message-Digest Algorithms</a>", RFC 6194, DOI 10.17487/RFC6194, March 2011.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC8032">[RFC8032]</b></td>
 <td class="top">
-<a>Josefsson, S.</a> and <a>I. Liusvaara</a>, "<a href="http://tools.ietf.org/html/rfc8032">Edwards-Curve Digital Signature Algorithm (EdDSA)</a>", RFC 8032, DOI 10.17487/RFC8032, January 2017.</td>
+<a>Josefsson, S.</a> and <a>I. Liusvaara</a>, "<a href="https://tools.ietf.org/html/rfc8032">Edwards-Curve Digital Signature Algorithm (EdDSA)</a>", RFC 8032, DOI 10.17487/RFC8032, January 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="SMIMEv2">[SMIMEv2]</b></td>
@@ -918,7 +925,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <ul>
 <li>CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.  This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.  The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.  </li>
 <li>RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).  Such keys were previously considered secure, so processing of historic  certificates  will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  <br><br> <a href="#SMIMEv3.1" class="xref">[SMIMEv3.1]</a> set the lower limit on suggested key sizes for creating and validation at 1024 bits.  Prior to that the lower bound on key sizes was 512 bits.  </li>
-<li>Hash functions used to validate signatures on historic messages may longer be considered to be secure (see below).  While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&#8209;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.  </li>
+<li>Hash functions used to validate signatures on historic messages may longer be considered to be secure (see below).  While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&#8209;1, the fact they are no longer considered to be collision resistant the security levels of the signatures are generally considered suspect.  </li>
 </ul>
 
 <p> </p>
@@ -927,7 +934,7 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
 <ul>
 <li>RSA with MD5 was dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151" class="xref">[RFC6151]</a>.  </li>
 <li>RSA and DSA with SHA-1 were dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  SHA-1 is nolonger considered to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194" class="xref">[RFC6194]</a> but it is out-of-date relative to the most recent advances.  </li>
-<li>DSA with SHA-256 support was dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  DSA was dropped as part of a general movement from discrete logarithms to elliptic curves.  Issues have come up dealing with small group attacks and with non-deterministic generation of the parameter 'k' (see <a href="#RFC6979" class="xref">[RFC6979]</a>).  </li>
+<li>DSA with SHA-256 support was dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  DSA was dropped as part of a general movement from finite fields to elliptic curves.  Issues have come up dealing with non-deterministic generation of the parameter 'k' (see <a href="#RFC6979" class="xref">[RFC6979]</a>).  </li>
 </ul>
 
 <p> </p>
@@ -1008,6 +1015,5 @@ pkcs-9-at-emailAddress OBJECT IDENTIFIER ::=
   </address>
 </div>
 
-  <div class="github-fork-ribbon-wrapper"><div class="github-fork-ribbon"><a href="https://github.com/lamps-wg/smime">Fork me on GitHub</a></div></div>
 </body>
 </html>

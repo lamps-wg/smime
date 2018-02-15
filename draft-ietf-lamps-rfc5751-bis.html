@@ -19,20 +19,25 @@
 }
 
 @media screen and (min-width: 1024px) {
-  ul.toc, #rfc\.toc {
+  body>ul.toc, body>#rfc\.toc {
     position: fixed;
     bottom: 0;
     right: 0;
-    right: calc(50vw - 525px);
+    right: calc(50vw - 550px);
     width: 300px;
     z-index: 1;
   }
   #rfc\.toc {
-    top: 15px;
-  }
-  ul.toc {
-    top: 80px;
+    top: 55px;
     overflow: auto;
+    overscroll-behavior: contain;
+  }
+  ul.toc, #rfc\.toc {
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>ul.toc {
+    top: 140px;
   }
 
   body {
@@ -41,11 +46,11 @@
 }
 
 body {
-  font: 15px "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 16px "Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #333;
   font-size-adjust: 0.5;
-  line-height: 130%;
-  margin: 25px auto;
+  line-height: 24px;
+  margin: 75px auto;
   max-width: 724px;
 }
 
@@ -58,7 +63,7 @@ body {
   margin: 0.8em 0 0.3em;
 }
 .title { font-size: 36px; }
-h1 { font-size: 30px; }
+h1 { font-size: 36px; }
 h2 { font-size: 24px; }
 h3, h4 { font-size: 18px; }
 h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
@@ -121,10 +126,9 @@ table.header td {
   height: auto;
   line-height: 100%;
 }
-#rfc\.abstract+p {
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 130%;
+#rfc\.abstract+p, #rfc\.abstract p {
+  font-size: 18px;
+  line-height: 27px%;
 }
 
 samp, tt, code, pre {
@@ -192,6 +196,9 @@ ul.empty li {
 hr {
   border: 0;
   border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
 }
 
 a {
@@ -347,12 +354,12 @@ address {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.7.0 - http://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.9.3 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Schaad, J., Ramsdell, B., and S. Turner" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lamps-rfc5751-bis-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2017-7-21" />
+  <meta name="dct.issued" scheme="ISO8601" content="-15" />
   <meta name="dct.abstract" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
   <meta name="description" content="This document defines Secure/Multipurpose Internet Mail Extensions (S/&#8288;MIME) version 4.0.  S/&#8288;MIME provides a consistent way to send and receive secure MIME data.  Digital signatures provide authentication, message integrity, and non-repudiation with proof of origin.  Encryption provides data confidentiality.  Compression can be used to reduce data size.  This document obsoletes RFC 5751.  " />
 
@@ -380,7 +387,7 @@ address {
 <td class="right">Brute Squad Labs, Inc.</td>
 </tr>
 <tr>
-<td class="left">Expires: January 22, 2018</td>
+<td class="left">Expires: August 19, 2018</td>
 <td class="right">S. Turner</td>
 </tr>
 <tr>
@@ -389,7 +396,7 @@ address {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">July 21, 2017</td>
+<td class="right">2 15,</td>
 </tr>
 
     	
@@ -405,12 +412,12 @@ address {
 <p>The source for this draft is being maintained in GitHub.  Suggested changes should be submitted as pull requests  at <span>&lt;</span><a href="https://github.com/lamps-wg/smime">https://github.com/lamps-wg/smime</a><span>&gt;</span>.  Instructions are on that page as well.  Editorial changes can be managed in GitHub, but any substantial issues need to be discussed on the LAMPS mailing list.  </p>
 <h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
-<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 22, 2018.</p>
+<p>This Internet-Draft will expire on August 19, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
-<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
-<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+<p>Copyright (c)  IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 <p>This document may contain material from IETF Documents or IETF Contributions published or made publicly available before November 10, 2008.  The person(s) controlling the copyright in some of this material may not have granted the IETF Trust the right to allow modifications of such material outside the IETF Standards Process. Without obtaining an adequate license from the person(s) controlling the copyright in such materials, this document may not be modified outside the IETF Standards Process, and derivative works of it may not be created outside the IETF Standards Process, except to format it for publication as an RFC or to translate it into languages other than English.</p>
 
   
@@ -586,7 +593,7 @@ address {
 <dt>ASN.1:</dt>
 <dd style="margin-left: 19">Abstract Syntax Notation One, as defined in ITU-T Recommendations X.680, X.681, X.682 and X.683 <a href="#ASN.1" class="xref">[ASN.1]</a>.  </dd>
 <dt>BER:</dt>
-<dd style="margin-left: 19">Basic Encoding Rules for ASN.1, as defined in ITU- T Recommendation X.690 <a href="#X.690" class="xref">[X.690]</a>.  </dd>
+<dd style="margin-left: 19">Basic Encoding Rules for ASN.1, as defined in ITU-T Recommendation X.690 <a href="#X.690" class="xref">[X.690]</a>.  </dd>
 <dt>Certificate:</dt>
 <dd style="margin-left: 19">A type that binds an entity's name to a public key with a digital signature.  </dd>
 <dt>DER:</dt>
@@ -662,7 +669,7 @@ address {
 <p><a href="#WhichEncAlg" class="xref">Section 2.7.1</a>: Updated pointers from 2.7.2.1 through 2.7.2.4 to 2.7.1.1 to 2.7.1.2.  </p>
 <p><a href="#Canonicalization" class="xref">Section 3.1.1</a>: Removed text about MIME character sets.  </p>
 <p><a href="#smime-type" class="xref">Section 3.2.2</a> and 3.6: Replaced "encrypted" with "enveloped".  Update OID example to use AES-128 CBC oid.  </p>
-<p id="rfc.section.1.6.p.17">Section 3.4.3.2: Replace micalg parameter for SHA&#8209;1 with sha-1.  </p>
+<p id="rfc.section.1.6.p.17">Section 3.4.3.2: Replace "micalg" parameter for "SHA&#8209;1" with "sha-1".  </p>
 <p><a href="#CertProcessing" class="xref">Section 4</a>: Updated reference to CERT v3.2.  </p>
 <p><a href="#KeyPairs" class="xref">Section 4.1</a>: Updated RSA and DSA key size discussion.  Moved last four sentences to security considerations.  Updated reference to randomness requirements for security.  </p>
 <p><a href="#IANA" class="xref">Section 5</a>: Added IANA registration templates to update media type registry to point to this document as opposed to RFC 2311.  </p>
@@ -707,7 +714,7 @@ address {
 <ul>
 <li>MUST support ECDSA with curve P-256 and SHA-256.  </li>
 <li>MUST support EdDSA with curve 25519 using PureEdDSA mode.  </li>
-<li>MUST- support RSA with SHA-256.  </li>
+<li>MUST- support RSA PKCS#1 v1.5 with SHA-256.  </li>
 <li>SHOULD support RSASSA-PSS with SHA-256.  </li>
 <li>MUST NOT support EdDSA using the pre-hash mode.  </li>
 </ul>
@@ -723,7 +730,7 @@ address {
 </ul>
 
 <p> </p>
-<p id="rfc.section.2.2.p.3">Both ECDSA and EdDSA are included in the list of required algorithms for political reasons.  NIST is unable to provide the seeds that were used to create their standardized curves, this means that there is a section of the community which believes that there might be a backdoor to these curves.  The EdDSA curves were, in part, created in response to this feeling.  However, there are still significant sections of the industry which need to have NIST approved algorithms.  For this reason, both sets of curves are represented in the recieving agent list, but there is only a requirement for curve in the sending agent list.  </p>
+<p id="rfc.section.2.2.p.3">Both ECDSA and EdDSA are included in the list of required algorithms for political reasons.  NIST is unable to provide the seeds that were used to create their standardized curves, this means that there is a section of the community which believes that there might be a backdoor to these curves.  The EdDSA curves were standardized in the IETF in a more transparent method.  However, there are still significant sections of the industry which need to have NIST approved algorithms.  For this reason, both sets of curves are represented in the receiving agent list, but there is only a requirement for curve in the sending agent list.  </p>
 <p id="rfc.section.2.2.p.4">See <a href="#KeyPairs" class="xref">Section 4.1</a> for information on key size and algorithm references.  </p>
 <h1 id="rfc.section.2.3">
 <a href="#rfc.section.2.3">2.3.</a> <a href="#KeyEncryptionAlgorithmIdentifier" id="KeyEncryptionAlgorithmIdentifier">KeyEncryptionAlgorithmIdentifier</a>
@@ -791,7 +798,7 @@ address {
 <h1 id="rfc.section.2.5.2">
 <a href="#rfc.section.2.5.2">2.5.2.</a> <a href="#SMIMECaps" id="SMIMECaps">SMIME Capabilities Attribute</a>
 </h1>
-<p id="rfc.section.2.5.2.p.1">The SMIMECapabilities attribute includes signature algorithms (such as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128 CBC"), authenticated symmetric algorithms (such as "AES-128 GCM") and key encipherment algorithms (such as "rsaEncryption").  The presence of an algorthm based SMIME Capability attribute in this sequence implies that the sender can deal with the algorithm as well as undertanding the ASN.1 structures associated with that algorithm.  There are also several identifiers that indicate support for other optional features such as binary encoding and compression.  The SMIMECapabilities were designed to be flexible and extensible so that, in the future, a means of identifying other capabilities and preferences such as certificates can be added in a way that will not cause current clients to break.  </p>
+<p id="rfc.section.2.5.2.p.1">The SMIMECapabilities attribute includes signature algorithms (such as "sha256WithRSAEncryption"), symmetric algorithms (such as "AES-128 CBC"), authenticated symmetric algorithms (such as "AES-128 GCM") and key encipherment algorithms (such as "rsaEncryption").  The presence of an algorthm based SMIME Capability attribute in this sequence implies that the sender can deal with the algorithm as well as understanding the ASN.1 structures associated with that algorithm.  There are also several identifiers that indicate support for other optional features such as binary encoding and compression.  The SMIMECapabilities were designed to be flexible and extensible so that, in the future, a means of identifying other capabilities and preferences such as certificates can be added in a way that will not cause current clients to break.  </p>
 <p id="rfc.section.2.5.2.p.2">If present, the SMIMECapabilities attribute MUST be a SignedAttribute; it MUST NOT be an UnsignedAttribute.  CMS defines SignedAttributes as a SET OF Attribute.  The SignedAttributes in a signerInfo MUST NOT include multiple instances of the SMIMECapabilities attribute.  CMS defines the ASN.1 syntax for Attribute to include attrValues SET OF AttributeValue.  A SMIMECapabilities attribute MUST only include a single instance of AttributeValue.  There MUST NOT be zero or multiple instances of AttributeValue present in the attrValues SET OF AttributeValue.  </p>
 <p id="rfc.section.2.5.2.p.3">The semantics of the SMIMECapabilities attribute specify a partial list as to what the client announcing the SMIMECapabilities can support.  A client does not have to list every capability it supports, and need not list all its capabilities so that the capabilities list doesn't get too long.  In an SMIMECapabilities attribute, the object identifiers (OIDs) are listed in order of their preference, but SHOULD be separated logically along the lines of their categories (signature algorithms, symmetric algorithms, key encipherment algorithms, etc.).  </p>
 <p id="rfc.section.2.5.2.p.4">The structure of the SMIMECapabilities attribute is to facilitate simple table lookups and binary comparisons in order to determine matches.  For instance, the DER-encoding for the SMIMECapability for AES-128 CBC MUST be identically encoded regardless of the implementation.  Because of the requirement for identical encoding, individuals documenting algorithms to be used in the SMIMECapabilities attribute SHOULD explicitly document the correct byte sequence for the common cases.  </p>
@@ -896,7 +903,7 @@ address {
 
 <p> </p>
 <p id="rfc.section.3.1.p.6">When an S/&#8288;MIME message is received, the security services on the message are processed, and the result is the MIME entity.  That MIME entity is typically passed to a MIME-capable user agent where it is further decoded and presented to the user or receiving application.  </p>
-<p id="rfc.section.3.1.p.7">In order to protect outer, non-content-related message header fields (for instance, the "Subject", "To", "From", and "Cc" fields), the sending client MAY wrap a full MIME message in a message/rfc822 wrapper in order to apply S/&#8288;MIME security services to these header fields.  It is up to the receiving client to decide how to present this "inner" header along with the unprotected "outer" header.  </p>
+<p id="rfc.section.3.1.p.7">In order to protect outer, non-content-related message header fields (for instance, the "Subject", "To", "From", and "Cc" fields), the sending client MAY wrap a full MIME message in a message/rfc822 wrapper in order to apply S/&#8288;MIME security services to these header fields.  It is up to the receiving client to decide how to present this "inner" header along with the unprotected "outer" header.  It is RECOMMENDED that a distinction be made between the location of the header.  </p>
 <p id="rfc.section.3.1.p.8">When an S/&#8288;MIME message is received, if the top-level protected MIME entity has a Content-Type of message/rfc822, it can be assumed that the intent was to provide header protection.  This entity SHOULD be presented as the top-level message, taking into account header merging issues as previously discussed.  </p>
 <h1 id="rfc.section.3.1.1">
 <a href="#rfc.section.3.1.1">3.1.1.</a> <a href="#Canonicalization" id="Canonicalization">Canonicalization</a>
@@ -909,7 +916,7 @@ address {
 <a href="#rfc.section.3.1.2">3.1.2.</a> Transfer Encoding</h1>
 <p id="rfc.section.3.1.2.p.1">When generating any of the secured MIME entities below, except the signing using the multipart/&#8288;signed format, no transfer encoding is required at all.  S/&#8288;MIME implementations MUST be able to deal with binary MIME objects.  If no Content-Transfer-Encoding header field is present, the transfer encoding is presumed to be 7BIT.  </p>
 <p id="rfc.section.3.1.2.p.2">S/&#8288;MIME implementations SHOULD however use transfer encoding described in <a href="#Transfer-multipart" class="xref">Section 3.1.3</a> for all MIME entities they secure.  The reason for securing only 7-bit MIME entities, even for enveloped data that are not exposed to the transport, is that it allows the MIME entity to be handled in any environment without changing it.  For example, a trusted gateway might remove the envelope, but not the signature, of a message, and then forward the signed message on to the end recipient so that they can verify the signatures directly.  If the transport internal to the site is not 8-bit clean, such as on a wide- area network with a single mail gateway, verifying the signature will not be possible unless the original MIME entity was only 7-bit data.  </p>
-<p id="rfc.section.3.1.2.p.3">S/&#8288;MIME implementations that "know" that all intended recipients are capable of handling inner (all but the outermost) binary MIME objects SHOULD use binary encoding as opposed to a 7-bit-safe transfer encoding for the inner entities.  The use of a 7-bit-safe encoding (such as base64) would unnecessarily expand the message size.  Implementations MAY "know" that recipient implementations are capable of handling inner binary MIME entities either by interpreting the id- cap-preferBinaryInside SMIMECapabilities attribute, by prior agreement, or by other means.  </p>
+<p id="rfc.section.3.1.2.p.3">In the case where S/&#8288;MIME implementations that "know" that all intended recipients are capable of handling inner (all but the outermost) binary MIME objects SHOULD use binary encoding as opposed to a 7-bit-safe transfer encoding for the inner entities.  The use of a 7-bit-safe encoding (such as base64) would unnecessarily expand the message size.  Implementations MAY determine that recipient implementations are capable of handling inner binary MIME entities either by interpreting the id- cap-preferBinaryInside SMIMECapabilities attribute, by prior agreement, or by other means.  </p>
 <p id="rfc.section.3.1.2.p.4">If one or more intended recipients are unable to handle inner binary MIME objects, or if this capability is unknown for any of the intended recipients, S/&#8288;MIME implementations SHOULD use transfer encoding described in <a href="#Transfer-multipart" class="xref">Section 3.1.3</a> for all MIME entities they secure.  </p>
 <h1 id="rfc.section.3.1.3">
 <a href="#rfc.section.3.1.3">3.1.3.</a> <a href="#Transfer-multipart" id="Transfer-multipart">Transfer Encoding for Signing Using multipart/signed</a>
@@ -924,7 +931,7 @@ address {
 </ul>
 
 <p> </p>
-<p><a href="#RFC1847" class="xref">[RFC1847]</a> prohibits an agent from changing the transfer encoding of the first part of a multipart/&#8288;signed message.  If a compliant agent that cannot transmit 8-bit or binary data encounters a multipart/&#8288;signed message with 8-bit or binary data in the first part, it would have to return the message to the sender as undeliverable.  </p>
+<p><a href="#RFC1847" class="xref">[RFC1847]</a> prohibits an agent from changing the transfer encoding of the first part of a multipart/&#8288;signed message.  If a compliant agent that cannot transmit 8-bit or binary data encountered a multipart/&#8288;signed message with 8-bit or binary data in the first part, it would have to return the message to the sender as undeliverable.  </p>
 <h1 id="rfc.section.3.1.4">
 <a href="#rfc.section.3.1.4">3.1.4.</a> Sample Canonical MIME Entity</h1>
 <p id="rfc.section.3.1.4.p.1">This example shows a multipart/&#8288;mixed message with full transfer encoding.  This message contains a text part and an attachment.  The sample message text includes characters that are not ASCII and thus need to be transfer encoded.  Though not shown here, the end of each line is &lt;CR&gt;&lt;LF&gt;.  The line ending of the MIME headers, the text, and the transfer encoded parts, all MUST be &lt;CR&gt;&lt;LF&gt;.  </p>
@@ -1556,7 +1563,7 @@ Change Controller: S&#8203;/&#8203;MIME working group delegated from the IESG
 <p id="rfc.section.6.p.10">Modification of the ciphertext in EnvelopedData can go undetected if authentication is not also used, which is the case when sending EnvelopedData without wrapping it in SignedData or enclosing SignedData within it.  This is one of the reasons for moving from EnvelopedData to AuthEnvelopedData as the authenticated encryption algorithms provide the authentication without needing the SignedData layer.  </p>
 <p id="rfc.section.6.p.11">If an implementation is concerned about compliance with National Institute of Standards and Technology (NIST) key size recommendations, then see <a href="#SP800-57" class="xref">[SP800-57]</a>.  </p>
 <p id="rfc.section.6.p.12">If messaging environments make use of the fact that a message is signed to change the behavior of message processing (examples would be running rules or UI display hints), without first verifying that the message is actually signed and knowing the state of the signature, this can lead to incorrect handling of the message.  Visual indicators on messages may need to have the signature validation code checked periodically if the indicator is supposed to give information on the current status of a message.  </p>
-<p id="rfc.section.6.p.13">Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situtation where the sender of the message will be authenticated.  In almost all cases this is not a correct statement.  There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service: <a href="#RFC6278" class="xref">[RFC6278]</a> which defined how to use static-static key agreement with CMS so that is readably doable.  Currently, all S&#8203;/&#8203;MIME key agreement methods derive a KEK and wrap a CEK.  This violates the third precondition above.  New key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.  </p>
+<p id="rfc.section.6.p.13">Many people assume that the use of an authenticated encryption algorithm is all that is needed to be in a situation where the sender of the message will be authenticated.  In almost all cases this is not a correct statement.  There are a number of preconditions that need to hold for an authenticated encryption algorithm to provide this service: <a href="#RFC6278" class="xref">[RFC6278]</a> which defined how to use static-static key agreement with CMS so that is readably doable.  Currently, all S&#8203;/&#8203;MIME key agreement methods derive a KEK and wrap a CEK.  This violates the third precondition above.  New key agreement algorithms that directly created the CEK without creating an intervening KEK would need to be defined.  </p>
 
 <ul>
 <li>The starting key must be bound to a single entity.  The use of a group key only would allow for the statement that a message was sent by one of the entities that held the key but will not identify a specific entity.  </li>
@@ -1599,12 +1606,12 @@ Change Controller: S&#8203;/&#8203;MIME working group delegated from the IESG
 <tr>
 <td class="reference"><b id="I-D.ietf-curdle-cms-ecdh-new-curves">[I-D.ietf-curdle-cms-ecdh-new-curves]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-curdle-cms-ecdh-new-curves-09">Use of the Elliptic Curve Diffie-Hellman Key Agreement Algorithm with X25519 and X448 in the Cryptographic Message Syntax (CMS)</a>", Internet-Draft draft-ietf-curdle-cms-ecdh-new-curves-09, June 2017.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-curdle-cms-ecdh-new-curves-10">Use of the Elliptic Curve Diffie-Hellman Key Agreement Algorithm with X25519 and X448 in the Cryptographic Message Syntax (CMS)</a>", Internet-Draft draft-ietf-curdle-cms-ecdh-new-curves-10, August 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="I-D.ietf-lamps-rfc5750-bis">[I-D.ietf-lamps-rfc5750-bis]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis-04">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0 Certificate Handling</a>", Internet-Draft draft-ietf-lamps-rfc5750-bis-04, April 2017.</td>
+<a>Schaad, J.</a>, <a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/draft-ietf-lamps-rfc5750-bis-04">Secure/Multipurpose Internet Mail Extensions (S/ MIME) Version 4.0 Certificate Handling</a>", Internet-Draft draft-ietf-lamps-rfc5750-bis-04, April 2017.</td>
 </tr>
 <tr>
 <td class="reference"><b id="MIME-SPEC">[MIME-SPEC]</b></td>
@@ -1614,112 +1621,112 @@ Change Controller: S&#8203;/&#8203;MIME working group delegated from the IESG
 <tr>
 <td class="reference"><b id="RFC1847">[RFC1847]</b></td>
 <td class="top">
-<a>Galvin, J.</a>, <a>Murphy, S.</a>, <a>Crocker, S.</a> and <a>N. Freed</a>, "<a href="http://tools.ietf.org/html/rfc1847">Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted</a>", RFC 1847, DOI 10.17487/RFC1847, October 1995.</td>
+<a>Galvin, J.</a>, <a>Murphy, S.</a>, <a>Crocker, S.</a> and <a>N. Freed</a>, "<a href="https://tools.ietf.org/html/rfc1847">Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted</a>", RFC 1847, DOI 10.17487/RFC1847, October 1995.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2045">[RFC2045]</b></td>
 <td class="top">
-<a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="http://tools.ietf.org/html/rfc2045">Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</a>", RFC 2045, DOI 10.17487/RFC2045, November 1996.</td>
+<a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="https://tools.ietf.org/html/rfc2045">Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</a>", RFC 2045, DOI 10.17487/RFC2045, November 1996.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2046">[RFC2046]</b></td>
 <td class="top">
-<a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="http://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>", RFC 2046, DOI 10.17487/RFC2046, November 1996.</td>
+<a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="https://tools.ietf.org/html/rfc2046">Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types</a>", RFC 2046, DOI 10.17487/RFC2046, November 1996.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2047">[RFC2047]</b></td>
 <td class="top">
-<a>Moore, K.</a>, "<a href="http://tools.ietf.org/html/rfc2047">MIME (Multipurpose Internet Mail Extensions) Part Three: Message Header Extensions for Non-ASCII Text</a>", RFC 2047, DOI 10.17487/RFC2047, November 1996.</td>
+<a>Moore, K.</a>, "<a href="https://tools.ietf.org/html/rfc2047">MIME (Multipurpose Internet Mail Extensions) Part Three: Message Header Extensions for Non-ASCII Text</a>", RFC 2047, DOI 10.17487/RFC2047, November 1996.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2049">[RFC2049]</b></td>
 <td class="top">
-<a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="http://tools.ietf.org/html/rfc2049">Multipurpose Internet Mail Extensions (MIME) Part Five: Conformance Criteria and Examples</a>", RFC 2049, DOI 10.17487/RFC2049, November 1996.</td>
+<a>Freed, N.</a> and <a>N. Borenstein</a>, "<a href="https://tools.ietf.org/html/rfc2049">Multipurpose Internet Mail Extensions (MIME) Part Five: Conformance Criteria and Examples</a>", RFC 2049, DOI 10.17487/RFC2049, November 1996.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2119">[RFC2119]</b></td>
 <td class="top">
-<a>Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2138">[RFC2138]</b></td>
 <td class="top">
-<a>Rigney, C.</a>, <a>Rubens, A.</a>, <a>Simpson, W.</a> and <a>S. Willens</a>, "<a href="http://tools.ietf.org/html/rfc2138">Remote Authentication Dial In User Service (RADIUS)</a>", RFC 2138, DOI 10.17487/RFC2138, April 1997.</td>
+<a>Rigney, C.</a>, <a>Rubens, A.</a>, <a>Simpson, W.</a> and <a>S. Willens</a>, "<a href="https://tools.ietf.org/html/rfc2138">Remote Authentication Dial In User Service (RADIUS)</a>", RFC 2138, DOI 10.17487/RFC2138, April 1997.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2634">[RFC2634]</b></td>
 <td class="top">
-<a>Hoffman, P.</a>, "<a href="http://tools.ietf.org/html/rfc2634">Enhanced Security Services for S&#8203;/&#8203;MIME</a>", RFC 2634, DOI 10.17487/RFC2634, June 1999.</td>
+<a>Hoffman, P.</a>, "<a href="https://tools.ietf.org/html/rfc2634">Enhanced Security Services for S&#8203;/&#8203;MIME</a>", RFC 2634, DOI 10.17487/RFC2634, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3274">[RFC3274]</b></td>
 <td class="top">
-<a>Gutmann, P.</a>, "<a href="http://tools.ietf.org/html/rfc3274">Compressed Data Content Type for Cryptographic Message Syntax (CMS)</a>", RFC 3274, DOI 10.17487/RFC3274, June 2002.</td>
+<a>Gutmann, P.</a>, "<a href="https://tools.ietf.org/html/rfc3274">Compressed Data Content Type for Cryptographic Message Syntax (CMS)</a>", RFC 3274, DOI 10.17487/RFC3274, June 2002.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3370">[RFC3370]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3370">Cryptographic Message Syntax (CMS) Algorithms</a>", RFC 3370, DOI 10.17487/RFC3370, August 2002.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc3370">Cryptographic Message Syntax (CMS) Algorithms</a>", RFC 3370, DOI 10.17487/RFC3370, August 2002.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3560">[RFC3560]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3560">Use of the RSAES-OAEP Key Transport Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 3560, DOI 10.17487/RFC3560, July 2003.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc3560">Use of the RSAES-OAEP Key Transport Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 3560, DOI 10.17487/RFC3560, July 2003.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3565">[RFC3565]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc3565">Use of the Advanced Encryption Standard (AES) Encryption Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 3565, DOI 10.17487/RFC3565, July 2003.</td>
+<a>Schaad, J.</a>, "<a href="https://tools.ietf.org/html/rfc3565">Use of the Advanced Encryption Standard (AES) Encryption Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 3565, DOI 10.17487/RFC3565, July 2003.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4056">[RFC4056]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc4056">Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 4056, DOI 10.17487/RFC4056, June 2005.</td>
+<a>Schaad, J.</a>, "<a href="https://tools.ietf.org/html/rfc4056">Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)</a>", RFC 4056, DOI 10.17487/RFC4056, June 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4086">[RFC4086]</b></td>
 <td class="top">
-<a>Eastlake 3rd, D.</a>, <a>Schiller, J.</a> and <a>S. Crocker</a>, "<a href="http://tools.ietf.org/html/rfc4086">Randomness Requirements for Security</a>", BCP 106, RFC 4086, DOI 10.17487/RFC4086, June 2005.</td>
+<a>Eastlake 3rd, D.</a>, <a>Schiller, J.</a> and <a>S. Crocker</a>, "<a href="https://tools.ietf.org/html/rfc4086">Randomness Requirements for Security</a>", BCP 106, RFC 4086, DOI 10.17487/RFC4086, June 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4288">[RFC4288]</b></td>
 <td class="top">
-<a>Freed, N.</a> and <a>J. Klensin</a>, "<a href="http://tools.ietf.org/html/rfc4288">Media Type Specifications and Registration Procedures</a>", RFC 4288, DOI 10.17487/RFC4288, December 2005.</td>
+<a>Freed, N.</a> and <a>J. Klensin</a>, "<a href="https://tools.ietf.org/html/rfc4288">Media Type Specifications and Registration Procedures</a>", RFC 4288, DOI 10.17487/RFC4288, December 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4289">[RFC4289]</b></td>
 <td class="top">
-<a>Freed, N.</a> and <a>J. Klensin</a>, "<a href="http://tools.ietf.org/html/rfc4289">Multipurpose Internet Mail Extensions (MIME) Part Four: Registration Procedures</a>", BCP 13, RFC 4289, DOI 10.17487/RFC4289, December 2005.</td>
+<a>Freed, N.</a> and <a>J. Klensin</a>, "<a href="https://tools.ietf.org/html/rfc4289">Multipurpose Internet Mail Extensions (MIME) Part Four: Registration Procedures</a>", BCP 13, RFC 4289, DOI 10.17487/RFC4289, December 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5035">[RFC5035]</b></td>
 <td class="top">
-<a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/rfc5035">Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility</a>", RFC 5035, DOI 10.17487/RFC5035, August 2007.</td>
+<a>Schaad, J.</a>, "<a href="https://tools.ietf.org/html/rfc5035">Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility</a>", RFC 5035, DOI 10.17487/RFC5035, August 2007.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5083">[RFC5083]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc5083">Cryptographic Message Syntax (CMS) Authenticated-Enveloped-Data Content Type</a>", RFC 5083, DOI 10.17487/RFC5083, November 2007.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc5083">Cryptographic Message Syntax (CMS) Authenticated-Enveloped-Data Content Type</a>", RFC 5083, DOI 10.17487/RFC5083, November 2007.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5084">[RFC5084]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc5084">Using AES-CCM and AES-GCM Authenticated Encryption in the Cryptographic Message Syntax (CMS)</a>", RFC 5084, DOI 10.17487/RFC5084, November 2007.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc5084">Using AES-CCM and AES-GCM Authenticated Encryption in the Cryptographic Message Syntax (CMS)</a>", RFC 5084, DOI 10.17487/RFC5084, November 2007.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5652">[RFC5652]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc5652">Cryptographic Message Syntax (CMS)</a>", STD 70, RFC 5652, DOI 10.17487/RFC5652, September 2009.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc5652">Cryptographic Message Syntax (CMS)</a>", STD 70, RFC 5652, DOI 10.17487/RFC5652, September 2009.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5753">[RFC5753]</b></td>
 <td class="top">
-<a>Turner, S.</a> and <a>D. Brown</a>, "<a href="http://tools.ietf.org/html/rfc5753">Use of Elliptic Curve Cryptography (ECC) Algorithms in Cryptographic Message Syntax (CMS)</a>", RFC 5753, DOI 10.17487/RFC5753, January 2010.</td>
+<a>Turner, S.</a> and <a>D. Brown</a>, "<a href="https://tools.ietf.org/html/rfc5753">Use of Elliptic Curve Cryptography (ECC) Algorithms in Cryptographic Message Syntax (CMS)</a>", RFC 5753, DOI 10.17487/RFC5753, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5754">[RFC5754]</b></td>
 <td class="top">
-<a>Turner, S.</a>, "<a href="http://tools.ietf.org/html/rfc5754">Using SHA2 Algorithms with Cryptographic Message Syntax</a>", RFC 5754, DOI 10.17487/RFC5754, January 2010.</td>
+<a>Turner, S.</a>, "<a href="https://tools.ietf.org/html/rfc5754">Using SHA2 Algorithms with Cryptographic Message Syntax</a>", RFC 5754, DOI 10.17487/RFC5754, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="SMIMEv4.0">[SMIMEv4.0]</b></td>
@@ -1758,132 +1765,132 @@ Change Controller: S&#8203;/&#8203;MIME working group delegated from the IESG
 <tr>
 <td class="reference"><b id="RFC2268">[RFC2268]</b></td>
 <td class="top">
-<a>Rivest, R.</a>, "<a href="http://tools.ietf.org/html/rfc2268">A Description of the RC2(r) Encryption Algorithm</a>", RFC 2268, DOI 10.17487/RFC2268, March 1998.</td>
+<a>Rivest, R.</a>, "<a href="https://tools.ietf.org/html/rfc2268">A Description of the RC2(r) Encryption Algorithm</a>", RFC 2268, DOI 10.17487/RFC2268, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2311">[RFC2311]</b></td>
 <td class="top">
-<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a>, <a>Lundblade, L.</a> and <a>L. Repka</a>, "<a href="http://tools.ietf.org/html/rfc2311">S&#8203;/&#8203;MIME Version 2 Message Specification</a>", RFC 2311, DOI 10.17487/RFC2311, March 1998.</td>
+<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a>, <a>Lundblade, L.</a> and <a>L. Repka</a>, "<a href="https://tools.ietf.org/html/rfc2311">S&#8203;/&#8203;MIME Version 2 Message Specification</a>", RFC 2311, DOI 10.17487/RFC2311, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2312">[RFC2312]</b></td>
 <td class="top">
-<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a> and <a>J. Weinstein</a>, "<a href="http://tools.ietf.org/html/rfc2312">S&#8203;/&#8203;MIME Version 2 Certificate Handling</a>", RFC 2312, DOI 10.17487/RFC2312, March 1998.</td>
+<a>Dusse, S.</a>, <a>Hoffman, P.</a>, <a>Ramsdell, B.</a> and <a>J. Weinstein</a>, "<a href="https://tools.ietf.org/html/rfc2312">S&#8203;/&#8203;MIME Version 2 Certificate Handling</a>", RFC 2312, DOI 10.17487/RFC2312, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2313">[RFC2313]</b></td>
 <td class="top">
-<a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2313">PKCS #1: RSA Encryption Version 1.5</a>", RFC 2313, DOI 10.17487/RFC2313, March 1998.</td>
+<a>Kaliski, B.</a>, "<a href="https://tools.ietf.org/html/rfc2313">PKCS #1: RSA Encryption Version 1.5</a>", RFC 2313, DOI 10.17487/RFC2313, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2314">[RFC2314]</b></td>
 <td class="top">
-<a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2314">PKCS #10: Certification Request Syntax Version 1.5</a>", RFC 2314, DOI 10.17487/RFC2314, March 1998.</td>
+<a>Kaliski, B.</a>, "<a href="https://tools.ietf.org/html/rfc2314">PKCS #10: Certification Request Syntax Version 1.5</a>", RFC 2314, DOI 10.17487/RFC2314, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2315">[RFC2315]</b></td>
 <td class="top">
-<a>Kaliski, B.</a>, "<a href="http://tools.ietf.org/html/rfc2315">PKCS #7: Cryptographic Message Syntax Version 1.5</a>", RFC 2315, DOI 10.17487/RFC2315, March 1998.</td>
+<a>Kaliski, B.</a>, "<a href="https://tools.ietf.org/html/rfc2315">PKCS #7: Cryptographic Message Syntax Version 1.5</a>", RFC 2315, DOI 10.17487/RFC2315, March 1998.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2630">[RFC2630]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc2630">Cryptographic Message Syntax</a>", RFC 2630, DOI 10.17487/RFC2630, June 1999.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc2630">Cryptographic Message Syntax</a>", RFC 2630, DOI 10.17487/RFC2630, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2631">[RFC2631]</b></td>
 <td class="top">
-<a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc2631">Diffie-Hellman Key Agreement Method</a>", RFC 2631, DOI 10.17487/RFC2631, June 1999.</td>
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc2631">Diffie-Hellman Key Agreement Method</a>", RFC 2631, DOI 10.17487/RFC2631, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2632">[RFC2632]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc2632">S&#8203;/&#8203;MIME Version 3 Certificate Handling</a>", RFC 2632, DOI 10.17487/RFC2632, June 1999.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc2632">S&#8203;/&#8203;MIME Version 3 Certificate Handling</a>", RFC 2632, DOI 10.17487/RFC2632, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2633">[RFC2633]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc2633">S&#8203;/&#8203;MIME Version 3 Message Specification</a>", RFC 2633, DOI 10.17487/RFC2633, June 1999.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc2633">S&#8203;/&#8203;MIME Version 3 Message Specification</a>", RFC 2633, DOI 10.17487/RFC2633, June 1999.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC2785">[RFC2785]</b></td>
 <td class="top">
-<a>Zuccherato, R.</a>, "<a href="http://tools.ietf.org/html/rfc2785">Methods for Avoiding the "Small-Subgroup" Attacks on the Diffie-Hellman Key Agreement Method for S&#8203;/&#8203;MIME</a>", RFC 2785, DOI 10.17487/RFC2785, March 2000.</td>
+<a>Zuccherato, R.</a>, "<a href="https://tools.ietf.org/html/rfc2785">Methods for Avoiding the "Small-Subgroup" Attacks on the Diffie-Hellman Key Agreement Method for S&#8203;/&#8203;MIME</a>", RFC 2785, DOI 10.17487/RFC2785, March 2000.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3218">[RFC3218]</b></td>
 <td class="top">
-<a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc3218">Preventing the Million Message Attack on Cryptographic Message Syntax</a>", RFC 3218, DOI 10.17487/RFC3218, January 2002.</td>
+<a>Rescorla, E.</a>, "<a href="https://tools.ietf.org/html/rfc3218">Preventing the Million Message Attack on Cryptographic Message Syntax</a>", RFC 3218, DOI 10.17487/RFC3218, January 2002.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3766">[RFC3766]</b></td>
 <td class="top">
-<a>Orman, H.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc3766">Determining Strengths For Public Keys Used For Exchanging Symmetric Keys</a>", BCP 86, RFC 3766, DOI 10.17487/RFC3766, April 2004.</td>
+<a>Orman, H.</a> and <a>P. Hoffman</a>, "<a href="https://tools.ietf.org/html/rfc3766">Determining Strengths For Public Keys Used For Exchanging Symmetric Keys</a>", BCP 86, RFC 3766, DOI 10.17487/RFC3766, April 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3850">[RFC3850]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc3850">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Certificate Handling</a>", RFC 3850, DOI 10.17487/RFC3850, July 2004.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc3850">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Certificate Handling</a>", RFC 3850, DOI 10.17487/RFC3850, July 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3851">[RFC3851]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a>, "<a href="http://tools.ietf.org/html/rfc3851">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Message Specification</a>", RFC 3851, DOI 10.17487/RFC3851, July 2004.</td>
+<a>Ramsdell, B.</a>, "<a href="https://tools.ietf.org/html/rfc3851">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.1 Message Specification</a>", RFC 3851, DOI 10.17487/RFC3851, July 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC3852">[RFC3852]</b></td>
 <td class="top">
-<a>Housley, R.</a>, "<a href="http://tools.ietf.org/html/rfc3852">Cryptographic Message Syntax (CMS)</a>", RFC 3852, DOI 10.17487/RFC3852, July 2004.</td>
+<a>Housley, R.</a>, "<a href="https://tools.ietf.org/html/rfc3852">Cryptographic Message Syntax (CMS)</a>", RFC 3852, DOI 10.17487/RFC3852, July 2004.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4134">[RFC4134]</b></td>
 <td class="top">
-<a>Hoffman, P.</a>, "<a href="http://tools.ietf.org/html/rfc4134">Examples of S&#8203;/&#8203;MIME Messages</a>", RFC 4134, DOI 10.17487/RFC4134, July 2005.</td>
+<a>Hoffman, P.</a>, "<a href="https://tools.ietf.org/html/rfc4134">Examples of S&#8203;/&#8203;MIME Messages</a>", RFC 4134, DOI 10.17487/RFC4134, July 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4270">[RFC4270]</b></td>
 <td class="top">
-<a>Hoffman, P.</a> and <a>B. Schneier</a>, "<a href="http://tools.ietf.org/html/rfc4270">Attacks on Cryptographic Hashes in Internet Protocols</a>", RFC 4270, DOI 10.17487/RFC4270, November 2005.</td>
+<a>Hoffman, P.</a> and <a>B. Schneier</a>, "<a href="https://tools.ietf.org/html/rfc4270">Attacks on Cryptographic Hashes in Internet Protocols</a>", RFC 4270, DOI 10.17487/RFC4270, November 2005.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC4949">[RFC4949]</b></td>
 <td class="top">
-<a>Shirey, R.</a>, "<a href="http://tools.ietf.org/html/rfc4949">Internet Security Glossary, Version 2</a>", FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007.</td>
+<a>Shirey, R.</a>, "<a href="https://tools.ietf.org/html/rfc4949">Internet Security Glossary, Version 2</a>", FYI 36, RFC 4949, DOI 10.17487/RFC4949, August 2007.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5750">[RFC5750]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Certificate Handling</a>", RFC 5750, DOI 10.17487/RFC5750, January 2010.</td>
+<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc5750">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Certificate Handling</a>", RFC 5750, DOI 10.17487/RFC5750, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC5751">[RFC5751]</b></td>
 <td class="top">
-<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="http://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
+<a>Ramsdell, B.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc5751">Secure/Multipurpose Internet Mail Extensions (S&#8203;/&#8203;MIME) Version 3.2 Message Specification</a>", RFC 5751, DOI 10.17487/RFC5751, January 2010.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6151">[RFC6151]</b></td>
 <td class="top">
-<a>Turner, S.</a> and <a>L. Chen</a>, "<a href="http://tools.ietf.org/html/rfc6151">Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a>", RFC 6151, DOI 10.17487/RFC6151, March 2011.</td>
+<a>Turner, S.</a> and <a>L. Chen</a>, "<a href="https://tools.ietf.org/html/rfc6151">Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms</a>", RFC 6151, DOI 10.17487/RFC6151, March 2011.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6194">[RFC6194]</b></td>
 <td class="top">
-<a>Polk, T.</a>, <a>Chen, L.</a>, <a>Turner, S.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc6194">Security Considerations for the SHA-0 and SHA-1 Message-Digest Algorithms</a>", RFC 6194, DOI 10.17487/RFC6194, March 2011.</td>
+<a>Polk, T.</a>, <a>Chen, L.</a>, <a>Turner, S.</a> and <a>P. Hoffman</a>, "<a href="https://tools.ietf.org/html/rfc6194">Security Considerations for the SHA-0 and SHA-1 Message-Digest Algorithms</a>", RFC 6194, DOI 10.17487/RFC6194, March 2011.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC6278">[RFC6278]</b></td>
 <td class="top">
-<a>Herzog, J.</a> and <a>R. Khazan</a>, "<a href="http://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
+<a>Herzog, J.</a> and <a>R. Khazan</a>, "<a href="https://tools.ietf.org/html/rfc6278">Use of Static-Static Elliptic Curve Diffie-Hellman Key Agreement in Cryptographic Message Syntax</a>", RFC 6278, DOI 10.17487/RFC6278, June 2011.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC7114">[RFC7114]</b></td>
 <td class="top">
-<a>Leiba, B.</a>, "<a href="http://tools.ietf.org/html/rfc7114">Creation of a Registry for smime-type Parameter Values</a>", RFC 7114, DOI 10.17487/RFC7114, January 2014.</td>
+<a>Leiba, B.</a>, "<a href="https://tools.ietf.org/html/rfc7114">Creation of a Registry for smime-type Parameter Values</a>", RFC 7114, DOI 10.17487/RFC7114, January 2014.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC7905">[RFC7905]</b></td>
 <td class="top">
-<a>Langley, A.</a>, <a>Chang, W.</a>, <a>Mavrogiannopoulos, N.</a>, <a>Strombergson, J.</a> and <a>S. Josefsson</a>, "<a href="http://tools.ietf.org/html/rfc7905">ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)</a>", RFC 7905, DOI 10.17487/RFC7905, June 2016.</td>
+<a>Langley, A.</a>, <a>Chang, W.</a>, <a>Mavrogiannopoulos, N.</a>, <a>Strombergson, J.</a> and <a>S. Josefsson</a>, "<a href="https://tools.ietf.org/html/rfc7905">ChaCha20-Poly1305 Cipher Suites for Transport Layer Security (TLS)</a>", RFC 7905, DOI 10.17487/RFC7905, June 2016.</td>
 </tr>
 <tr>
 <td class="reference"><b id="SMIMEv2">[SMIMEv2]</b></td>
@@ -2022,7 +2029,7 @@ END
 <p id="rfc.section.B.1.p.1">The following algorithms have been called our for some level of support by previous S&#8203;/&#8203;MIME specifications: </p>
 
 <ul>
-<li>SHA&#8209;1 was dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194" class="xref">[RFC6194]</a> but it is out-of-date relative to the most recient advances.  </li>
+<li>SHA&#8209;1 was dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  SHA-1 is no longer considerd to be secure as it is no longer collision-resistant.  The IETF statement on SHA-1 can be found in <a href="#RFC6194" class="xref">[RFC6194]</a> but it is out-of-date relative to the most recent advances.  </li>
 <li>MD5 was dropped in <a href="#SMIMEv4.0" class="xref">[SMIMEv4.0]</a>.  MD5 is no longer considered to be secure as it is no longer collision-resistant.  Details can be found in <a href="#RFC6151" class="xref">[RFC6151]</a>.  </li>
 </ul>
 
@@ -2034,7 +2041,7 @@ END
 <ul>
 <li>CAs are not required to keep certificates on a CRL beyond one update after a certificate has expired.  This means that unless CRLs are cached as part of the message it is not always possible to check if a certificate has been revoked.  The same problems exist with OCSP responses as they may be based on a CRL rather than on the certificate database.  </li>
 <li>RSA and DSA keys of less than 2048 bits are now considered by many experts to be cryptographically insecure (due to advances in computing power).  Such keys were previously considered secure, so processing of historic  signed messages  will often result in the use of weak keys.  Implementations that wish to support previous versions of S/&#8288;MIME or process old messages need to consider the security risks that result from smaller key sizes (e.g., spoofed messages) versus the costs of denial of service.  <br><br> <a href="#SMIMEv3.1" class="xref">[SMIMEv3.1]</a> set the lower limit on suggested key sizes for creating and validation at 1024 bits.  Prior to that the lower bound on key sizes was 512 bits.  </li>
-<li>Hash functions used to validate signatures on historic messages may longer be considered to be secure.  (See below.) While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&#8209;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.  </li>
+<li>Hash functions used to validate signatures on historic messages may longer be considered to be secure.  (See below.) While there are not currently any known practical pre-image or second pre-image attacks against MD5 or SHA&#8209;1, the fact they are no longer considered to be collision resistent the security levels of the signatures are generally considered suspect.  If a message is known to be historic, that it it has been in the possession of the client for some time, then it might still be considered to be secure.  </li>
 <li>The previous two issues apply to the certificates used to validate the binding of the public key to the identity that signed the message as well.  </li>
 </ul>
 
@@ -2048,7 +2055,7 @@ END
 </ul>
 
 <p> </p>
-<p id="rfc.section.B.2.p.3">As requirements for manditory to implement has changed over time, some issues have been created that can cause interopatability problems: </p>
+<p id="rfc.section.B.2.p.3">As requirements for mandatory to implement has changed over time, some issues have been created that can cause interoperability problems: </p>
 
 <ul>
 <li>S/&#8288;MIME v2 clients are only required to verify digital signatures using the rsaEncryption algorithm with SHA&#8209;1 or MD5, and might not implement id-dsa-with-sha1 or id-dsa at all.  </li>
@@ -2057,7 +2064,7 @@ END
 </ul>
 
 <p> </p>
-<p id="rfc.section.B.2.p.4">NOTE: Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1, and sending clients MUST use id-dsa-with-sha1 if using that algorithm.  </p>
+<p id="rfc.section.B.2.p.4">NOTE: Receiving clients SHOULD recognize id-dsa as equivalent to id-dsa-with-sha1.  </p>
 <p id="rfc.section.B.2.p.5">For 512-bit RSA with SHA&#8209;1 see <a href="#RFC3370" class="xref">[RFC3370]</a> and <a href="#FIPS186-2" class="xref">[FIPS186-2]</a> without Change Notice 1, for 512-bit RSA with SHA-256 see <a href="#RFC5754" class="xref">[RFC5754]</a> and <a href="#FIPS186-2" class="xref">[FIPS186-2]</a> without Change Notice 1, and for 1024-bit through 2048-bit RSA with SHA-256 see <a href="#RFC5754" class="xref">[RFC5754]</a> and <a href="#FIPS186-2" class="xref">[FIPS186-2]</a> with Change Notice 1.  The first reference provides the signature algorithm's object identifier, and the second provides the signature algorithm's definition.  </p>
 <p id="rfc.section.B.2.p.6">For 512-bit DSA with SHA&#8209;1 see <a href="#RFC3370" class="xref">[RFC3370]</a> and <a href="#FIPS186-2" class="xref">[FIPS186-2]</a> without Change Notice 1, for 512-bit DSA with SHA-256 see <a href="#RFC5754" class="xref">[RFC5754]</a> and <a href="#FIPS186-2" class="xref">[FIPS186-2]</a> without Change Notice 1, for 1024-bit DSA with SHA&#8209;1 see <a href="#RFC3370" class="xref">[RFC3370]</a> and <a href="#FIPS186-2" class="xref">[FIPS186-2]</a> with Change Notice 1, for 1024-bit and above DSA with SHA-256 see <a href="#RFC5754" class="xref">[RFC5754]</a> and <a href="#FIPS186-4" class="xref">[FIPS186-4]</a>.  The first reference provides the signature algorithm's object identifier and the second provides the signature algorithm's definition.  </p>
 <h1 id="rfc.appendix.B.3">
@@ -2158,6 +2165,5 @@ END
   </address>
 </div>
 
-  <div class="github-fork-ribbon-wrapper"><div class="github-fork-ribbon"><a href="https://github.com/lamps-wg/smime">Fork me on GitHub</a></div></div>
 </body>
 </html>
